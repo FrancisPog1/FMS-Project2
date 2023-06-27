@@ -59,47 +59,47 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         ->select('roles.title as user_role', 'users.email', 'users.status', 'users.id')
         ->get();
 
-        return view('Academic_head/Admin_Setup/AcadHead_AddUser', compact('users','roles'));
+        return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', compact('users','roles'));
     })->name('acadhead_AddUser');
 
 
     /**Academic Rank */
     Route::get('/AcadHead', function () {
         $acadranks = DB::table('academic_ranks')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_AcademicRank', compact('acadranks'));
+        return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', compact('acadranks'));
     })->name('acadhead_AcademicRank');
 
     /**Role */
     Route::get('/Role', function () {
         $roles = DB::table('roles')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_Role', compact('roles'));
+        return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', compact('roles'));
     })->name('acadhead_UserRole');
 
 
     /**Faculty Type */
     Route::get('/FacultyType', function () {
         $facultytypes = DB::table('faculty_types')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_FacultyType', compact('facultytypes'));
+        return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', compact('facultytypes'));
     })->name('acadhead_FacultyType');
 
     /**Designation */
     Route::get('/Designation', function () {
         $designations = DB::table('designations')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_Designation', compact('designations'));
+        return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', compact('designations'));
     })->name('acadhead_Designation');
 
 
     /**Specialization */
     Route::get('/Specialization', function () {
         $specializations = DB::table('specializations')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_Specialization', compact('specializations'));
+        return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', compact('specializations'));
     })->name('acadhead_Specialization');
 
 
         /**Program*/
         Route::get('/Program', function () {
             $programs = DB::table('programs')->get();
-            return view('Academic_head/Admin_Setup/AcadHead_Programs', compact('programs'));
+            return view('Academic_head/Admin_Setup/AcadHead_Programs/AcadHead_Programs', compact('programs'));
         })->name('acadhead_Program');
 
 
@@ -117,13 +117,13 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         /**Requirement Type*/
         Route::get('/RequirementType', function () {
             $requirementtypes = DB::table('requirement_types')->get();
-            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType', compact('requirementtypes'));
+            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', compact('requirementtypes'));
         })->name('acadhead_RequirementType');
 
         /**Activity Type*/
         Route::get('/ActivityType', function () {
             $activitytypes = DB::table('activity_types')->get();
-            return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType', compact('activitytypes'));
+            return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', compact('activitytypes'));
         })->name('acadhead_ActivityType');
 
         /**Class Schedule*/
@@ -162,7 +162,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
                 $activity->end_datetime = Carbon::parse($activity->end_datetime)->format('F d, Y h:i A');
             }
 
-            return view('Academic_head/AcadHead_Setup/AcadHead_Activities', compact('activities', 'activitytypes'));
+            return view('Academic_head/AcadHead_Setup/AcadHead_Activities/AcadHead_Activities', compact('activities', 'activitytypes'));
 
         });
 
