@@ -37,37 +37,21 @@ class MonitorRequirements_Controller extends Controller
 
     }
 
-    public function validateRequirement(Request $request, $id)
+    public function validateRequirement(Request $request, $id, $req_bin_id, $assigned_bin_id)
     {
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
+        $assigned_bin = UserAssignedToRequirementBins::findOrFail($assigned_bin_id);
 
        $assigned_requirement_id = UserUploadRequirement::findOrFail($id);
        $assigned_requirement_id->status = $request->input('changeStatus');
        $assigned_requirement_id->acadhead_remarks = $request->input('remarks');
        $assigned_requirement_id->updated_by = $userId;
-
        $assigned_requirement_id->save();
 
-        return back()->with('success', 'The requirement is validated successfully.');
-
-    }
-
-    public function reviewedMark($id)
-    {
-        $userId = Auth::user()->id;
-        $assigned_bin = UserAssignedToRequirementBins::findOrFail($id);
-
-        // if ($assigned_bin->review_status === "Reviewed") {
-        //     return back()->with('error', 'You already marked this as Reviewed.');
-        // } else {
-            $assigned_bin->review_status = "Reviewed";
-            $assigned_bin->reviewed_by = $userId;
-            $assigned_bin->updated_by = $userId;
-            $assigned_bin->save();
-
-            // Check if there are any pending or rejected statuses in UserUploadRequirement
-            $hasPendingOrRejected = UserUploadRequirement::where('assigned_to', $assigned_bin->assigned_to)
+        //CODES FOR ASSIGNING NEW STATUS TO COMLIANCE STATUS ON user_assigned_to_bin table
+        // Check if there are any pending or rejected statuses in UserUploadRequirement
+        $hasPendingOrRejected = UserUploadRequirement::where('assigned_to', $assigned_bin->assigned_to)
             ->whereIn('status', ['Pending', 'Rejected'])
             ->join('requirement_bin_contents', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
             ->whereNull('requirement_bin_contents.deleted_at')
@@ -80,19 +64,41 @@ class MonitorRequirements_Controller extends Controller
             ->doesntExist();
 
         $records = UserUploadRequirement::where('assigned_to', $assigned_bin->assigned_to)
-        ->join('requirement_bin_contents', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
-        ->whereIn('status', ['Pending', 'Rejected', 'Approved'])
-        ->whereNull('requirement_bin_contents.deleted_at')
-        ->doesntExist();
+            ->join('requirement_bin_contents', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
+            ->whereNull('requirement_bin_contents.deleted_at')
+            ->join('requirement_bins', 'requirement_bin_contents.foreign_requirement_bins_id', '=', 'requirement_bins.id')
+            ->where('requirement_bins.id', '=', $req_bin_id)
+            ->exists();
 
-        if ($hasPendingOrRejected) {
-            $assigned_bin->compliance_status = 'Incomplete';
-        } elseif ($allApproved) {
-            $assigned_bin->compliance_status = 'Completed';
+        if ($records){
+            if ($hasPendingOrRejected) {
+                $assigned_bin->compliance_status = 'Incomplete';
+            } elseif ($allApproved) {
+                $assigned_bin->compliance_status = 'Completed';
+            }
+        }
+        else{
+            $assigned_bin->compliance_status = 'Pending';
         }
 
         $assigned_bin->save();
 
+        return back()->with('success', 'The requirement is validated successfully.');
+
+    }
+
+    public function reviewedMark($id, $req_bin_id)
+    {
+        $userId = Auth::user()->id;
+        $assigned_bin = UserAssignedToRequirementBins::findOrFail($id);
+
+        // if ($assigned_bin->review_status === "Reviewed") {
+        //     return back()->with('error', 'You already marked this as Reviewed.');
+        // } else {
+            $assigned_bin->review_status = "Reviewed";
+            $assigned_bin->reviewed_by = $userId;
+            $assigned_bin->updated_by = $userId;
+            $assigned_bin->save();
 
             return back()->with('success', 'Successfully marked as Reviewed.');
         // }

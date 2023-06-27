@@ -225,7 +225,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::put('/update_bincontents{id}', [RequirementSetup_Controller::class, 'updateRequirement'])->name('update_requirements');
 
 
-    Route::put('/validate_bincontents{id}', [MonitorRequirements_Controller::class, 'validateRequirement'])->name('validate_requirements');
+    Route::put('/validate_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'validateRequirement'])->name('validate_requirements');
 
 
     // For registering users
@@ -260,7 +260,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('MonitorRequirements/{user_id}/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'show'])
     ->name('acadhead_MonitorRequirements');
 
-    Route::put('/ReviewedBin/{id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
+    Route::put('/ReviewedBin/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
     ->name('acadhead_ReviewRequirements');
 
 

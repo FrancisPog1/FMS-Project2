@@ -34,7 +34,7 @@
                     </td>
                     <td class="text-center">
                         <button type="button"
-                            onclick="openValidateModal('{{ $data->status }}', '{{ $data->remarks }}','{{ $data->id }}')"
+                            onclick="openValidateModal('{{ $data->status }}', '{{ $data->remarks }}','{{ $data->id }}', '{{ $req_bin_id }}')"
                             class="px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 ">Validate</button>
                     </td>
                 </tr>
