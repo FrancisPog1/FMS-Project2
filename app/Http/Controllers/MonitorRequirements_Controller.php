@@ -79,6 +79,12 @@ class MonitorRequirements_Controller extends Controller
             ->whereNull('requirement_bin_contents.deleted_at')
             ->doesntExist();
 
+        $records = UserUploadRequirement::where('assigned_to', $assigned_bin->assigned_to)
+        ->join('requirement_bin_contents', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
+        ->whereIn('status', ['Pending', 'Rejected', 'Approved'])
+        ->whereNull('requirement_bin_contents.deleted_at')
+        ->doesntExist();
+
         if ($hasPendingOrRejected) {
             $assigned_bin->compliance_status = 'Incomplete';
         } elseif ($allApproved) {
