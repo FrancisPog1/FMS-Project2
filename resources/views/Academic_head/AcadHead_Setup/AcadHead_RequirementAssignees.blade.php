@@ -11,9 +11,17 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row-col-sm-6 mb-2">
-                        <div class="col-md-3 ml-4">
+                    <div class="row mt-5">
+                        <div class="col ml-4">
                             <h1 class="m-0">Requirement Assignees</h1>
+                        </div>
+                        <div class="col ml-4">
+                            <ol class="breadcrumb float-right mr-5">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="#">Requirement Bin</a></li>
+                                <li class="breadcrumb-item"><a href="#">Assign Bin</a></li>
+                                <li class="breadcrumb-item active">Evaluation</li>
+                            </ol>
                         </div>
                     </div>
                 </div>

@@ -146,8 +146,8 @@
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container-fluid">
-                        <div class="row-col-sm-6 mb-2">
-                            <div class="col-md-3 ml-4">
+                        <div class="row-col-12 mb-2">
+                            <div class="col-6 ml-4">
                                 <h1 class="m-0">Requirement Bin</h1>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                                     </option>
                                 </select>
                             </div>
-                            
+
                             <!-- Tables of roles -->
                             <div class="card-body p-0">
                                 <table class="table table-striped">
@@ -195,7 +195,7 @@
                                             <th class="text-center" style="">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody> 
+                                    <tbody>
                                     @foreach ($requirementbins as $requirementbin)
                                             <tr>
                                                 <td>{{ $requirementbin->title }}</td>
@@ -294,7 +294,7 @@
                                                 </div>
 
                                             </div>
-                                            
+
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label class="required-input" >Status</label>
@@ -347,8 +347,8 @@
                                                 <textarea type="text" class="form-control" id="inputField" name="description" placeholder="Description" tabindex="1" style="height: 100px;"></textarea>
                                             </div>
                                         </div>
-                                        
-                               
+
+
                                         <div class="row">
 											<div class="form-group col-md-12">
 												<label for="datetimepicker">Select a date and time:</label>
@@ -367,7 +367,7 @@
                                                 <label>Status</label>
                                                 <input class="form-control" name="status" type="text" value="ONGOING" readonly>
                                             </div>
-                                        </div>   
+                                        </div>
                                     </div>
                                 </div>
 
@@ -417,7 +417,7 @@
         });
     </script>
 
-    
+
 <!-- Script for Date picker -->
 <script src="{{ asset('js/farms.datepicker.js') }}"></script>
 
@@ -425,6 +425,6 @@
     </html>
 
 
-     
+
 
 

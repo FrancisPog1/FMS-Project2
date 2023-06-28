@@ -436,3 +436,32 @@ require __DIR__.'/auth.php';
 //This is like an extend/include function. It includes the auth.php route in this web.php route so that It can access the routes inside the auth.php
 
 
+
+
+/*
+ * June 17, 2023 <Sat> Daniel's modified part
+ */
+
+
+//For dropzone to display and upload req bin
+Route::get('/Faculty_RequirementBin', [DropzoneController::class, 'Faculty_RequirementBin']);
+Route::post('/Faculty_RequirementBin', [DropzoneController::class, 'store'])->name('dropzone.store');
+
+//For dropzone to remove file
+//Route::get('/uploaded_files', [DropzoneController::class, 'delete'])->name('dropzone.delete');
+Route::delete('/deleteFile/{filename}', [DropzoneController::class, 'delete'])->name('deleteFile');
+
+
+/*
+*  breadcrumbs
+*/
+
+
+// Req Bin for breadcrumbs
+Route::get('/data_table', function () {
+    return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table', ['page_title' => 'Requirement Bin']);
+    });
+
+Route::get('/AcadHead_AssignedRequirements', function () {
+    return view('Academic_head/AcadHead_Setup/AcadHead_AssignedRequirements', ['page_title' => 'Assigned Requirement']);
+    });
