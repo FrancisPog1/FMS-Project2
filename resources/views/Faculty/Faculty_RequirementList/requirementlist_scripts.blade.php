@@ -67,15 +67,7 @@
     const pond = FilePond.create(inputElement);
 
 
-    // FilePond.setOptions({
-    //     server: {
-    //         process: '/upload-file',
-    //         revert: '/delete-file',
-    //         headers: {
-    //             'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    //         }
-    //     },
-    // });
+
 
     FilePond.setOptions({
         server: {
