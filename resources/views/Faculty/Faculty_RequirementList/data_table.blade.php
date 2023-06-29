@@ -59,9 +59,13 @@
                                             ">{{ $data->status }}</button>
                                         </td>
                                         <td class="text-center">
-                                            <button type="button"
-                                                onclick="openUploadModal('{{ $data->status }}', '{{ $data->remarks }}','{{ $data->id }}', '{{ $req_bin_id }}')"
-                                                class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">Upload</button>
+                                            <button type="button" data-status="{{ $data->status }}"
+                                                data-remarks="{{ $data->remarks }}"
+                                                data-requirement-id="{{ $data->id }}"
+                                                data-req-bin-id="{{ $req_bin_id }}"
+                                                class="upload-button px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                                Upload
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

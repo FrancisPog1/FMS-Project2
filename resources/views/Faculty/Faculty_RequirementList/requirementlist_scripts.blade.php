@@ -1,21 +1,27 @@
 {{-- Scripts for showing the Upload modal --}}
 <script>
-    function openUploadModal(status, remarks, requirementId, req_bin_id) {
-        // Set the values in the form fields
+    // Add event listener for upload buttons using event delegation
+    document.addEventListener('click', function(event) {
+        if (event.target.matches('.upload-button')) {
+            var button = event.target;
+            var status = button.getAttribute('data-status');
+            var remarks = button.getAttribute('data-remarks');
+            var requirementId = button.getAttribute('data-requirement-id');
+            var reqBinId = button.getAttribute('data-req-bin-id');
 
+            // Set the values in the form fields
+            document.getElementById('changeStatus').value = status;
+            document.getElementById('remarks').value = remarks;
 
-        document.getElementById('changeStatus').value = status;
-        document.getElementById('remarks').value = remarks;
+            // Set the action of the form dynamically using JavaScript
+            var form = document.getElementById('uploadForm');
+            form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__',
+                reqBinId);
 
-        // Set the action of the form dynamically using JavaScript
-        var form = document.getElementById('uploadForm');
-        // form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__', req_bin_id);
-        form.action = form.action.replace('__requirementId__', requirementId);
-
-
-        // Open the upload modal
-        $('#modal-xl-upload').modal('show');
-    }
+            // Open the upload modal
+            $('#modal-xl-upload').modal('show');
+        }
+    });
 
     // Add event listener for modal shown event
     $('#modal-xl-upload').on('shown.bs.modal', function() {
@@ -32,6 +38,7 @@
         $('#modal-xl-upload').modal('hide');
     });
 </script>
+
 
 
 <style>
