@@ -29,27 +29,16 @@ Breadcrumbs::for('Assigned Requirement', function (BreadcrumbTrail $trail) {
     $trail->push('Assigned Requirement', route('acadhead_AssignedRequirements'));
 });
 
+
+
 // Dashboard > Reqbin > Assign Req > Evaluation
-Breadcrumbs::for('Evaluation', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('Evaluation', function (BreadcrumbTrail $trail, $bin_id) {
     $trail->parent('Assigned Requirement');
-    $trail->push('Evaluation', route('acadhead_RequirementAssignees'));
+    $trail->push('Evaluation', route('acadhead_RequirementAssignees', ['bin_id'=>$bin_id]));
 });
 
-
-// Dashboard > Blog > [Category]
-// Breadcrumbs::for('Evaluation', function (BreadcrumbTrail $trail, $category) {
-//     $trail->parent(''Requirement Bin');
-//     $trail->push($category->title, route('Evaluation', $category));
-// });
-
-//  // Dashboard > Blog > Blog2 > [Category]
-// Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
-//     $trail->parent('blog');
-//     $trail->push($category->title, route('category', $category));
-// });
-
-// // Dashboard > Blog > [Category] > [Post]
-// Breadcrumbs::for('post,' function ($trail, $post) {
-// 	$trail->parent('category', $post-.caategory);
-// 	$trail->push($post->title, route('post', $post->id));
-// });
+// Dashboard > Reqbin > Assign Req > Evaluation > Monitor
+Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $bin_id, $req_bin_id) {
+    $trail->parent('Evaluation');
+    $trail->push('Monitor User', route('acadhead_MonitorRequirements', ['bin_id'=>$bin_id, 'req_bin_id'=>$req_bin_id]));
+});

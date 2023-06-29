@@ -473,3 +473,8 @@ Route::get('/AcadHead_RequirementAssignees', function () {
     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Evaluation']);
 });
 
+// REQ BIN MONITOR
+Route::get('/AcadHead_MonitorRequirements', function () {
+    return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements', ['page_title' => 'Monitor User']);
+});
+

@@ -31,8 +31,8 @@ class RequirementBin_Controller extends Controller
             'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id')
             ->get();
 
-            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees', compact('assigned_reqrs'));
-
+            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id'));
+            
 
         }
 

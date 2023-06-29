@@ -17,7 +17,7 @@
                         </div>
                         <div class="col ml-4">
                             <ol class="breadcrumb float-right mr-5">
-                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation') }}</li>
+                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation',$bin_id) }}</li>
                             </ol>
                         </div>
                     </div>

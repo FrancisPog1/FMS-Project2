@@ -1,8 +1,13 @@
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row-col-sm-6 mb-2">
-            <div class="col-md-3 ml-2">
-                <h1 class="mt-4">Monitor User Requirements</h1>
+        <div class="row mt-5">
+            <div class="col ml-4">
+                <h1 class="m-0">Monitor Users</h1>
+            </div>
+            <div class="col ml-4">
+                <ol class="breadcrumb float-right mr-5">
+                    <li class="breadcrumb-item active">{{ Breadcrumbs::render('Monitor User', [ ?, ?, ]) }}</li>
+                </ol>
             </div>
         </div>
     </div>
