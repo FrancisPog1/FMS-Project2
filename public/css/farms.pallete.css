@@ -65,3 +65,9 @@
 {
   font-size: .8rem;
 }
+
+a:hover
+
+{
+    color: var(--text-color-1);
+}

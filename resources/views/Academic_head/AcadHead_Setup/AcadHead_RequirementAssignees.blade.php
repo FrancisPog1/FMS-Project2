@@ -17,10 +17,7 @@
                         </div>
                         <div class="col ml-4">
                             <ol class="breadcrumb float-right mr-5">
-                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="#">Requirement Bin</a></li>
-                                <li class="breadcrumb-item"><a href="#">Assign Bin</a></li>
-                                <li class="breadcrumb-item active">Evaluation</li>
+                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation') }}</li>
                             </ol>
                         </div>
                     </div>

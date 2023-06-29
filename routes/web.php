@@ -266,7 +266,8 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     })->name('acadhead_AssignedRequirements');
 
     /**Requirement Assignees*/
-    Route::get('/RequirementAssignees/{bin_id}', [RequirementBin_Controller::class, 'view_assigned_user'])->name('acadhead_RequirementAssignees');
+    Route::get('/RequirementAssignees/{bin_id}', [RequirementBin_Controller::class, 'view_assigned_user'
+    ])->name('acadhead_RequirementAssignees');
 
     Route::get('MonitorRequirements/{user_id}/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'show'])
     ->name('acadhead_MonitorRequirements');
@@ -453,15 +454,21 @@ Route::delete('/deleteFile/{filename}', [DropzoneController::class, 'delete'])->
 
 
 /*
-*  breadcrumbs
+*  breadcrumbs of academic head
 */
 
 
-// Req Bin for breadcrumbs
+// REQ BIN
 Route::get('/data_table', function () {
     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table', ['page_title' => 'Requirement Bin']);
-    });
+});
 
+// ASSIGN REQ
 Route::get('/AcadHead_AssignedRequirements', function () {
     return view('Academic_head/AcadHead_Setup/AcadHead_AssignedRequirements', ['page_title' => 'Assigned Requirement']);
-    });
+});
+
+// REQ BIN ASSIGNEES
+Route::get('/AcadHead_RequirementAssignees', function () {
+    return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Evaluation']);
+});
