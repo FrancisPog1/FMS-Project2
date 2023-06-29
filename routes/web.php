@@ -478,3 +478,42 @@ Route::get('/AcadHead_MonitorRequirements', function () {
     return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements', ['page_title' => 'Monitor User']);
 });
 
+// ADMIN USER ROLE
+Route::get('/AcadHead_Role', function () {
+    return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', ['page_title' => 'System role user']);
+});
+
+// ADMIN SYSTEM USERS
+Route::get('/AcadHead_AddUser', function () {
+    return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', ['page_title' => 'System Users']);
+});
+
+// ADMIN ACADEMIC RANK
+Route::get('/AcadHead_AcademicRank', function () {
+    return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', ['page_title' => 'Faculty Academic Rank']);
+});
+
+// ADMIN FACULTY TYPE
+Route::get('/AcadHead_AcademicRank', function () {
+    return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', ['page_title' => 'Faculty Types']);
+});
+
+// ADMIN REQUIREMENT TYPES
+Route::get('/AcadHead_RequirementType', function () {
+    return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', ['page_title' => 'Requirement Types']);
+});
+
+// ADMIN ACT TYPES
+Route::get('/AcadHead_ActivityType', function () {
+    return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', ['page_title' => 'Activity Types']);
+});
+
+// ADMIN DESIGNATION
+Route::get('/AcadHead_Designation', function () {
+    return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', ['page_title' => 'Designation']);
+});
+
+// ADMIN PROGRAMS
+Route::get('/AcadHead_Specialization', function () {
+    return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
+});

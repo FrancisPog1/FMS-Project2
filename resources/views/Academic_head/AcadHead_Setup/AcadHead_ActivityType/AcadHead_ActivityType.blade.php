@@ -15,9 +15,13 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row-col-sm-6 mb-2">
-                        <div class="col-md-3 ml-4">
-                            <h1 class="m-0">Activity Type</h1>
+                    <div class="row mt-5 ml-5">
+                        <div class="col">
+                            <h1 class="m-0">Activity Types</h1>
+
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Activity Types') }}</li>
+                            </ol>
                         </div>
                     </div>
                 </div>

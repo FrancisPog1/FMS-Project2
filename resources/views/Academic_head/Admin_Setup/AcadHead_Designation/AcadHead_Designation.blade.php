@@ -14,9 +14,13 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row-col-sm-6 mb-2">
-                        <div class="col-md-3 ml-4">
+                    <div class="row mt-5 ml-5">
+                        <div class="col">
                             <h1 class="m-0">Designation</h1>
+
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Designation') }}</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
