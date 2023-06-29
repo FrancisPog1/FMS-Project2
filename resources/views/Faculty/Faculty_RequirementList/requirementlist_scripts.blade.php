@@ -13,7 +13,6 @@
         form.action = form.action.replace('__requirementId__', requirementId);
 
 
-
         // Open the upload modal
         $('#modal-xl-upload').modal('show');
     }

@@ -7,6 +7,7 @@ use App\Models\UserUploadRequirement;
 use App\Models\UsersFiles;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use illuminate\Support\Facades\Validator;
@@ -21,6 +22,8 @@ class FacultyUpload_Controller extends Controller
         ]);
         $user_id = Auth::user()->id;
         $assigned_requirement = UserUploadRequirement::findOrFail($requirementID);
+
+
         $temporaryFiles = TemporaryFiles::all();
 
         if($validator->fails()){
@@ -32,13 +35,13 @@ class FacultyUpload_Controller extends Controller
             //This code copy the folders and files from the temporary folder and then paste it to the uploaded_files folder
             foreach($temporaryFiles as $temporaryFile){
                 \Storage::copy('uploaded_files/tmp/' .$temporaryFile->folder . '/' .$temporaryFile->file_name, 'uploaded_files/' .$temporaryFile->folder . '/' .$temporaryFile->file_name);
-                UsersFiles::create([
-                    'id' => \Str::uuid()->toString(),
-                    'uploaded_by' => $user_id,
-                    'requirement_id' => $assigned_requirement->id,
-                    'file_name' => $temporaryFile->file_name,
-                    'file_path' => $temporaryFile->folder . '/' . $temporaryFile->file_name,
-                ]);
+               $UserFiles = new UsersFiles();
+               $UserFiles->id = \Str::uuid()->toString();
+               $UserFiles->uploaded_by= $user_id;
+               $UserFiles->requirement_id = $requirementID;
+               $UserFiles->file_name = $temporaryFile->file_name;
+               $UserFiles->file_path = $temporaryFile->folder . '/' . $temporaryFile->file_name;
+               $UserFiles->save();
 
                 //Delete the temporary files from the path and tempoarary_files table
                 \Storage::deleteDirectory('uploaded_files/tmp'. $temporaryFile->folder);

@@ -472,3 +472,4 @@ Route::get('/AcadHead_AssignedRequirements', function () {
 Route::get('/AcadHead_RequirementAssignees', function () {
     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Evaluation']);
 });
+
