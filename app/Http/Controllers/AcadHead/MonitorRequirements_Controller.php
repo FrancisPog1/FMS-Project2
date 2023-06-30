@@ -20,6 +20,7 @@ class MonitorRequirements_Controller extends Controller
 {
     public function show($user_id, $assigned_bin_id, $req_bin_id)
     {
+
         $datas = DB::table('requirement_types')
         ->join('requirement_bin_contents', 'requirement_types.id', '=', 'requirement_bin_contents.foreign_requirement_types_id')
         ->join('user_upload_requirements', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
@@ -34,7 +35,7 @@ class MonitorRequirements_Controller extends Controller
         ->get();
 
         return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements'
-        , compact('datas','assigned_bin_id', 'req_bin_id'));
+        , compact('datas','assigned_bin_id', 'req_bin_id', 'user_id'));
 
     }
 

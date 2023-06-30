@@ -38,7 +38,20 @@ Breadcrumbs::for('Evaluation', function (BreadcrumbTrail $trail, $bin_id) {
 });
 
 // Dashboard > Reqbin > Assign Req > Evaluation > Monitor
-Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $bin_id, $req_bin_id) {
-    $trail->parent('Evaluation');
-    $trail->push('Monitor User', route('acadhead_MonitorRequirements', ['bin_id'=>$bin_id, 'req_bin_id'=>$req_bin_id]));
+
+
+// Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $user_id, $reqbin_id, $ass_bin_id) {
+//     $trail->parent('Evaluation', $user_id, $reqbin_id, $ass_bin_id);
+//     $trail->push('Monitor User', route('acadhead_MonitorRequirements', [
+//         'user_id' => $user_id,
+//         'assigned_bin_id' => $ass_bin_id,
+//         'req_bin_id' => $reqbin_id
+//     ]));
+// });
+
+Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $bin_id) {
+    $trail->parent('Evaluation', $bin_id);
+    $trail->push('Monitor User', route('acadhead_RequirementAssignees', ['bin_id'=>$bin_id]));
 });
+
+

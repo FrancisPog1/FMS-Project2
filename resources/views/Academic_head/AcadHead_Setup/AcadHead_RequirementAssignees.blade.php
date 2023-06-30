@@ -17,7 +17,7 @@
                         </div>
                         <div class="col ml-4">
                             <ol class="breadcrumb float-right mr-5">
-                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation',$bin_id) }}</li>
+                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation', $bin_id) }}</li>
                             </ol>
                         </div>
                     </div>
@@ -95,7 +95,6 @@
                                                     'req_bin_id' => $assigned_reqr->req_bin_id,
                                                 ]) }}"
                                                     class="px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">Monitor</a>
-
                                             </td>
                                         </tr>
                                     @endforeach

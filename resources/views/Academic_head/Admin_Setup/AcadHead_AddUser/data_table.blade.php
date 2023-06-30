@@ -31,7 +31,7 @@
             </div>
 
             <!-- Tables of roles -->
-            <div class="card-body p-0">
+            <div class="card-body p-0" style="height: 500px; overflow-y: scroll;">
                 <table class="table table-striped">
                     <thead class="pal-1 text-col-2">
                         <tr>

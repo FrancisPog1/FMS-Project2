@@ -11,22 +11,7 @@
 <!-- Include Toastr JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<!-- Toastr Alert Message -->
-<script>
-    $(document).ready(function() {
-        @if (Session::has('success'))
-            toastr.success("{{ Session::get('success') }}");
-        @endif
 
-        @if (Session::has('warning'))
-            toastr.warning("{{ Session::get('warning') }}");
-        @endif
-
-        @if (Session::has('error'))
-            toastr.error("{{ Session::get('error') }}");
-        @endif
-    });
-</script>
 
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
