@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Session; /**For the session to work */
 use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 class AcademicRank_Controller extends Controller
 {
 /**Codes for Creating Academic Rank */
-    public function Create_AcadRank(Request $request){
+    public function Create_AcadRank(Request $request): JsonResponse {
         /**Codes to validate the input fields of the registration page */
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title'=>'required|unique:academic_ranks',
             'description'=>'max:300'
         ]);
@@ -32,12 +36,17 @@ class AcademicRank_Controller extends Controller
         $AcadRank->title = $request ->title;
         $AcadRank->description = $request ->description;
         $AcadRank->created_by =  $userId;
-        $res = $AcadRank->save();
-        if($res){
-            return back()->with('success', 'You have created an Academic Rank!'); /**Alert Message */
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $AcadRank->save();
+            return response()->json(['success' => true, 'message' => 'Academic Rank successfully created.'], 200);
         }
     }
     //DELETE RANKS
@@ -58,8 +67,13 @@ class AcademicRank_Controller extends Controller
     }
 
     //UPDATE RANKS
-    public function updateRanks(Request $request, $id)
+    public function updateRanks(Request $request, $id): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required|unique:academic_ranks',
+            'description'=>'max:300'
+        ]);
+
         // Get the logged in user's ID
         $user_id = Auth::user()->id;
 
@@ -69,9 +83,18 @@ class AcademicRank_Controller extends Controller
 
         // Assign the user's ID to the user_id foreign key column
         $acadrank->updated_by = $user_id;
-        $acadrank->save();
 
-        return back()->with('success', 'Academic rank updated successfully.');
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $acadrank->save();
+            return response()->json(['success' => true, 'message' => 'Academic Rank updated successfully.'], 200);
+        }
     }
 
 

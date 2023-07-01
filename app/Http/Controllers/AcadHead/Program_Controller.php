@@ -17,11 +17,16 @@ use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
+
 class Program_Controller extends Controller
 {
     /**Creating  Program*/
-    public function Create_Program(Request $request){
-        $request->validate([
+    public function Create_Program(Request $request): JsonResponse {
+        $validator = Validator::make($request->all(), [
             'title'=>'required|unique:programs',
             'description'=>'max:300'
         ]);
@@ -36,12 +41,16 @@ class Program_Controller extends Controller
         $program->description = $request ->description;
         $program->created_by = $userId;
 
-        $res = $program->save();
-        if($res){
-            return back()->with('success', 'You have created a Program!'); /**Alert Message */
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $program->save();
+            return response()->json(['success' => true, 'message' => 'Program successfully created.'], 200);
         }
 
     }
@@ -63,8 +72,13 @@ class Program_Controller extends Controller
     }
 
     //UPDATE PROGRAMS
-    public function updatePrograms(Request $request, $id)
+    public function updatePrograms(Request $request, $id): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required|unique:programs',
+            'description'=>'max:300'
+        ]);
+
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
 
@@ -74,9 +88,19 @@ class Program_Controller extends Controller
         $program->title = $request->input('title');
         $program->updated_by = $userId;
 
-        $program->save();
 
-        return back()->with('success', 'Program updated successfully.');
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $program->save();
+            return response()->json(['success' => true, 'message' => 'Program successfully updated.'], 200);
+        }
     }
 
 

@@ -1,14 +1,10 @@
-        <style>
-
-        </style>
-        
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mt-5 ml-5">
                     <div class="col">
                         <h1 class="m-0">Requirement Bin</h1>
-                    
+
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">{{ Breadcrumbs::render('Requirement Bin') }} </li>
                         </ol>
@@ -88,7 +84,7 @@
                                                     </a>
                                                     <input name="_method" type="hidden" value="DELETE">
 
-                                                    <a href="{{ route('acadhead_AssignedRequirements') }}"
+                                                    <a href="{{ route('acadhead_RequirementAssignees', ['bin_id' => $requirementbin->id]) }}"
                                                         role="button" aria-pressed="true"
                                                         class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
 

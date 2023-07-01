@@ -16,12 +16,17 @@ use Illuminate\Support\Facades\Session; /**For the session to work */
 use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 class ActivityType_Controller extends Controller
 {
     /**Creating Activity Type */
-    public function Create_ActivityType(Request $request){
-        $request->validate([
-            'title'=>'required|unique:requirement_types',
+    public function Create_ActivityType(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required|unique:activity_types',
             'category'=>'required',
             'description'=>'max:300'
         ]);
@@ -38,12 +43,16 @@ class ActivityType_Controller extends Controller
         $act_type->category = $request ->category;
         $act_type->created_by = $userId;
 
-        $res = $act_type->save();
-        if($res){
-            return back()->with('success', 'You have created a Activity Type'); /**Alert Message */
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $act_type->save();
+            return response()->json(['success' => true, 'message' => 'Activity Type successfully created.'], 200);
         }
     }
 
@@ -64,17 +73,33 @@ class ActivityType_Controller extends Controller
     }
 
     //UPDATE ACTIVITY TYPES
-    public function updateActivitytypes(Request $request, $id)
+    public function updateActivitytypes(Request $request, $id): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required|unique:activity_types',
+            'category'=>'required',
+            'description'=>'max:300'
+        ]);
+
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
         $act_type = ActivityType::find($id);
         $act_type->title = $request->input('title');
         $act_type->description = $request->input('description');
         $act_type->category = $request ->input('category');
-        $act_type->save();
 
-        return back()->with('success', 'Activity Type updated successfully.');
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $act_type->save();
+            return response()->json(['success' => true, 'message' => 'Activity Type successfully updated.'], 200);
+        }
     }
 
 }

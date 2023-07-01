@@ -1,5 +1,5 @@
 <section class="content">
-    <form action="{{ route('CreateSpecialization') }}" method="post">
+    <form id="create_specialization" action="{{ route('CreateSpecialization') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered">

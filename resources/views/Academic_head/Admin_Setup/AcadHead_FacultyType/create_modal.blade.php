@@ -1,5 +1,5 @@
 <section class="content">
-    <form action="{{ route('CreateFacultyType') }}" method="post">
+    <form id="create_type" action="{{ route('CreateFacultyType') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered">

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-        <!-- Title with PUP logo -->
-        <link rel="icon" href="{{ asset('img/pup.png') }}" />
-        <title>PUPQC | Faculty Records and Monitoring System</title>
+    <!-- Title with PUP logo -->
+    <link rel="icon" href="{{ asset('img/pup.png') }}" />
+    <title>PUPQC | Faculty Records and Monitoring System</title>
+
 
     @yield('head')
 
@@ -16,16 +18,17 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-{{-- TOP NAVBAR --}}
-        @include('NavigationBar.AcadHead_Navbars.Top_NavBar')
+    {{-- TOP NAVBAR --}}
+    @include('NavigationBar.AcadHead_Navbars.Top_NavBar')
 
-{{-- LEFT NAVBAR --}}
-        @include('NavigationBar.AcadHead_Navbars.Left_NavBar')
-        
+    {{-- LEFT NAVBAR --}}
+    @include('NavigationBar.AcadHead_Navbars.Left_NavBar')
+
     @yield('content')
 
-{{-- BODY JS DEPENDENCIES --}}
+    {{-- BODY JS DEPENDENCIES --}}
     @include('layouts.Dependencies.BODY_JS_dependencies')
 
 </body>
+
 </html>

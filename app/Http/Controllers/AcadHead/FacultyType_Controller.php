@@ -15,13 +15,15 @@ use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 class FacultyType_Controller extends Controller
 {
-
-
     /**Creating Faculty Type */
-    public function Create_FacultyType(Request $request){
-        $request->validate([
+    public function Create_FacultyType(Request $request): JsonResponse{
+        $validator = Validator::make($request->all(), [
             'title'=>'required|unique:faculty_types',
             'description'=>'max:300'
         ]);
@@ -36,12 +38,16 @@ class FacultyType_Controller extends Controller
         $faculty_type->description = $request ->description;
         $faculty_type->created_by = $userId;
 
-        $res = $faculty_type->save();
-        if($res){
-            return back()->with('success', 'You have created a Faculty Type!'); /**Alert Message */
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $faculty_type->save();
+            return response()->json(['success' => true, 'message' => 'Faculty Type successfully created.'], 200);
         }
 
     }
@@ -63,8 +69,14 @@ class FacultyType_Controller extends Controller
     }
 
     //UPDATE Faculty Types
-    public function updateFacultytypes(Request $request, $id)
+    public function updateFacultytypes(Request $request, $id): JsonResponse
     {
+
+        $validator = Validator::make($request->all(), [
+            'title'=>'required|unique:faculty_types',
+            'description'=>'max:300'
+        ]);
+
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
 
@@ -73,11 +85,19 @@ class FacultyType_Controller extends Controller
         $type->description = $request->input('description');
         $type->updated_by = $userId;
 
-        $type->save();
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $type->save();
+            return response()->json(['success' => true, 'message' => 'Faculty Type successfully updated.'], 200);
+        }
 
-        return back()->with('success', 'Faculty Type updated successfully.');
     }
-
 
 }
 

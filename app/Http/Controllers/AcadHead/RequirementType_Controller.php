@@ -17,12 +17,17 @@ use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 class RequirementType_Controller extends Controller
 {
 
     /**Creating Requirement Type */
-    public function Create_RequirementType(Request $request){
-        $request->validate([
+    public function Create_RequirementType(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
             'title'=>'required|unique:requirement_types',
             'description'=>'max:300'
         ]);
@@ -37,12 +42,16 @@ class RequirementType_Controller extends Controller
         $reqtype->description = $request ->description;
         $reqtype->created_by = $userId;
 
-        $res = $reqtype->save();
-        if($res){
-            return back()->with('success', 'You have created a Requirement Type'); /**Alert Message */
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $reqtype->save();
+            return response()->json(['success' => true, 'message' => 'Requirement Type successfully created.'], 200);
         }
     }
 
@@ -63,8 +72,12 @@ class RequirementType_Controller extends Controller
     }
 
     //UPDATE REQUIREMENT TYPE
-    public function updateRequirementtypes(Request $request, $id)
+    public function updateRequirementtypes(Request $request, $id): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+        'title'=>'required|unique:requirement_types',
+        'description'=>'max:300'
+    ]);
 
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
@@ -73,9 +86,17 @@ class RequirementType_Controller extends Controller
         $req_type->description = $request->input('description');
         $req_type->updated_by = $userId;
 
-        $req_type->save();
-
-        return back()->with('success', 'Requirement Type updated successfully.');
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $req_type->save();
+            return response()->json(['success' => true, 'message' => 'Requirement Type updated successfully.'], 200);
+        }
     }
 
 }

@@ -15,11 +15,16 @@ use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 class Designation_Controller extends Controller
 {
     /**Creating Designation */
-    public function Create_Designation(Request $request){
-        $request->validate([
+    public function Create_Designation(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
             'title'=>'required|unique:designations',
             'description'=>'max:300'
         ]);
@@ -34,14 +39,17 @@ class Designation_Controller extends Controller
         $designation->description = $request ->description;
         $designation->created_by = $userId;
 
-        $res = $designation->save();
-        if($res){
-            return back()->with('success', 'You have created a Designation!'); /**Alert Message */
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $designation->save();
+            return response()->json(['success' => true, 'message' => 'Designation successfully created.'], 200);
         }
-
     }
 
     public function deleteDesignations($id)
@@ -61,19 +69,31 @@ class Designation_Controller extends Controller
     }
 
     //UPDATE DESIGNATION
-    public function updateDesignations(Request $request, $id)
+    public function updateDesignations(Request $request, $id): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required|unique:designations',
+            'description'=>'max:300'
+        ]);
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
 
-        $role = Designation::find($id);
-        $role->title = $request->input('title');
-        $role->description = $request->input('description');
-        $role->updated_by = $userId;
+        $designation = Designation::find($id);
+        $designation->title = $request->input('title');
+        $designation->description = $request->input('description');
+        $designation->updated_by = $userId;
 
-        $role->save();
-
-        return back()->with('success', 'Designation updated successfully.');
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $designation->save();
+            return response()->json(['success' => true, 'message' => 'Designation successfully updated.'], 200);
+        }
     }
 }
 

@@ -17,11 +17,17 @@ use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
+
 class Role_Controller extends Controller
 {
     //Creating a Role
-    public function Create_Roles(Request $request){
-        $request->validate([
+    public function Create_Roles(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
             'title'=>'required|unique:roles',
             'description'=>'max:300'
         ]);
@@ -34,12 +40,17 @@ class Role_Controller extends Controller
         $role->title = $request ->title;
         $role->description = $request ->description;
         $role->created_by = $userId;
-        $res = $role->save();
-        if($res){
-            return back()->with('success', 'You have created a Role!'); /**Alert Message */
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $role->save();
+            return response()->json(['success' => true, 'message' => 'Role successfully created.'], 200);
         }
 
     }
@@ -63,8 +74,13 @@ class Role_Controller extends Controller
     }
 
         //UPDATE ROLES
-        public function updateRoles(Request $request, $id)
+        public function updateRoles(Request $request, $id) : JsonResponse
         {
+            $validator = Validator::make($request->all(), [
+                'title'=>'required|unique:roles',
+                'description'=>'max:300'
+            ]);
+
             // Get the user ID of the logged in user
             $userId = Auth::user()->id;
 
@@ -72,9 +88,18 @@ class Role_Controller extends Controller
             $role->title = $request->input('title');
             $role->description = $request->input('description');
             $role->updated_by = $userId;
-            $role->save();
 
-            return back()->with('success', 'Role updated successfully.');
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validator->errors(),
+                ]);
+            }
+            else {
+                $role->save();
+                return response()->json(['success' => true, 'message' => 'Role successfully updated.'], 200);
+            }
         }
 
 }

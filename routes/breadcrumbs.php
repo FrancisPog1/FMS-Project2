@@ -24,17 +24,17 @@ Breadcrumbs::for('Requirement Bin', function (BreadcrumbTrail $trail) {
 });
 
 // Dashboard > Reqbin > Assign Req
-Breadcrumbs::for('Assigned Requirement', function (BreadcrumbTrail $trail) {
-    $trail->parent('Requirement Bin');
-    $trail->push('Assigned Requirement', route('acadhead_AssignedRequirements'));
-});
+// Breadcrumbs::for('Assigned Requirement', function (BreadcrumbTrail $trail) {
+//     $trail->parent('Requirement Bin');
+//     $trail->push('Assigned Requirement', route('acadhead_AssignedRequirements'));
+// });
 
 
 
 // Dashboard > Reqbin > Assign Req > Evaluation
-Breadcrumbs::for('Evaluation', function (BreadcrumbTrail $trail, $bin_id) {
-    $trail->parent('Assigned Requirement');
-    $trail->push('Evaluation', route('acadhead_RequirementAssignees', ['bin_id'=>$bin_id]));
+Breadcrumbs::for('Requirement Assignees', function (BreadcrumbTrail $trail, $bin_id) {
+    $trail->parent('Requirement Bin');
+    $trail->push('Requirement Assignees', route('acadhead_RequirementAssignees', ['bin_id'=>$bin_id]));
 });
 
 // Dashboard > Reqbin > Assign Req > Evaluation > Monitor
@@ -50,7 +50,7 @@ Breadcrumbs::for('Evaluation', function (BreadcrumbTrail $trail, $bin_id) {
 // });
 
 Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $bin_id) {
-    $trail->parent('Evaluation', $bin_id);
+    $trail->parent('Requirement Assignees', $bin_id);
     $trail->push('Monitor User', route('acadhead_RequirementAssignees', ['bin_id'=>$bin_id]));
 });
 

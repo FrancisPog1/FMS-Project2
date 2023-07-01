@@ -45,8 +45,8 @@
                                    @foreach ($activitytypes as $activitytype)
                                        <tr>
                                            <td>{{ $activitytype->title }}</td>
-                                           <td>{{ $activitytype->category }}</td>
                                            <td>{{ $activitytype->description }}</td>
+                                           <td>{{ $activitytype->category }}</td>
                                            <td class="text-center">
                                                <form method="POST"
                                                    action="{{ route('delete_activitytypes', $activitytype->id) }}">

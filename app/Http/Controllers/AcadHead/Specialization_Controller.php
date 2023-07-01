@@ -15,12 +15,18 @@ use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
+
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 class Specialization_Controller extends Controller
 {
 
     /**Creating Specialization */
-    public function Create_Specialization(Request $request){
-        $request->validate([
+    public function Create_Specialization(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
             'title'=>'required|unique:specializations',
             'description'=>'max:300'
         ]);
@@ -35,12 +41,16 @@ class Specialization_Controller extends Controller
         $specialization->description = $request ->description;
         $specialization->created_by = $userId;
 
-        $res = $specialization->save();
-        if($res){
-            return back()->with('success', 'You have created a Specialization!'); /**Alert Message */
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
         }
-        else{
-            return back()->with('fail', 'Something went Wrong');
+        else {
+            $specialization->save();
+            return response()->json(['success' => true, 'message' => 'Specialization successfully created.'], 200);
         }
 
     }
@@ -62,8 +72,12 @@ class Specialization_Controller extends Controller
     }
 
     //UPDATE SPECIALIZATION
-    public function updateSpecializations(Request $request, $id)
+    public function updateSpecializations(Request $request, $id): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required|unique:specializations',
+            'description'=>'max:300'
+        ]);
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
 
@@ -72,9 +86,17 @@ class Specialization_Controller extends Controller
         $specialization->description = $request->input('description');
         $specialization->updated_by = $userId;
 
-        $specialization->save();
-
-        return back()->with('success', 'Specialization updated successfully.');
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $specialization->save();
+            return response()->json(['success' => true, 'message' => 'Specialization successfully created.'], 200);
+        }
     }
 
 }

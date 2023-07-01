@@ -155,9 +155,6 @@ class CreateAdminUserSeeder extends Seeder
         ]);
 
 
-
-
-
         //--------------------------For Academic Rank----------------------------//
         $AcademicRank = AcademicRank::create([
             'id' => Str::uuid()->toString(),
@@ -197,7 +194,6 @@ class CreateAdminUserSeeder extends Seeder
         ]);
 
 
-
         //--------------------------For Program----------------------------//
         $program = Program::create([
             'id' => Str::uuid()->toString(),
@@ -216,7 +212,8 @@ class CreateAdminUserSeeder extends Seeder
 
         $program = Program::create([
             'id' => Str::uuid()->toString(),
-            'title' => 'Bachelor in Technology and Livelihood Education With Specialization in Information and Communication Technology (BTLED-ICT)',
+            'title' => 'Bachelor in Technology and Livelihood Education With Specialization
+                            in Information and Communication Technology (BTLED-ICT)',
             'description' => null,
             'created_by' => null,
         ]);
@@ -226,7 +223,9 @@ class CreateAdminUserSeeder extends Seeder
         $requirement_bin = RequirementBin::create([
             'id' => Str::uuid()->toString(),
             'title' => 'First Semester: Faculty Monitoring Report',
-            'description' => 'This requirement bin must contain the documents that are used to track the performance of faculty members during the first semester of this academic year. Please comply with the requirements before the deadline',
+            'description' => 'This requirement bin must contain the documents that are used to track
+                                the performance of faculty members during the first semester of this academic year.
+                                Please comply with the requirements before the deadline',
             'deadline' => '2023-07-30 12:00:00',
             'status' => 'ONGOING',
         ]);

@@ -1,7 +1,7 @@
 {{-- Create Modal --}}
 
 <section class="content">
-    <form action="{{ route('Create_ActivityType') }}" method="post">
+    <form id="create_type" action="{{ route('Create_ActivityType') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered">
