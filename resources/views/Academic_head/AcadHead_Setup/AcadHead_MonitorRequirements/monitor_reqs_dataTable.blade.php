@@ -1,10 +1,10 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mt-5">
-            <div class="col ml-4">
+            <div class="col ml-3">
                 <h1 class="m-0">Monitor Users</h1>
             </div>
-            <div class="col ml-4">
+            <div class="col-7 ml-4">
                 <ol class="breadcrumb float-right mr-5">
                     <li class="breadcrumb-item active">{{ Breadcrumbs::render('Monitor User', $req_bin_id) }}</li>
                 </ol>
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<br><br>
+<br>
 
 <!-- Content Body (Page Body) -->
 <div class="container">
@@ -33,12 +33,12 @@
                                 </b>
                             </div>
 
-                            <div class="text-right">
+                            {{-- <div class="text-right">
                                 <button type="button" data-toggle="modal" data-target="#modal-xl-create"
                                     class="px-2 py-2 text-sm rounded-lg text-pal-1 hover:bg-gray-200">
                                     <i class="fa fa-plus"></i>
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     {{-- Table body --}}
@@ -115,7 +115,7 @@
                     <br>
 
                     {{-- column row on button back --}}
-                    <div class="col">
+                    {{-- <div class="col">
                         <div class="text-right">
                             <a type="button" href="{{ route('acadhead_RequirementAssignees', $req_bin_id) }}"
                                 class="px-2 py-2 text-sm text-center rounded-lg text-pal-1 hover:bg-gray-200 text-center mr-2 mb-2">
@@ -124,7 +124,7 @@
                             </a>
 
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             {{-- specific user match in specific requirement --}}

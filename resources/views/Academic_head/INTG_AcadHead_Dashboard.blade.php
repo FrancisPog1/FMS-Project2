@@ -11,9 +11,9 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mt-5">
+                <div class="row mt-3">
                     <div class="col ml-4">
-                        <h1 class="m-0">{{ Breadcrumbs::render('Dashboard') }}</h1>
+                        <h1 class="m-0">Dashboard</h1>
                     </div>
                 </div>
             </div>
