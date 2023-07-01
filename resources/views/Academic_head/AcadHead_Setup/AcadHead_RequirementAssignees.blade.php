@@ -14,9 +14,8 @@
                     <div class="row mt-5 ml-5">
                         <div class="col">
                             <h1 class="m-0">Requirement Assignees</h1>
-                        </div>
-                        <div class="col ml-4">
-                            <ol class="breadcrumb float-right mr-5">
+
+                            <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation',$bin_id) }}</li>
                             </ol>
                         </div>

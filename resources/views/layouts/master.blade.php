@@ -2,7 +2,7 @@
 <html>
 <head>
         <!-- Title with PUP logo -->
-        <link rel="icon" href="{{ asset('img/pup.png') }}" />
+        <link rel="icon" href="{{ ('/img/pup.png') }}" />
         <title>PUPQC | Faculty Records and Monitoring System</title>
 
     @yield('head')
@@ -16,16 +16,27 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-{{-- TOP NAVBAR --}}
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="{{ asset('/img/pup.png') }}" height="60" width="60">
+        </div>
+
+        {{-- TOP NAVBAR --}}
         @include('NavigationBar.AcadHead_Navbars.Top_NavBar')
 
-{{-- LEFT NAVBAR --}}
+        {{-- LEFT NAVBAR --}}
         @include('NavigationBar.AcadHead_Navbars.Left_NavBar')
-        
-    @yield('content')
 
-{{-- BODY JS DEPENDENCIES --}}
+        {{-- CONTENTS --}}
+        @yield('content')
+
+    </div>
+
+    {{-- BODY JS DEPENDENCIES --}}
     @include('layouts.Dependencies.BODY_JS_dependencies')
+
 
 </body>
 </html>

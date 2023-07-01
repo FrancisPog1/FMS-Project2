@@ -1,11 +1,10 @@
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mt-5">
-            <div class="col ml-3">
-                <h1 class="m-0">Monitor Users</h1>
-            </div>
-            <div class="col-7 ml-4">
-                <ol class="breadcrumb float-right mr-5">
+        <div class="row mt-5 ml-5">
+            <div class="col">
+                <h1 class="m-0">Monitoring</h1>
+
+                <ol class="breadcrumb">
                     <li class="breadcrumb-item active">{{ Breadcrumbs::render('Monitor User', $req_bin_id) }}</li>
                 </ol>
             </div>
@@ -28,7 +27,7 @@
                         <div class="row justify-content-between">
                             <div class="flex-wrap">
                                 <b>
-                                    <h1 class="ml-1 mt-2">Gusto mo ng Lemon, meron akong tequila
+                                    <h1 class="ml-1 mt-2">Irynne's Requirements
                                     </h1>
                                 </b>
                             </div>
