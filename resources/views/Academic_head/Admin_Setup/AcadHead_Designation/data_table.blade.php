@@ -36,7 +36,7 @@
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th class="text-center">Designations</th>
-                            {{-- <th style="width: 50%;">Description</th> --}}
+                            <th class="text-center" style="width: 50%;">Description</th>
                             <th class="text-center" style="width: 25%;">Actions</th>
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@
                         @foreach ($designations as $designation)
                             <tr>
                                 <td class="text-center">{{ $designation->title }}</td>
-                                {{-- <td>{{ $designation->description }}</td> --}}
+                                <td>{{ $designation->description }}</td>
                                 <td class="text-center">
                                     <form method="POST" action="{{ route('delete_designations', $designation->id) }}">
                                         @csrf

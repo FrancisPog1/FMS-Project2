@@ -35,14 +35,16 @@
                    <table class="table table-striped">
                        <thead class="pal-1 text-col-2">
                            <tr>
-                               <th class="text-center" style="width: 75%;">Faculty types</th>
+                               <th class="text-center" style="width: 30%;">Faculty types</th>
+                               <th class="text-center" style="width: 45%;">Description</th>
                                <th class="text-center" style="width: 25%;">Actions</th>
                            </tr>
                        </thead>
                        <tbody>
                            @foreach ($facultytypes as $type)
                                <tr>
-                                   <td class="text-center">{{ $type->title }}</td>
+                                   <td>{{ $type->title }}</td>
+                                   <td>{{ $type->description }}</td>
                                    <td class="text-center">
                                        <form method="POST" action="{{ route('delete_facultytypes', $type->id) }}">
                                            @csrf

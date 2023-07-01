@@ -35,8 +35,8 @@
                          <table class="table table-striped">
                              <thead class="pal-1 text-col-2">
                                  <tr>
-                                     <th>Title</th>
-                                     <th style="width: 50%;">Description</th>
+                                     <th class="text-center">Title</th>
+                                     <th class="text-center" style="width: 42%;">Description</th>
                                      <th class="text-center" style="width: 25%;">Actions</th>
                                  </tr>
                              </thead>
