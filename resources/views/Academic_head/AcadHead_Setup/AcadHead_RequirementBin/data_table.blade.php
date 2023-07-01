@@ -55,7 +55,7 @@
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th class="text-center">Title</th>
-                                    <th class="text-center" style="width:30%;">Requirements</th>
+                                    <th class="text-center" style="width:30%;">Description</th>
                                     <th class="text-center">Deadline</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
@@ -65,7 +65,7 @@
                                 @foreach ($requirementbins as $requirementbin)
                                     <tr>
                                         <td class="text-center">{{ $requirementbin->title }}</td>
-                                        <td class="text-center">{{ $requirementbin->description }}</td>
+                                        <td>{{ $requirementbin->description }}</td>
                                         <td>{{ $requirementbin->deadline }}</td>
 
                                         <td class="text-center">
