@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 
 use App\Models\RequirementBinContent;
+use App\Models\RequirementBin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
@@ -21,6 +22,7 @@ class RequirementSetup_Controller extends Controller
 
     public function show($bin_id){
         $requirementtypes = DB::table('requirement_types')->get();
+        $requirement_bin = RequirementBin::where('id', $bin_id)->first();
         $roles = DB::table('roles')->get();
 
         $requirements = DB::table('requirement_bin_contents')
@@ -46,7 +48,7 @@ class RequirementSetup_Controller extends Controller
         ->get();
 
         return view('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/AcadHead_Bin_Setup',
-        compact('requirementtypes', 'bin_id', 'requirements', 'users', 'roles', 'deleted_requirements'));
+        compact('requirementtypes', 'bin_id', 'requirements', 'users', 'roles', 'deleted_requirements', 'requirement_bin'));
     }
 
 

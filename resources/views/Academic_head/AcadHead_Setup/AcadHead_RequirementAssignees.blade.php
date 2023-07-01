@@ -16,12 +16,7 @@
                             <h1 class="m-0">Requirement Assignees</h1>
 
                             <ol class="breadcrumb">
-<<<<<<< HEAD
-                                <li class="breadcrumb-item active">
-                                    {{ Breadcrumbs::render('Requirement Assignees', $bin_id) }}</li>
-=======
-                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation',$bin_id) }}</li>
->>>>>>> 1734f1ebdcd5bab45f905e945459ccebba1b2c5d
+                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Requirement Assignees',$bin_id) }}</li>
                             </ol>
                         </div>
                     </div>

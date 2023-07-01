@@ -30,7 +30,8 @@
                         <div class="row justify-content-between">
                             <div class="flex-wrap">
                                 <b>
-                                    <h1 class="ml-1 mt-2">Please setup the requirements for the [Requirement No.1]
+                                    <h1 class="ml-1 mt-2">Please setup the requirements for the
+                                        [{{ $requirement_bin->title }}]
                                     </h1>
                                 </b>
                             </div>
