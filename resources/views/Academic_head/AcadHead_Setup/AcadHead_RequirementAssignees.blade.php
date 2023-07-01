@@ -14,8 +14,9 @@
                     <div class="row mt-5 ml-5">
                         <div class="col">
                             <h1 class="m-0">Requirement Assignees</h1>
-
-                            <ol class="breadcrumb">
+                        </div>
+                        <div class="col ml-4">
+                            <ol class="breadcrumb float-right mr-5">
                                 <li class="breadcrumb-item active">{{ Breadcrumbs::render('Evaluation',$bin_id) }}</li>
                             </ol>
                         </div>
@@ -94,7 +95,6 @@
                                                     'req_bin_id' => $assigned_reqr->req_bin_id,
                                                 ]) }}"
                                                     class="px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">Monitor</a>
-
                                             </td>
                                         </tr>
                                     @endforeach

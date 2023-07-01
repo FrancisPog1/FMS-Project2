@@ -14,6 +14,7 @@
             document.getElementById('changeStatus').value = status;
             document.getElementById('remarks').value = remarks;
 
+
             // Set the action of the form dynamically using JavaScript
             var form = document.getElementById('validateForm');
             form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__',

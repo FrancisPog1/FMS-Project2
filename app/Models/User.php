@@ -11,6 +11,7 @@ class User extends Model implements Authenticatable
 {
     use HasFactory;
 
+
     public $incrementing = false; //This fix the bug with the Auth::user()->id code.
 
     protected $table = 'users';
