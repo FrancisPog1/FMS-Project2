@@ -3,10 +3,54 @@
         // Set the values in the form fields
         document.getElementById('editForm').elements['email'].value = email;
         document.getElementById('editForm').elements['role'].value = role;
-        document.getElementById('editForm').action = "{{ route('update_users', '') }}" + userId;
 
         // Open the edit modal
         $('#modal-xl-edit').modal('show');
+
+        // AJAX CODES TO MAKE THE MODAL TO NOT RELOAD
+        $(document).ready(function() {
+
+            // Handle form submission
+            $('#editForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+
+                jQuery.ajax({
+                    type: 'post',
+                    url: "{{ route('update_users', '') }}" + userId,
+                    data: jQuery('#editForm').serialize(), // Serialize the form data
+
+                    success: function(response) {
+                        if (response.success === true) {
+                            // Hide the modal using the modal's instance
+                            $('.modal').hide();
+                            $('.modal-backdrop').remove();
+
+                            toastr.success(response.message, 'Success Alert', {
+                                timeOut: 5000
+                            });
+                        } else {
+                            // Display validation errors using toastr
+                            if (response.errors) {
+                                $.each(response.errors, function(key, value) {
+                                    toastr.error(value[0], 'Validation Error', {
+                                        timeOut: 3000
+                                    });
+                                });
+                            } else {
+                                toastr.error(response.message, 'Error Alert', {
+                                    timeOut: 3000
+                                });
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText); // Log any errors to the console
+                    }
+                });
+            });
+
+
+        });
     }
 
     // Add event listeners to close the modal

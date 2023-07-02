@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Validator;
 class RequirementType_Controller extends Controller
 {
 
+
+    
     /**Creating Requirement Type */
     public function Create_RequirementType(Request $request): JsonResponse
     {

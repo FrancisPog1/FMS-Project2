@@ -15,6 +15,11 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
+
 class User_Controller extends Controller
 {
     public function deleteUsers($id)
@@ -34,12 +39,19 @@ class User_Controller extends Controller
     }
 
     //UPDATE USER
-    public function updateUsers(Request $request, $id)
+    public function updateUsers(Request $request, $id): JsonResponse
     {
-            $request->validate([
-            'email'=>'required|email',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-             ]);
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required',
+            'confirmed',
+            Password::min(8)     //Require at least 8 characters...
+            ->letters()         // Require at least one letter...
+            ->mixedCase()        // Require at least one uppercase and one lowercase letter...
+            ->numbers()         // Require at least one number...
+            ->symbols()         // Require at least one symbol...
+            ->uncompromised()], // Ensure the password appears less than 3 times in the same data leak...
+        ]);
 
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
@@ -49,9 +61,19 @@ class User_Controller extends Controller
         $user->foreign_role_id = $request->input('role');
         $user->password = Hash::make($request ->password);
         $user->updated_by = $userId;
-        $user->save();
 
-        return back()->with('success', 'User updated successfully.');
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+        else {
+            $user->save();
+            return response()->json(['success' => true, 'message' => 'User updated successfully.'], 200);
+        }
     }
 
 }

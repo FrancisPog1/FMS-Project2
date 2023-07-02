@@ -38,6 +38,9 @@
             {{-- CREATE MODAL --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_RequirementType/create_modal')
 
+            {{-- RESTORE MODAL --}}
+            @include('Academic_head/AcadHead_Setup/AcadHead_RequirementType/restore_modal')
+
 
         </div>
 
