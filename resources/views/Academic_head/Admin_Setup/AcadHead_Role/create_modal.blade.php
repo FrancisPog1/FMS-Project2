@@ -38,4 +38,5 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+    </form>
 </section>

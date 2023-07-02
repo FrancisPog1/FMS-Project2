@@ -38,6 +38,9 @@
             {{-- CREATE MODAL --}}
             @include('Academic_head/Admin_Setup/AcadHead_AcademicRank/create_modal')
 
+            {{-- RESTORE MODAL --}}
+            @include('Academic_head/Admin_Setup/AcadHead_AcademicRank/restore_modal')
+
         </div>
         <!-- Footer Container -->
         <footer class="main-footer">

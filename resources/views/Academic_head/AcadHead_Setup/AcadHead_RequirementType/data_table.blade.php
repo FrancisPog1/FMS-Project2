@@ -45,24 +45,24 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                 @foreach ($requirementtypes as $requirementtype)
+                                 @foreach ($requirement_types as $requirement_type)
                                      <tr>
-                                         <td>{{ $requirementtype->title }}</td>
-                                         <td>{{ $requirementtype->description }}</td>
+                                         <td>{{ $requirement_type->title }}</td>
+                                         <td>{{ $requirement_type->description }}</td>
                                          <td class="text-center">
                                              <form method="POST"
-                                                 action="{{ route('delete_requirementtypes', $requirementtype->id) }}">
+                                                 action="{{ route('delete_requirementtypes', $requirement_type->id) }}">
                                                  @csrf
                                                  <input name="_method" type="hidden" value="DELETE">
 
                                                  <button data-toggle="modal"
-                                                     onclick="openViewModal('{{ $requirementtype->title }}', '{{ $requirementtype->description }}')"
+                                                     onclick="openViewModal('{{ $requirement_type->title }}', '{{ $requirement_type->description }}')"
                                                      data-target="#modal-xl-view" type="button"
                                                      class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
                                                      <i class="far fa-eye"></i>
                                                  </button>
                                                  <button type="button"
-                                                     onclick="openEditModal('{{ $requirementtype->title }}', '{{ $requirementtype->description }}',  '{{ $requirementtype->id }}')"
+                                                     onclick="openEditModal('{{ $requirement_type->title }}', '{{ $requirement_type->description }}',  '{{ $requirement_type->id }}')"
                                                      class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
                                                      <i class="far fa-edit"></i>
                                                  </button>

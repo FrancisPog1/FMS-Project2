@@ -18,6 +18,23 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class RequirementBin_Controller extends Controller
 {
+    public function show(){
+        $deleted_requirementbins = RequirementBin::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $requirementbins = RequirementBin::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        foreach ($requirementbins as $requirementbin) {
+            $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+        }
+
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
+        compact('deleted_requirementbins', 'requirementbins'));
+
+    }
 
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')
@@ -32,7 +49,7 @@ class RequirementBin_Controller extends Controller
             ->get();
 
             return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id'));
-            
+
 
         }
 
@@ -73,19 +90,13 @@ class RequirementBin_Controller extends Controller
         }
         //Delete Requirement Bin
         public function deleteRequirementBins($id)
-        {   // Find the requirement bin by its ID
-            $reqbin = RequirementBin::find($id);
-
-            // Check if the requirement bin exists
-            if ($reqbin) {
-                // Delete the requirement bin
-                $reqbin->delete();
-                // Redirect to a success page or perform any other actions
-                // You can customize this based on your requirements
-                return back()->with('success', 'Requirement Bin deleted successfully');
-            }
-            // If the requirement type doesn't exist, redirect with an error message
-            return back()->with('error', 'Requirement Bin not found');
+        {   $user_id = Auth::user()->id;
+            $designation = RequirementBin::find($id);
+            $designation->is_deleted = true;
+            $designation->updated_by = $user_id;
+            $designation->save();
+            $designation->delete();
+            return back()->with('success', 'Requirement Bin deleted successfully!'); /**Alert Message */
         }
 
 
@@ -112,6 +123,35 @@ class RequirementBin_Controller extends Controller
 
             return back()->with('success', 'Requirement Type updated successfully.');
         }
+
+        public function restore(Request $request)
+    {   $deleted_requirementbins = $request->input('deleted_reqs');
+
+        if ($deleted_requirementbins != null)
+        {
+            foreach( $deleted_requirementbins as $requirementbin_id ) {
+
+                $requirementbins = RequirementBin::withTrashed()->findOrFail($requirementbin_id);
+                $requirementbins->is_deleted = false;
+                $requirementbins->save();
+                $requirementbins->restore();
+            }
+            return back()->with('success', 'Requirement Bin restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $requirementbin = RequirementBin::withTrashed()->findOrFail($id);
+            $requirementbin->forceDelete();
+
+            return back()->with('success', 'Requirement Bin permanently deleted successfully!'); /**Alert Message */
+        }
+
 
 }
 

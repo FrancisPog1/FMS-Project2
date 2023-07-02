@@ -22,6 +22,19 @@ use Illuminate\Support\Facades\Validator;
 
 class Specialization_Controller extends Controller
 {
+    public function show(){
+        $deleted_specializations = Specialization::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $specializations = Specialization::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization',
+        compact('deleted_specializations', 'specializations'));
+    }
+
 
     /**Creating Specialization */
     public function Create_Specialization(Request $request): JsonResponse
@@ -56,19 +69,13 @@ class Specialization_Controller extends Controller
     }
 
     public function deleteSpecializations($id)
-    {   // Find the specialization by its ID
-        $specialization = Specialization::find($id);
-
-        // Check if the specialization exists
-        if ($specialization) {
-            // Delete the specialization
-            $specialization->delete();
-            // Redirect to a success page or perform any other actions
-            // You can customize this based on your requirements
-            return back()->with('success', 'Specialization deleted successfully');
-        }
-        // If the role doesn't exist, redirect with an error message
-        return back()->with('error', 'Specialization not found');
+    {   $user_id = Auth::user()->id;
+        $designation = Specialization::find($id);
+        $designation->is_deleted = true;
+        $designation->updated_by = $user_id;
+        $designation->save();
+        $designation->delete();
+        return back()->with('success', 'Specialization deleted successfully!'); /**Alert Message */
     }
 
     //UPDATE SPECIALIZATION
@@ -98,6 +105,34 @@ class Specialization_Controller extends Controller
             return response()->json(['success' => true, 'message' => 'Specialization successfully created.'], 200);
         }
     }
+
+    public function restore(Request $request)
+    {   $deleted_designations = $request->input('deleted_reqs');
+
+        if ($deleted_designations != null)
+        {
+            foreach( $deleted_designations as $designation_id ) {
+
+                $designations = Specialization::withTrashed()->findOrFail($designation_id);
+                $designations->is_deleted = false;
+                $designations->save();
+                $designations->restore();
+            }
+            return back()->with('success', 'Specialization restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $designation = Specialization::withTrashed()->findOrFail($id);
+            $designation->forceDelete();
+
+            return back()->with('success', 'Specialization permanently deleted successfully!'); /**Alert Message */
+        }
 
 }
 

@@ -24,6 +24,20 @@ use Illuminate\Support\Facades\Validator;
 
 class Program_Controller extends Controller
 {
+    public function show(){
+        $deleted_programs = Program::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $programs = Program::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        return view('Academic_head/Admin_Setup/AcadHead_Programs/AcadHead_Programs',
+        compact('deleted_programs', 'programs'));
+    }
+
+
     /**Creating  Program*/
     public function Create_Program(Request $request): JsonResponse {
         $validator = Validator::make($request->all(), [
@@ -56,19 +70,13 @@ class Program_Controller extends Controller
     }
 
     public function deletePrograms($id)
-    {   // Find the program by its ID
+    {   $user_id = Auth::user()->id;
         $program = Program::find($id);
-
-        // Check if the program exists
-        if ($program) {
-            // Delete the program
-            $program->delete();
-            // Redirect to a success page or perform any other actions
-            // You can customize this based on your requirements
-            return back()->with('success', 'Rank deleted successfully');
-        }
-        // If the role doesn't exist, redirect with an error message
-        return back()->with('error', 'Rank not found');
+        $program->is_deleted = true;
+        $program->updated_by = $user_id;
+        $program->save();
+        $program->delete();
+        return back()->with('success', 'Program deleted successfully!'); /**Alert Message */
     }
 
     //UPDATE PROGRAMS
@@ -102,6 +110,34 @@ class Program_Controller extends Controller
             return response()->json(['success' => true, 'message' => 'Program successfully updated.'], 200);
         }
     }
+
+    public function restore(Request $request)
+    {   $deleted_programs = $request->input('deleted_reqs');
+
+        if ($deleted_programs != null)
+        {
+            foreach( $deleted_programs as $program_id ) {
+
+                $programs = Program::withTrashed()->findOrFail($program_id);
+                $programs->is_deleted = false;
+                $programs->save();
+                $programs->restore();
+            }
+            return back()->with('success', 'Faculty Type restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $program = Program::withTrashed()->findOrFail($id);
+            $program->forceDelete();
+
+            return back()->with('success', 'Faculty Type permanently deleted successfully!'); /**Alert Message */
+        }
 
 
 }

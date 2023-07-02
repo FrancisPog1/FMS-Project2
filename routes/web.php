@@ -75,67 +75,34 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     /**Academic Rank */
-    Route::get('/AcadHead', function () {
-        $acadranks = DB::table('academic_ranks')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', compact('acadranks'));
-    })->name('acadhead_AcademicRank');
+    Route::get('/AcadHead', [AcademicRank_Controller::class, 'show'])->name('acadhead_AcademicRank');
 
     /**Role */
-    Route::get('/Role', function () {
-        $roles = DB::table('roles')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', compact('roles'));
-    })->name('acadhead_UserRole');
-
+    Route::get('/Role', [Role_Controller::class, 'show'])->name('acadhead_UserRole');
 
     /**Faculty Type */
-    Route::get('/FacultyType', function () {
-        $facultytypes = DB::table('faculty_types')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', compact('facultytypes'));
-    })->name('acadhead_FacultyType');
+    Route::get('/FacultyType',[FacultyType_Controller::class, 'show'])->name('acadhead_FacultyType');
 
     /**Designation */
-    Route::get('/Designation', function () {
-        $designations = DB::table('designations')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', compact('designations'));
-    })->name('acadhead_Designation');
-
+    Route::get('/Designation', [Designation_Controller::class, 'show'])->name('acadhead_Designation');
 
     /**Specialization */
-    Route::get('/Specialization', function () {
-        $specializations = DB::table('specializations')->get();
-        return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', compact('specializations'));
-    })->name('acadhead_Specialization');
+    Route::get('/Specialization',[Specialization_Controller::class, 'show'])->name('acadhead_Specialization');
 
-
-        /**Program*/
-        Route::get('/Program', function () {
-            $programs = DB::table('programs')->get();
-            return view('Academic_head/Admin_Setup/AcadHead_Programs/AcadHead_Programs', compact('programs'));
-        })->name('acadhead_Program');
+    /**Program*/
+    Route::get('/Program', [Program_Controller::class, 'show'])->name('acadhead_Program');
 
 
         /**Requirement Bin*/
-        Route::get('/RequirementBin', function () {
-            $requirementbins = DB::table('requirement_bins')->get();
-            //Format the deadline or date into more readable date format
-            foreach ($requirementbins as $requirementbin) {
-                $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
-            }
-            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin', compact('requirementbins'));
-        })->name('acadhead_RequirementBin');
+        Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
 
 
+        //EDITED July 02, 2023
         /**Requirement Type*/
-        Route::get('/RequirementType', function () {
-            $requirementtypes = DB::table('requirement_types')->get();
-            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', compact('requirementtypes'));
-        })->name('acadhead_RequirementType');
+        Route::get('/RequirementType',[RequirementType_Controller::class, 'show'])->name('acadhead_RequirementType');
 
         /**Activity Type*/
-        Route::get('/ActivityType', function () {
-            $activitytypes = DB::table('activity_types')->get();
-            return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', compact('activitytypes'));
-        })->name('acadhead_ActivityType');
+        Route::get('/ActivityType', [ActivityType_Controller::class, 'show'])->name('acadhead_ActivityType');
 
         /**Class Schedule*/
         Route::get('/ClassSchedule', function () {
@@ -156,26 +123,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
         /**Academic Head Activities*/
-
-        Route::get('/AcadHead_Activities', function () {
-            $activitytypes = DB::table('activity_types')->get();
-
-            $activities = DB::table('activities')
-                ->join('activity_types', 'activities.activity_type_id', '=', 'activity_types.id')
-                ->select('activities.title', 'activities.start_datetime', 'activities.status', 'activities.end_datetime',
-                'activity_types.title as type_title', 'activities.description', 'activities.location', 'activities.id',
-                'activity_types.id as type')
-                ->get();
-
-            // Convert start_datetime and end_datetime to the desired format
-            foreach ($activities as $activity) {
-                $activity->start_datetime = Carbon::parse($activity->start_datetime)->format('F d, Y h:i A');
-                $activity->end_datetime = Carbon::parse($activity->end_datetime)->format('F d, Y h:i A');
-            }
-
-            return view('Academic_head/AcadHead_Setup/AcadHead_Activities/AcadHead_Activities', compact('activities', 'activitytypes'));
-
-        });
+        Route::get('/AcadHead_Activities', [Activities_Controller::class, 'show'])->name('acadhead_activities');
 
 
         /**User Profiles*/
@@ -200,7 +148,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     //New Code
     Route::post('/Setup_RequirementBin/{id}', [RequirementSetup_Controller::class, 'Create_Requirement'])->name('Setup_RequirementBin');
 
-    //Delete routes for deleting records
+    //--------------------------SOFT DELETING RECORDS ROUTES---------------------------//
     Route::delete('/delete_roles/{roleId}', [Role_Controller::class, 'deleteRoles'])->name('delete_roles');
     Route::delete('/delete_ranks/{rankId}', [AcademicRank_Controller::class, 'deleteRanks'])->name('delete_ranks');
     Route::delete('/delete_users/{userId}', [User_Controller::class, 'deleteUsers'])->name('delete_users');
@@ -214,14 +162,37 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::delete('/delete_activities/{activitiesId}', [Activities_Controller::class, 'deleteActivities'])->name('delete_activities');
     Route::delete('/delete_bincontents/{id}', [RequirementSetup_Controller::class, 'deleteRequirement'])->name('delete_requirements');
 
-    //Hard Delete records
+    //--------------------------HARD DELETE ROUTES---------------------------//
     Route::delete('/destroy_bincontents{id}', [RequirementSetup_Controller::class, 'destroyRequirement'])->name('destroy_requirements');
+    Route::delete('/destroy_requirementtypes{id}', [RequirementType_Controller::class, 'destroy'])->name('destroy_requirementtypes');
+    Route::delete('/destroy_roles{roleId}', [Role_Controller::class, 'destroy'])->name('destroy_roles');
+    Route::delete('/destroy_ranks{rankId}', [AcademicRank_Controller::class, 'destroy'])->name('destroy_ranks');
+    Route::delete('/destroy_users{userId}', [User_Controller::class, 'destroy'])->name('destroy_users');
+    Route::delete('/destroy_designations{designationId}', [Designation_Controller::class, 'destroy'])->name('destroy_designations');
+    Route::delete('/destroy_facultytypes{facultytypeId}', [FacultyType_Controller::class, 'destroy'])->name('destroy_facultytypes');
+    Route::delete('/destroy_programs{programId}', [Program_Controller::class, 'destroy'])->name('destroy_programs');
+    Route::delete('/destroy_specializations{specializationId}', [Specialization_Controller::class, 'destroy'])->name('destroy_specialization');
+    Route::delete('/destroy_requirementbins{requirementbinId}', [RequirementBin_Controller::class, 'destroy'])->name('destroy_requirementbins');
+    Route::delete('/destroy_activitytypes{activitytypeId}', [ActivityType_Controller::class, 'destroy'])->name('destroy_activitytypes');
+    Route::delete('/destroy_activities{activitiesId}', [Activities_Controller::class, 'destroy'])->name('destroy_activities');
 
-    //Restore routes for restoring deleted records
+
+        //--------------------------RESTORE DELETED RECORDS ROUTES---------------------------//
     Route::post('/restore_bincontents', [RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
+    Route::post('/restore_requirementtypes', [RequirementType_Controller::class, 'restore'])->name('restore_requirementtypes');
+    Route::post('/restore_AcademicRank', [AcademicRank_Controller::class, 'restore'])->name('restore_ranks');
+    Route::post('/restore_Program', [Program_Controller::class, 'restore'])->name('restore_program');
+    Route::post('/restore_Specialization', [Specialization_Controller::class, 'restore'])->name('restore_specialization');
+    Route::post('/restore_Designation', [Designation_Controller::class, 'restore'])->name('restore_designation');
+    Route::post('/restore_FacultyType', [FacultyType_Controller::class, 'restore'])->name('restore_facultyType');
+    Route::post('/restore_Role', [Role_Controller::class, 'restores'])->name('restore_roles');
+    Route::post('/restore_RequirementBin', [RequirementBin_Controller::class, 'restore'])->name('restore_requirementbin');
+    Route::post('/restore_ActivityType', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
+    Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
 
 
-    //Route for updating records
+
+        //--------------------------UPDATING A RECORD ROUTES---------------------------//
     Route::put('/update_ranks{id}', [AcademicRank_Controller::class, 'updateRanks'])->name('update_ranks');
     Route::put('/update_roles{roleId}', [Role_Controller::class, 'updateRoles'])->name('update_roles');
     Route::put('/update_users{userId}', [User_Controller::class, 'updateUsers'])->name('update_users');

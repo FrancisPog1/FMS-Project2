@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model implements Authenticatable
 {
     use HasFactory;
-
-
+    use SoftDeletes;
     public $incrementing = false; //This fix the bug with the Auth::user()->id code.
 
     protected $table = 'users';

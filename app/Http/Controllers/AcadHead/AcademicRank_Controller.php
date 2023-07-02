@@ -19,6 +19,20 @@ use Illuminate\Support\Facades\Validator;
 
 class AcademicRank_Controller extends Controller
 {
+
+    public function show(){
+        $deleted_ranks = AcademicRank::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $acadranks = AcademicRank::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank',
+        compact('deleted_ranks', 'acadranks'));
+    }
+
 /**Codes for Creating Academic Rank */
     public function Create_AcadRank(Request $request): JsonResponse {
         /**Codes to validate the input fields of the registration page */
@@ -51,19 +65,13 @@ class AcademicRank_Controller extends Controller
     }
     //DELETE RANKS
     public function deleteRanks($id)
-    {   // Find the role by its ID
-        $rank = AcademicRank::find($id);
-
-        // Check if the role exists
-        if ($rank) {
-            // Delete the role
-            $rank->delete();
-            // Redirect to a success page or perform any other actions
-            // You can customize this based on your requirements
-            return back()->with('success', 'Rank deleted successfully');
-        }
-        // If the role doesn't exist, redirect with an error message
-        return back()->with('error', 'Rank not found');
+    {   $user_id = Auth::user()->id;
+        $acad_rank = AcademicRank::find($id);
+        $acad_rank->is_deleted = true;
+        $acad_rank->updated_by = $user_id;
+        $acad_rank->save();
+        $acad_rank->delete();
+        return back()->with('success', 'Academic Rank deleted successfully!'); /**Alert Message */
     }
 
     //UPDATE RANKS
@@ -96,6 +104,36 @@ class AcademicRank_Controller extends Controller
             return response()->json(['success' => true, 'message' => 'Academic Rank updated successfully.'], 200);
         }
     }
+
+
+    public function restore(Request $request)
+    {   $deleted_ranks = $request->input('deleted_reqs');
+
+        if ($deleted_ranks != null)
+        {
+            foreach( $deleted_ranks as $rank_id ) {
+
+                $acad_rank = AcademicRank::withTrashed()->findOrFail($rank_id);
+                $acad_rank->is_deleted = false;
+                $acad_rank->save();
+                $acad_rank->restore();
+            }
+            return back()->with('success', 'Academic Rank restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $acad_rank = AcademicRank::withTrashed()->findOrFail($id);
+            $acad_rank->forceDelete();
+
+            return back()->with('success', 'Academic Rank permanently deleted successfully!'); /**Alert Message */
+
+        }
 
 
 }

@@ -16,6 +16,8 @@
             {{-- CREATE MODAL --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/create_modal')
 
+            {{-- RESTORE MODAL --}}
+            @include('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/restore_modal')
 
         </div>
 

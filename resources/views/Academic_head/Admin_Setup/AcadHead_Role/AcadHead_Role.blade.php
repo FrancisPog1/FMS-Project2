@@ -28,7 +28,6 @@
                 </div>
             </div>
 
-
             {{-- DATA TABLE --}}
             @include('Academic_head/Admin_Setup/AcadHead_Role/data_table')
 
@@ -40,6 +39,9 @@
 
             {{-- CREATE MODAL --}}
             @include('Academic_head/Admin_Setup/AcadHead_Role/create_modal')
+
+            {{-- RESTORE MODAL --}}
+            @include('Academic_head/Admin_Setup/AcadHead_Role/restore_modal')
 
         </div>
 

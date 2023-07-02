@@ -21,6 +21,20 @@ use Illuminate\Support\Facades\Validator;
 
 class Designation_Controller extends Controller
 {
+
+    public function show(){
+        $deleted_designations = Designation::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $designations = Designation::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation',
+        compact('deleted_designations', 'designations'));
+    }
+
     /**Creating Designation */
     public function Create_Designation(Request $request): JsonResponse
     {
@@ -53,19 +67,13 @@ class Designation_Controller extends Controller
     }
 
     public function deleteDesignations($id)
-    {   // Find the designation by its ID
+    {   $user_id = Auth::user()->id;
         $designation = Designation::find($id);
-
-        // Check if the designation exists
-        if ($designation) {
-            // Delete the designation
-            $designation->delete();
-            // Redirect to a success page or perform any other actions
-            // You can customize this based on your requirements
-            return back()->with('success', 'Designation deleted successfully');
-        }
-        // If the designation doesn't exist, redirect with an error message
-        return back()->with('error', 'Designation not found');
+        $designation->is_deleted = true;
+        $designation->updated_by = $user_id;
+        $designation->save();
+        $designation->delete();
+        return back()->with('success', 'Designation deleted successfully!'); /**Alert Message */
     }
 
     //UPDATE DESIGNATION
@@ -95,5 +103,33 @@ class Designation_Controller extends Controller
             return response()->json(['success' => true, 'message' => 'Designation successfully updated.'], 200);
         }
     }
+
+    public function restore(Request $request)
+    {   $deleted_designations = $request->input('deleted_reqs');
+
+        if ($deleted_designations != null)
+        {
+            foreach( $deleted_designations as $designation_id ) {
+
+                $designations = Designation::withTrashed()->findOrFail($designation_id);
+                $designations->is_deleted = false;
+                $designations->save();
+                $designations->restore();
+            }
+            return back()->with('success', 'Designation restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $designation = Designation::withTrashed()->findOrFail($id);
+            $designation->forceDelete();
+
+            return back()->with('success', 'Designation permanently deleted successfully!'); /**Alert Message */
+        }
 }
 

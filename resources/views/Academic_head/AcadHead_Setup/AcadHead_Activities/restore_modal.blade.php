@@ -1,13 +1,13 @@
     <!-- Restoring Modal -->
     <section class="content">
-        <form action="{{ route('restore_specialization') }}" method="post">
+        <form action="{{ route('restore_activities') }}" method="post">
             @csrf
             <div class="modal fade" id="modal-xl-restore">
                 <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h4 class="modal-title">Restore Specialization</h4>
+                            <h4 class="modal-title">Restore Activities</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -29,32 +29,32 @@
                                         <table class="table table-striped">
                                             <thead class="pal-1 text-col-2">
                                                 <tr>
-                                                    <th>Specialization</th>
-                                                    <th style="width:40%;">Description</th>
+                                                    <th>Activities</th>
+                                                    <th style="width:40%;">Dates</th>
                                                     <th style="width:20%;">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($deleted_specializations as $deleted_specialization)
+                                                @foreach ($deleted_activities as $deleted_activity)
                                                     <tr>
                                                         <td>
                                                             <div class="ml-3">
                                                                 <input type="checkbox" class="form-check-input"
                                                                     id="checkbox-0_0" name="deleted_reqs[]"
-                                                                    value="{{ $deleted_specialization->id }}">
+                                                                    value="{{ $deleted_activity->id }}">
 
                                                                 <label class="form-check-label"
-                                                                    for="checkbox-0_0">{{ $deleted_specialization->title }}</label>
+                                                                    for="checkbox-0_0">{{ $deleted_activity->title }}</label>
                                                             </div>
 
                                                         </td>
-                                                        <td>{{ $deleted_specialization->description }}</td>
+                                                        <td>{{ $deleted_activity->deadline }}</td>
 
                                                         <td>
                                                             <button type="button"
                                                                 class="ml-2 px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 destroy-button"
-                                                                name="{{ $deleted_specialization->id }}"
-                                                                data-name="{{ $deleted_specialization->id }}">
+                                                                name="{{ $deleted_activity->id }}"
+                                                                data-name="{{ $deleted_activity->id }}">
                                                                 <i class="far fa-trash-alt"></i>
                                                             </button>
 

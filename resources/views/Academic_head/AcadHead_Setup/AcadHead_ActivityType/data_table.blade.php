@@ -5,6 +5,11 @@
                        <div class="card-header">
                            <h3 class="card-title mt-2">List of Activity Type</h3>
                            <div class="text-right">
+
+                               <button data-toggle="modal" data-target="#modal-xl-restore" type="button"
+                                   class="px-4 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300">
+                                   Restore</button>
+
                                <button data-toggle="modal" data-target="#modal-xl-create" type="button"
                                    class="px-4 py-2 text-sm font-medium text-center text-white bg-green-800 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">Create
                                    New Activity Type</button>
@@ -42,7 +47,7 @@
                                    </tr>
                                </thead>
                                <tbody>
-                                   @foreach ($activitytypes as $activitytype)
+                                   @foreach ($activity_types as $activitytype)
                                        <tr>
                                            <td>{{ $activitytype->title }}</td>
                                            <td>{{ $activitytype->description }}</td>

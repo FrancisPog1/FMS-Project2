@@ -1,6 +1,6 @@
     <!-- Restoring Modal -->
     <section class="content">
-        <form action="{{ route('restore_requirements') }}" method="post">
+        <form action="{{ route('restore_program') }}" method="post">
             @csrf
             <div class="modal fade" id="modal-xl-restore">
                 <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -35,26 +35,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($deleted_requirements as $deleted_requirement)
+                                                @foreach ($deleted_programs as $deleted_program)
                                                     <tr>
                                                         <td>
                                                             <div class="ml-3">
                                                                 <input type="checkbox" class="form-check-input"
                                                                     id="checkbox-0_0" name="deleted_reqs[]"
-                                                                    value="{{ $deleted_requirement->id }}">
+                                                                    value="{{ $deleted_program->id }}">
 
                                                                 <label class="form-check-label"
-                                                                    for="checkbox-0_0">{{ $deleted_requirement->title }}</label>
+                                                                    for="checkbox-0_0">{{ $deleted_program->title }}</label>
                                                             </div>
 
                                                         </td>
-                                                        <td>{{ $deleted_requirement->file_format }}</td>
+                                                        <td>{{ $deleted_program->file_format }}</td>
 
                                                         <td>
                                                             <button type="button"
                                                                 class="ml-2 px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 destroy-button"
-                                                                name="{{ $deleted_requirement->id }}"
-                                                                data-name="{{ $deleted_requirement->id }}">
+                                                                name="{{ $deleted_program->id }}"
+                                                                data-name="{{ $deleted_program->id }}">
                                                                 <i class="far fa-trash-alt"></i>
                                                             </button>
 

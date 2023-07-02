@@ -39,6 +39,9 @@
             {{-- CREATE MODAL --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_ActivityType/create_modal')
 
+            {{-- RESTORE MODAL --}}
+            @include('Academic_head/AcadHead_Setup/AcadHead_ActivityType/restore_modal')
+
         </div>
 
         <!-- Footer Container -->

@@ -39,6 +39,9 @@
             {{-- CREATE MODAL --}}
             @include('Academic_head/Admin_Setup/AcadHead_Specialization/create_modal')
 
+            {{-- RESTORE MODAL --}}
+            @include('Academic_head/Admin_Setup/AcadHead_Specialization/restore_modal')
+
 
 
 

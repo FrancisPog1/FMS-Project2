@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Activities;
 Use Carbon\Carbon;
 
@@ -18,6 +18,32 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class Activities_Controller extends Controller
 {
+    public function show(){
+        $deleted_activities = Activities::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $activitytypes = DB::table('activity_types')->get();
+
+        $activities = DB::table('activities')
+        ->join('activity_types', 'activities.activity_type_id', '=', 'activity_types.id')
+        ->where('activities.is_deleted', false)
+        ->where('activities.deleted_at', null)
+        ->select('activities.title', 'activities.start_datetime', 'activities.status', 'activities.end_datetime',
+            'activity_types.title as type_title', 'activities.description', 'activities.location', 'activities.id',
+            'activity_types.id as type')
+        ->get();
+
+        // Convert start_datetime and end_datetime to the desired format
+        foreach ($activities as $activity) {
+            $activity->start_datetime = Carbon::parse($activity->start_datetime)->format('F d, Y h:i A');
+            $activity->end_datetime = Carbon::parse($activity->end_datetime)->format('F d, Y h:i A');
+        }
+
+        return view('Academic_head/AcadHead_Setup/AcadHead_Activities/AcadHead_Activities', compact('activities', 'activitytypes', 'deleted_activities'));
+
+    }
+
            /**Creating Activity */
            public function Create_Activities(Request $request){
             $request->validate([
@@ -112,6 +138,32 @@ class Activities_Controller extends Controller
         }
 
 
+        public function restore(Request $request)
+        {   $deleted_activities = $request->input('deleted_reqs');
 
+            if ($deleted_activities != null)
+            {
+                foreach( $deleted_activities as $activity_id ) {
+
+                    $activities = Activities::withTrashed()->findOrFail($activity_id);
+                    $activities->is_deleted = false;
+                    $activities->save();
+                    $activities->restore();
+                }
+                return back()->with('success', 'Activity restored successfully!'); /**Alert Message */
+            }
+            else{
+                return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+            }
+        }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $activity = Activities::withTrashed()->findOrFail($id);
+            $activity->forceDelete();
+
+            return back()->with('success', 'Activity permanently deleted successfully!'); /**Alert Message */
+        }
 }
 

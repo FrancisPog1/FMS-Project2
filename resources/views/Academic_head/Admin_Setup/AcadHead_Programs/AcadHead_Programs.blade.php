@@ -39,6 +39,9 @@
             {{-- CREATE MODAL --}}
             @include('Academic_head/Admin_Setup/AcadHead_Programs/create_modal')
 
+            {{-- RESTORE MODAL --}}
+            @include('Academic_head/Admin_Setup/AcadHead_Programs/restore_modal')
+
         </div>
         <!-- Footer Container -->
         <footer class="main-footer">

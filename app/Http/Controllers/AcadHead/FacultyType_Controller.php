@@ -21,6 +21,21 @@ use Illuminate\Support\Facades\Validator;
 
 class FacultyType_Controller extends Controller
 {
+
+    public function show(){
+        $deleted_types = FacultyType::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $types = FacultyType::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType',
+        compact('deleted_types', 'types'));
+    }
+
+
     /**Creating Faculty Type */
     public function Create_FacultyType(Request $request): JsonResponse{
         $validator = Validator::make($request->all(), [
@@ -53,19 +68,13 @@ class FacultyType_Controller extends Controller
     }
 
     public function deleteFacultytypes($id)
-    {   // Find the Faculty Type by its ID
-        $type = facultyType::find($id);
-
-        // Check if the Faculty Type exists
-        if ($type) {
-            // Delete the Faculty Type
-            $type->delete();
-            // Redirect to a success page or perform any other actions
-            // You can customize this based on your requirements
-            return back()->with('success', 'Faculty Type deleted successfully');
-        }
-        // If the Faculty Type doesn't exist, redirect with an error message
-        return back()->with('error', 'Faculty Type not found');
+    {   $user_id = Auth::user()->id;
+        $type = FacultyType::find($id);
+        $type->is_deleted = true;
+        $type->updated_by = $user_id;
+        $type->save();
+        $type->delete();
+        return back()->with('success', 'Faculty Type deleted successfully!'); /**Alert Message */
     }
 
     //UPDATE Faculty Types
@@ -80,7 +89,7 @@ class FacultyType_Controller extends Controller
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
 
-        $type = facultyType::find($id);
+        $type = FacultyType::find($id);
         $type->title = $request->input('title');
         $type->description = $request->input('description');
         $type->updated_by = $userId;
@@ -96,8 +105,35 @@ class FacultyType_Controller extends Controller
             $type->save();
             return response()->json(['success' => true, 'message' => 'Faculty Type successfully updated.'], 200);
         }
-
     }
+
+    public function restore(Request $request)
+    {   $deleted_types = $request->input('deleted_reqs');
+
+        if ($deleted_types != null)
+        {
+            foreach( $deleted_types as $type_id ) {
+
+                $types = FacultyType::withTrashed()->findOrFail($type_id);
+                $types->is_deleted = false;
+                $types->save();
+                $types->restore();
+            }
+            return back()->with('success', 'Faculty Type restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $type = FacultyType::withTrashed()->findOrFail($id);
+            $type->forceDelete();
+
+            return back()->with('success', 'Faculty Type permanently deleted successfully!'); /**Alert Message */
+        }
 
 }
 

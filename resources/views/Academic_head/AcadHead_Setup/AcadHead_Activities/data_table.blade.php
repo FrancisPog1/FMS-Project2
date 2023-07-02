@@ -4,6 +4,23 @@
         <div class="card">
 
             <div class="card-header">
+                <h3 class="card-title mt-2">List of Activities</h3>
+                <div class="text-right">
+
+                    <button data-toggle="modal" data-target="#modal-xl-restore" type="button"
+                        class="px-4 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300">
+                        Restore</button>
+
+                    <button data-toggle="modal" data-target="#modal-xl-create" type="button"
+                        class="text-col-1 btn btn-success btn-m p-drop">
+                        Create activity &nbsp;
+                        <i class="fas fa-plus"></i>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="card-header">
                 <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
                 <select name="dataTable_length" aria-controls="dataTable"
                     class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
@@ -20,20 +37,6 @@
                         100
                     </option>
                 </select>
-
-                <div class="row float-right justify-content-between">
-                    <div class="col-6">
-                        <input type="search" class="" placeholder=" Search activites" aria-controls=""
-                            style="width: 150px; height: 30px; font-size: .9rem; border-radius: 5px;">
-                    </div>
-                    <div class="col-6">
-                        <button data-toggle="modal" data-target="#modal-xl-create" type="button"
-                            class="text-col-1 btn btn-success btn-m p-drop">
-                            Create activity &nbsp;
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <!-- Tables of roles -->

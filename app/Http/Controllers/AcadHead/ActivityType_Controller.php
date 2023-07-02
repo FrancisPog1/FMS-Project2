@@ -22,6 +22,20 @@ use Illuminate\Support\Facades\Validator;
 
 class ActivityType_Controller extends Controller
 {
+    public function show(){
+        $deleted_types = ActivityType::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $activity_types = ActivityType::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType',
+        compact('deleted_types', 'activity_types'));
+    }
+
+
     /**Creating Activity Type */
     public function Create_ActivityType(Request $request): JsonResponse
     {
@@ -57,19 +71,13 @@ class ActivityType_Controller extends Controller
     }
 
     public function deleteActivitytypes($id)
-    {   // Find the Activity Type by its ID
-        $act_type = ActivityType::find($id);
-
-        // Check if the Activity Type exists
-        if ($act_type) {
-            // Delete the Activity Type
-            $act_type->delete();
-            // Redirect to a success page or perform any other actions
-            // You can customize this based on your requirements
-            return back()->with('success', 'Activity Type deleted successfully');
-        }
-        // If the Activity Type doesn't exist, redirect with an error message
-        return back()->with('error', 'Activity Type not found');
+    {   $user_id = Auth::user()->id;
+        $type = ActivityType::find($id);
+        $type->is_deleted = true;
+        $type->updated_by = $user_id;
+        $type->save();
+        $type->delete();
+        return back()->with('success', 'Activity Type deleted successfully!'); /**Alert Message */
     }
 
     //UPDATE ACTIVITY TYPES
@@ -101,6 +109,35 @@ class ActivityType_Controller extends Controller
             return response()->json(['success' => true, 'message' => 'Activity Type successfully updated.'], 200);
         }
     }
+
+
+    public function restore(Request $request)
+    {   $deleted_types = $request->input('deleted_reqs');
+
+        if ($deleted_types != null)
+        {
+            foreach( $deleted_types as $type_id ) {
+
+                $types = ActivityType::withTrashed()->findOrFail($type_id);
+                $types->is_deleted = false;
+                $types->save();
+                $types->restore();
+            }
+            return back()->with('success', 'Activity Type restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $type = ActivityType::withTrashed()->findOrFail($id);
+            $type->forceDelete();
+
+            return back()->with('success', 'Activity Type permanently deleted successfully!'); /**Alert Message */
+        }
 
 }
 

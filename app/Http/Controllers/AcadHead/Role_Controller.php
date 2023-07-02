@@ -24,6 +24,21 @@ use Illuminate\Support\Facades\Validator;
 
 class Role_Controller extends Controller
 {
+
+    public function show(){
+        $deleted_roles = Role::onlyTrashed()
+        ->where('is_deleted', true)
+        ->get();
+
+        $roles = Role::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role',
+        compact('deleted_roles', 'roles'));
+    }
+
+
     //Creating a Role
     public function Create_Roles(Request $request): JsonResponse
     {
@@ -58,19 +73,13 @@ class Role_Controller extends Controller
 
     //Deleting Role
     public function deleteRoles($id)
-    {   // Find the role by its ID
+    {   $user_id = Auth::user()->id;
         $role = Role::find($id);
-
-        // Check if the role exists
-        if ($role) {
-            // Delete the role
-            $role->delete();
-            // Redirect to a success page or perform any other actions
-            // You can customize thrankis based on your requirements
-            return back()->with('success', 'Role deleted successfully');
-        }
-        // If the role doesn't exist, redirect with an error message
-        return back()->with('error', 'Role not found');
+        $role->is_deleted = true;
+        $role->updated_by = $user_id;
+        $role->save();
+        $role->delete();
+        return back()->with('success', 'Role deleted successfully!'); /**Alert Message */
     }
 
         //UPDATE ROLES
@@ -101,6 +110,36 @@ class Role_Controller extends Controller
                 return response()->json(['success' => true, 'message' => 'Role successfully updated.'], 200);
             }
         }
+
+
+    public function restore(Request $request)
+    {   $deleted_roles = $request->input('deleted_reqs');
+
+        if ($deleted_roles != null)
+        {
+            foreach( $deleted_roles as $role_id ) {
+
+                $roles = Role::withTrashed()->findOrFail($role_id);
+                $roles->is_deleted = false;
+                $roles->save();
+                $roles->restore();
+            }
+            return back()->with('success', 'Role restored successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
+        }
+    }
+
+        //HARD DELETE Requiremnts
+        public function destroy($id)
+        {   // Find the role by its ID
+            $role = Role::withTrashed()->findOrFail($id);
+            $role->forceDelete();
+
+            return back()->with('success', 'Role permanently deleted successfully!'); /**Alert Message */
+        }
+
 
 }
 
