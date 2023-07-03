@@ -201,6 +201,10 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::put('/update_activities{activitiesId}', [Activities_Controller::class, 'updateActivities'])->name('update_activities');
     Route::put('/update_bincontents{id}', [RequirementSetup_Controller::class, 'updateRequirement'])->name('update_requirements');
 
+    //--------------------------FILTERING ROUTES---------------------------//
+    Route::get('/requirementbin_setup_page', [RequirementSetup_Controller::class, 'filtered_user'])->name('filtered_users');
+
+
 
     Route::put('/validate_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'validateRequirement'])->name('validate_requirements');
 
@@ -213,7 +217,8 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     //Newly Added Routes
     //Requirement Bin Setup Page
-   Route::post('/requirementbin_setup_page{id}', [RequirementSetup_Controller::class, 'show'])->name('acadhead_bin_setup');
+   Route::get('/requirementbin_setup_page{id}', [RequirementSetup_Controller::class, 'show'])->name('acadhead_bin_setup');
+
 
     //Routes for Assigning a requirement to one or more users
     Route::post('/assign-Requirement{id}', [AssignRequirement_Controller::class, 'assign_to_user'])->name('Assign_Requirement');
@@ -301,6 +306,6 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
     });
 
-//-----------------------------------ROUTES FOR FILTERING RECORDS IN TABLES------------------------------------//
-Route::post('/filterRole', [RequirementSetup_Controller::class, 'filter_role'])->name('filter_role');
+    //-----------------------------------ROUTES FOR FILTERING RECORDS IN TABLES------------------------------------//
+    Route::post('/filterRole', [RequirementSetup_Controller::class, 'filter_role'])->name('filter_role');
 });

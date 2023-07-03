@@ -6,6 +6,9 @@
     <link rel="icon" href="{{ asset('img/pup.png') }}" />
     <title>PUPQC | Faculty Records and Monitoring System</title>
 
+    {{-- Iadded this code to fix the error in the csrf token in the requirementbin setupp age ->Assign modal scripts --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     @yield('head')
 

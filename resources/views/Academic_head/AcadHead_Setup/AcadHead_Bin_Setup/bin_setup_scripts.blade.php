@@ -168,43 +168,7 @@
     button.addEventListener('click', localWarning);
 </script>
 
-<<<<<<< Updated upstream
 
-
-{{-- <script>
-    $(document).ready(function()     {
-                var bin_id = "{{ $bin_id }}";
-                $("#type").on('change', function() {
-                        var value = $(this).val();
-                        alert(value);
-
-                        jQuery.ajax({
-                                url: "{{ route('acadhead_bin_setup', '') }}" + bin_id,
-                                type: "POST",
-                                data: {
-                                    'role_id': value
-                                },
-                                success: function(data) {
-                                    var users = data.users;
-                                    var html = '';
-                                    if (users.length > 0) {
-                                        for (let i = 0; i < users.length; i++) {
-                                           // html +=
-
-                                        } else {
-                                            html += '<tr><td> No Users.... < /td><tr>';
-                                        }
-                                        $("#filtered-records").html(html);
-                                    }
-
-
-                                });
-
-                        });
-
-                });
-</script> --}}
-=======
 {{--
 
 <script>
@@ -218,25 +182,49 @@
 
 
 <script>
-    $(document).ready(function() {
-        var bin_id = "{{ $bin_id }}";
-        $("#types").on('change', function() {
-            var types = $(this).val();
-            // alert('Hello fuck');
+$(document).ready(function() {
+    var filteredUsersUrl = "{{ route('filtered_users') }}";
+    $("#types").on('change', function() {
+        var types = $(this).val();
+        // alert('Hello fuck');
 
-            $.ajax({
-                url: "{{ route('acadhead_bin_setup', '') }}" + bin_id,
-                type: "POST",
-                data: {'types': types},
-                success: function(data) {
-                    console.log(data);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: filteredUsersUrl,
+            type: "GET",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken // Include CSRF token in headers
+            },
+            data: {'types': types},
+            success: function(data) {
+                var users = data.users;
+                var html = '';
+                if(users.length > 0){
+                    for(let i = 0; i < users.length; i++){
+                        html += '<tr>\
+                                    <td>\
+                                        <div class="ml-3">\
+                                            <input type="checkbox" class="form-check-input" id="check" name="users[]" value="' + users[i]['id'] + '">\
+                                            <label class="form-check-label" for="check">Faculty 1</label>\
+                                        </div>\
+                                    </td>\
+                                    <td>' + users[i]['email'] + '</td>\
+                                    <td>' + users[i]['role'] + '</td>\
+                                </tr>';
+                    }
+                } else {
+                    html += '<tr><td> No Records </td> </tr>';
                 }
-            });
+
+                $('#filtered-records').html(html);
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
         });
     });
+});
+
 </script>
 
->>>>>>> Stashed changes
