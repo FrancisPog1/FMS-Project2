@@ -17,13 +17,24 @@ use Illuminate\Support\Facades\Session; /**For the session to work */
 use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 
+<<<<<<< Updated upstream
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+=======
+
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+>>>>>>> Stashed changes
 
 class RequirementSetup_Controller extends Controller
 {
 
+<<<<<<< Updated upstream
     public function show(Request $request, $bin_id){
+=======
+    public function show(Request $request, $bin_id): JsonResponse {
+>>>>>>> Stashed changes
         $requirementtypes = DB::table('requirement_types')->get();
         $requirement_bin = RequirementBin::where('id', $bin_id)->first();
         $roles = DB::table('roles')->get();
@@ -45,6 +56,7 @@ class RequirementSetup_Controller extends Controller
                 'requirement_bin_contents.id as id')
         ->get();
 
+<<<<<<< Updated upstream
 
         // if ($request->ajax()){
         //     $users = DB::table('users')
@@ -54,6 +66,17 @@ class RequirementSetup_Controller extends Controller
         //     ->get();
         //     return response()->json(['users'=>$users]);
         // }
+=======
+        if($request->ajax())
+        {
+            $users = DB::table('users')
+            ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
+            ->where('roles.id', '=', $request->types)
+            ->select('roles.title as role', 'users.email', 'users.status', 'users.id')
+            ->get();
+            return reponse()->json(['users'=>$users]);
+        }
+>>>>>>> Stashed changes
 
         $users = DB::table('users')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')

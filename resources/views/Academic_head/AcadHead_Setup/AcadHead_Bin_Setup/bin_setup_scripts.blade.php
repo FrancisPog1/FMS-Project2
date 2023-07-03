@@ -34,7 +34,7 @@
         // Set the values in the form fields
 
         // Set the value of the `type` element in the `editForm` form to the selected value
-        document.getElementById('viewForm').elements['type'].value = type;
+        document.getElementById('viewForm').elements['types'].value = type;
         document.getElementById('viewForm').elements['notes'].value = notes;
 
         // Open the edit modal
@@ -77,6 +77,7 @@
     $(document).ready(function() {
         // Check
         $("#check-all-restore").on("click", function() {
+
             if ($(this).prop("checked")) {
                 $("input[type='checkbox']").prop("checked", true);
             } else {
@@ -89,9 +90,23 @@
             if (!$(this).prop("checked")) {
                 $("#check-all-restore").prop("checked", false);
             }
+
         });
     });
 </script>
+
+<script>
+    //Function to check all checkboxes on ASSIGN
+    var switchButton = document.getElementById("switch");
+    var checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    switchButton.addEventListener("change", function() {
+        for (var checkbox of checkboxes) {
+            checkbox.checked = switchButton.checked;
+        }
+    });
+</script>
+
 
 
 
@@ -153,6 +168,7 @@
     button.addEventListener('click', localWarning);
 </script>
 
+<<<<<<< Updated upstream
 
 
 {{-- <script>
@@ -188,3 +204,39 @@
 
                 });
 </script> --}}
+=======
+{{--
+
+<script>
+    document.getElementById("assign").elements["types"].addEventListener("change", function() {
+        var selectedOption = this.value;
+        //alert("You selected: " + selectedOption);
+
+    });
+</script> --}}
+
+
+
+<script>
+    $(document).ready(function() {
+        var bin_id = "{{ $bin_id }}";
+        $("#types").on('change', function() {
+            var types = $(this).val();
+            // alert('Hello fuck');
+
+            $.ajax({
+                url: "{{ route('acadhead_bin_setup', '') }}" + bin_id,
+                type: "POST",
+                data: {'types': types},
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+>>>>>>> Stashed changes
