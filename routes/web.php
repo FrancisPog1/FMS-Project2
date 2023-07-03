@@ -213,7 +213,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     //Newly Added Routes
     //Requirement Bin Setup Page
-   Route::get('/requirementbin_setup_page{id}', [RequirementSetup_Controller::class, 'show'])->name('acadhead_bin_setup');
+   Route::post('/requirementbin_setup_page{id}', [RequirementSetup_Controller::class, 'show'])->name('acadhead_bin_setup');
 
     //Routes for Assigning a requirement to one or more users
     Route::post('/assign-Requirement{id}', [AssignRequirement_Controller::class, 'assign_to_user'])->name('Assign_Requirement');

@@ -1,6 +1,6 @@
         <!-- Assigning Modal -->
         <section class="content">
-            <form action="{{ route('Assign_Requirement', $bin_id) }}" method="post">
+            <form id="assign" action="{{ route('Assign_Requirement', $bin_id) }}" method="post">
                 @csrf
                 <div class="modal fade" id="modal-xl-assign">
                     <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -20,7 +20,7 @@
                                     <div class="row col-md-12">
 
                                         <div class="col-4 form-group">
-                                            <select id="type" name="type" class="form-control form-control-md">
+                                            <select id="types" name="types" class="form-control form-control-md">
                                                 <option selected>Choose Role/s</option>
                                                 @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}">{{ $role->title }}
@@ -100,13 +100,4 @@
             </form>
         </section>
 
-        <script>
-            var switchButton = document.getElementById("switch");
-            var checkboxes = document.querySelectorAll("input[type='checkbox']");
 
-            switchButton.addEventListener("change", function() {
-                for (var checkbox of checkboxes) {
-                    checkbox.checked = switchButton.checked;
-                }
-            });
-        </script>
