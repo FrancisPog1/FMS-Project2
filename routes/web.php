@@ -248,6 +248,70 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     ->name('acadhead_ReviewRequirements');
 
 
+    /*
+    *  breadcrumbs of academic head
+    */
+
+
+    // REQ BIN
+    Route::get('/data_table', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table', ['page_title' => 'Requirement Bin']);
+    });
+
+    // ASSIGN REQ
+    Route::get('/AcadHead_AssignedRequirements', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_AssignedRequirements', ['page_title' => 'Assigned Requirement']);
+    });
+
+    // REQ BIN ASSIGNEES
+    Route::get('/AcadHead_RequirementAssignees', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Requirement Assignees']);
+    });
+
+    // REQ BIN MONITOR
+    Route::get('/AcadHead_MonitorRequirements', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements', ['page_title' => 'Monitor User']);
+    });
+
+    // ADMIN USER ROLE
+    Route::get('/AcadHead_Role', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', ['page_title' => 'System role user']);
+    });
+
+    // ADMIN SYSTEM USERS
+    Route::get('/AcadHead_AddUser', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', ['page_title' => 'System Users']);
+    });
+
+    // ADMIN ACADEMIC RANK
+    Route::get('/AcadHead_AcademicRank', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', ['page_title' => 'Faculty Academic Rank']);
+    });
+
+    // ADMIN FACULTY TYPE
+    Route::get('/AcadHead_AcademicRank', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', ['page_title' => 'Faculty Types']);
+    });
+
+    // ADMIN REQUIREMENT TYPES
+    Route::get('/AcadHead_RequirementType', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', ['page_title' => 'Requirement Types']);
+    });
+
+    // ADMIN ACT TYPES
+    Route::get('/AcadHead_ActivityType', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', ['page_title' => 'Activity Types']);
+    });
+
+    // ADMIN DESIGNATION
+    Route::get('/AcadHead_Designation', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', ['page_title' => 'Designation']);
+    });
+
+    // ADMIN PROGRAMS
+    Route::get('/AcadHead_Specialization', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
+    });
 });
 
 
@@ -255,50 +319,48 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 //------------------------------------------------------------------ FACULTIES --------------------------------------------------------------------//
 Route::middleware(['auth', 'isFaculty'])->group(function () {
 
-Route::get('/FacultyActivities', function () {
-    return view('Faculty/Faculty_Activities', ['page_title' => 'Faculty Activities']);
-    })->name('faculty_Activities');
+    Route::get('/FacultyActivities', function () {
+        return view('Faculty/Faculty_Activities', ['page_title' => 'Faculty Activities']);
+        })->name('faculty_Activities');
 
-Route::get('/FacultyClassObservation', function () {
-    return view('Faculty/Faculty_ClassObservation', ['page_title' => 'Faculty Class Observation']);
-    })->name('faculty_ClassObservation');
+    Route::get('/FacultyClassObservation', function () {
+        return view('Faculty/Faculty_ClassObservation', ['page_title' => 'Faculty Class Observation']);
+        })->name('faculty_ClassObservation');
 
-Route::get('/FacultyClassSchedule', function () {
-    return view('Faculty/Faculty_ClassSchedule', ['page_title' => 'Faculty Class Schedule']);
-    })->name('faculty_ClassSchedule');
+    Route::get('/FacultyClassSchedule', function () {
+        return view('Faculty/Faculty_ClassSchedule', ['page_title' => 'Faculty Class Schedule']);
+        })->name('faculty_ClassSchedule');
 
-Route::get('/FacultyDashboard', function () {
-    return view('Faculty/Faculty_Dashboard', ['page_title' => 'Faculty Dashboard']);
-    })->name('faculty_Dashboard');
+    Route::get('/FacultyDashboard', function () {
+        return view('Faculty/Faculty_Dashboard', ['page_title' => 'Faculty Dashboard']);
+        })->name('faculty_Dashboard');
 
-Route::get('/FacultyProfile', function () {
-    return view('Faculty/Faculty_Profile', ['page_title' => 'Faculty Profile']);
-    })->name('faculty_Profile');
+    Route::get('/FacultyProfile', function () {
+        return view('Faculty/Faculty_Profile', ['page_title' => 'Faculty Profile']);
+        })->name('faculty_Profile');
 
-Route::get('/FacultyReports', function () {
-    return view('Faculty/Faculty_Reports', ['page_title' => 'Faculty Reports']);
-    })->name('faculty_Reports');
-
-
-//----------- Requirement Bin -----------------//
+    Route::get('/FacultyReports', function () {
+        return view('Faculty/Faculty_Reports', ['page_title' => 'Faculty Reports']);
+        })->name('faculty_Reports');
 
 
-Route::get('/FacultyRequirementBin', [Faculty_RequirementBin_Controller::class, 'show'])->name('faculty_RequirementBin');
-
-Route::get('/FacultyRequirements/{assigned_bin_id}/{req_bin_id}', [Faculty_RequirementBin_Controller::class, 'show_requirements'])->name('faculty_Requirements');
+    //----------- Requirement Bin -----------------//
 
 
+    Route::get('/FacultyRequirementBin', [Faculty_RequirementBin_Controller::class, 'show'])->name('faculty_RequirementBin');
+
+    Route::get('/FacultyRequirements/{assigned_bin_id}/{req_bin_id}', [Faculty_RequirementBin_Controller::class, 'show_requirements'])->name('faculty_Requirements');
 
 
-//-------------------- File Pond Routes -----------------//
-// UPLOADING ROUTES
-Route::post('/upload-file', [UploadTemporaryFiles_Controller::class, 'uploadFile'])->name('upload_file');
-
-Route::delete('/delete-file', [DeleteTemporaryFiles_Controller::class, 'deleteFile'])->name('delete_file');
-
-Route::put('/faculty_upload-file/{id}', [FacultyUpload_Controller::class, 'uploadFile'])->name('faculty_uploadfile');
 
 
+    //-------------------- File Pond Routes -----------------//
+    // UPLOADING ROUTES
+    Route::post('/upload-file', [UploadTemporaryFiles_Controller::class, 'uploadFile'])->name('upload_file');
+
+    Route::delete('/delete-file', [DeleteTemporaryFiles_Controller::class, 'deleteFile'])->name('delete_file');
+
+    Route::put('/faculty_upload-file/{id}', [FacultyUpload_Controller::class, 'uploadFile'])->name('faculty_uploadfile');
 });
 
 
@@ -424,68 +486,3 @@ Route::post('/Faculty_RequirementBin', [DropzoneController::class, 'store'])->na
 //Route::get('/uploaded_files', [DropzoneController::class, 'delete'])->name('dropzone.delete');
 Route::delete('/deleteFile/{filename}', [DropzoneController::class, 'delete'])->name('deleteFile');
 
-
-/*
-*  breadcrumbs of academic head
-*/
-
-
-// REQ BIN
-Route::get('/data_table', function () {
-    return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table', ['page_title' => 'Requirement Bin']);
-});
-
-// ASSIGN REQ
-Route::get('/AcadHead_AssignedRequirements', function () {
-    return view('Academic_head/AcadHead_Setup/AcadHead_AssignedRequirements', ['page_title' => 'Assigned Requirement']);
-});
-
-// REQ BIN ASSIGNEES
-Route::get('/AcadHead_RequirementAssignees', function () {
-    return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Requirement Assignees']);
-});
-
-// REQ BIN MONITOR
-Route::get('/AcadHead_MonitorRequirements', function () {
-    return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements', ['page_title' => 'Monitor User']);
-});
-
-// ADMIN USER ROLE
-Route::get('/AcadHead_Role', function () {
-    return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', ['page_title' => 'System role user']);
-});
-
-// ADMIN SYSTEM USERS
-Route::get('/AcadHead_AddUser', function () {
-    return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', ['page_title' => 'System Users']);
-});
-
-// ADMIN ACADEMIC RANK
-Route::get('/AcadHead_AcademicRank', function () {
-    return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', ['page_title' => 'Faculty Academic Rank']);
-});
-
-// ADMIN FACULTY TYPE
-Route::get('/AcadHead_AcademicRank', function () {
-    return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', ['page_title' => 'Faculty Types']);
-});
-
-// ADMIN REQUIREMENT TYPES
-Route::get('/AcadHead_RequirementType', function () {
-    return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', ['page_title' => 'Requirement Types']);
-});
-
-// ADMIN ACT TYPES
-Route::get('/AcadHead_ActivityType', function () {
-    return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', ['page_title' => 'Activity Types']);
-});
-
-// ADMIN DESIGNATION
-Route::get('/AcadHead_Designation', function () {
-    return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', ['page_title' => 'Designation']);
-});
-
-// ADMIN PROGRAMS
-Route::get('/AcadHead_Specialization', function () {
-    return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
-});

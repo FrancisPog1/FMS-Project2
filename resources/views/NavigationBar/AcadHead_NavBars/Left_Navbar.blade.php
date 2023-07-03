@@ -31,7 +31,7 @@
                         data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="AcadHead_Dashboard" class="nav-link active">
+                            <a href="AcadHead_Dashboard" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Dashboard
