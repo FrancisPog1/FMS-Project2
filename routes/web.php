@@ -306,6 +306,5 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
     });
 
-    //-----------------------------------ROUTES FOR FILTERING RECORDS IN TABLES------------------------------------//
-    Route::post('/filterRole', [RequirementSetup_Controller::class, 'filter_role'])->name('filter_role');
+
 });
