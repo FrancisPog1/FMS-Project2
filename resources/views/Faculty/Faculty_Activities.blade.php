@@ -1,8 +1,7 @@
 @extends('layouts.Faculty_master')
 
-
-{{-- CONTENTS --}}  
-@section('content')  
+{{-- CONTENTS --}}
+@section('content')
 
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
@@ -93,8 +92,8 @@
                                                 rounded-lg hover:bg-blue-800
                                                 focus:ring-4 focus:outline-none
                                                 focus:ring-blue-300
-                                               
-                                               
+
+
                                                ">View</button>
                                         </td>
                                     </tr>
@@ -158,7 +157,7 @@
                                         <button type="button" class="btn btn-outline-primary">View Memo dw</button>
 
                                     </div>
-                                </div>                       
+                                </div>
                             </div>
 
                             <div class="modal-footer

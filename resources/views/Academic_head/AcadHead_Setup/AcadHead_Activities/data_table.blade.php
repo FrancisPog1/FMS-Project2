@@ -69,19 +69,26 @@
                                 </td>
 
                                 <td class="text-sm-center">
-                                    <button data-toggle="modal" data-target="#modal-xl" type="button"
-                                        class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                        <i class="far fa-eye"></i>
-                                    </button>
-                                    <button data-toggle="modal" type="button" data-target="#modal-xl-edit"
-                                        onclick="openEditModal('{{ $activity->title }}', '{{ $activity->type }}', '{{ $activity->description }}','{{ $activity->location }}', '{{ $activity->status }}', '{{ $activity->start_datetime }}', '{{ $activity->end_datetime }}', '{{ $activity->id }}')"
-                                        class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
-                                        <i class="far fa-edit"></i>
-                                    </button>
-                                    <button id="button1" type=""
-                                        class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
+                                    <form method="POST" action="{{ route('delete_activity', $activity->id) }}">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button data-toggle="modal" data-target="#modal-xl" type="button"
+                                            onclick="openViewModal('{{ $activity->title }}', '{{ $activity->type }}', '{{ $activity->description }}','{{ $activity->location }}', '{{ $activity->status }}', '{{ $activity->start_datetime }}', '{{ $activity->end_datetime }}')"
+                                            class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button data-toggle="modal" type="button" data-target="#modal-xl-edit"
+                                            onclick="openEditModal('{{ $activity->title }}', '{{ $activity->type }}', '{{ $activity->description }}','{{ $activity->location }}', '{{ $activity->status }}', '{{ $activity->start_datetime }}', '{{ $activity->end_datetime }}', '{{ $activity->id }}')"
+                                            class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+
+                                        <button type="button"
+                                            class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
+                                            title="Delete">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

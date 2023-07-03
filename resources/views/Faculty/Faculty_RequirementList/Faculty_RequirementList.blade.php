@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.Faculty_master')
 
 {{-- ADDING THE DEPENDENCY FOR THE FILEPOND --}}
 @section('head')

@@ -12,7 +12,7 @@
         <div class="content-wrapper">
 
             {{-- Data TABLE --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/bin_setup_dataTable')
+            @include('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/data_table')
 
             {{-- View Modal --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/view_modal')

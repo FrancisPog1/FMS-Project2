@@ -152,3 +152,39 @@
     const button = document.querySelector('.destroy-button');
     button.addEventListener('click', localWarning);
 </script>
+
+
+
+{{-- <script>
+    $(document).ready(function()     {
+                var bin_id = "{{ $bin_id }}";
+                $("#type").on('change', function() {
+                        var value = $(this).val();
+                        alert(value);
+
+                        jQuery.ajax({
+                                url: "{{ route('acadhead_bin_setup', '') }}" + bin_id,
+                                type: "POST",
+                                data: {
+                                    'role_id': value
+                                },
+                                success: function(data) {
+                                    var users = data.users;
+                                    var html = '';
+                                    if (users.length > 0) {
+                                        for (let i = 0; i < users.length; i++) {
+                                           // html +=
+
+                                        } else {
+                                            html += '<tr><td> No Users.... < /td><tr>';
+                                        }
+                                        $("#filtered-records").html(html);
+                                    }
+
+
+                                });
+
+                        });
+
+                });
+</script> --}}

@@ -13,7 +13,7 @@
                                <span aria-hidden="true">&times;</span>
                            </button>
                        </div>
-                       <div class="modal-body" style="height: 500px;">
+                       <div class="modal-body" style="height: 500px; overflow: scroll;">
                            <div class="card-body">
 
                                <div class="row">

@@ -60,7 +60,7 @@
                                                         <th style="width:20%;">Role</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="filtered-records">
                                                     @foreach ($users as $user)
                                                         <tr>
                                                             <td>

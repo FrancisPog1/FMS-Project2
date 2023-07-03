@@ -24,6 +24,30 @@
     });
 </script>
 
+<script>
+    function openViewModal(title, type, description, location, status, start_datetime, end_datetime, id) {
+        // Set the values in the form fields
+        document.getElementById('viewForm').elements['title'].value = title;
+        document.getElementById('viewForm').elements['description'].value = description;
+        document.getElementById('viewForm').elements['type'].value = type;
+        document.getElementById('viewForm').elements['location'].value = location;
+        document.getElementById('viewForm').elements['status'].value = status;
+        document.getElementById('viewForm').elements['start_datetime'].value = start_datetime;
+        document.getElementById('viewForm').elements['end_datetime'].value = end_datetime;
+
+        // Open the edit modal
+        $('#modal-xl-view').modal('show');
+    }
+
+    // Add event listeners to close the modal
+    document.getElementById('closeviewModalButton').addEventListener('click', function() {
+        $('#modal-xl-view').modal('hide');
+    });
+
+    document.getElementById('cancelviewButton').addEventListener('click', function() {
+        $('#modal-xl-view').modal('hide');
+    });
+</script>
 
 
 {{-- DESTROY OR HARD DELETE A RECORD --}}

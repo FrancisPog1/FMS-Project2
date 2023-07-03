@@ -17,10 +17,13 @@ use Illuminate\Support\Facades\Session; /**For the session to work */
 use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+
 class RequirementSetup_Controller extends Controller
 {
 
-    public function show($bin_id){
+    public function show(Request $request, $bin_id){
         $requirementtypes = DB::table('requirement_types')->get();
         $requirement_bin = RequirementBin::where('id', $bin_id)->first();
         $roles = DB::table('roles')->get();
@@ -42,6 +45,16 @@ class RequirementSetup_Controller extends Controller
                 'requirement_bin_contents.id as id')
         ->get();
 
+
+        // if ($request->ajax()){
+        //     $users = DB::table('users')
+        //     ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
+        //     ->where('roles.id', $request->role_id)
+        //     ->select('roles.title as role', 'users.email', 'users.status', 'users.id')
+        //     ->get();
+        //     return response()->json(['users'=>$users]);
+        // }
+
         $users = DB::table('users')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
         ->select('roles.title as role', 'users.email', 'users.status', 'users.id')
@@ -50,6 +63,20 @@ class RequirementSetup_Controller extends Controller
         return view('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/AcadHead_Bin_Setup',
         compact('requirementtypes', 'bin_id', 'requirements', 'users', 'roles', 'deleted_requirements', 'requirement_bin'));
     }
+
+    // public function filter_role(Request $request): JsonResponse {
+
+    //     $roleId = $request->input('roles');
+
+    //     $users = DB::table('users')
+    //     ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
+    //     ->where('foreign_role_id', $roleId)
+    //     ->select('roles.title as role', 'users.email', 'users.status', 'users.id')
+    //     ->get();
+
+    //     return response()->json($users);
+    // }
+
 
 
 /**Codes for Creating Requriement*/

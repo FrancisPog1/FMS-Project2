@@ -137,6 +137,17 @@ class Activities_Controller extends Controller
 
         }
 
+        //Soft Deleting a record
+        public function delete($id)
+        {   $user_id = Auth::user()->id;
+            $activity = Activities::find($id);
+            $activity->is_deleted = true;
+            $activity->updated_by = $user_id;
+            $activity->save();
+            $activity->delete();
+            return back()->with('success', 'Activity deleted successfully!'); /**Alert Message */
+        }
+
 
         public function restore(Request $request)
         {   $deleted_activities = $request->input('deleted_reqs');

@@ -17,20 +17,8 @@ use App\Http\Controllers\AcadHead\User_Controller;   // For update and delete
 use App\Http\Controllers\AcadHead\RequirementSetup_Controller;
 use App\Http\Controllers\AcadHead\AssignRequirement_Controller;
 use App\Http\Controllers\AcadHead\MonitorRequirements_Controller;
-use App\Http\Controllers\AcadHead\DropzoneController;
 use App\Http\Controllers\AcadHead\Dashboard_Controller;
-
-use App\Http\Controllers\UploadTemporaryFiles_Controller;
-use App\Http\Controllers\DeleteTemporaryFiles_Controller;
-use App\Http\Controllers\FacultyUpload_Controller;
-
-// FACULTY CONTROLLERS
-
-use App\Http\Controllers\Faculty\Faculty_RequirementBin_Controller;
-
 use App\Http\Controllers\Auth\RegisteredUserController;
-
-
 
 
 use Carbon\Carbon;
@@ -48,6 +36,16 @@ use App\Http\Middleware\AuthCheck;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// This is like an extend/include function. It includes the auth.php, faculty.php,
+// director.php, and staff.php route in this web.php route so that It can access the routes inside the auth.php
+require __DIR__.'/auth.php';
+
+require __DIR__.'/faculty.php';
+
+require __DIR__.'/director.php';
+
+require __DIR__.'/staff.php';
 
 
 //------------------------------------------------------------------ ACADEMIC HEAD --------------------------------------------------------------------//
@@ -93,43 +91,44 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/Program', [Program_Controller::class, 'show'])->name('acadhead_Program');
 
 
-        /**Requirement Bin*/
-        Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
+    /**Requirement Bin*/
+    Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
 
 
-        //EDITED July 02, 2023
-        /**Requirement Type*/
-        Route::get('/RequirementType',[RequirementType_Controller::class, 'show'])->name('acadhead_RequirementType');
+    //EDITED July 02, 2023
+    /**Requirement Type*/
+    Route::get('/RequirementType',[RequirementType_Controller::class, 'show'])->name('acadhead_RequirementType');
 
-        /**Activity Type*/
-        Route::get('/ActivityType', [ActivityType_Controller::class, 'show'])->name('acadhead_ActivityType');
+    /**Activity Type*/
+    Route::get('/ActivityType', [ActivityType_Controller::class, 'show'])->name('acadhead_ActivityType');
 
-        /**Class Schedule*/
-        Route::get('/ClassSchedule', function () {
-            return view('Academic_head/AcadHead_Setup/AcadHead_ClassSchedule', ['page_title' => 'Class Schedule']);
-            })->name('acadhead_ClassSchedule');
-
-
-        /**Class Observation*/
-        Route::get('/ClassObservation', function () {
-            return view('Academic_head/AcadHead_Setup/AcadHead_ClassObservation', ['page_title' => 'Class Observation']);
-            })->name('acadhead_ClassObservation');
+    /**Class Schedule*/
+    Route::get('/ClassSchedule', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_ClassSchedule', ['page_title' => 'Class Schedule']);
+        })->name('acadhead_ClassSchedule');
 
 
-        /**Academic Head Reports*/
-        Route::get('/Reports', function () {
-            return view('Academic_head/AcadHead_Setup/AcadHead_Reports', ['page_title' => 'Reports']);
-            })->name('acadhead_Reports');
+    /**Class Observation*/
+    Route::get('/ClassObservation', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_ClassObservation', ['page_title' => 'Class Observation']);
+        })->name('acadhead_ClassObservation');
 
 
-        /**Academic Head Activities*/
-        Route::get('/AcadHead_Activities', [Activities_Controller::class, 'show'])->name('acadhead_activities');
+    /**Academic Head Reports*/
+    Route::get('/Reports', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_Reports', ['page_title' => 'Reports']);
+        })->name('acadhead_Reports');
 
 
-        /**User Profiles*/
-        Route::get('/UserProfile', function () {
-            return view('/User_Profile', ['page_title' => 'User Profile']);
-            })->name('user_Profile');
+    /**Academic Head Activities*/
+    Route::get('/AcadHead_Activities', [Activities_Controller::class, 'show'])->name('acadhead_activities');
+
+
+    /**User Profiles*/
+    Route::get('/UserProfile', function () {
+        return view('/User_Profile', ['page_title' => 'User Profile']);
+        })->name('user_Profile');
+
 
     //This is all the routes for Creating or Adding.
     Route::post('/Create_AcademicRank', [AcademicRank_Controller::class, 'Create_AcadRank'])->name('Create_AcademicRank');
@@ -159,7 +158,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::delete('/delete_requirementtypes/{requirementtypeId}', [RequirementType_Controller::class, 'deleteRequirementtypes'])->name('delete_requirementtypes');
     Route::delete('/delete_requirementbins/{requirementbinId}', [RequirementBin_Controller::class, 'deleteRequirementBins'])->name('delete_requirementbins');
     Route::delete('/delete_activitytypes/{activitytypeId}', [ActivityType_Controller::class, 'deleteActivitytypes'])->name('delete_activitytypes');
-    Route::delete('/delete_activities/{activitiesId}', [Activities_Controller::class, 'deleteActivities'])->name('delete_activities');
+    Route::delete('/delete_activities/{activitiesId}', [Activities_Controller::class, 'delete'])->name('delete_activity');
     Route::delete('/delete_bincontents/{id}', [RequirementSetup_Controller::class, 'deleteRequirement'])->name('delete_requirements');
 
     //--------------------------HARD DELETE ROUTES---------------------------//
@@ -190,8 +189,6 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::post('/restore_ActivityType', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
     Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
 
-
-
         //--------------------------UPDATING A RECORD ROUTES---------------------------//
     Route::put('/update_ranks{id}', [AcademicRank_Controller::class, 'updateRanks'])->name('update_ranks');
     Route::put('/update_roles{roleId}', [Role_Controller::class, 'updateRoles'])->name('update_roles');
@@ -211,8 +208,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     // For registering users
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register_user', [RegisteredUserController::class, 'Create_User'])->name('register_user');
 
 
@@ -223,7 +219,6 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     //Routes for Assigning a requirement to one or more users
     Route::post('/assign-Requirement{id}', [AssignRequirement_Controller::class, 'assign_to_user'])->name('Assign_Requirement');
-
 
 
     /**Assigned Requirement*/
@@ -239,15 +234,13 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     /**Requirement Assignees*/
     Route::get('/RequirementAssignees{bin_id}', [RequirementBin_Controller::class, 'view_assigned_user'
     ])->name('acadhead_RequirementAssignees');
-
     Route::get('MonitorRequirements,{user_id},{assigned_bin_id},{req_bin_id}',[MonitorRequirements_Controller::class, 'show'])
     ->name('acadhead_MonitorRequirements');
-
-
     Route::put('/ReviewedBin/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
     ->name('acadhead_ReviewRequirements');
 
 
+<<<<<<< Updated upstream
     /*
     *  breadcrumbs of academic head
     */
@@ -313,12 +306,27 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
     });
 });
+=======
+//-----------------------------------ROUTES FOR FILTERING RECORDS IN TABLES------------------------------------//
+Route::post('/filterRole', [RequirementSetup_Controller::class, 'filter_role'])->name('filter_role');
+>>>>>>> Stashed changes
 
+    // REQ BIN
+    Route::get('/data_table', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table', ['page_title' => 'Requirement Bin']);
+    });
 
+    // ASSIGN REQ
+    Route::get('/AcadHead_AssignedRequirements', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_AssignedRequirements', ['page_title' => 'Assigned Requirement']);
+    });
 
-//------------------------------------------------------------------ FACULTIES --------------------------------------------------------------------//
-Route::middleware(['auth', 'isFaculty'])->group(function () {
+    // REQ BIN ASSIGNEES
+    Route::get('/AcadHead_RequirementAssignees', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Requirement Assignees']);
+    });
 
+<<<<<<< Updated upstream
     Route::get('/FacultyActivities', function () {
         return view('Faculty/Faculty_Activities', ['page_title' => 'Faculty Activities']);
         })->name('faculty_Activities');
@@ -342,8 +350,44 @@ Route::middleware(['auth', 'isFaculty'])->group(function () {
     Route::get('/FacultyReports', function () {
         return view('Faculty/Faculty_Reports', ['page_title' => 'Faculty Reports']);
         })->name('faculty_Reports');
+=======
+    // REQ BIN MONITOR
+    Route::get('/AcadHead_MonitorRequirements', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements', ['page_title' => 'Monitor User']);
+    });
 
+    // ADMIN USER ROLE
+    Route::get('/AcadHead_Role', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', ['page_title' => 'System role user']);
+    });
 
+    // ADMIN SYSTEM USERS
+    Route::get('/AcadHead_AddUser', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', ['page_title' => 'System Users']);
+    });
+
+    // ADMIN ACADEMIC RANK
+    Route::get('/AcadHead_AcademicRank', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', ['page_title' => 'Faculty Academic Rank']);
+    });
+
+    // ADMIN FACULTY TYPE
+    Route::get('/AcadHead_AcademicRank', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', ['page_title' => 'Faculty Types']);
+    });
+
+    // ADMIN REQUIREMENT TYPES
+    Route::get('/AcadHead_RequirementType', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', ['page_title' => 'Requirement Types']);
+    });
+>>>>>>> Stashed changes
+
+    // ADMIN ACT TYPES
+    Route::get('/AcadHead_ActivityType', function () {
+        return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', ['page_title' => 'Activity Types']);
+    });
+
+<<<<<<< Updated upstream
     //----------- Requirement Bin -----------------//
 
 
@@ -357,6 +401,17 @@ Route::middleware(['auth', 'isFaculty'])->group(function () {
     //-------------------- File Pond Routes -----------------//
     // UPLOADING ROUTES
     Route::post('/upload-file', [UploadTemporaryFiles_Controller::class, 'uploadFile'])->name('upload_file');
+=======
+    // ADMIN DESIGNATION
+    Route::get('/AcadHead_Designation', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', ['page_title' => 'Designation']);
+    });
+
+    // ADMIN PROGRAMS
+    Route::get('/AcadHead_Specialization', function () {
+        return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
+    });
+>>>>>>> Stashed changes
 
     Route::delete('/delete-file', [DeleteTemporaryFiles_Controller::class, 'deleteFile'])->name('delete_file');
 
@@ -366,123 +421,13 @@ Route::middleware(['auth', 'isFaculty'])->group(function () {
 
 
 
-//------------------------------------------------------------------ STAFF --------------------------------------------------------------------//
-Route::middleware(['auth', 'isStaff'])->group(function () {
-Route::get('/StaffClassObservation', function () {
-    return view('Staff/Staff_ClassObservation', ['page_title' => 'Staff Class Observation']);
-    })->name('Staff_ClassObservation');
 
-Route::get('/StaffClassSchedule', function () {
-    return view('Staff/Staff_ClassSchedule', ['page_title' => 'Staff Class Schedule']);
-    })->name('Staff_ClassSchedule');
-
-Route::get('/StaffDashboard', function () {
-    return view('Staff/Staff_Dashboard', ['page_title' => 'Staff Dashboard']);
-    })->name('Staff_Dashboard');
-
-/**Staff Requirement Bin*/
-Route::get('/StaffRequirementBin', function () {
-    return view('Staff/Staff_RequirementBin', ['page_title' => ' Staff Requirement Bin']);
-    })->name('staff_RequirementBin');
-
-                //Retrieving Program Data in the DB
-                Route::get('/StaffRequirementBin', function () {
-                    $requirementbins = DB::table('requirement_bins')->get();
-                    //Format the deadline or date into more readable date format
-                    foreach ($requirementbins as $requirementbin) {
-                        $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
-                    }
-                    return view('Staff/Staff_RequirementBin', compact('requirementbins'));
-                });
-
-
-    /**Staff Activities*/
-Route::get('/StaffActivities', function () {
-    return view('Staff/Staff_Activities', ['page_title' => ' Staff Activities']);
-    })->name('staff_Activities');
-
-            //Retrieving Activity Types Data in the DB
-            Route::get('/StaffActivities', function () {
-                $activitytypes = DB::table('activity_types')->get();
-
-                $activities = DB::table('activities')
-                    ->join('activity_types', 'activities.activity_type_id', '=', 'activity_types.id')
-                    ->select('activities.title', 'activities.start_datetime', 'activities.status', 'activities.end_datetime', 'activity_types.title as type_title')
-                    ->get();
-
-                // Convert start_datetime and end_datetime to the desired format
-                foreach ($activities as $activity) {
-                    $activity->start_datetime = Carbon::parse($activity->start_datetime)->format('F d, Y h:i A');
-                    $activity->end_datetime = Carbon::parse($activity->end_datetime)->format('F d, Y h:i A');
-                }
-
-                return view('Staff/Staff_Activities', compact('activities', 'activitytypes'));
-
-            });
-
-// Route::get('/StaffProfile', function () {
-//     return view('Staff/Staff_Profile', ['page_title' => 'Staff Profile']);
-//     })->name('Staff_Profile');
-
-Route::get('/StaffReports', function () {
-    return view('Staff/Staff_Reports', ['page_title' => 'Staff Reports']);
-    })->name('Staff_Reports');
-});
-
-
-//------------------------------------------------------------------ DIRECTOR --------------------------------------------------------------------//
-Route::middleware(['auth', 'isDirector'])->group(function () {
-Route::get('/DirectorClassObservation', function () {
-    return view('Director/Director_ClassObservation', ['page_title' => 'Director Class Observation']);
-    })->name('Director_ClassObservation');
-
-Route::get('/DirectorClassSchedule', function () {
-    return view('Director/Director_ClassSchedule', ['page_title' => 'Director Class Schedule']);
-    })->name('Director_ClassSchedule');
-
-    Route::get('/DirectorActivities', function () {
-        return view('Director/Director_Activities', ['page_title' => 'Director Activities']);
-        })->name('Director_Activities');
-
-    Route::get('/DirectorActivityTypes', function () {
-        return view('Director/Director_ActivityTypes', ['page_title' => 'Director Class Schedule']);
-        })->name('Director_ActivityTypes');
-
-
-Route::get('/DirectorDashboard', function () {
-    return view('Director/Director_Dashboard', ['page_title' => 'Director Dashboard']);
-    })->name('Director_Dashboard');
-
-// Route::get('/DirectorProfile', function () {
-//     return view('Director/Director_Profile', ['page_title' => 'Director Profile']);
-//     })->name('Director_Profile');
-
-Route::get('/DirectorReports', function () {
-    return view('Director/Director_Reports', ['page_title' => 'Director Reports']);
-    })->name('Director_Reports');
-});
-
-
-
-
-
-
-require __DIR__.'/auth.php';
-//This is like an extend/include function. It includes the auth.php route in this web.php route so that It can access the routes inside the auth.php
-
-
-
+<<<<<<< Updated upstream
+=======
 
 /*
- * June 17, 2023 <Sat> Daniel's modified part
- */
+*  breadcrumbs of academic head
+*/
 
 
-//For dropzone to display and upload req bin
-Route::get('/Faculty_RequirementBin', [DropzoneController::class, 'Faculty_RequirementBin']);
-Route::post('/Faculty_RequirementBin', [DropzoneController::class, 'store'])->name('dropzone.store');
-
-//For dropzone to remove file
-//Route::get('/uploaded_files', [DropzoneController::class, 'delete'])->name('dropzone.delete');
-Route::delete('/deleteFile/{filename}', [DropzoneController::class, 'delete'])->name('deleteFile');
-
+>>>>>>> Stashed changes
