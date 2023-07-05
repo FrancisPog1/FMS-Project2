@@ -154,9 +154,9 @@
                                                         '<i class="far fa-eye"></i>' +
                                                     '</a>' +
                                                     '<button type="button" onclick="openEditModal(\'' + bins[i]['title'] + '\', \'' + description + '\', \'' + bins[i]['id']  + '\', \'' + bins[i]['deadline'] + '\', \'' + bins[i]['status'] + '\')" class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">'
-                                                       +'<i class="far fa-edit"></i>' +
+                                                    +'<i class="far fa-edit"></i>' +
                                                     '</button>' +
-                                                         deleteButton +
+                                                        deleteButton +
                                                     '<i class="far fa-trash-alt"></i>'+
                                                     '</button>'+
                                                 '</form>'+
@@ -165,7 +165,7 @@
                                     '</tr>';
                         }
                     } else {
-                        html += '<tr><td> No Records </td></tr>';
+                        html += '<tr><td colspan="5"> No Records </td></tr>';
                     }
 
                     $('#filtered-bins').html(html);
