@@ -48,8 +48,7 @@ class RequirementBin_Controller extends Controller
             if ($request->bins) {
 
                 if ($request->bins == 'All') {
-                    $query = RequirementBin::whereNull('deleted_at')
-                    ->where('is_deleted', false);
+                    $query = $query;
                 }
                 else{
                     $query->where('status', $request->bins);
@@ -71,16 +70,16 @@ class RequirementBin_Controller extends Controller
         }
 
 
-        $requirementbins = RequirementBin::where('deleted_at', null)
-        ->where('is_deleted', false)
-        ->get();
+        // $requirementbins = RequirementBin::where('deleted_at', null)
+        // ->where('is_deleted', false)
+        // ->get();
 
-        foreach ($requirementbins as $requirementbin) {
-            $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
-        }
+        // foreach ($requirementbins as $requirementbin) {
+        //     $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+        // }
 
-        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
-        compact('requirementbins'));
+        // return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
+        // compact('requirementbins'));
 
     }
 
