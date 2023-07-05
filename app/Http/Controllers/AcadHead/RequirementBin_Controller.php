@@ -69,18 +69,6 @@ class RequirementBin_Controller extends Controller
             return response()->json(['requirementbins' => $requirementbins]);
         }
 
-
-        // $requirementbins = RequirementBin::where('deleted_at', null)
-        // ->where('is_deleted', false)
-        // ->get();
-
-        // foreach ($requirementbins as $requirementbin) {
-        //     $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
-        // }
-
-        // return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
-        // compact('requirementbins'));
-
     }
 
 
@@ -122,18 +110,8 @@ class RequirementBin_Controller extends Controller
             return response()->json(['requirementbins' => $requirementbins]);
         }
 
-        // $requirementbins = RequirementBin::where('deleted_at', null)
-        //     ->where('is_deleted', false)
-        //     ->get();
-
-        // foreach ($requirementbins as $requirementbin) {
-        //     $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
-        // }
-
-        // return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin', compact('requirementbins'));
     }
-
-
+        // ------------------------THIS ARE THE CODES FOR THE REQUIREMENT ASSIGNEES PAGE-------------------------- //
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')
             ->join('user_assigned_to_requirement_bins', 'users.id', '=', 'user_assigned_to_requirement_bins.assigned_to')
@@ -146,10 +124,110 @@ class RequirementBin_Controller extends Controller
             'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id')
             ->get();
 
-            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id'));
+            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id'));
+        }
 
+
+        public function filtered_assignees(Request $request, $bin_id){
+            if($request->ajax())
+            {
+                $query = DB::table('users')
+                ->join('user_assigned_to_requirement_bins', 'users.id', '=', 'user_assigned_to_requirement_bins.assigned_to')
+                ->join('requirement_bins', 'requirement_bins.id', '=', 'user_assigned_to_requirement_bins.requirement_bin_id')
+                ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
+                ->where('requirement_bins.id', '=', $bin_id)
+                ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
+                'user_assigned_to_requirement_bins.review_status as review_status',
+                'user_assigned_to_requirement_bins.compliance_status as compliance_status',
+                'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id');
+
+                if($request->option)
+                {
+                    $option = $request->option;
+                    switch ($option) {
+                        case 'All':
+                            $query = $query;
+                            break;
+                        case 'Faculty':
+                            $query->where('roles.title', $option);
+                            break;
+                        case 'Director':
+                            $query->where('roles.title', $option);
+                            break;
+                        case 'Staff':
+                            $query->where('roles.title', $option);
+                            break;
+
+                        case 'Reviewed':
+                            $query->where('review_status', $option);
+                            break;
+                        case 'Pending':
+                            $query->where('review_status', $option);
+                            break;
+
+                        case 'Completed':
+                            $query->where('compliance_status', $option);
+                            break;
+                        case 'Incomplete':
+                            $query->where('compliance_status', $option);
+                            break;
+                        case 'Pending':
+                            $query->where('compliance_status', $option);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+                $assignees = $query->get();
+                return response()->json(['assignees' => $assignees]);
+
+            }
 
         }
+
+
+        public function sorted_assignees(Request $request, $bin_id){
+            $query = DB::table('users')
+            ->join('user_assigned_to_requirement_bins', 'users.id', '=', 'user_assigned_to_requirement_bins.assigned_to')
+            ->join('requirement_bins', 'requirement_bins.id', '=', 'user_assigned_to_requirement_bins.requirement_bin_id')
+            ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
+            ->where('requirement_bins.id', '=', $bin_id)
+            ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
+            'user_assigned_to_requirement_bins.review_status as review_status',
+            'user_assigned_to_requirement_bins.compliance_status as compliance_status',
+            'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id');
+
+            if($request->option)
+            {
+                $option = $request->option;
+                switch ($option) {
+                    case 'All':
+                        $query = $query;
+                        break;
+                    // case 'az':
+                    //     $query->where('users.name', $option);
+                    //     break;
+                    // case 'za':
+                    //     $query->where('users.name', $option);
+                    //     break;
+                    case 'e_az':
+                        $query->orderBy('email', 'asc');
+                        break;
+                    case 'e_za':
+                        $query->orderBy('email', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            $assignees = $query->get();
+            return response()->json(['assignees' => $assignees]);
+        }
+
+
+
 
         /**Creating Requirement Bin */
         public function Create_RequirementBin(Request $request){
@@ -249,7 +327,5 @@ class RequirementBin_Controller extends Controller
 
             return back()->with('success', 'Requirement Bin permanently deleted successfully!'); /**Alert Message */
         }
-
-
 }
 
