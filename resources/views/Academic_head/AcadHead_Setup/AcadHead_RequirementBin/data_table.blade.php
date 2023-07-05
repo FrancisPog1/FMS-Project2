@@ -31,24 +31,43 @@
                         </div>
                     </div>
 
+                        {{-- CODE FOR THE FILTERING --}}
                     <div class="card-header">
-                        <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
-                        <select name="dataTable_length" aria-controls="dataTable"
-                            class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">
-                                10
-                            </option>
-                            <option value="25">
-                                25
-                            </option>
-                            <option value="50">
-                                50
-                            </option>
-                            <option value="100">
-                                100
-                            </option>
-                        </select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
+                                <select name="dataTable_length" aria-controls="dataTable"
+                                    class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <div class="mr-2">
+                                    <select name="filter" id="filter" class="form-control" >
+                                        <option selected disabled >Filter by</option>
+                                        <option value="All">All</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="In progress">In Progress</option>
+                                        <option value="Closed">Closed</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select name="sort" id="sort" class="form-control">
+                                        <option selected disabled >Sort by</option>
+                                        <option value="All">All</option>
+                                        <option value="az">Title: A to Z</option>
+                                        <option value="za">Title: Z to A</option>
+                                        <option value="oldest">Deadline: Oldest to Newest</option>
+                                        <option value="newest">Deadline: Newest to Oldest</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
 
                     <!-- Tables of roles -->
                     <div class="card-body p-0">
@@ -62,7 +81,7 @@
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id='filtered-bins'>
                                 @foreach ($requirementbins as $requirementbin)
                                     <tr>
                                         <td class="text-center">{{ $requirementbin->title }}</td>

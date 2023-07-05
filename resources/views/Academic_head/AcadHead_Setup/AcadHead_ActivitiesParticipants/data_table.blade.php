@@ -4,7 +4,7 @@
         <div class="card">
 
             <div class="card-header">
-                <h3 class="card-title mt-2">List of Activities</h3>
+                <h3 class="card-title mt-2">List of Participants</h3>
                 <div class="text-right">
 
                     <button data-toggle="modal" data-target="#modal-xl-restore" type="button"

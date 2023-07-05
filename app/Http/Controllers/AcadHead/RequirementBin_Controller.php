@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Session; /**For the session to work */
 use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 class RequirementBin_Controller extends Controller
 {
     public function show(){
@@ -35,6 +39,101 @@ class RequirementBin_Controller extends Controller
         compact('deleted_requirementbins', 'requirementbins'));
 
     }
+
+    public function filtered_bin(Request $request){
+        if ($request->ajax()) {
+            $query = RequirementBin::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->bins) {
+
+                if ($request->bins == 'All') {
+                    $query = RequirementBin::whereNull('deleted_at')
+                    ->where('is_deleted', false);
+                }
+                else{
+                    $query->where('status', $request->bins);
+                }
+            }
+
+            if ($request->deadline) {
+                $deadline = Carbon::parse($request->deadline)->format('Y-m-d');
+                $query->whereDate('deadline', $deadline);
+            }
+
+            $requirementbins = $query->get();
+
+            foreach ($requirementbins as $requirementbin) {
+                $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+            }
+
+            return response()->json(['requirementbins' => $requirementbins]);
+        }
+
+
+        $requirementbins = RequirementBin::where('deleted_at', null)
+        ->where('is_deleted', false)
+        ->get();
+
+        foreach ($requirementbins as $requirementbin) {
+            $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+        }
+
+        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
+        compact('requirementbins'));
+
+    }
+
+
+    public function sorted_bin(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = RequirementBin::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->bins) {
+                $sort = $request->bins;
+                switch ($sort) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    case 'newest':
+                        $query->orderBy('deadline', 'desc');
+                        break;
+                    case 'oldest':
+                        $query->orderBy('deadline', 'asc');
+                        break;
+                    case 'All':
+                        $query->orderBy('deadline', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            $requirementbins = $query->get();
+
+            foreach ($requirementbins as $requirementbin) {
+                $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+            }
+
+            return response()->json(['requirementbins' => $requirementbins]);
+        }
+
+        // $requirementbins = RequirementBin::where('deleted_at', null)
+        //     ->where('is_deleted', false)
+        //     ->get();
+
+        // foreach ($requirementbins as $requirementbin) {
+        //     $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+        // }
+
+        // return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin', compact('requirementbins'));
+    }
+
 
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')

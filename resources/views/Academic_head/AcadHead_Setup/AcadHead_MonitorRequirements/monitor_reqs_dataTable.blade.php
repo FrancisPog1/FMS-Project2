@@ -32,12 +32,30 @@
                                 </b>
                             </div>
 
-                            {{-- <div class="text-right">
-                                <button type="button" data-toggle="modal" data-target="#modal-xl-create"
-                                    class="px-2 py-2 text-sm rounded-lg text-pal-1 hover:bg-gray-200">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div> --}}
+                        </div>
+
+                        {{-- CODE FOR THE FILTERING --}}
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <div class="mr-2">
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="all">All</option>
+                                            <option value="open">Open</option>
+                                            <option value="in-progress">In Progress</option>
+                                            <option value="completed">Completed</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select name="department" id="department" class="form-control">
+                                            <option value="all">All</option>
+                                            <option value="department-1">Department 1</option>
+                                            <option value="department-2">Department 2</option>
+                                            <option value="department-3">Department 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {{-- Table body --}}

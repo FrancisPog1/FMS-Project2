@@ -41,7 +41,7 @@
                                <div class="row">
                                    <div class="form-group col-md-12">
                                        <label>Status</label>
-                                       <input class="form-control" name="status" type="text" value="ONGOING"
+                                       <input class="form-control" name="status" type="text" value="In progress"
                                            readonly>
                                    </div>
                                </div>
