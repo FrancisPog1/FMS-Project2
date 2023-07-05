@@ -11,7 +11,7 @@
                 </div> --}}
             </div>
 
-                    {{-- CODE FOR THE FILTERING --}}
+                    {{-- CODE FOR THE FILTERING UI --}}
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
