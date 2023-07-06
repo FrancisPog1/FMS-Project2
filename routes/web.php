@@ -206,9 +206,10 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/FilteredBin', [RequirementBin_Controller::class, 'filtered_bin'])->name('filtered_bin');
 
     //--------------------------SORTING ROUTES---------------------------//
-    Route::get('/SortedBin', [RequirementBin_Controller::class, 'sorted_bin'])->name('sorted_bin');
 
     Route::get('/filtered_and_sorted_assignees/{bin_id}', [RequirementBin_Controller::class, 'filteredAndSortedAssignees'])->name('filtered_and_sorted_assignees');
+    Route::get('/filtered_and_sorted_bin', [RequirementBin_Controller::class, 'filteredAndSortedBin'])->name('filtered_and_sorted_bins');
+
 
 
     Route::put('/validate_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'validateRequirement'])->name('validate_requirements');

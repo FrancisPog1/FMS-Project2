@@ -40,47 +40,25 @@ class RequirementBin_Controller extends Controller
 
     }
 
-    public function filtered_bin(Request $request){
+    public function filteredAndSortedBin(Request $request){
         if ($request->ajax()) {
             $query = RequirementBin::whereNull('deleted_at')
                 ->where('is_deleted', false);
 
-            if ($request->bins) {
+            if ($request->filter_option) {
+                $filterOption = $request->filter_option;
 
-                if ($request->bins == 'All') {
+                if ( $filterOption  == 'All') {
                     $query = $query;
                 }
                 else{
-                    $query->where('status', $request->bins);
+                    $query->where('status',  $filterOption);
                 }
             }
 
-            if ($request->deadline) {
-                $deadline = Carbon::parse($request->deadline)->format('Y-m-d');
-                $query->whereDate('deadline', $deadline);
-            }
-
-            $requirementbins = $query->get();
-
-            foreach ($requirementbins as $requirementbin) {
-                $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
-            }
-
-            return response()->json(['requirementbins' => $requirementbins]);
-        }
-
-    }
-
-
-    public function sorted_bin(Request $request)
-    {
-        if ($request->ajax()) {
-            $query = RequirementBin::whereNull('deleted_at')
-                ->where('is_deleted', false);
-
-            if ($request->bins) {
-                $sort = $request->bins;
-                switch ($sort) {
+            if ($request->sort_option) {
+                $sortOption = $request->sort_option;
+                switch ($sortOption) {
                     case 'az':
                         $query->orderBy('title', 'asc');
                         break;
@@ -101,6 +79,11 @@ class RequirementBin_Controller extends Controller
                 }
             }
 
+            if ($request->deadline) {
+                $deadline = Carbon::parse($request->deadline)->format('Y-m-d');
+                $query->whereDate('deadline', $deadline);
+            }
+
             $requirementbins = $query->get();
 
             foreach ($requirementbins as $requirementbin) {
@@ -111,6 +94,7 @@ class RequirementBin_Controller extends Controller
         }
 
     }
+
         // ------------------------THIS ARE THE CODES FOR THE REQUIREMENT ASSIGNEES PAGE-------------------------- //
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')
@@ -179,12 +163,12 @@ class RequirementBin_Controller extends Controller
                 if ($request->sort_option) {
                     $sortOption = $request->sort_option;
                     switch ($sortOption) {
-                        // case 'az':
-                        //     $query->orderBy('users.name', 'asc');
-                        //     break;
-                        // case 'za':
-                        //     $query->orderBy('users.name', 'desc');
-                        //     break;
+                        case 'az':
+                            $query->orderBy('users.name', 'asc');
+                            break;
+                        case 'za':
+                            $query->orderBy('users.name', 'desc');
+                            break;
                         case 'e_az':
                             $query->orderBy('users.email', 'asc');
                             break;
