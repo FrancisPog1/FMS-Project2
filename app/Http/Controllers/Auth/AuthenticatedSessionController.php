@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -30,11 +32,20 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        //Make the status "Active when the user is logged in"
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $user->status = "Active";
+        $user->save();
+
+
     /**
     * I added this if else statement so that after the authentication it will check the
     * role and redirect the user to their deginated home page per role
     * Edited 06/19/23 01:02 PM
     */
+
+
          if (Auth::user()->foreign_role_id == '1') {
             return redirect()->intended(RouteServiceProvider::AcadHead_HOME)->with('success', 'Admin Login Successfull');
         }
@@ -62,12 +73,16 @@ class AuthenticatedSessionController extends Controller
      * Destroy an authenticated session.
      */
     public function destroy(Request $request): RedirectResponse
-    {
+    {    //Make the status "Active when the user is logged in"
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $user->status = "Inactive";
+        $user->save();
+
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
+
 
         return redirect('/');
     }

@@ -29,19 +29,24 @@
                                         <select name="filter" id="filter" class="form-control">
                                             <option selected disabled>Filter by</option>
                                             <option value="All">All</option>
-                                            <option value="Pending">Pending</option>
-                                            <option value="In progress">In Progress</option>
-                                            <option value="Closed">Closed</option>
+                                            <option value="Faculty">Role: Faculty</option>
+                                            <option value="Staff">Role: Staff</option>
+                                            <option value="Academic Head">Role: Academic Head</option>
+                                            <option value="Director">Role: Director</option>
+                                            <option value="Active">Status: Active</option>
+                                            <option value="Inactive">Status: Inactive</option>
                                         </select>
                                     </div>
                                     <div style="width:20%;">
                                         <select name="sort" id="sort" class="form-control">
                                             <option selected disabled>Sort by</option>
                                             <option value="All">All</option>
-                                            <option value="az">Title: A to Z</option>
-                                            <option value="za">Title: Z to A</option>
-                                            <option value="oldest">Deadline: Oldest to Newest</option>
-                                            <option value="newest">Deadline: Newest to Oldest</option>
+                                            <option value="az">Name: A to Z</option>
+                                            <option value="za">Name: Z to A</option>
+                                            <option value="e_az">Email: A to Z</option>
+                                            <option value="e_za">Email: Z to A</option>
+                                            <option value="r_az">Role: A to Z</option>
+                                            <option value="r_za">Role: Z to A</option>
                                         </select>
                                     </div>
                                     <div class="ml-auto" style="width:40%;">
@@ -61,17 +66,22 @@
                         <tr>
                             <th>Email</th>
                             <th style="width: 25%;">Role</th>
-                            <th style="width: 15%;">Status</th>
+                            <th class= "text-center" style="width: 15%;">Status</th>
                             <th class="text-center" style="width: 25%;">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="filtered-users">
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->user_role }}</td>
                                 <!--This should be a toggle switch with funct.-->
-                                <td><b>WIP</b></td>
+                                <td class="text-center">
+                                    <button type="button"
+                                        class="  font-medium rounded-full text-sm  px-3 py-1 mr-2 mb-2
+                                {{ $user->status == 'Inactive' ? 'text-white bg-red-500' : 'text-white bg-green-400' }}
+                                ">{{ $user->status }}</button>
+                                </td>
 
                                 <td class="text-center">
                                     <form method="POST" action="{{ route('delete_users', $user->id) }}">

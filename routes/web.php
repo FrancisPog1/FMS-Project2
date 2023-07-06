@@ -60,16 +60,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         })->name('acadhead_Dashboard');
 
     /**Add User */
-    Route::get('/AddUser', function () {
-        $roles = DB::table('roles')->get();
-
-        $users = DB::table('users')
-        ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as user_role', 'users.email', 'users.status', 'users.id')
-        ->get();
-
-        return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', compact('users','roles'));
-    })->name('acadhead_AddUser');
+    Route::get('/AddUser',[User_Controller::class, 'show'])->name('acadhead_AddUser');
 
     /**Academic Rank */
     Route::get('/AcadHead', [AcademicRank_Controller::class, 'show'])->name('acadhead_AcademicRank');
@@ -210,6 +201,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/filtered_and_sorted_assignees/{bin_id}', [RequirementBin_Controller::class, 'filteredAndSortedAssignees'])->name('filtered_and_sorted_assignees');
     Route::get('/filtered_and_sorted_bin', [RequirementBin_Controller::class, 'filteredAndSortedBin'])->name('filtered_and_sorted_bins');
     Route::get('/filtered_and_sorted_activitytype', [ActivityType_Controller::class, 'filteredAndSortedActivitytype'])->name('filtered_and_sorted_activitytypes');
+    Route::get('/filtered_and_sorted_user', [User_Controller::class, 'filteredAndSortedUser'])->name('filtered_and_sorted_users');
 
 
     Route::get('/filtered_and_sorted_role', [Role_Controller::class, 'filteredAndSortedRole'])->name('sorted_roles');
@@ -219,7 +211,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/filtered_and_sorted_designation', [Designation_Controller::class, 'filteredAndSortedDesignation'])->name('sorted_designations');
     Route::get('/filtered_and_sorted_program', [Program_Controller::class, 'filteredAndSortedProgram'])->name('sorted_programs');
     Route::get('/filtered_and_sorted_specialization', [Specialization_Controller::class, 'filteredAndSortedSpecialization'])->name('sorted_specializations');
-    Route::get('/filtered_and_sorted_user', [User_Controller::class, 'filteredAndSortedUser'])->name('sorted_users');
+
 
 
 
