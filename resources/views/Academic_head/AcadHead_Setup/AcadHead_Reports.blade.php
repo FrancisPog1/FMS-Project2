@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-{{-- CONTENTS --}}  
-@section('content')  
+{{-- CONTENTS --}}
+@section('content')
 
 
 
@@ -29,7 +29,7 @@
             </div>
 
             <div class="card-body">
-                <ul class="nav nav-tabs" id="custom-content-above-tab"
+                <ul class="nav nav-tabs justify-content-center" id="custom-content-above-tab"
                     role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active"
@@ -228,8 +228,8 @@
                                                             focus:ring-blue-300 font-medium
                                                             rounded-full text-sm px-2
                                                             text-center mr-2 mb-2
-                                                           
-                                                           
+
+
                                                            ">Ongoing</button>
                                                     </td>
                                                     <td>
@@ -240,8 +240,8 @@
                                                             focus:ring-blue-300 font-medium
                                                             rounded-full text-sm px-2
                                                             text-center mr-2 mb-2
-                                                           
-                                                           
+
+
                                                            ">Ongoing</button>
                                                     </td>
                                                 </tbody>
@@ -364,8 +364,8 @@
                                                             focus:ring-blue-300 font-medium
                                                             rounded-full text-sm px-3
                                                             text-center mr-2 mb-2
-                                                           
-                                                           
+
+
                                                            ">Ongoing</button>
                                                     </td>
                                                 </tbody>
@@ -466,8 +466,8 @@
                                                             focus:ring-blue-300 font-medium
                                                             rounded-full text-sm px-3
                                                             text-center mr-2 mb-2
-                                                           
-                                                           
+
+
                                                            ">Ongoing</button>
                                                     </td>
                                                 </tbody>
@@ -575,8 +575,8 @@
                                                             focus:ring-blue-300 font-medium
                                                             rounded-full text-sm px-3
                                                             text-center mr-2 mb-2
-                                                           
-                                                           
+
+
                                                            ">Ongoing</button>
                                                     </td>
                                                     <td>
@@ -735,7 +735,7 @@
 
         <!-- Local script for warning modals -->
         <script src="{{ asset('js/farms.swal.warning.modal.js') }}"></script>
-		
+
 		<!-- Script for Date picker -->
 		<script src="{{ asset('js/farms.datepicker.js') }}"></script>
 @endsection
