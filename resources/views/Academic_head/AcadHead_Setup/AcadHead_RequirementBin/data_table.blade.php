@@ -115,11 +115,12 @@
                                                         <i class="far fa-eye"></i>
                                                     </a>
                                                     <button type="button"
-                                                        onclick="openEditModal('{{ $requirementbin->title }}', '{{ $requirementbin->description }}',  '{{ $requirementbin->id }}', '{{ $requirementbin->deadline }}', '{{ $requirementbin->status }}') "
-                                                        class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
+                                                    onclick="openEditModal('{{ $requirementbin->title }}', {{ json_encode($requirementbin->description) }}, '{{ $requirementbin->id }}', '{{ $requirementbin->deadline }}', '{{ $requirementbin->status }}')"
+                                                    class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
+                                                <i class="far fa-edit"></i>
+                                            </button>
 
-                                                        <i class="far fa-edit"></i>
-                                                    </button>
+
                                                     <button type="button"
                                                         class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
                                                         title="Delete">

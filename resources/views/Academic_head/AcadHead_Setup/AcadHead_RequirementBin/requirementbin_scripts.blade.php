@@ -1,5 +1,6 @@
 <script>
     function openEditModal(title, description, binId, deadline, status) {
+
         // Set the values in the form fields
         document.getElementById('editForm').elements['title'].value = title;
         document.getElementById('editForm').elements['description'].value = description;
