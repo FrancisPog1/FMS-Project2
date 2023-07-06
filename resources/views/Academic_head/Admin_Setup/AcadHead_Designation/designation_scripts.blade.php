@@ -227,3 +227,99 @@
         });
     });
 </script>
+
+
+{{-- AJAX SCRIPT FOR SORTING --}}
+<script>
+    $(document).ready(function() {
+        var sortedRoute = "{{ route('sorted_designations') }}";
+
+        $("#sort").on('change', function() {
+            var sortOption = $("#sort").val();
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                url: sortedRoute,
+                type: "GET",
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                data: {
+                    'option': sortOption
+                },
+                success: function(data) {
+                    var designations = data.designations;
+                    var html = '';
+                    var deleteRoute = "{{ route('delete_designations', ':id') }}";
+
+                    if (designations.length > 0) {
+                        for (let i = 0; i < designations.length; i++) {
+                            html += '<tr>' +
+                                   '<td>' + designations[i]['title'] + '</td>' +
+                                   '<td>' + designations[i]['description'] + '</td>' +
+                                  ' <td class="text-center">' +
+                                       '<form method="POST" action=" '+ deleteRoute.replace(':id', designations[i]['id']) +' ">' +
+                                           '@csrf' +
+                                         ' <input name="_method" type="hidden" value="DELETE">' +
+                                           '<button data-toggle="modal"' +
+                                              'onclick="openViewModal(' +"'"+ designations[i]['title'] + "', '" + designations[i]['description'] + "'"+ ')" ' +
+                                              ' data-target="#modal-xl-view" type="button"' +
+                                               'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
+                                             '  <i class="far fa-eye"></i>' +
+                                        '   </button>' +
+                                           '<button type="button"' +
+                                              ' onclick="openEditModal(' +" ' "+ designations[i]['title'] + " ' " + ", '" + designations[i]['description'] + " ' " + ", '" + designations[i]['id'] + "' " + ' )" ' +
+                                               'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
+                                              ' <i class="far fa-edit"></i>' +
+                                           '</button>' +
+                                         '  <button type="button"' +
+                                             '  class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
+                                              ' title="Delete">' +
+                                             '  <i class="far fa-trash-alt"></i>' +
+                                           '</button>' +
+                                       '</form>' +
+                                 '  </td>' +
+                              ' </tr>';
+                        }
+                    } else {
+                        html += '<tr><td> No Records </td></tr>';
+                    }
+
+                    $('#filtered-designations').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+{{-- Local Warning Modal Before Deleting--}}
+<script>
+    $(document).on('click', '.local-delete-button', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var form = $(this).closest("form");
+    var name = $(this).data("name");
+
+    Swal.fire({
+        title: "Are you sure?",
+        icon: "info",
+        html: "Do you want to <b>delete</b> this?",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: "Yes",
+        confirmButtonColor: "#3085d6",
+        confirmButtonAriaLabel: "...",
+        cancelButtonColor: "#d33",
+        cancelButtonAriaLabel: "...",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit(); // Submit the form for deletion
+        }
+    });
+});
+</script>
+

@@ -36,6 +36,54 @@ class ActivityType_Controller extends Controller
     }
 
 
+    public function filteredAndSortedActivitytype(Request $request){
+        if ($request->ajax()) {
+            $query = ActivityType::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+                if ($request->filter_option) {
+                    $filterOption = $request->filter_option;
+                    switch ($filterOption) {
+                        case 'All':
+                            $query = $query;
+                            break;
+                        case 'Meeting':
+                            $query->where('category',  $filterOption);
+                            break;
+                        case 'Activity':
+                            $query->where('category',  $filterOption);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+            if ($request->sort_option) {
+                $sortOption = $request->sort_option;
+                switch ($sortOption) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if ($request->deadline) {
+                $deadline = Carbon::parse($request->deadline)->format('Y-m-d');
+                $query->whereDate('deadline', $deadline);
+            }
+
+            $types = $query->get();
+            return response()->json(['types' => $types]);
+        }
+
+    }
+
+
     /**Creating Activity Type */
     public function Create_ActivityType(Request $request): JsonResponse
     {

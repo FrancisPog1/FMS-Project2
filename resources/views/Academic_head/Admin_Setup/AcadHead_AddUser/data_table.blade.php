@@ -11,24 +11,48 @@
                 </div>
             </div>
 
-            <div class="card-header row">
-                <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .9rem;">Show entries</p>
-                <select name="dataTable_length" aria-controls="dataTable"
-                    class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
-                    <option value="10">
-                        10
-                    </option>
-                    <option value="25">
-                        25
-                    </option>
-                    <option value="50">
-                        50
-                    </option>
-                    <option value="100">
-                        100
-                    </option>
-                </select>
-            </div>
+                           {{-- CODE FOR THE FILTERING --}}
+                           <div class="card-header">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
+                                    <select name="dataTable_length" aria-controls="dataTable"
+                                        class="ml-2 col-3 custom-select custom-select-sm form-control form-control-sm">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="col-8 d-flex">
+                                    <div class="mr-2">
+                                        <select name="filter" id="filter" class="form-control">
+                                            <option selected disabled>Filter by</option>
+                                            <option value="All">All</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="In progress">In Progress</option>
+                                            <option value="Closed">Closed</option>
+                                        </select>
+                                    </div>
+                                    <div style="width:20%;">
+                                        <select name="sort" id="sort" class="form-control">
+                                            <option selected disabled>Sort by</option>
+                                            <option value="All">All</option>
+                                            <option value="az">Title: A to Z</option>
+                                            <option value="za">Title: Z to A</option>
+                                            <option value="oldest">Deadline: Oldest to Newest</option>
+                                            <option value="newest">Deadline: Newest to Oldest</option>
+                                        </select>
+                                    </div>
+                                    <div class="ml-auto" style="width:40%;">
+                                        <form class="d-flex">
+                                            <input class="form-control me-2 rounded-lg" type="search" placeholder="Search" aria-label="Search">
+                                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
             <!-- Tables of roles -->
             <div class="card-body p-0">

@@ -182,7 +182,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::post('/restore_Specialization', [Specialization_Controller::class, 'restore'])->name('restore_specialization');
     Route::post('/restore_Designation', [Designation_Controller::class, 'restore'])->name('restore_designation');
     Route::post('/restore_FacultyType', [FacultyType_Controller::class, 'restore'])->name('restore_facultyType');
-    Route::post('/restore_Role', [Role_Controller::class, 'restores'])->name('restore_roles');
+    Route::post('/restore_Role', [Role_Controller::class, 'restore'])->name('restore_roles');
     Route::post('/restore_RequirementBin', [RequirementBin_Controller::class, 'restore'])->name('restore_requirementbin');
     Route::post('/restore_ActivityType', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
     Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
@@ -205,10 +205,21 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/requirementbin_setup_page', [RequirementSetup_Controller::class, 'filtered_user'])->name('filtered_users');
     Route::get('/FilteredBin', [RequirementBin_Controller::class, 'filtered_bin'])->name('filtered_bin');
 
-    //--------------------------SORTING ROUTES---------------------------//
+    //--------------------------FILTERTING/SORTING ROUTES---------------------------//
 
     Route::get('/filtered_and_sorted_assignees/{bin_id}', [RequirementBin_Controller::class, 'filteredAndSortedAssignees'])->name('filtered_and_sorted_assignees');
     Route::get('/filtered_and_sorted_bin', [RequirementBin_Controller::class, 'filteredAndSortedBin'])->name('filtered_and_sorted_bins');
+    Route::get('/filtered_and_sorted_activitytype', [ActivityType_Controller::class, 'filteredAndSortedActivitytype'])->name('filtered_and_sorted_activitytypes');
+
+
+    Route::get('/filtered_and_sorted_role', [Role_Controller::class, 'filteredAndSortedRole'])->name('sorted_roles');
+    Route::get('/filtered_and_sorted_rank', [AcademicRank_Controller::class, 'filteredAndSortedRank'])->name('sorted_ranks');
+    Route::get('/filtered_and_sorted_facultytype', [FacultyType_Controller::class, 'filteredAndSortedFacultytype'])->name('sorted_facultytypes');
+    Route::get('/filtered_and_sorted_requirementtype', [RequirementType_Controller::class, 'filteredAndSortedRequirementtype'])->name('sorted_requirementtypes');
+    Route::get('/filtered_and_sorted_designation', [Designation_Controller::class, 'filteredAndSortedDesignation'])->name('sorted_designations');
+    Route::get('/filtered_and_sorted_program', [Program_Controller::class, 'filteredAndSortedProgram'])->name('sorted_programs');
+    Route::get('/filtered_and_sorted_specialization', [Specialization_Controller::class, 'filteredAndSortedSpecialization'])->name('sorted_specializations');
+    Route::get('/filtered_and_sorted_user', [User_Controller::class, 'filteredAndSortedUser'])->name('sorted_users');
 
 
 

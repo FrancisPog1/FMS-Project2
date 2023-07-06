@@ -37,6 +37,30 @@ class Program_Controller extends Controller
         compact('deleted_programs', 'programs'));
     }
 
+    public function filteredAndSortedProgram(Request $request){
+        if ($request->ajax()) {
+            $query = Program::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->option) {
+                $option = $request->option;
+                switch ($option) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            $programs = $query->get();
+            return response()->json(['programs' => $programs]);
+        }
+
+    }
 
     /**Creating  Program*/
     public function Create_Program(Request $request): JsonResponse {

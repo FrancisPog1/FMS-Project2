@@ -35,6 +35,31 @@ class Designation_Controller extends Controller
         compact('deleted_designations', 'designations'));
     }
 
+    public function filteredAndSortedDesignation(Request $request){
+        if ($request->ajax()) {
+            $query = Designation::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->option) {
+                $option = $request->option;
+                switch ($option) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            $designations = $query->get();
+            return response()->json(['designations' => $designations]);
+        }
+
+    }
+
     /**Creating Designation */
     public function Create_Designation(Request $request): JsonResponse
     {

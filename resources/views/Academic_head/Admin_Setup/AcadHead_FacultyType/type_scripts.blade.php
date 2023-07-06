@@ -230,3 +230,98 @@
         });
     });
 </script>
+
+{{-- AJAX SCRIPT FOR SORTING --}}
+<script>
+    $(document).ready(function() {
+        var sortedTypeRoute = "{{ route('sorted_facultytypes') }}";
+
+        $("#sort").on('change', function() {
+            var sortOption = $("#sort").val();
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                url: sortedTypeRoute,
+                type: "GET",
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                data: {
+                    'option': sortOption
+                },
+                success: function(data) {
+                    var types = data.types;
+                    var html = '';
+                    var deleteTypeRoute = "{{ route('delete_facultytypes', ':type_id') }}";
+
+                    if (types.length > 0) {
+                        for (let i = 0; i < types.length; i++) {
+                            html += '<tr>' +
+                                   '<td>' + types[i]['title'] + '</td>' +
+                                   '<td>' + types[i]['description'] + '</td>' +
+                                  ' <td class="text-center">' +
+                                       '<form method="POST" action=" '+ deleteTypeRoute.replace(':type_id', types[i]['id']) +' ">' +
+                                           '@csrf' +
+                                         ' <input name="_method" type="hidden" value="DELETE">' +
+                                           '<button data-toggle="modal"' +
+                                              'onclick="openViewModal(' +"'"+ types[i]['title'] + "', '" + types[i]['description'] + "'"+ ')" ' +
+                                              ' data-target="#modal-xl-view" type="button"' +
+                                               'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
+                                             '  <i class="far fa-eye"></i>' +
+                                        '   </button>' +
+                                           '<button type="button"' +
+                                              ' onclick="openEditModal(' +" ' "+ types[i]['title'] + " ' " + ", '" + types[i]['description'] + " ' " + ", '" + types[i]['id'] + "' " + ' )" ' +
+                                               'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
+                                              ' <i class="far fa-edit"></i>' +
+                                           '</button>' +
+                                         '  <button type="button"' +
+                                             '  class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
+                                              ' title="Delete">' +
+                                             '  <i class="far fa-trash-alt"></i>' +
+                                           '</button>' +
+                                       '</form>' +
+                                 '  </td>' +
+                              ' </tr>';
+                        }
+                    } else {
+                        html += '<tr><td> No Records </td></tr>';
+                    }
+
+                    $('#filtered-types').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+{{-- Local Warning Modal Before Deleting--}}
+<script>
+    $(document).on('click', '.local-delete-button', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var form = $(this).closest("form");
+    var name = $(this).data("name");
+
+    Swal.fire({
+        title: "Are you sure?",
+        icon: "info",
+        html: "Do you want to <b>delete</b> this?",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: "Yes",
+        confirmButtonColor: "#3085d6",
+        confirmButtonAriaLabel: "...",
+        cancelButtonColor: "#d33",
+        cancelButtonAriaLabel: "...",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit(); // Submit the form for deletion
+        }
+    });
+});
+</script>
+

@@ -16,23 +16,29 @@
                 </div>
             </div>
 
-            <div class="card-header row">
-                <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .9rem;">Show entries</p>
-                <select name="dataTable_length" aria-controls="dataTable"
-                    class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
-                    <option value="10">
-                        10
-                    </option>
-                    <option value="25">
-                        25
-                    </option>
-                    <option value="50">
-                        50
-                    </option>
-                    <option value="100">
-                        100
-                    </option>
-                </select>
+              {{-- CODE FOR THE FILTERING --}}
+              <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
+                        <select name="dataTable_length" aria-controls="dataTable"
+                            class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <div>
+                            <select name="sort" id="sort" class="form-control">
+                                <option selected disabled>Sort by</option>
+                                <option value="az">Name: A to Z</option>
+                                <option value="za">Name: Z to A</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Tables of roles -->
@@ -45,7 +51,7 @@
                             <th class="text-center" style="width: 25%;">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="filtered-designations">
                         @foreach ($designations as $designation)
                             <tr>
                                 <td class="text-center">{{ $designation->title }}</td>

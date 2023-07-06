@@ -33,6 +33,32 @@ class AcademicRank_Controller extends Controller
         compact('deleted_ranks', 'acadranks'));
     }
 
+    public function filteredAndSortedRank(Request $request){
+        if ($request->ajax()) {
+            $query = AcademicRank::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->option) {
+                $option = $request->option;
+                switch ($option) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            $ranks = $query->get();
+            return response()->json(['ranks' => $ranks]);
+        }
+
+    }
+
+
 /**Codes for Creating Academic Rank */
     public function Create_AcadRank(Request $request): JsonResponse {
         /**Codes to validate the input fields of the registration page */

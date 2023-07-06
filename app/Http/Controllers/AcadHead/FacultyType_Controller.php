@@ -35,6 +35,32 @@ class FacultyType_Controller extends Controller
         compact('deleted_types', 'types'));
     }
 
+    public function filteredAndSortedFacultytype(Request $request){
+        if ($request->ajax()) {
+            $query = FacultyType::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->option) {
+                $option = $request->option;
+                switch ($option) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            $types = $query->get();
+            return response()->json(['types' => $types]);
+        }
+
+    }
+
+
 
     /**Creating Faculty Type */
     public function Create_FacultyType(Request $request): JsonResponse{

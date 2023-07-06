@@ -37,6 +37,31 @@ class RequirementType_Controller extends Controller
         compact('deleted_types', 'requirement_types'));
     }
 
+    public function filteredAndSortedRequirementtype(Request $request){
+        if ($request->ajax()) {
+            $query = RequirementType::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->option) {
+                $option = $request->option;
+                switch ($option) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            $types = $query->get();
+            return response()->json(['types' => $types]);
+        }
+
+    }
+
     /**Creating Requirement Type */
     public function Create_RequirementType(Request $request): JsonResponse
     {

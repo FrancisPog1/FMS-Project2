@@ -38,6 +38,31 @@ class Role_Controller extends Controller
         compact('deleted_roles', 'roles'));
     }
 
+    public function filteredAndSortedRole(Request $request){
+        if ($request->ajax()) {
+            $query = Role::whereNull('deleted_at')
+                ->where('is_deleted', false);
+
+            if ($request->option) {
+                $option = $request->option;
+                switch ($option) {
+                    case 'az':
+                        $query->orderBy('title', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('title', 'desc');
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            $roles = $query->get();
+            return response()->json(['roles' => $roles]);
+        }
+
+    }
+
 
     //Creating a Role
     public function Create_Roles(Request $request): JsonResponse
