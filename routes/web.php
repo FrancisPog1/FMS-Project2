@@ -213,6 +213,11 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/filtered_and_sorted_specialization', [Specialization_Controller::class, 'filteredAndSortedSpecialization'])->name('sorted_specializations');
 
 
+    //------------------------------------------[ ROUTES FOR VIEWING FILES ]-------------------------------------------//
+    Route::get('/admin/files', [ViewUserFiles::class, 'viewFiles'])->name('admin.files');
+    Route::get('/admin/files', [ViewUserFiles::class, 'viewFiles'])->name('admin.download');
+
+
 
 
     Route::put('/validate_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'validateRequirement'])->name('validate_requirements');
