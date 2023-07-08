@@ -9,7 +9,7 @@ use App\Models\UserUploadRequirement;
 use App\Models\RequirementBinContent;
 use App\Models\UserAssignedToRequirementBins;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\UsersFiles;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session; /**For the session to work */
@@ -20,6 +20,7 @@ class MonitorRequirements_Controller extends Controller
 {
     public function show($user_id, $assigned_bin_id, $req_bin_id)
     {
+        $files = UsersFiles::all();
 
         $datas = DB::table('requirement_types')
         ->join('requirement_bin_contents', 'requirement_types.id', '=', 'requirement_bin_contents.foreign_requirement_types_id')
@@ -35,7 +36,7 @@ class MonitorRequirements_Controller extends Controller
         ->get();
 
         return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements'
-        , compact('datas','assigned_bin_id', 'req_bin_id', 'user_id'));
+        , compact('datas','assigned_bin_id', 'req_bin_id', 'user_id', 'files'));
 
     }
 

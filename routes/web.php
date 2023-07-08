@@ -165,7 +165,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::delete('/destroy_activities{activitiesId}', [Activities_Controller::class, 'destroy'])->name('destroy_activities');
 
 
-        //--------------------------RESTORE DELETED RECORDS ROUTES---------------------------//
+    //--------------------------RESTORE DELETED RECORDS ROUTES---------------------------//
     Route::post('/restore_bincontents', [RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
     Route::post('/restore_requirementtypes', [RequirementType_Controller::class, 'restore'])->name('restore_requirementtypes');
     Route::post('/restore_AcademicRank', [AcademicRank_Controller::class, 'restore'])->name('restore_ranks');
@@ -178,7 +178,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::post('/restore_ActivityType', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
     Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
 
-        //--------------------------UPDATING A RECORD ROUTES---------------------------//
+    //--------------------------UPDATING A RECORD ROUTES---------------------------//
     Route::put('/update_ranks{id}', [AcademicRank_Controller::class, 'updateRanks'])->name('update_ranks');
     Route::put('/update_roles{roleId}', [Role_Controller::class, 'updateRoles'])->name('update_roles');
     Route::put('/update_users{userId}', [User_Controller::class, 'updateUsers'])->name('update_users');
