@@ -1,19 +1,16 @@
-<!-- Main content -->
+
+<!-- DATA TABLE -->
 <section class="container">
     <div class="mr-5 ml-5">
-        <div class="card">
+        <div class="card" >
 
             <div class="card-header">
                 <h3 class="card-title mt-2">List of Participants</h3>
                 <div class="text-right">
 
-                    <button data-toggle="modal" data-target="#modal-xl-restore" type="button"
-                        class="px-4 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300">
-                        Restore</button>
-
-                    <button data-toggle="modal" data-target="#modal-xl-create" type="button"
+                    <button data-toggle="modal" data-target="#modal-xl-add-participants" type="button"
                         class="text-col-1 btn btn-success btn-m p-drop">
-                        Create activity &nbsp;
+                        Add Participants &nbsp;
                         <i class="fas fa-plus"></i>
                     </button>
 
@@ -56,55 +53,41 @@
 
 
             <!-- Tables of roles -->
-            <div class="card-body p-0">
+            <div class="card-body p-0" >
                 <table class="table table-striped">
                     <thead class="pal-1 text-col-2">
                         <tr>
-                            <th style="width: 28%;">Title</th>
-                            <th style="width: 15%;">Type</th>
-                            <th style="width: 12%;">Status</th>
-                            <th style="width: 16%;">Date</th>
+                            <th style="width: 28%;">Name</th>
+                            <th style="width: 15%;">Email</th>
+                            <th style="width: 12%;">Role</th>
                             <th class="text-center" style="width: 20%;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($activities as $activity)
+                        @foreach ($participants as $participant)
                             <tr>
+
                                 <td>
-                                    {{ $activity->title }}
+                                    Name 1
                                 </td>
+
                                 <td>
-                                    {{ $activity->type_title }}
+                                    {{ $participant->email }}
                                 </td>
+
                                 <td>
-                                    <button type="button"
-                                        class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-2 text-center mr-2 mb-2">{{ $activity->status }}</button>
-                                </td>
-                                <td>
-                                    {{ $activity->start_datetime }} - <br> {{ $activity->end_datetime }}
+                                    {{ $participant->role }}
                                 </td>
 
                                 <td class="text-sm-center">
-                                    <form method="POST" action="{{ route('delete_activity', $activity->id) }}">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <button data-toggle="modal" data-target="#modal-xl" type="button"
-                                            onclick="openViewModal('{{ $activity->title }}', '{{ $activity->type }}', '{{ $activity->description }}','{{ $activity->location }}', '{{ $activity->status }}', '{{ $activity->start_datetime }}', '{{ $activity->end_datetime }}')"
-                                            class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                            <i class="far fa-eye"></i>
-                                        </button>
-                                        <button data-toggle="modal" type="button" data-target="#modal-xl-edit"
-                                            onclick="openEditModal('{{ $activity->title }}', '{{ $activity->type }}', '{{ $activity->description }}','{{ $activity->location }}', '{{ $activity->status }}', '{{ $activity->start_datetime }}', '{{ $activity->end_datetime }}', '{{ $activity->id }}')"
-                                            class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
-                                            <i class="far fa-edit"></i>
-                                        </button>
 
                                         <button type="button"
-                                            class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
+                                            class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 remove-button"
+                                            name="{{ $participant->id }}"
                                             title="Delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
-                                    </form>
+
                                 </td>
                             </tr>
                         @endforeach

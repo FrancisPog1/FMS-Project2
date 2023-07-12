@@ -16,7 +16,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" style="height: 500px;">
+                    <div class="modal-body" style="height: 500px; overflow: scroll;">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
@@ -57,18 +57,11 @@
                                                 </div>
                                                 <div class="card-body" style=" overflow-y: scroll;">
                                                     <!-- List of files goes here -->
-                                                    <!-- Example: -->
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item">File 1</li>
-                                                        <li class="list-group-item">File 2</li>
-                                                        <li class="list-group-item">File 3</li>
-                                                        <li class="list-group-item">File 3</li>
-                                                        <li class="list-group-item">File 3</li>
-                                                        <li class="list-group-item">File 3</li>
-                                                        <li class="list-group-item">File 3</li>
-                                                        <li class="list-group-item">File 3</li>
-                                                        <li class="list-group-item">File 3</li>
+
+                                                    <ul id="files" class="list-group">
+
                                                     </ul>
+
                                                 </div>
                                             </div>
                                         </div>

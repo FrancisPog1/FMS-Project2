@@ -12,7 +12,7 @@ class DeleteTemporaryFiles_Controller extends Controller
         $temporaryFile= TemporaryFiles::where('folder', request()->getContent())->first();
 
         if($temporaryFile){
-            \Storage::deleteDirectory('uploaded_files/tmp'. $temporaryFile->folder);
+            \Storage::deleteDirectory('uploaded_files/tmp/'. $temporaryFile->folder);
             $temporaryFile->delete();
         }
         return response()->noContent();

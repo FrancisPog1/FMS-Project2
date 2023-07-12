@@ -18,6 +18,9 @@ use App\Http\Controllers\AcadHead\RequirementSetup_Controller;
 use App\Http\Controllers\AcadHead\AssignRequirement_Controller;
 use App\Http\Controllers\AcadHead\MonitorRequirements_Controller;
 use App\Http\Controllers\AcadHead\Dashboard_Controller;
+use App\Http\Controllers\AcadHead\ViewUserFiles_Controller;
+use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
+use App\Http\Controllers\AcadHead\ActivitiesParticipants_Controller;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -81,6 +84,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/Program', [Program_Controller::class, 'show'])->name('acadhead_Program');
 
 
+
     /**Requirement Bin*/
     Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
 
@@ -90,6 +94,15 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     /**Activity Type*/
     Route::get('/ActivityType', [ActivityType_Controller::class, 'show'])->name('acadhead_ActivityType');
+
+    Route::get('/ActivityParticipants/{activity_id}', [ActivitiesParticipants_Controller::class, 'show'])->name('activities_participants');
+
+    Route::post('/AddParticipants/{activity_id}', [ActivitiesParticipants_Controller::class, 'add_participants'])->name('add_participants');
+
+
+    Route::delete('/RemoveParticipants{id}', [ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
+
+
 
     /**Class Schedule*/
     Route::get('/ClassSchedule', function () {
@@ -194,7 +207,6 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     //--------------------------FILTERING ROUTES---------------------------//
     Route::get('/requirementbin_setup_page', [RequirementSetup_Controller::class, 'filtered_user'])->name('filtered_users');
-    Route::get('/FilteredBin', [RequirementBin_Controller::class, 'filtered_bin'])->name('filtered_bin');
 
     //--------------------------FILTERTING/SORTING ROUTES---------------------------//
 
@@ -214,8 +226,10 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     //------------------------------------------[ ROUTES FOR VIEWING FILES ]-------------------------------------------//
-    Route::get('/admin/files', [ViewUserFiles::class, 'viewFiles'])->name('admin.files');
-    Route::get('/admin/files', [ViewUserFiles::class, 'viewFiles'])->name('admin.download');
+
+    Route::get('/view/files', [ViewUserFiles_Controller::class, 'viewFiles'])->name('files.view');
+    Route::get('/display/files', [ViewUserFiles_Controller::class, 'displayFiles'])->name('files.display');
+    Route::get('/download/files/{file}', [DownloadUserFiles_Controller::class, 'downloadFiles'])->name('files.download');
 
 
 

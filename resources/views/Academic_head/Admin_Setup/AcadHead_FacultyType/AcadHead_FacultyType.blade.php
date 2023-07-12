@@ -11,20 +11,20 @@
 
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mt-5 ml-5">
-                        <div class="col">
-                            <h1 class="m-0">Faculty Types</h1>
 
+            {{-- New Page Header --}}
+            <section class="content-header ">
+                <div class="mr-5 ml-5" >
+                    <div class="card " >
+                        <div class="card-header" style="height: 85px;">
+                            <h1 class="m-0">Faculty Types</h1>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">{{ Breadcrumbs::render('Faculty Types') }}</li>
                             </ol>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             {{-- DATA TABLE --}}
             @include('Academic_head/Admin_Setup/AcadHead_FacultyType/data_table')

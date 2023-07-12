@@ -1,21 +1,4 @@
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mt-5 ml-3">
-            <div class="col">
-                <h1 class="m-0">Requirement Bin Setup</h1>
 
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#">Requirement Bin</a></li>
-                    <li class="breadcrumb-item active">Bin Setup</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<br>
 
 <!-- Content Body (Page Body) -->
 <div class="container">

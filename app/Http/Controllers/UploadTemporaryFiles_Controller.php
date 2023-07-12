@@ -14,7 +14,7 @@ class UploadTemporaryFiles_Controller extends Controller
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
             $folder = uniqid('file-', true);
-            $file->storeAs('uploaded_files/tmp'. $folder, $fileName);
+            $file->storeAs('uploaded_files/tmp/'. $folder, $fileName);
 
             TemporaryFiles::create([
                 'folder' => $folder,

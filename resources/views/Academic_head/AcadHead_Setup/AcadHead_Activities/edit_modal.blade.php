@@ -1,14 +1,14 @@
    <!--Edit Modal-->
    <section class="content">
-       <form id="editForm" action="" method="post">
+       <form action="{{ route('update_activities', $activity->id) }}" method="post">
            @method('PUT')
            @csrf
-           <div class="modal fade" id="modal-xl-edit">
+           <div class="modal fade" id="modal-xl-edit-{{ $activity->id }}">
                <div class="modal-dialog modal-dialog-centered modal-xl">
                    <div class="modal-content">
                        <div class="modal-header">
                            <h4 class="modal-title">Edit New Activity</h4>
-                           <button type="button" class="close" data-dismiss="modal" id="cancelButton"
+                           <button type="button" class="close" data-dismiss="modal" id="cancelButton-{{$activity->id}}"
                                aria-label="Close">
                                <span aria-hidden="true">&times;</span>
                            </button>
@@ -19,7 +19,7 @@
                                <div class="row">
                                    <div class="form-group col-md-9">
                                        <label class="required-input">Title</label>
-                                       <input type="text" class="form-control" id="title" name="title"
+                                       <input type="text" class="form-control" id="title" name="title" value=" {{ $activity->title }}"
                                            placeholder="Title" tabindex="1" required="">
                                    </div>
 
@@ -40,21 +40,29 @@
                                <div class="row">
                                    <div class="form-group col-md-12">
                                        <label>Description</label>
-                                       <textarea type="text" class="form-control" id="inputField" name="description" placeholder="Description"
-                                           tabindex="1" style="height: 100px;"></textarea>
+                                       <textarea type="text" class="form-control" id="edit-description-{{$activity->id}}" name="description"
+                                        placeholder="Description" >{!!$activity->description !!}</textarea>
                                    </div>
                                </div>
 
                                <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Agenda</label>
+                                    <textarea type="text" class="form-control" id="edit-agenda-{{$activity->id}}" name="agenda"
+                                        tabindex="1" style="height: 100px;">{{ $activity->agenda }}</textarea>
+                                </div>
+                            </div>
+
+                               <div class="row">
                                    <div class="form-group col-md-10">
                                        <label>Location</label>
-                                       <input type="text" class="form-control" id="location" name="location"
+                                       <input type="text" class="form-control" id="location" name="location" value=" {{ $activity->location }}"
                                            placeholder="Location" tabindex="1" required="">
                                    </div>
 
                                    <div class="form-group col-md-2">
                                        <label class="required-input">Status</label>
-                                       <input class="form-control" name="status" id="status" type="text"
+                                       <input class="form-control" name="status" id="status" type="text" value=" {{ $activity->status }}"
                                            value="ONGOING" readonly>
                                    </div>
                                </div>
@@ -63,14 +71,14 @@
                                    <div class="form-group col-md-6 additional-input">
                                        <label class="required-input">Start time</label>
                                        <input type="datetime-local" class="form-control" id="start_datetime"
-                                           name="start_datetime" tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
+                                           name="start_datetime" tabindex="1" value="{{ $activity->start_datetime }}"
                                            min="{{ date('Y-m-d 00:00:00') }}" data-parsley-excluded="true">
                                    </div>
 
                                    <div class="form-group col-md-6 additional-input">
                                        <label class="required-input">End time</label>
                                        <input type="datetime-local" class="form-control" id="end_datetime"
-                                           name="end_datetime" tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
+                                           name="end_datetime" tabindex="1" value=" {{ $activity->end_datetime }}"
                                            min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
                                    </div>
                                </div>
@@ -86,7 +94,7 @@
                        </div>
                        <div class="modal-footer justify-content-between">
                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal"
-                               id="closeModalButton">Close</button>
+                               id="closeModalButton-{{$activity->id}}">Close</button>
                            <button type="submit" class="btn btn-outline-primary swalDefaultSuccess">Save
                                Changes</button>
                        </div>

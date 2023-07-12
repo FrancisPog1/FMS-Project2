@@ -88,13 +88,14 @@
                                     <form method="POST" action="{{ route('delete_activity', $activity->id) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
-                                        <button data-toggle="modal" data-target="#modal-xl" type="button"
-                                            onclick="openViewModal('{{ $activity->title }}', '{{ $activity->type }}', '{{ $activity->description }}','{{ $activity->location }}', '{{ $activity->status }}', '{{ $activity->start_datetime }}', '{{ $activity->end_datetime }}')"
+
+                                        <a href="{{ route('activities_participants', $activity->id)}}"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             <i class="far fa-eye"></i>
-                                        </button>
-                                        <button data-toggle="modal" type="button" data-target="#modal-xl-edit"
-                                            onclick="openEditModal('{{ $activity->title }}', '{{ $activity->type }}', '{{ $activity->description }}','{{ $activity->location }}', '{{ $activity->status }}', '{{ $activity->start_datetime }}', '{{ $activity->end_datetime }}', '{{ $activity->id }}')"
+                                        </a>
+
+                                        <button data-toggle="modal" type="button" data-target="#modal-xl-edit-{{$activity->id}}"
+                                            onclick="editDescription('#edit-description-{{$activity->id}}', '#edit-agenda-{{$activity->id}}')"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
                                             <i class="far fa-edit"></i>
                                         </button>
@@ -107,6 +108,10 @@
                                     </form>
                                 </td>
                             </tr>
+
+                        {{-- EDIT MODAL --}}
+                        @include('Academic_head/AcadHead_Setup/AcadHead_Activities/edit_modal')
+
                         @endforeach
                     </tbody>
                     <tfoot>

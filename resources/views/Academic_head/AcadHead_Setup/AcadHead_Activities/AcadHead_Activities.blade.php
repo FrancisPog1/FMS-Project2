@@ -7,23 +7,22 @@
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row-col-sm-6 mb-2">
-                        <div class="col-md-6 ml-4">
-                            <h1 class="m-0">Activity Dashboard</h1>
-                        </div>
+        {{-- New Page Header --}}
+        <section class="content-header ">
+            <div class="mr-5 ml-5" >
+                <div class="card " >
+                    <div class="card-header" style="height: 80px;">
+                        <h1 class="m-0">Activity Dashboard</h1>
+                        <h3 class="m-0">Dashboard / Activity</h3>
                     </div>
                 </div>
             </div>
+        </section>
 
 
             {{-- DATA TABLE --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_Activities/data_table')
 
-            {{-- EDIT MODAL --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_Activities/edit_modal')
 
             {{-- VIEW MODAL --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_Activities/view_modal')

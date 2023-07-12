@@ -30,7 +30,7 @@ class Activities_Controller extends Controller
         ->where('activities.is_deleted', false)
         ->where('activities.deleted_at', null)
         ->select('activities.title', 'activities.start_datetime', 'activities.status', 'activities.end_datetime',
-            'activity_types.title as type_title', 'activities.description', 'activities.location', 'activities.id',
+            'activity_types.title as type_title', 'activities.description', 'activities.location', 'activities.agenda','activities.id',
             'activity_types.id as type')
         ->get();
 
@@ -46,7 +46,7 @@ class Activities_Controller extends Controller
 
            /**Creating Activity */
            public function Create_Activities(Request $request){
-            $request->validate([
+            $validate = $request->validate([
                 'title' => 'required|unique:activities',
                 'description' => 'max:1000',
                 'location' => 'max:400',
@@ -56,6 +56,8 @@ class Activities_Controller extends Controller
                 'status' => 'nullable'
             ]);
 
+
+
             // Get the User ID of the logged in user
             $userId = Auth::user()->id;
 
@@ -64,6 +66,7 @@ class Activities_Controller extends Controller
             $activities->id = Str::uuid()->toString();
             $activities->title = $request ->title;
             $activities->description = $request ->description;
+            $activities->agenda = $request -> agenda;
             $activities->location = $request ->location;
             $activities->activity_type_id = $request ->type;
 

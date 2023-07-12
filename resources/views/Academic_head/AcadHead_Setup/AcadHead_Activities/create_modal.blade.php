@@ -11,7 +11,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" style="height: 600px;">
+                    <div class="modal-body" style="height: 600px; overflow:auto;">
                         <div class="card-body">
 
                             <div class="row">
@@ -39,6 +39,13 @@
                                     <label>Description</label>
                                     <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"
                                         tabindex="1" style="height: 100px;"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Agenda</label>
+                                    <textarea type="text" class="form-control" id="agenda" name="agenda"></textarea>
                                 </div>
                             </div>
 

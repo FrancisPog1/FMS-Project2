@@ -1,17 +1,4 @@
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mt-5 ml-5">
-                    <div class="col">
-                        <h1 class="m-0">Requirement Bin</h1>
 
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">{{ Breadcrumbs::render('Requirement Bin') }} </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Main content -->
         <section class="container">
@@ -81,8 +68,8 @@
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th class="text-center">Title</th>
-                                    <th class="text-center" style="width:30%;">Description</th>
-                                    <th class="text-center">Deadline</th>
+                                    <th class="text-center">Starting date</th>
+                                    <th class="text-center">Ending date</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -91,8 +78,8 @@
                                 @foreach ($requirementbins as $requirementbin)
                                     <tr>
                                         <td class="text-center">{{ $requirementbin->title }}</td>
-                                        <td>{{ $requirementbin->description }}</td>
-                                        <td>{{ $requirementbin->deadline }}</td>
+                                        <td>{{ $requirementbin->start_datetime }}</td>
+                                        <td>{{ $requirementbin->end_datetime }}</td>
 
                                         <td class="text-center">
                                             <button type="button"
@@ -120,11 +107,11 @@
 
                                                         <i class="far fa-eye"></i>
                                                     </a>
-                                                    <button type="button"
-                                                    onclick="openEditModal('{{ $requirementbin->title }}', {{ json_encode($requirementbin->description) }}, '{{ $requirementbin->id }}', '{{ $requirementbin->deadline }}', '{{ $requirementbin->status }}')"
+                                                    <button type="button" data-toggle="modal" data-target="#modal-xl-edit-{{$requirementbin->id}}"
+                                                        data-requirementbin-id = "{{$requirementbin->id}}"
                                                     class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
                                                 <i class="far fa-edit"></i>
-                                            </button>
+                                                </button>
 
 
                                                     <button type="button"
@@ -138,6 +125,9 @@
                                             </div>
                                         </td>
                                     </tr>
+
+                                    {{-- EDIT MODAL --}}
+                                    @include('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/edit_modal')
                                 @endforeach
                             </tbody>
                             <tfoot class="text-col-1" style="font-size: .9rem;">

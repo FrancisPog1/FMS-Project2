@@ -7,11 +7,24 @@
         <div class="content-wrapper">
 
 
+          {{-- New Page Header --}}
+          <section class="content-header ">
+            <div class="mr-5 ml-5" >
+                <div class="card " >
+                    <div class="card-header" style="height: 85px;">
+                        <h1 class="m-0">Requirement Bins</h1>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">{{ Breadcrumbs::render('Requirement Bin') }} </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
             {{-- DATA TABLE --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table')
 
-            {{-- EDIT MODAL --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/edit_modal')
 
             {{-- CREATE MODAL --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/create_modal')

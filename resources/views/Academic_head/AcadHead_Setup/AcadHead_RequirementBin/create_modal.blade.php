@@ -1,6 +1,6 @@
    <!--Create Modal-->
    <section class="content">
-       <form action="{{ route('Create_RequirementBin') }}" method="post">
+       <form id="create_bin" action="{{ route('Create_RequirementBin') }}" method="post">
            @csrf
            <div class="modal fade" id="modal-xl-create">
                <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -11,7 +11,7 @@
                                <span aria-hidden="true">&times;</span>
                            </button>
                        </div>
-                       <div class="modal-body" style="height: 500px;">
+                       <div class="modal-body" style="height: 500px; overflow:auto;">
                            <div class="card-body">
                                <div class="row">
                                    <div class="form-group col-md-12">
@@ -23,27 +23,27 @@
                                <div class="row">
                                    <div class="form-group col-md-12">
                                        <label>Description</label>
-                                       <textarea type="text" class="form-control" id="inputField" name="description" placeholder="Description"
+                                       <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"
                                            tabindex="1" style="height: 100px;"></textarea>
                                    </div>
                                </div>
 
                                <div class="row">
-                                   <div class="form-group col-md-12">
-                                       <label class="required-input">Deadline</label>
-                                       <input type="datetime-local" class="form-control" id="deadline" name="deadline"
+                                   <div class="form-group col-md-6">
+                                       <label class="required-input">Starting date</label>
+                                       <input type="datetime-local" class="form-control" id="start_date" name="start_date"
                                            tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
                                            min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
 
                                    </div>
-                               </div>
 
-                               <div class="row">
-                                   <div class="form-group col-md-12">
-                                       <label>Status</label>
-                                       <input class="form-control" name="status" type="text" value="In progress"
-                                           readonly>
-                                   </div>
+                                   <div class="form-group col-md-6">
+                                        <label class="required-input">Ending date</label>
+                                        <input type="datetime-local" class="form-control" id="end_date" name="end_date"
+                                            tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
+                                            min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
+
+                                    </div>
                                </div>
 
                            </div>
