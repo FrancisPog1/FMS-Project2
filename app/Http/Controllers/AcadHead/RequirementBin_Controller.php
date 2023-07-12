@@ -100,17 +100,30 @@ class RequirementBin_Controller extends Controller
         // ------------------------THIS ARE THE CODES FOR THE REQUIREMENT ASSIGNEES PAGE-------------------------- //
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')
-            ->join('user_assigned_to_requirement_bins', 'users.id', '=', 'user_assigned_to_requirement_bins.assigned_to')
-            ->join('requirement_bins', 'requirement_bins.id', '=', 'user_assigned_to_requirement_bins.requirement_bin_id')
+            ->join('user_assigned_to_requirement_bins as user_bins', 'users.id', '=', 'user_bins.assigned_to')
+            ->join('requirement_bins as bin', 'bin.id', '=', 'user_bins.requirement_bin_id')
             ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
-            ->where('requirement_bins.id', '=', $bin_id)
+            ->where('bin.id', '=', $bin_id)
             ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
-            'user_assigned_to_requirement_bins.review_status as review_status',
-            'user_assigned_to_requirement_bins.compliance_status as compliance_status',
-            'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id')
+                    'user_bins.review_status as review_status',
+                    'user_bins.compliance_status as compliance_status',
+                    'user_bins.id as id', 'bin.id as req_bin_id',)
             ->get();
 
-            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id'));
+            $requirementbin = DB::table('requirement_bins as bin')
+            ->leftJoin('users', 'users.id', '=' ,'bin.created_by')
+            ->where('bin.id', '=', $bin_id)
+            ->select('bin.title as bin_title', 'bin.status as bin_status', 'bin.created_by as bin_created_by',
+                'bin.created_at as bin_created_at','bin.description as bin_description', 'bin.start_datetime as bin_start_datetime',
+                'bin.end_datetime as bin_end_datetime', 'users.email as email')
+            ->get();
+
+            foreach ($requirementbin as $bin) {
+                $bin->bin_start_datetime = Carbon::parse($bin->bin_start_datetime)->format('F d, Y h:i A');
+                $bin->bin_end_datetime = Carbon::parse($bin->bin_end_datetime)->format('F d, Y h:i A');
+            }
+
+            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id', 'requirementbin'));
         }
 
 
@@ -219,8 +232,16 @@ class RequirementBin_Controller extends Controller
             $formatted_endDate = $carbon_endDate->format('Y-m-d H:i:s');
             $reqbin->end_datetime = $formatted_endDate;
 
-            $reqbin->status = $request ->status;
             $reqbin->created_by =  $userId;
+
+            $today= Carbon::today();
+            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
+            {
+                $reqbin->status = "Ongoing";
+            }
+            else{
+                $reqbin->status = "Pending";
+            }
 
 
             if($validator->fails()){
@@ -234,7 +255,7 @@ class RequirementBin_Controller extends Controller
                 $reqbin->save();
                 return response()->json([
                     'success' => true,
-                    'message' => 'Requirement Bin successfully created.',
+                    'message' => 'Requirement Bin successfully created.'
                   ], 200);
             }
 
@@ -272,9 +293,7 @@ class RequirementBin_Controller extends Controller
                 $bin_description = $requirementbin->description;
             }
 
-
-
-            $req_bin = RequirementBin::find($id);
+            $req_bin = RequirementBin::findOrFail($id);
             $req_bin->title = $request->input('title');
             $req_bin->description = $request->input('description');
 
@@ -290,10 +309,16 @@ class RequirementBin_Controller extends Controller
             $formatted_endDate = $carbon_endDate->format('Y-m-d H:i:s');
             $req_bin->end_datetime = $formatted_endDate;
 
-
-            $req_bin->status = $request ->input('status');
             $req_bin->updated_by =  $userId;
 
+            $today= Carbon::today();
+            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
+            {
+                 $req_bin->status = "Ongoing";
+            }
+            else{
+                 $req_bin->status = "Pending";
+            }
 
             if($validator->fails()){
                 return response()->json([
@@ -307,7 +332,7 @@ class RequirementBin_Controller extends Controller
                 $req_bin->save();
                 return response()->json([
                     'success' => true,
-                    'message' => 'Requirement Bin updated successfully.',
+                    'message' => 'Requirement Bin updated successfully.'
                   ], 200);
             }
         }

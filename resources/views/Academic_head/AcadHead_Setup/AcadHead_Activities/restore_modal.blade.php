@@ -53,8 +53,7 @@
                                                         <td>
                                                             <button type="button"
                                                                 class="ml-2 px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 destroy-button"
-                                                                name="{{ $deleted_activity->id }}"
-                                                                data-name="{{ $deleted_activity->id }}">
+                                                                name="{{ $deleted_activity->id }}">
                                                                 <i class="far fa-trash-alt"></i>
                                                             </button>
 

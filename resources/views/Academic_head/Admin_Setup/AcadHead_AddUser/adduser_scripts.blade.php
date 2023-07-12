@@ -9,7 +9,7 @@
 
         // AJAX CODES TO MAKE THE MODAL TO NOT RELOAD
         $(document).ready(function() {
-
+            var countdown = 2;
             // Handle form submission
             $('#editForm').on('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission behavior
@@ -22,12 +22,21 @@
                     success: function(response) {
                         if (response.success === true) {
                             // Hide the modal using the modal's instance
-                            $('.modal').hide();
-                            $('.modal-backdrop').remove();
-
+                            $('#modal-xl-edit').modal('hide');
                             toastr.success(response.message, 'Success Alert', {
                                 timeOut: 5000
                             });
+
+                                //Countdown before showing the toastr
+                                var timer = setInterval(function() {
+                                countdown--;
+
+                                if (countdown === 0) {
+                                    clearInterval(timer);
+                                     location.reload();
+                                }
+                            }, 1000);
+
                         } else {
                             // Display validation errors using toastr
                             if (response.errors) {
@@ -102,7 +111,7 @@
 <script>
     // AJAX CODES TO MAKE THE MODAL TO NOT RELOAD
     $(document).ready(function() {
-
+        var countdown = 2;
         // Handle form submission
         $('#adduser').on('submit', function(event) {
             event.preventDefault(); // Prevent default form submission behavior
@@ -115,12 +124,22 @@
                 success: function(response) {
                     if (response.success === true) {
                         // Hide the modal using the modal's instance
-                        $('.modal').hide();
-                        $('.modal-backdrop').remove();
-
+                        $('#modal-xl-create').modal('hide');
                         toastr.success(response.message, 'Success Alert', {
-                            timeOut: 5000
-                        });
+                        timeOut: 5000
+                         });
+
+                            //Countdown before showing the toastr
+                            var timer = setInterval(function() {
+                                countdown--;
+
+                                if (countdown === 0) {
+                                    clearInterval(timer);
+                                     location.reload();
+                                }
+                            }, 1000);
+
+
                     } else {
                         // Display validation errors using toastr
                         if (response.errors) {

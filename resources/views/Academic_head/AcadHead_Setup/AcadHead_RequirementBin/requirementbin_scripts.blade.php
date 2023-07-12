@@ -37,18 +37,18 @@
 
 <script>
         //---------------------- AJAX CODES FOR EDIT MODAL ------------------------//
-        var binId = button.getAttribute('data-requirementbin-id');
+     function editModal(binId){
+          // AJAX CODES TO MAKE THE MODAL TO NOT RELOAD
         $(document).ready(function() {
             var countdown = 2;
-
+            var formID = '#editForm-' + binId;
             // Handle form submission
-            $('#editForm').on('submit', function(event) {
+            $(formID).on('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission behavior
-
                 jQuery.ajax({
-                    type: 'post',
+                    type: 'put',
                     url: "{{ route('update_requirementbins', '') }}" + binId,
-                    data: jQuery('#editForm').serialize(), // Serialize the form data
+                    data: jQuery(formID).serialize(), // Serialize the form data
 
                     success: function(response) {
                         if (response.success === true) {
@@ -68,6 +68,7 @@
                                     location.reload();
                                 }
                             }, 1000);
+
                         } else {
                             // Display validation errors using toastr
                             if (response.errors) {
@@ -89,9 +90,9 @@
                 });
             });
         });
+
         //---------------------- END OF AJAX CODES ------------------------//
     }
-
 </script>
 
 {{-- DESTROY OR HARD DELETE A RECORD --}}
@@ -282,6 +283,7 @@
 });
 </script>
 
+
 <script>
     // AJAX CODES TO MAKE THE MODAL TO NOT RELOAD
     $(document).ready(function() {
@@ -295,12 +297,12 @@
                 url: "{{ route('Create_RequirementBin') }}",
                 data: jQuery('#create_bin').serialize(), // Serialize the form data
 
-                success: function(return) {
-                    if (return.success === true) {
+                success: function(response) {
+                    if (response.success === true) {
                         // Hide the modal using the modal's instance
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
-                        toastr.success(return.message, 'Success Alert', {
+                        toastr.success(response.message, 'Success Alert', {
                             timeOut: 5000
                         });
 
@@ -316,14 +318,14 @@
 
                     } else {
                         // Display validation errors using toastr
-                        if (return.errors) {
-                            $.each(return.errors, function(key, value) {
+                        if (response.errors) {
+                            $.each(response.errors, function(key, value) {
                                 toastr.error(value[0], 'Validation Error', {
                                     timeOut: 3000
                                 });
                             });
                         } else {
-                            toastr.error(return.message, 'Error Alert', {
+                            toastr.error(response.message, 'Error Alert', {
                                 timeOut: 3000
                             });
                         }

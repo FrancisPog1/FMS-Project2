@@ -99,9 +99,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     Route::post('/AddParticipants/{activity_id}', [ActivitiesParticipants_Controller::class, 'add_participants'])->name('add_participants');
 
-
     Route::delete('/RemoveParticipants{id}', [ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
-
 
 
     /**Class Schedule*/

@@ -7,16 +7,7 @@
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
-            {{-- <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row-col-sm-6 mb-2">
-                        <div class="col-md-6 ml-4">
-                            <h1 class="m-0">Activity Participants</h1>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+        
 
             {{-- New Page Header --}}
             <section class="content-header ">

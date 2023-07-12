@@ -7,12 +7,12 @@
 
     <div class="wrapper">
 
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="img/pup.png" height="60" width="60">
-        </div>
 
-
+        {{-- <div class="preloader flex-column justify-content-center align-items-center">
+            <div class="spinner-border text-danger" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div> --}}
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar pal-1 sidebar-dark-maroon elevation-1">
