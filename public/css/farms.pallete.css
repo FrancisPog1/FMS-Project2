@@ -1,11 +1,11 @@
 :root
 {
-    --pallete-1: #800000;
-    --pallete-2: #A36605;
-    --pallete-3: #F3C51C;
+    --pallete-1: #830000;
+    --pallete-2: #daac62;
+    --pallete-3: #e6d597;
     --pallete-4: #ECE09D;
 
-    --text-color-1: #120303;
+    --text-color-1: #272727;
     --text-color-2: #FFF;
 }
 
@@ -14,7 +14,7 @@
     background-color: var(--pallete-1);
 }
 
-.pal-2, .pal-2
+.pal-2
 {
     background-color: var(--pallete-2);
 }
@@ -63,11 +63,94 @@
 
 .p-drop
 {
-  font-size: .8rem;
+    font-size: .8rem;
 }
 
 a
 
 {
     color: var(--text-color-1);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: var(--text-color-1) !important;
+    background-color: var(--pallete-4);
+}
+
+/* for bg color*/
+.gradient-bg
+{
+    /* background: linear-gradient(to right, rgb(255, 255, 255), #bebebe 100%); */
+    background-color: #edecec;
+}
+
+/* for sidebar color and blur*/
+.transpa
+{
+    background-color: var(--pallete-1);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* for nav-links that involve redirection */
+.nav-item > a,
+.info > a
+{
+    transition: color 0.8s ease!important;
+    position: relative!important;
+}
+
+.nav-item > a:hover,
+.info > a:hover
+{
+    color: var(--pallete-2)!important;
+}
+
+.nav-item > a:hover::before,
+.info > a:hover::before
+{
+    background-color: var(--pallete-4);
+}
+
+/* for sidebar header PUPQC_FARMS */
+.brand-link {
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.brand-link:hover {
+    color: var(--pallete-1);
+    transform: scale(1.05);
+    transition-delay: 0.2s;
+}
+
+/* for sidebar justify texts when hovered*/
+.nav-link {
+    transition: transform 3s ease, color 3s ease;
+    font-weight: 600;
+}
+
+.nav-item:hover .nav-link {
+    transform: scale(1);
+    color: var(--pallete-2);
+    transition-delay: 0.2s;
+}
+
+.nav-item:not(:hover) .nav-link{
+    transform: scale(0.9);
+    color: var(--text-color-2);
+    transform: 1s;
+}
+
+
+/* for top nav*/
+.navbar
+{
+    background-color: var(--text-color-2);
+}
+
+h1
+
+{
+    font-weight: 500;
 }

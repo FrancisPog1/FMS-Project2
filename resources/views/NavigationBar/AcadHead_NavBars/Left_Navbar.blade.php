@@ -12,23 +12,22 @@
             <img class="animation__shake" src="img/pup.png" height="60" width="60">
         </div>
 
-
-
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar pal-1 sidebar-dark-maroon elevation-1">
+        <div class="main-sidebar elevation-1 transpa">
             <!-- PUP Logo -->
-            <a href="" class="brand-link">
-                <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" class="brand-image img-circle elevation-3">
-                <span class="brand-text font-weight-bolder">PUPQC-FARMS</span>
+            <a href="#" class="brand-link" style="height: 70px;">
+                <div class="mt-2">
+                    <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" class="brand-image img-circle elevation-3">
+                    <span class="brand-text font-weight-bolder" style="color: var(--pallete-4);">PUPQC-FARMS</span>
+                </div>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                <div class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
                             <a href="AcadHead_Dashboard" class="nav-link">
@@ -36,17 +35,20 @@
                                 <p>
                                     Dashboard
                                 </p>
+
                             </a>
                         </li>
+
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user-lock"></i>
                                 <p>
-                                    Admin Setup
+                                    Administrator
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="Role" class="nav-link">
@@ -92,7 +94,7 @@
 
                                 <li class="nav-item">
                                     <a href="Designation" class="nav-link">
-                                        <i class="fas fa-anchor nav-icon"></i>
+                                        <i class="fas fa-user-graduate nav-icon"></i>
                                         <p class="p-drop">Designation</p>
                                     </a>
                                 </li>
@@ -115,7 +117,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user-shield"></i>
                                 <p>
-                                    Acad Head Setup
+                                    Academic head
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -164,8 +166,8 @@
                             </ul>
                         </li>
                     </ul>
-                </nav>
+                </div>
             </div>
-        </aside>
+        </div>
     </div>
 </body>

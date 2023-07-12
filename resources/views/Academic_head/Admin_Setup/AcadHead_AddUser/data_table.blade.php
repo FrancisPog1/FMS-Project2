@@ -111,7 +111,7 @@
                     </tbody>
                     <tfoot class="text-col-1" style="font-size: .9rem;">
                         <tr>
-                            <td>
+                            <td colspan="4">
                                 <div class="col-sm-12">
                                     <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
                                         Showing 1 to 4 of 4 entries

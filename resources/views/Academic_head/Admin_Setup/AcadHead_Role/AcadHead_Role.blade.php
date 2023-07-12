@@ -10,7 +10,7 @@
         </div>
 
         <!-- Content Wrapper. Outer Container -->
-        <div class="content-wrapper">
+        <div class="content-wrapper gradient-bg">
             <!-- Content Header (Page header) -->
 
 

@@ -113,14 +113,14 @@
 
                                             <td class="text-center">
                                                 <button data-toggle="modal" data-target="#modal-xl" type="button" class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                                    <i class="far fa-eye"></i>  
+                                                    <i class="far fa-eye"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot class="text-col-1" style="font-size: .9rem;">
                                         <tr>
-                                            <td>
+                                            <td colspan="9">
                                                 <div class="col-sm-12">
                                                     <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
                                                         Showing 1 to 4 of 4 entries
@@ -205,19 +205,19 @@
 
 										<div class="mt-6 d-flex justify-content-center">
 											<div class="card mt-6 col-sm-10">
-												  <div class="card-header">
-													<h3 class="card-title">Set Observation</h3>
+                                                <div class="card-header">
+                                                <h3 class="card-title">Set Observation</h3>
 
-													<div class="card-tools">
-													  <button type="button" class="btn btn-tool" data-card-widget="collapse" >
-														<i class="fas fa-minus"></i>
-													  </button>
-													</div>
-												  </div>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" >
+                                                    <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                                </div>
 
-												  <div class="card-body p-0" style="display: block !important;">
-													<ul class="products-list product-list-in-card pl-2 pr-2">
-													  <li class="item">
+                                                <div class="card-body p-0" style="display: block !important;">
+                                                <ul class="products-list product-list-in-card pl-2 pr-2">
+                                                    <li class="item">
 														<div class="product-info">
 															<div class="">
 																<div class="form-group col-md-12">
@@ -243,9 +243,9 @@
 																</div>
 															</div>
 														</div>
-													  </li>
+                                                    </li>
 
-												   </div>
+                                                </div>
 											</div>
 										</div>
                                 </div>
