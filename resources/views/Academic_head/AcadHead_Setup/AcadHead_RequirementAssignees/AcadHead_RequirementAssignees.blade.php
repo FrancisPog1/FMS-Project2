@@ -23,6 +23,9 @@
                 </div>
             </section>
 
+            {{-- BIN DETAILS --}}
+            @include('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees/bin_details')
+
             {{-- DATA TABLE --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees/data_table')
 

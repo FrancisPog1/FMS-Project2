@@ -1,6 +1,6 @@
 <!--Edit Modal-->
 <section class="content">
-    <form id="editForm" action="{{ route('update_requirementbins', $requirementbin->id) }}"  method="post">
+    <form id="editForm-{{$requirementbin->id}}" action="{{ route('update_requirementbins', $requirementbin->id) }}"  method="post">
         @method('PUT')
         @csrf
         <div class="modal fade" id="modal-xl-edit-{{$requirementbin->id}}">
@@ -25,7 +25,6 @@
                                 <div class="form-group col-md-12">
                                     <label>Description</label>
                                     <textarea type="text" class="form-control" id="edit-description-{{$requirementbin->id}}" name="description" placeholder="Description"
-                                        onclick="editDescription('#edit-description-{{$requirementbin->id}}')"
                                         tabindex="1" style="height: 100px;">{{$requirementbin->description}}</textarea>
                                 </div>
                             </div>

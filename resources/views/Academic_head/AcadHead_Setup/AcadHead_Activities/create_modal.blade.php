@@ -1,6 +1,6 @@
 <!--Create Modal-->
 <section class="content">
-    <form action="{{ route('Create_Activities') }}" method="post">
+    <form id="createForm" action="{{ route('Create_Activities') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -50,21 +50,11 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-10">
+                                <div class="form-group col-md-12">
                                     <label>Location</label>
                                     <input type="text" class="form-control" id="location" name="location"
                                         placeholder="Location" tabindex="1" required="">
                                 </div>
-
-                                <div class="form-group col-md-12">
-                                    <label class="required-input">Status</label>
-                                    <select id="status" name="status" class="form-control select2">
-                                        <option disabled selected>List of status</option>
-                                        <option value="ONGOING">ONGOING</option>
-                                        <option value="PENDING">PENDING</option>
-                                    </select>
-                                </div>
-
                             </div>
 
                             <div class="row">
@@ -82,13 +72,6 @@
                                         min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="" id="memo_upload">
-                                    <div class="dz-default dz-message"><button class="dz-button" type="button">Drop
-                                            files here to upload</button></div>
-                                </div>
-                            </div>
-
 
                         </div>
                     </div>

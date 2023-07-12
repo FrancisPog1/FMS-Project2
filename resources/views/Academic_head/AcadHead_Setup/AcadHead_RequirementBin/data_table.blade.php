@@ -108,7 +108,7 @@
                                                         <i class="far fa-eye"></i>
                                                     </a>
                                                     <button type="button" data-toggle="modal" data-target="#modal-xl-edit-{{$requirementbin->id}}"
-                                                        data-requirementbin-id = "{{$requirementbin->id}}"
+                                                        onclick=" editModal('{{ $requirementbin->id }}'), editDescription('#edit-description-{{$requirementbin->id}}')"
                                                     class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
                                                 <i class="far fa-edit"></i>
                                                 </button>

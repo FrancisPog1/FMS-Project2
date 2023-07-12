@@ -8,10 +8,6 @@
 
         <div class="wrapper">
 
-            <!-- Preloader -->
-            <div class="preloader flex-column justify-content-center align-items-center">
-                <img class="animation__shake" src="img/pup.png" height="60" width="60">
-            </div>
 
             <!-- Content Wrapper. Outer Container -->
             <div class="content-wrapper">
@@ -113,7 +109,7 @@
 
                                             <td class="text-center">
                                                 <button data-toggle="modal" data-target="#modal-xl" type="button" class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                                    <i class="far fa-eye"></i>  
+                                                    <i class="far fa-eye"></i>
                                                 </button>
                                             </td>
                                         </tr>

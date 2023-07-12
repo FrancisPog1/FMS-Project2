@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Activities;
 Use Carbon\Carbon;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session; /**For the session to work */
@@ -45,18 +49,15 @@ class Activities_Controller extends Controller
     }
 
            /**Creating Activity */
-           public function Create_Activities(Request $request){
-            $validate = $request->validate([
+           public function Create_Activities(Request $request): JsonResponse{
+            $validator = Validator::make($request->all(), [
                 'title' => 'required|unique:activities',
                 'description' => 'max:1000',
                 'location' => 'max:400',
                 'start_datetime' => 'required|date|after_or_equal:today',
                 'end_datetime' => 'required|date|after_or_equal:today',
                 'type' => 'required',
-                'status' => 'nullable'
             ]);
-
-
 
             // Get the User ID of the logged in user
             $userId = Auth::user()->id;
@@ -81,29 +82,43 @@ class Activities_Controller extends Controller
             $formatted_endDate = $end_carbonDate->format('Y-m-d H:i:s');
             $activities->end_datetime = $formatted_endDate;
 
-            $activities->status = $request ->status;
             $activities->created_by = $userId;
 
-            $res = $activities->save();
-            if($res){
-                return back()->with('success', 'You have created a Activity!'); /**Alert Message */
+            $today= Carbon::today();
+            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
+            {
+                 $activities->status = "Ongoing";
             }
             else{
-                return back()->with('fail', 'Something went Wrong');
+                 $activities->status = "Pending";
+            }
+
+            if($validator->fails()){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validator->errors(),
+                ]);
+            }
+            else{
+                $activities->save();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Activity successfully created.'
+                  ], 200);
             }
 
         }
 
           /**Update current existing Activity */
-          public function updateActivities(Request $request, $id){
-            $request->validate([
+          public function updateActivities(Request $request, $id): JsonResponse{
+            $validator = Validator::make($request->all(), [
                 'title' => 'required|unique:activities',
                 'description' => 'max:1000',
                 'location' => 'max:400',
                 'start_datetime' => 'required|date|after_or_equal:today',
                 'end_datetime' => 'required|date|after_or_equal:today',
                 'type' => 'required',
-                'status' => 'nullable'
             ]);
 
             // Get the User ID of the logged in user
@@ -127,15 +142,27 @@ class Activities_Controller extends Controller
             $formatted_endDate = $end_carbonDate->format('Y-m-d H:i:s');
             $activities->end_datetime = $formatted_endDate;
 
-            $activities->status = $request ->status;
             $activities->updated_by = $userId;
 
-            $res = $activities->save();
-            if($res){
-                return back()->with('success', 'Activity updated successfully!'); /**Alert Message */
+            $today= Carbon::today();
+            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
+            {
+                 $activities->status = "Ongoing";
             }
             else{
-                return back()->with('fail', 'Something went Wrong');
+                 $activities->status = "Pending";
+            }
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validator->errors(),
+                ]);
+            }
+            else {
+                $activities->save();
+                return response()->json(['success' => true, 'message' => 'Activities successfully updated.'], 200);
             }
 
         }
@@ -174,6 +201,7 @@ class Activities_Controller extends Controller
         //HARD DELETE Requiremnts
         public function destroy($id)
         {   // Find the role by its ID
+            dd($id);
             $activity = Activities::withTrashed()->findOrFail($id);
             $activity->forceDelete();
 
