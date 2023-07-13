@@ -60,7 +60,7 @@ class Director_ActivitiesParticipants_Controller extends Controller
         ->select('roles.title as role', 'users.email', 'users.id')
         ->get();
 
-        return view('Academic_head/AcadHead_Setup/AcadHead_ActivitiesParticipants/AcadHead_ActivitiesParticipants',
+        return view('Director/Director_ActivitiesParticipants/Director_ActivitiesParticipants',
         compact('participants', 'roles', 'users', 'activity_id', 'activities'));
 
     }

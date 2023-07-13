@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.Director_master')
 
 {{-- CONTENTS --}}
 @section('content')
@@ -22,15 +22,18 @@
                 </div>
             </section>
 
+            {{-- Assignee Details --}}
+            @include('Director/Director_MonitorRequirements/assignee_details')
+
             {{-- Data Table --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/monitor_reqs_dataTable')
+            @include('Director/Director_MonitorRequirements/monitor_reqs_dataTable')
 
 
-            {{-- Validate Modal --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/validate_modal')
+            {{-- VIEW Modal --}}
+            @include('Director/Director_MonitorRequirements/view_modal')
 
             {{-- Display File Modal --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/file_modal')
+            @include('Director/Director_MonitorRequirements/file_modal')
 
 
             {{-- <div class="d-flex justify-content-between">
@@ -60,5 +63,5 @@
 
 
     {{-- Scripts --}}
-    @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/monitor_reqs_scripts')
+    @include('Director/Director_MonitorRequirements/monitor_reqs_scripts')
 @endsection

@@ -8,12 +8,6 @@
                 <h3 class="card-title mt-2">List of Participants</h3>
                 <div class="text-right">
 
-                    <button data-toggle="modal" data-target="#modal-xl-add-participants" type="button"
-                        class="text-col-1 btn btn-success btn-m p-drop">
-                        Add Participants &nbsp;
-                        <i class="fas fa-plus"></i>
-                    </button>
-
                 </div>
             </div>
 
@@ -60,7 +54,8 @@
                             <th style="width: 28%;">Name</th>
                             <th style="width: 15%;">Email</th>
                             <th style="width: 12%;">Role</th>
-                            <th class="text-center" style="width: 20%;">Action</th>
+                            <th style="width: 12%;" class="text-center">Status</th>
+                            {{-- <th class="text-center" style="width: 20%;">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -80,14 +75,8 @@
                                 </td>
 
                                 <td class="text-sm-center">
-
                                         <button type="button"
-                                            class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 remove-button"
-                                            name="{{ $participant->id }}"
-                                            title="Delete">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-
+                                            class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-2 text-center mr-2 mb-2">Status</button>
                                 </td>
                             </tr>
                         @endforeach
