@@ -15,8 +15,23 @@
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
+            {{-- New Page Header --}}
+            <section class="content-header ">
+                <div class="mr-5 ml-5" >
+                    <div class="card " >
+                        <div class="card-header" style="height: 85px;">
+                            <h1 class="m-0">List of Requirements</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">Dashboard / Requirement Bin / List of Requirements</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {{-- Data Table --}}
             @include('Faculty/Faculty_RequirementList/data_table')
+
 
 
             {{-- Upload Modal --}}
@@ -46,8 +61,6 @@
             </div>
         </footer>
     </div>
-
-
 
     {{-- Scripts --}}
     @include('Faculty/Faculty_RequirementList/requirementlist_scripts')

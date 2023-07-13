@@ -21,6 +21,7 @@ class FacultyUpload_Controller extends Controller
         $validator = \Validator::make($request->all(), [
             'file' => 'required'
         ]);
+
         $user_id = Auth::user()->id;
         $assigned_requirement = UserUploadRequirement::findOrFail($requirementID);
 
