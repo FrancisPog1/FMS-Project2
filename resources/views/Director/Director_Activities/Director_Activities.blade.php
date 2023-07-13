@@ -24,9 +24,6 @@
             @include('Director/Director_Activities/data_table')
 
 
-            {{-- VIEW MODAL --}}
-            @include('Director/Director_Activities/view_modal')
-
         </div>
 
         <!-- Footer Container -->

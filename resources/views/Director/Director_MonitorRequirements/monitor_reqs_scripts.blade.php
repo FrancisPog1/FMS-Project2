@@ -3,7 +3,7 @@
 <script>
     // Add event listener for upload buttons using event delegation
     document.addEventListener('click', function(event) {
-        if (event.target.matches('.validate-button')) {
+        if (event.target.matches('.view-button')) {
             var button = event.target;
             var status = button.getAttribute('data-status');
             var remarks = button.getAttribute('data-remarks');
@@ -12,16 +12,11 @@
             var user_id = button.getAttribute('data-user-id');
 
             // Set the values in the form fields
-            document.getElementById('changeStatus').value = status;
+            document.getElementById('status').value = status;
             document.getElementById('remarks').value = remarks;
 
-
-            // Set the action of the form dynamically using JavaScript
-            var form = document.getElementById('validateForm');
-            form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__',
-                reqBinId);
             $.ajax({
-                url: "{{ route('files.view') }}",
+                url: "{{ route('director.files.view') }}",
                 method: 'GET',
                 data: {
                     req_bin_id: reqBinId,
@@ -31,7 +26,7 @@
                 success: function(data) {
                     var file = data.files;
                     var html = '';
-                    var downloadRoute = "{{ route('files.download', ':file_id')}}";
+                    var downloadRoute = "{{ route('director.files.download', ':file_id')}}";
                     // Update the modal content with the files
                     if (file.length > 0) {
                         for (let i = 0; i < file.length; i++) {
@@ -57,24 +52,24 @@
                 });
 
             // Open the upload modal
-            $('#modal-xl-validate').modal('show');
+            $('#modal-xl-view').modal('show');
 
         }
     });
 
     // Add event listener for modal shown event
-    $('#modal-xl-validate').on('shown.bs.modal', function() {
+    $('#modal-xl-view').on('shown.bs.modal', function() {
         // Focus on the remarks input field when the modal is shown
         document.getElementById('changeStatus').focus();
     });
 
     // Add event listeners to close the modal
     document.getElementById('closeModalButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
+        $('#modal-xl-view').modal('hide');
     });
 
     document.getElementById('cancelButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
+        $('#modal-xl-view').modal('hide');
     });
 </script>
 
@@ -84,7 +79,7 @@
 
 function displayFileModal(file_id) {
 
-        var Url = "{{ route('files.display') }}";
+        var Url = "{{ route('director.files.display') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             $.ajax({
@@ -123,41 +118,6 @@ function displayFileModal(file_id) {
 }
 
     </script>
-
-
-{{-- <script>
-    function openValidateModal(status, remarks, requirementId, req_bin_id) {
-        // Set the values in the form fields
-
-
-        document.getElementById('changeStatus').value = status;
-        document.getElementById('remarks').value = remarks;
-
-        // Set the action of the form dynamically using JavaScript
-        var form = document.getElementById('validateForm');
-        form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__', req_bin_id);
-
-
-
-        // Open the validate modal
-        $('#modal-xl-validate').modal('show');
-    }
-
-    // Add event listener for modal shown event
-    $('#modal-xl-validate').on('shown.bs.modal', function() {
-        // Focus on the remarks input field when the modal is shown
-        document.getElementById('changeStatus').focus();
-    });
-
-    // Add event listeners to close the modal
-    document.getElementById('closeModalButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
-    });
-
-    document.getElementById('cancelButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
-    });
-</script> --}}
 
 
 <style>
