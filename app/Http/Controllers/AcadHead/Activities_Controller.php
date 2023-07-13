@@ -201,7 +201,6 @@ class Activities_Controller extends Controller
         //HARD DELETE Requiremnts
         public function destroy($id)
         {   // Find the role by its ID
-            dd($id);
             $activity = Activities::withTrashed()->findOrFail($id);
             $activity->forceDelete();
 
