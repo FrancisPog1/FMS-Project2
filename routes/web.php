@@ -84,7 +84,6 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/Program', [Program_Controller::class, 'show'])->name('acadhead_Program');
 
 
-
     /**Requirement Bin*/
     Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
 
