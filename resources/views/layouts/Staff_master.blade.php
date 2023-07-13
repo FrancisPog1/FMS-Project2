@@ -19,11 +19,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('/img/pup.png') }}" height="60" width="60">
-        </div>
-
         {{-- TOP NAVBAR --}}
         @include('NavigationBar.Staff_Navbars.Staff_Top_NavBar')
 

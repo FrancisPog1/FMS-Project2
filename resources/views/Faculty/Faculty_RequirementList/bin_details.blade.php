@@ -1,4 +1,4 @@
-<!-- Activity Details -->
+<!-- Bin Details -->
 <section class="container">
     <div class="mr-5 ml-5">
         <div class="card">

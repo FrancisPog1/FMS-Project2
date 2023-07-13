@@ -31,14 +31,14 @@
 
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="StaffRequirementBin" class="nav-link">
+                                <a href="{{ route('staff_RequirementBin')}}" class="nav-link">
                                     <i class="fas fa-folder nav-icon"></i>
                                     <p class="p-drop">Requirements Bin</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="StaffActivities" class="nav-link">
+                                <a href="{{ route('staff_activities')}}" class="nav-link">
                                     <i class="fas fa-sticky-note nav-icon"></i>
                                     <p class="p-drop">Activity</p>
                                 </a>
