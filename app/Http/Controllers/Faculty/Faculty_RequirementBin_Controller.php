@@ -59,8 +59,21 @@ class Faculty_RequirementBin_Controller extends Controller
             'user_upload_requirements.id as id')
             ->get();
 
+            $requirementbin = DB::table('requirement_bins as bin')
+            ->leftJoin('users', 'users.id', '=' ,'bin.created_by')
+            ->where('bin.id', '=',  $req_bin_id)
+            ->select('bin.title as bin_title', 'bin.status as bin_status', 'bin.created_by as bin_created_by',
+                'bin.created_at as bin_created_at','bin.description as bin_description', 'bin.start_datetime as bin_start_datetime',
+                'bin.end_datetime as bin_end_datetime', 'users.email as email')
+            ->get();
+
+            foreach ($requirementbin as $bin) {
+                $bin->bin_start_datetime = Carbon::parse($bin->bin_start_datetime)->format('F d, Y h:i A');
+                $bin->bin_end_datetime = Carbon::parse($bin->bin_end_datetime)->format('F d, Y h:i A');
+            }
+
             return view('Faculty/Faculty_RequirementList/Faculty_RequirementList'
-            , compact('datas','assigned_bin_id', 'req_bin_id'));
+            , compact('datas','assigned_bin_id', 'req_bin_id', 'requirementbin'));
 
         }
 
