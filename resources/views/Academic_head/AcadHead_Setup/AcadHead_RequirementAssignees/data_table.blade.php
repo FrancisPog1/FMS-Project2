@@ -38,7 +38,7 @@
 
                                 <option value="Completed">Compliance status: Completed</option>
                                 <option value="Incomplete">Compliance status: Incomplete</option>
-                                <option value="Pending">Compliance status: Pending</option>
+                                <option value="CPending">Compliance status: Pending</option>
 
                             </select>
                         </div>

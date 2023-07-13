@@ -167,8 +167,8 @@ class RequirementBin_Controller extends Controller
                         case 'Incomplete':
                             $query->where('user_assigned_to_requirement_bins.compliance_status', $filterOption);
                             break;
-                        case 'Pending':
-                            $query->where('user_assigned_to_requirement_bins.compliance_status', $filterOption);
+                        case 'CPending':
+                            $query->where('user_assigned_to_requirement_bins.compliance_status', 'Pending');
                             break;
                         default:
                             break;
