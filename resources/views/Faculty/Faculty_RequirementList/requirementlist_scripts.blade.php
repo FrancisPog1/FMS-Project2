@@ -67,8 +67,6 @@
     const pond = FilePond.create(inputElement);
 
 
-
-
     FilePond.setOptions({
         server: {
             process: {

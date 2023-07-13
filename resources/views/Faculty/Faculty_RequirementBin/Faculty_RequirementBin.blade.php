@@ -4,16 +4,20 @@
     <!-- Content Wrapper. Outer Container -->
     <div class="content-wrapper">
 
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row-col-sm-6 mb-2">
-                    <div class="col-md-6 ml-4">
-                        <h1 class="m-0">Requirement Bin</h1>
+            {{-- New Page Header --}}
+            <section class="content-header ">
+                <div class="mr-5 ml-5" >
+                    <div class="card " >
+                        <div class="card-header" style="height: 85px;">
+                            <h1 class="m-0">Requirement Bin</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">Dashboard / Requirement Bin</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+
 
 
         {{-- DATA TABLE --}}
