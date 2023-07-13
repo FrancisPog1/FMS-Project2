@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use App\Http\Middleware\AuthCheck;
 
+use App\Http\Controllers\Director\Director_RequirementBin_Controller;
+use App\Http\Controllers\Director\Director_Activities_Controller;
+use App\Http\Controllers\Director\Director_ActivitiesParticipants_Controller;
+use App\Http\Controllers\Director\Director_BinContents_Controller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +51,19 @@ Route::middleware(['auth', 'isDirector'])->group(function () {
     Route::get('/DirectorReports', function () {
         return view('Director/Director_Reports', ['page_title' => 'Director Reports']);
         })->name('Director_Reports');
+
+
+
+    Route::get('/director_requirementAssignees{bin_id}', [Director_RequirementBin_Controller::class, 'view_assigned_user'
+    ])->name('director_RequirementAssignees');
+
+    Route::get('/director_activities', [Director_Activities_Controller::class, 'show'])->name('director_activities');
+    Route::get('/director_activity_participants/{activity_id}', [Director_ActivitiesParticipants_Controller::class, 'show'])->name('director_activities_participants');
+    Route::get('/director_requirementbin', [Director_RequirementBin_Controller::class, 'show'])->name('director_requirementbin');
+
+    Route::get('/director_requirementbin_content{id}', [Director_BinContents_Controller::class, 'show'])->name('director_bin_content');
+
+
 });
 
 

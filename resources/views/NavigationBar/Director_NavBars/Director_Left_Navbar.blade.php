@@ -55,17 +55,20 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="DirectorActivities" class="nav-link active">
+                            <a href="{{ route('director_activities') }}" class="nav-link">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p class="p-drop">Activities</p>
                             </a>
                         </li>
+
+
                         <li class="nav-item">
-                            <a href="DirectorActivityTypes" class="nav-link">
-                                <i class="fas fa-user-lock nav-icon"></i>
-                                <p class="p-drop">Activity Types</p>
+                            <a href="{{ route('director_requirementbin') }}" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p class="p-drop">Requirement Bin</p>
                             </a>
                         </li>
+
                     </ul>
                 </li>
                 <li class="nav-item">
