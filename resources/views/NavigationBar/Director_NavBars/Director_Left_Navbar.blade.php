@@ -1,9 +1,11 @@
 <!-- Sidebar Container -->
 <aside class="main-sidebar pal-1 sidebar-dark-maroon elevation-1">
     <!-- PUP Logo -->
-    <a href="" class="brand-link">
-        <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-bolder">PUPQC-FARMS</span>
+    <a href="" class="brand-link" style="height: 70px;">
+        <div class="mt-2">
+            <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" class="brand-image img-circle elevation-3">
+            <span class="brand-text font-weight-bolder">PUPQC-FARMS</span>
+        </div>
     </a>
 
     <!-- Sidebar -->

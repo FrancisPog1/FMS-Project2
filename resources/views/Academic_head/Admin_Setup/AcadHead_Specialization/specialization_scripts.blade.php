@@ -257,34 +257,34 @@
                     if (specializations.length > 0) {
                         for (let i = 0; i < specializations.length; i++) {
                             html += '<tr>' +
-                                   '<td>' + specializations[i]['title'] + '</td>' +
-                                   '<td>' + specializations[i]['description'] + '</td>' +
-                                  ' <td class="text-center">' +
-                                       '<form method="POST" action=" '+ deleteRoute.replace(':id', specializations[i]['id']) +' ">' +
-                                           '@csrf' +
-                                         ' <input name="_method" type="hidden" value="DELETE">' +
-                                           '<button data-toggle="modal"' +
-                                              'onclick="openViewModal(' +"'"+ specializations[i]['title'] + "', '" + specializations[i]['description'] + "'"+ ')" ' +
-                                              ' data-target="#modal-xl-view" type="button"' +
-                                               'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
-                                             '  <i class="far fa-eye"></i>' +
-                                        '   </button>' +
-                                           '<button type="button"' +
-                                              ' onclick="openEditModal(' +" ' "+ specializations[i]['title'] + " ' " + ", '" + specializations[i]['description'] + " ' " + ", '" + specializations[i]['id'] + "' " + ' )" ' +
-                                               'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
-                                              ' <i class="far fa-edit"></i>' +
-                                           '</button>' +
-                                         '  <button type="button"' +
-                                             '  class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
-                                              ' title="Delete">' +
-                                             '  <i class="far fa-trash-alt"></i>' +
-                                           '</button>' +
-                                       '</form>' +
-                                 '  </td>' +
-                              ' </tr>';
+                                '<td>' + specializations[i]['title'] + '</td>' +
+                                '<td>' + specializations[i]['description'] + '</td>' +
+                                ' <td class="text-center">' +
+                                    '<form method="POST" action=" '+ deleteRoute.replace(':id', specializations[i]['id']) +' ">' +
+                                        '@csrf' +
+                                        ' <input name="_method" type="hidden" value="DELETE">' +
+                                        '<button data-toggle="modal"' +
+                                            'onclick="openViewModal(' +"'"+ specializations[i]['title'] + "', '" + specializations[i]['description'] + "'"+ ')" ' +
+                                            ' data-target="#modal-xl-view" type="button"' +
+                                            'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
+                                            '  <i class="far fa-eye"></i>' +
+                                    '   </button>' +
+                                        '<button type="button"' +
+                                            ' onclick="openEditModal(' +" ' "+ specializations[i]['title'] + " ' " + ", '" + specializations[i]['description'] + " ' " + ", '" + specializations[i]['id'] + "' " + ' )" ' +
+                                            'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
+                                            ' <i class="far fa-edit"></i>' +
+                                        '</button>' +
+                                        '  <button type="button"' +
+                                            '  class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
+                                            ' title="Delete">' +
+                                            '  <i class="far fa-trash-alt"></i>' +
+                                        '</button>' +
+                                    '</form>' +
+                                '  </td>' +
+                            ' </tr>';
                         }
                     } else {
-                        html += '<tr><td> No Records </td></tr>';
+                        html += '<tr><td colspan="3"> No Records </td></tr>';
                     }
 
                     $('#filtered-specializations').html(html);

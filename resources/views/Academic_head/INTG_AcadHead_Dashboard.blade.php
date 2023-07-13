@@ -7,7 +7,7 @@
 
 <!-- Content Wrapper. Outer Container - AKA DASHBOARD -->
 <div class="wrapper">
-    <div class="content-wrapper">
+    <div class="content-wrapper gradient-bg">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -156,14 +156,14 @@
                             Summaries
                             </h3>
                             <div class="card-tools">
-                            <ul class="nav nav-pills ml-auto">
-                                <li class="nav-item">
-                                <a class="nav-link active " href="#" data-toggle="tab">Admin</a>
-                                </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="tab">AcadHead</a>
-                                </li>
-                            </ul>
+                                <ul class="nav nav-pills ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" data-toggle="tab" style="color: var(--text-color-1);">Admin</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" data-toggle="tab" style="color: var(--text-color-1);">AcadHead</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="card-body">
@@ -189,24 +189,24 @@
         <div class="row m-auto">
             <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                <h5 class="card-title">Monthly Recap Report</h5>
+                <div class="card-header pal-1 ">
+                <h5 class="card-title text-col-2">Monthly Recap Report</h5>
 
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <button type="button" class="btn btn-tool text-col-2" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                     </button>
                     <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        <a href="#" class="dropdown-item">Action</a>
-                        <a href="#" class="dropdown-item">Another action</a>
-                        <a href="#" class="dropdown-item">Something else here</a>
-                        <a class="dropdown-divider"></a>
-                        <a href="#" class="dropdown-item">Separated link</a>
-                    </div>
+                        <button type="button" class="btn btn-tool dropdown-toggle text-col-2" data-toggle="dropdown">
+                            <i class="fas fa-wrench"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <a href="#" class="dropdown-item">Action</a>
+                            <a href="#" class="dropdown-item">Another action</a>
+                            <a href="#" class="dropdown-item">Something else here</a>
+                            <a class="dropdown-divider"></a>
+                            <a href="#" class="dropdown-item">Separated link</a>
+                        </div>
                     </div>
                 </div>
                 </div>

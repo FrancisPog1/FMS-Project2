@@ -23,32 +23,19 @@ Breadcrumbs::for('Requirement Bin', function (BreadcrumbTrail $trail) {
     $trail->push('Requirement Bin', route('acadhead_RequirementBin'));
 });
 
+// Dashboard > Requirement Bin > Bin Setup
+Breadcrumbs::for('Requirement Setup', function (BreadcrumbTrail $trail, $bin_id) {
+    $trail->parent('Requirement Bin');
+    $trail->push('Requirement Setup', route('acadhead_bin_setup', ['id'=>$bin_id]));
+});
+
 // Dashboard > Reqbin > Assign Req
-// Breadcrumbs::for('Assigned Requirement', function (BreadcrumbTrail $trail) {
-//     $trail->parent('Requirement Bin');
-//     $trail->push('Assigned Requirement', route('acadhead_AssignedRequirements'));
-// });
-
-
-
-// Dashboard > Reqbin > Assign Req > Evaluation
 Breadcrumbs::for('Requirement Assignees', function (BreadcrumbTrail $trail, $bin_id) {
     $trail->parent('Requirement Bin');
     $trail->push('Requirement Assignees', route('acadhead_RequirementAssignees', ['bin_id'=>$bin_id]));
 });
 
-// Dashboard > Reqbin > Assign Req > Evaluation > Monitor
-
-
-// Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $user_id, $reqbin_id, $ass_bin_id) {
-//     $trail->parent('Evaluation', $user_id, $reqbin_id, $ass_bin_id);
-//     $trail->push('Monitor User', route('acadhead_MonitorRequirements', [
-//         'user_id' => $user_id,
-//         'assigned_bin_id' => $ass_bin_id,
-//         'req_bin_id' => $reqbin_id
-//     ]));
-// });
-
+// Dashboard > Reqbin > Assign Req > Monitor User
 Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $bin_id) {
     $trail->parent('Requirement Assignees', $bin_id);
     $trail->push('Monitor User', route('acadhead_RequirementAssignees', ['bin_id'=>$bin_id]));
@@ -107,3 +94,11 @@ Breadcrumbs::for('Specialization', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard');
     $trail->push('Specialization', route('acadhead_Specialization'));
 });
+
+// Dashboard > Profile
+Breadcrumbs::for('Profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Profile', route('user_Profile'));
+});
+
+

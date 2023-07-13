@@ -243,7 +243,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     //Newly Added Routes
     //Requirement Bin Setup Page
-   Route::get('/requirementbin_setup_page{id}', [RequirementSetup_Controller::class, 'show'])->name('acadhead_bin_setup');
+    Route::get('/requirementbin_setup_page{id}', [RequirementSetup_Controller::class, 'show'])->name('acadhead_bin_setup');
 
 
     //Routes for Assigning a requirement to one or more users
@@ -263,10 +263,87 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     /**Requirement Assignees*/
     Route::get('/RequirementAssignees{bin_id}', [RequirementBin_Controller::class, 'view_assigned_user'
     ])->name('acadhead_RequirementAssignees');
+
     Route::get('MonitorRequirements,{user_id},{assigned_bin_id},{req_bin_id}',[MonitorRequirements_Controller::class, 'show'])
     ->name('acadhead_MonitorRequirements');
+
     Route::put('/ReviewedBin/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
     ->name('acadhead_ReviewRequirements');
+
+    /*
+    *  breadcrumbs of academic head
+    */
+
+    // // Profile
+    // Route::get('/User_Profile', function () {
+    //     return view('/User_Profile', ['page_title' => 'Profile']);
+    // });
+
+    // // REQ BIN
+    // Route::get('/data_table', function () {
+    //     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table', ['page_title' => 'Requirement Bin']);
+    // });
+
+    // // REQ BIN SETUP
+    // Route::get('/data_table', function () {
+    //     return view('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/data_table', ['page_title' => 'Requirement Setup']);
+    // });
+
+    // // ASSIGN REQ
+    // Route::get('/AcadHead_AssignedRequirements', function () {
+    //     return view('Academic_head/AcadHead_Setup/AcadHead_AssignedRequirements', ['page_title' => 'Assigned Requirement']);
+    // });
+
+    // // REQ BIN ASSIGNEES
+    // Route::get('/AcadHead_RequirementAssignees', function () {
+    //     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Requirement Assignees']);
+    // });
+
+    // // REQ BIN MONITOR
+    // Route::get('/AcadHead_MonitorRequirements', function () {
+    //     return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements', ['page_title' => 'Monitor User']);
+    // });
+
+    // // ADMIN USER ROLE
+    // Route::get('/AcadHead_Role', function () {
+    //     return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', ['page_title' => 'System role user']);
+    // });
+
+    // // ADMIN SYSTEM USERS
+    // Route::get('/AcadHead_AddUser', function () {
+    //     return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', ['page_title' => 'System Users']);
+    // });
+
+    // // ADMIN ACADEMIC RANK
+    // Route::get('/AcadHead_AcademicRank', function () {
+    //     return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', ['page_title' => 'Faculty Academic Rank']);
+    // });
+
+    // // ADMIN FACULTY TYPE
+    // Route::get('/AcadHead_AcademicRank', function () {
+    //     return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', ['page_title' => 'Faculty Types']);
+    // });
+
+    // // ADMIN REQUIREMENT TYPES
+    // Route::get('/AcadHead_RequirementType', function () {
+    //     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', ['page_title' => 'Requirement Types']);
+    // });
+
+    // // ADMIN ACT TYPES
+    // Route::get('/AcadHead_ActivityType', function () {
+    //     return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', ['page_title' => 'Activity Types']);
+    // });
+
+    // // ADMIN DESIGNATION
+    // Route::get('/AcadHead_Designation', function () {
+    //     return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', ['page_title' => 'Designation']);
+    // });
+
+    // // ADMIN PROGRAMS
+    // Route::get('/AcadHead_Specialization', function () {
+    //     return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
+    // });
+
 
 
 });

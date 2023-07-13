@@ -19,17 +19,16 @@
                     {{-- CODE FOR THE FILTERING UI --}}
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-4">
                                 <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
-                                <select name="dataTable_length" aria-controls="dataTable"
-                                    class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
+                                <select name="dataTable_length" aria-controls="dataTable" class="ml-2 col-3 custom-select custom-select-sm form-control form-control-sm">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 d-flex justify-content-end">
+                            <div class="col-8 d-flex">
                                 <div class="mr-2">
                                     <select name="filter" id="filter" class="form-control">
                                         <option selected disabled>Filter by</option>
@@ -38,77 +37,86 @@
                                         <option value="Activity">Category: Activity</option>
                                     </select>
                                 </div>
-                                <div>
+                                <div style="width:20%;">
                                     <select name="sort" id="sort" class="form-control">
-                                        <option selected disabled>Sort by</option>
+                                        <option selected="" disabled="">Sort by</option>
+                                        <option value="All">All</option>
                                         <option value="az">Title: A to Z</option>
                                         <option value="za">Title: Z to A</option>
+                                        <option value="oldest">Deadline: Oldest to Newest</option>
+                                        <option value="newest">Deadline: Newest to Oldest</option>
                                     </select>
+                                </div>
+                                <div class="ml-auto" style="width:40%;">
+                                    <form class="d-flex">
+                                        <input class="form-control me-2 rounded-lg" type="search" placeholder="Search" aria-label="Search">
+                                        <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                       <!-- Tables of roles -->
-                       <div class="card-body p-0">
-                           <table class="table table-striped">
-                               <thead class="pal-1 text-col-2">
-                                   <tr>
-                                       <th>Title</th>
-                                       <th style="width: 25%;">Description</th>
-                                       <th style="width: 25%;">Category</th>
-                                       <th class="text-center" style="width: 25%;">Actions</th>
-                                   </tr>
-                               </thead>
-                               <tbody id="filtered-types">
-                                   @foreach ($activity_types as $activitytype)
-                                       <tr>
-                                           <td>{{ $activitytype->title }}</td>
-                                           <td>{{ $activitytype->description }}</td>
-                                           <td>{{ $activitytype->category }}</td>
-                                           <td class="text-center">
-                                               <form method="POST"
-                                                   action="{{ route('delete_activitytypes', $activitytype->id) }}">
-                                                   @csrf
-                                                   <input name="_method" type="hidden" value="DELETE">
+                    <!-- Tables of roles -->
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead class="pal-1 text-col-2">
+                                <tr>
+                                    <th>Title</th>
+                                    <th style="width: 25%;">Description</th>
+                                    <th style="width: 25%;">Category</th>
+                                    <th class="text-center" style="width: 25%;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="filtered-types">
+                                @foreach ($activity_types as $activitytype)
+                                    <tr>
+                                        <td>{{ $activitytype->title }}</td>
+                                        <td>{{ $activitytype->description }}</td>
+                                        <td>{{ $activitytype->category }}</td>
+                                        <td class="text-center">
+                                            <form method="POST"
+                                                action="{{ route('delete_activitytypes', $activitytype->id) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
 
-                                                   <button data-toggle="modal"
-                                                       onclick="openViewModal('{{ $activitytype->title }}', '{{ $activitytype->description }}', '{{ $activitytype->category }}')"
-                                                       data-target="#modal-xl-view" type="button"
-                                                       class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                                       <i class="far fa-eye"></i>
-                                                   </button>
+                                                <button data-toggle="modal"
+                                                    onclick="openViewModal('{{ $activitytype->title }}', '{{ $activitytype->description }}', '{{ $activitytype->category }}')"
+                                                    data-target="#modal-xl-view" type="button"
+                                                    class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                                    <i class="far fa-eye"></i>
+                                                </button>
 
-                                                   <button type="button"
-                                                       onclick="openEditModal('{{ $activitytype->title }}', '{{ $activitytype->description }}', '{{ $activitytype->category }}' ,'{{ $activitytype->id }}')"
-                                                       class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
-                                                       <i class="far fa-edit"></i>
-                                                   </button>
+                                                <button type="button"
+                                                    onclick="openEditModal('{{ $activitytype->title }}', '{{ $activitytype->description }}', '{{ $activitytype->category }}' ,'{{ $activitytype->id }}')"
+                                                    class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
+                                                    <i class="far fa-edit"></i>
+                                                </button>
 
-                                                   <button type="button"
-                                                       class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
-                                                       title="Delete">
-                                                       <i class="far fa-trash-alt"></i>
-                                                   </button>
-                                               </form>
-                                           </td>
-                                       </tr>
-                                   @endforeach
-                               </tbody>
-                               <tfoot class="text-col-1" style="font-size: .9rem;">
-                                   <tr>
-                                       <td>
-                                           <div class="col-sm-12">
-                                               <div class="dataTables_info" id="dataTable_info" role="status"
-                                                   aria-live="polite">
-                                                   Showing 1 to 4 of 4 entries
-                                               </div>
-                                           </div>
-                                       </td>
-                                   </tr>
-                               </tfoot>
-                           </table>
-                       </div>
-                   </div>
-               </div>
-           </section>
+                                                <button type="button"
+                                                    class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
+                                                    title="Delete">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot class="text-col-1" style="font-size: .9rem;">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="col-sm-12">
+                                            <div class="dataTables_info" id="dataTable_info" role="status"
+                                                aria-live="polite">
+                                                Showing 1 to 4 of 4 entries
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>

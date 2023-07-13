@@ -6,21 +6,19 @@
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
-                      {{-- New Page Header --}}
-          <section class="content-header ">
-            <div class="mr-5 ml-5" >
-                <div class="card " >
-                    <div class="card-header" style="height: 85px;">
-                        <h1 class="m-0">Requirement Bin Setup</h1>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#">Requirement Bin</a></li>
-                            <li class="breadcrumb-item active">Bin Setup</li>
-                        </ol>
+            {{-- New Page Header --}}
+            <section class="content-header ">
+                <div class="mr-5 ml-5" >
+                    <div class="card " >
+                        <div class="card-header" style="height: 85px;">
+                            <h1 class="m-0">Requirement Bin Setup</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active"> {{ Breadcrumbs::render('Requirement Setup', $bin_id) }} </li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
             {{-- Data TABLE --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/data_table')

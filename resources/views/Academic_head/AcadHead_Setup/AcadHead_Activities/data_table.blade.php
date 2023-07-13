@@ -23,17 +23,16 @@
             {{-- CODE FOR THE FILTERING --}}
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-4">
                         <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
-                        <select name="dataTable_length" aria-controls="dataTable"
-                            class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
+                        <select name="dataTable_length" aria-controls="dataTable" class="ml-2 col-3 custom-select custom-select-sm form-control form-control-sm">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
                         </select>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-end">
+                    <div class="col-8 d-flex">
                         <div class="mr-2">
                             <select name="status" id="status" class="form-control">
                                 <option value="all">All</option>
@@ -42,7 +41,7 @@
                                 <option value="completed">Completed</option>
                             </select>
                         </div>
-                        <div>
+                        <div style="width:20%;">
                             <select name="department" id="department" class="form-control">
                                 <option value="all">All</option>
                                 <option value="department-1">Department 1</option>
@@ -50,10 +49,15 @@
                                 <option value="department-3">Department 3</option>
                             </select>
                         </div>
+                        <div class="ml-auto" style="width:40%;">
+                            <form class="d-flex">
+                                <input class="form-control me-2 rounded-lg" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-
 
             <!-- Tables of roles -->
             <div class="card-body p-0">
@@ -116,7 +120,7 @@
                     </tbody>
                     <tfoot>
                         <td class="dataTables_info text-col-1" id="dataTable_info" role="status" aria-live="polite"
-                            colspan="12" style="font-size: .9rem;">
+                            colspan="5" style="font-size: .9rem;">
                             Showing x to x of x entries
                         </td>
                     </tfoot>
