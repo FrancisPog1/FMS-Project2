@@ -1,17 +1,4 @@
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mt-5 ml-5">
-            <div class="col">
-                <h1 class="m-0">Requirement Bin</h1>
 
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active">{{ Breadcrumbs::render('Requirement Bin') }} </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Main content -->
 <section class="container">
