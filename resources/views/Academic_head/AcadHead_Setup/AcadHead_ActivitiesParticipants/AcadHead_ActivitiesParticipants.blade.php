@@ -7,32 +7,30 @@
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row-col-sm-6 mb-2">
-                        <div class="col-md-6 ml-4">
+        
+
+            {{-- New Page Header --}}
+            <section class="content-header ">
+                <div class="mr-5 ml-5" >
+                    <div class="card " >
+                        <div class="card-header" style="height: 80px;">
                             <h1 class="m-0">Activity Participants</h1>
+                            <h3 class="m-0">Dashboard / Activity / Activity Details</h3>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
+
+            {{-- Activity Details --}}
+            @include('Academic_head/AcadHead_Setup/AcadHead_ActivitiesParticipants/activity_details')
 
             {{-- DATA TABLE --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_Activities/data_table')
+            @include('Academic_head/AcadHead_Setup/AcadHead_ActivitiesParticipants/data_table')
 
             {{-- EDIT MODAL --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_Activities/edit_modal')
+            @include('Academic_head/AcadHead_Setup/AcadHead_ActivitiesParticipants/add_participants_modal')
 
-            {{-- VIEW MODAL --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_Activities/view_modal')
-
-            {{-- CREATE MODAL --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_Activities/create_modal')
-
-            {{-- RESTORE MODAL --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_Activities/restore_modal')
 
         </div>
 
@@ -47,5 +45,5 @@
     </div>
 
     {{-- SCRIPTS --}}
-    @include('Academic_head/AcadHead_Setup/AcadHead_Activities/activities_scripts')
+    @include('Academic_head/AcadHead_Setup/AcadHead_ActivitiesParticipants/participants_scripts')
 @endsection

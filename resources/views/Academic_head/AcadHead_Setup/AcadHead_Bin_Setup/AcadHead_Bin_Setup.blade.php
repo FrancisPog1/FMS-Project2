@@ -3,13 +3,24 @@
 @section('content')
     <div class="wrapper">
 
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center
-                    align-items-center">
-            <img class="animation__shake" src="img/pup.png" height="60" width="60">
-        </div>
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
+
+                      {{-- New Page Header --}}
+          <section class="content-header ">
+            <div class="mr-5 ml-5" >
+                <div class="card " >
+                    <div class="card-header" style="height: 85px;">
+                        <h1 class="m-0">Requirement Bin Setup</h1>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#">Requirement Bin</a></li>
+                            <li class="breadcrumb-item active">Bin Setup</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
 
             {{-- Data TABLE --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/data_table')

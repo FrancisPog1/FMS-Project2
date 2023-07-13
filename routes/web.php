@@ -18,6 +18,9 @@ use App\Http\Controllers\AcadHead\RequirementSetup_Controller;
 use App\Http\Controllers\AcadHead\AssignRequirement_Controller;
 use App\Http\Controllers\AcadHead\MonitorRequirements_Controller;
 use App\Http\Controllers\AcadHead\Dashboard_Controller;
+use App\Http\Controllers\AcadHead\ViewUserFiles_Controller;
+use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
+use App\Http\Controllers\AcadHead\ActivitiesParticipants_Controller;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -81,6 +84,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/Program', [Program_Controller::class, 'show'])->name('acadhead_Program');
 
 
+
     /**Requirement Bin*/
     Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
 
@@ -90,6 +94,13 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     /**Activity Type*/
     Route::get('/ActivityType', [ActivityType_Controller::class, 'show'])->name('acadhead_ActivityType');
+
+    Route::get('/ActivityParticipants/{activity_id}', [ActivitiesParticipants_Controller::class, 'show'])->name('activities_participants');
+
+    Route::post('/AddParticipants/{activity_id}', [ActivitiesParticipants_Controller::class, 'add_participants'])->name('add_participants');
+
+    Route::delete('/RemoveParticipants{id}', [ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
+
 
     /**Class Schedule*/
     Route::get('/ClassSchedule', function () {
@@ -165,7 +176,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::delete('/destroy_activities{activitiesId}', [Activities_Controller::class, 'destroy'])->name('destroy_activities');
 
 
-        //--------------------------RESTORE DELETED RECORDS ROUTES---------------------------//
+    //--------------------------RESTORE DELETED RECORDS ROUTES---------------------------//
     Route::post('/restore_bincontents', [RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
     Route::post('/restore_requirementtypes', [RequirementType_Controller::class, 'restore'])->name('restore_requirementtypes');
     Route::post('/restore_AcademicRank', [AcademicRank_Controller::class, 'restore'])->name('restore_ranks');
@@ -178,7 +189,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::post('/restore_ActivityType', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
     Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
 
-        //--------------------------UPDATING A RECORD ROUTES---------------------------//
+    //--------------------------UPDATING A RECORD ROUTES---------------------------//
     Route::put('/update_ranks{id}', [AcademicRank_Controller::class, 'updateRanks'])->name('update_ranks');
     Route::put('/update_roles{roleId}', [Role_Controller::class, 'updateRoles'])->name('update_roles');
     Route::put('/update_users{userId}', [User_Controller::class, 'updateUsers'])->name('update_users');
@@ -194,7 +205,6 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     //--------------------------FILTERING ROUTES---------------------------//
     Route::get('/requirementbin_setup_page', [RequirementSetup_Controller::class, 'filtered_user'])->name('filtered_users');
-    Route::get('/FilteredBin', [RequirementBin_Controller::class, 'filtered_bin'])->name('filtered_bin');
 
     //--------------------------FILTERTING/SORTING ROUTES---------------------------//
 
@@ -211,6 +221,13 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/filtered_and_sorted_designation', [Designation_Controller::class, 'filteredAndSortedDesignation'])->name('sorted_designations');
     Route::get('/filtered_and_sorted_program', [Program_Controller::class, 'filteredAndSortedProgram'])->name('sorted_programs');
     Route::get('/filtered_and_sorted_specialization', [Specialization_Controller::class, 'filteredAndSortedSpecialization'])->name('sorted_specializations');
+
+
+    //------------------------------------------[ ROUTES FOR VIEWING FILES ]-------------------------------------------//
+
+    Route::get('/view/files', [ViewUserFiles_Controller::class, 'viewFiles'])->name('files.view');
+    Route::get('/display/files', [ViewUserFiles_Controller::class, 'displayFiles'])->name('files.display');
+    Route::get('/download/files/{file}', [DownloadUserFiles_Controller::class, 'downloadFiles'])->name('files.download');
 
 
 

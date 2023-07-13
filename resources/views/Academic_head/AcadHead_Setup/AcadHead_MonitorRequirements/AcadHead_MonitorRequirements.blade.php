@@ -7,12 +7,30 @@
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
+
+            {{-- New Page Header --}}
+            <section class="content-header ">
+                <div class="mr-5 ml-5" >
+                    <div class="card " >
+                        <div class="card-header" style="height: 85px;">
+                            <h1 class="m-0">Monitoring Page</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Monitor User', $req_bin_id) }}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {{-- Data Table --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/monitor_reqs_dataTable')
 
 
             {{-- Validate Modal --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/validate_modal')
+
+            {{-- Display File Modal --}}
+            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/file_modal')
 
 
             {{-- <div class="d-flex justify-content-between">

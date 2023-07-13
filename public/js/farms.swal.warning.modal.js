@@ -1,9 +1,9 @@
-document.getElementById('show-modal-logout').addEventListener('click', function() {       
+document.getElementById('show-modal-logout').addEventListener('click', function () {
     Swal.fire({
         title: 'Are you sure?',
         icon: 'info',
         html:
-        'Do you want to <b>Log Out</b>?',
+            'Do you want to <b>Log Out</b>?',
         showCloseButton: true,
         showCancelButton: true,
         focusConfirm: false,
@@ -15,8 +15,9 @@ document.getElementById('show-modal-logout').addEventListener('click', function(
     }).then((result) => {
         if (result.isConfirmed) {
             window.location.replace("logout");
-    }})
-});  
+        }
+    })
+});
 
 
 function globalWarning(event) {
@@ -53,7 +54,7 @@ function globalWarning(event) {
 
 const deleteButtons = document.querySelectorAll('.delete-button');
 deleteButtons.forEach((button) => {
-button.addEventListener('click', globalWarning);
+    button.addEventListener('click', globalWarning);
 });
 
 

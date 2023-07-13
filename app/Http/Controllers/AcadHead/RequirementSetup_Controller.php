@@ -59,21 +59,26 @@ class RequirementSetup_Controller extends Controller
 
         if($request->ajax())
         {
-            $users = DB::table('users')
-            ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-            ->where('roles.id', '=', $request->types)
-            ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
-            ->get();
+            if($request->types == 'All')
+            {
+                 $users = DB::table('users')
+                ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
+                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
+                ->get();
+            }
+
+            else
+            {
+                $users = DB::table('users')
+                ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
+                ->where('roles.id', '=', $request->types)
+                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
+                ->get();
+            }
+
             return response()->json(['users'=>$users]);
         }
 
-        $users = DB::table('users')
-        ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
-        ->get();
-
-        return view('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/AcadHead_Bin_Setup',
-        compact('users'));
     }
 
 

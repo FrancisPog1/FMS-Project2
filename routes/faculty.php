@@ -10,6 +10,7 @@ use App\Http\Controllers\UploadTemporaryFiles_Controller;
 use App\Http\Controllers\DeleteTemporaryFiles_Controller;
 use App\Http\Controllers\FacultyUpload_Controller;
 use App\Http\Controllers\Faculty\Faculty_RequirementBin_Controller;
+use App\Http\Controllers\Faculty\Faculty_Activities_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,8 @@ use App\Http\Controllers\Faculty\Faculty_RequirementBin_Controller;
 //------------------------------------------------------------------ FACULTIES --------------------------------------------------------------------//
 Route::middleware(['auth', 'isFaculty'])->group(function () {
 
-    Route::get('/FacultyActivities', function () {
-        return view('Faculty/Faculty_Activities', ['page_title' => 'Faculty Activities']);
-        })->name('faculty_Activities');
+    Route::get('/FacultyActivities', [Faculty_Activities_Controller::class, 'show'])->name('faculty_Activities');
+    Route::get('/FacultyActivities/{id}', [Faculty_Activities_Controller::class, 'show_details'])->name('activity_details');
 
     Route::get('/FacultyClassObservation', function () {
         return view('Faculty/Faculty_ClassObservation', ['page_title' => 'Faculty Class Observation']);

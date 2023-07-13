@@ -1,98 +1,104 @@
-<!--Create Modal-->
-<section class="content">
-    <form action="{{ route('Create_Activities') }}" method="post">
-        @csrf
-        <div class="modal fade" id="modal-xl-create">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Add New Activity</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="height: 600px;">
-                        <div class="card-body">
+        <!-- Assigning Modal -->
+        <section class="content">
+            <form id="assign" action="{{ route('add_participants', $activity_id) }}" method="post">
+                @csrf
+                <div class="modal fade" id="modal-xl-add-participants">
+                    <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
+                        <div class="modal-content">
 
-                            <div class="row">
-                                <div class="form-group col-md-9">
-                                    <label class="required-input">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title"
-                                        placeholder="Title" tabindex="1" required="">
-                                </div>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Participants</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
 
-                                <div class="form-group col-md-3">
-                                    <label class="required-input">Type</label>
-                                    <select id="type" name="type" class="form-control select">
-                                        <option disabled selected>List of type/s</option>
-                                        @foreach ($activitytypes as $activitytype)
-                                            <option value="{{ $activitytype->id }}">
-                                                {{ $activitytype->title }}</option>
-                                        @endforeach
+                            <div class="modal-body card-body">
 
-                                    </select>
+                                <div class="row justify-content-between">
+
+                                    <div class="row col-md-12">
+
+                                        <div class="col-4 form-group">
+                                            <select id="types" name="types" class="form-control form-control-md">
+                                                <option selected disabled>Choose Role/s</option>
+                                                <option value="All"> All</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}">{{ $role->title }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-6">
+                                            {{-- Search bar --}}
+                                            <div class="input-group">
+                                                <input type="search" class="form-control"
+                                                    placeholder="Search a user" />
+                                                <span class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {{-- Check all button --}}
+                                        <div class="col-2 mt-2">
+                                            <input type="checkbox" class="check-all-assign" id="check-all-assign">
+                                            <label for="check-all-assign">Add all</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        {{-- Table body --}}
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped">
+                                                <thead class="pal-1 text-col-2">
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th style="width:40%;">Email</th>
+                                                        <th style="width:20%;">Role</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="filtered-records">
+                                                    @foreach ($users as $user)
+                                                        <tr>
+                                                            <td>
+                                                                <div class="ml-3">
+                                                                    <input type="checkbox" class="form-check-input"
+                                                                        id="check" name="users[]"
+                                                                        value="{{ $user->id }}">
+                                                                    <label class="form-check-label" for="check">
+                                                                        Faculty
+                                                                        1</label>
+                                                                </div>
+
+                                                            </td>
+                                                            <td>{{ $user->email }}</td>
+                                                            <td>{{ $user->role }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label>Description</label>
-                                    <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"
-                                        tabindex="1" style="height: 100px;"></textarea>
-                                </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-outline-danger"
+                                    data-dismiss="modal">Close</button>
+                                <button type="submit" {{-- Should have a modal for success assign in this element --}}
+                                    class="btn btn-outline-success swalDefaultSuccess">Assign</button>
                             </div>
-
-                            <div class="row">
-                                <div class="form-group col-md-10">
-                                    <label>Location</label>
-                                    <input type="text" class="form-control" id="location" name="location"
-                                        placeholder="Location" tabindex="1" required="">
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <label class="required-input">Status</label>
-                                    <select id="status" name="status" class="form-control select2">
-                                        <option disabled selected>List of status</option>
-                                        <option value="ONGOING">ONGOING</option>
-                                        <option value="PENDING">PENDING</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-md-6 additional-input">
-                                    <label class="required-input">Start time</label>
-                                    <input type="datetime-local" class="form-control" id="start_datetime"
-                                        name="start_datetime" tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
-                                        min="{{ date('Y-m-d 00:00:00') }}" data-parsley-excluded="true">
-                                </div>
-
-                                <div class="form-group col-md-6 additional-input">
-                                    <label class="required-input">End time</label>
-                                    <input type="datetime-local" class="form-control" id="end_datetime"
-                                        name="end_datetime" tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
-                                        min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="" id="memo_upload">
-                                    <div class="dz-default dz-message"><button class="dz-button" type="button">Drop
-                                            files here to upload</button></div>
-                                </div>
-                            </div>
-
-
                         </div>
+                        <!-- /.modal-content -->
                     </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                        <button type="Submit" class="btn btn-outline-primary swalDefaultSuccess">Save</button>
-                    </div>
+                    <!-- /.modal-dialog -->
                 </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-    </form>
-</section>
+            </form>
+        </section>
+
+

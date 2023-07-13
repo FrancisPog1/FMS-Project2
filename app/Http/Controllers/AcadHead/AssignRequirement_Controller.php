@@ -21,7 +21,7 @@ class AssignRequirement_Controller extends Controller
 {
     public function assign_to_user(Request $request, $bin_id)
     {
-             $res=0;
+            $res=0;
             $userId = Auth::user()->id;
 
             //Assigning the contents of the requirement bin to the user
