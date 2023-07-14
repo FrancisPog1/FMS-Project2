@@ -34,7 +34,7 @@
         // Set the values in the form fields
 
         // Set the value of the `type` element in the `editForm` form to the selected value
-        document.getElementById('viewForm').elements['types'].value = type;
+        document.getElementById('viewForm').elements['type'].value = type;
         document.getElementById('viewForm').elements['notes'].value = notes;
 
         // Open the edit modal

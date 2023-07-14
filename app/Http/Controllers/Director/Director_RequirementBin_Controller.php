@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AcadHead;
+namespace App\Http\Controllers\Director;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -11,16 +11,14 @@ use Illuminate\Support\Facades\DB;
 use App\Models\RequirementBin;
 Use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session; /**For the session to work */
-use Hash; /**For hashing the password */
 use Brian2694\Toastr\Facades\Toastr;
 
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
-class RequirementBin_Controller extends Controller
+class Director_RequirementBin_Controller extends Controller
 {
     public function show(){
         $deleted_requirementbins = RequirementBin::onlyTrashed()
@@ -36,7 +34,7 @@ class RequirementBin_Controller extends Controller
             $requirementbin->end_datetime = Carbon::parse($requirementbin->end_datetime)->format('F d, Y h:i A');
         }
 
-        return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
+        return view('Director/Director_RequirementBin/Director_RequirementBin',
         compact('deleted_requirementbins', 'requirementbins'));
 
     }
@@ -123,7 +121,7 @@ class RequirementBin_Controller extends Controller
                 $bin->bin_end_datetime = Carbon::parse($bin->bin_end_datetime)->format('F d, Y h:i A');
             }
 
-            return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id', 'requirementbin'));
+            return view('Director/Director_RequirementAssignees/Director_RequirementAssignees', compact('assigned_reqrs', 'bin_id', 'requirementbin'));
         }
 
 
@@ -201,168 +199,5 @@ class RequirementBin_Controller extends Controller
         }
 
 
-        /**Creating Requirement Bin */
-        public function Create_RequirementBin(Request $request): JsonResponse{
-            $validator = Validator::make($request->all(), [
-                'title' => 'required|unique:requirement_bins',
-                'description' => 'max:1000000',
-                'start_date' => 'required|date|after_or_equal:today',
-                'end_date' => 'required|date|after_or_equal:today',
-                'status' => 'nullable'
-            ]);
-
-            // Get the ID of the logged in user
-            $userId = Auth::user()->id;
-
-            /**Codes to get the contents of the input field and save it to the database */
-            $reqbin = new RequirementBin();
-            $reqbin->id = Str::uuid()->toString();
-            $reqbin->title = $request ->title;
-            $reqbin->description = $request ->description;
-
-            //This codes converts the date picker format into datetime format
-            $start_date = trim($request->input('start_date'));
-            $carbon_startDate = Carbon::createFromFormat('Y-m-d\TH:i', $start_date);
-            $formatted_startDate = $carbon_startDate->format('Y-m-d H:i:s');
-            $reqbin->start_datetime = $formatted_startDate;
-
-            //This codes converts the date picker format into datetime format
-            $end_date = trim($request->input('end_date'));
-            $carbon_endDate = Carbon::createFromFormat('Y-m-d\TH:i', $end_date);
-            $formatted_endDate = $carbon_endDate->format('Y-m-d H:i:s');
-            $reqbin->end_datetime = $formatted_endDate;
-
-            $reqbin->created_by =  $userId;
-
-            $today= Carbon::today();
-            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
-            {
-                $reqbin->status = "Ongoing";
-            }
-            else{
-                $reqbin->status = "Pending";
-            }
-
-
-            if($validator->fails()){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Validation error',
-                    'errors' => $validator->errors(),
-                ]);
-            }
-            else{
-                $reqbin->save();
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Requirement Bin successfully created.'
-                  ], 200);
-            }
-
-        }
-        //Delete Requirement Bin
-        public function deleteRequirementBins($id)
-        {   $user_id = Auth::user()->id;
-            $requirementbin = RequirementBin::find($id);
-            $requirementbin->is_deleted = true;
-            $requirementbin->updated_by = $user_id;
-            $requirementbin->save();
-            $requirementbin->delete();
-            return back()->with('success', 'Requirement Bin deleted successfully!'); /**Alert Message */
-        }
-
-
-        //UPDATE REQUIREMENT BIN
-        public function updateRequirementbins(Request $request, $id): JsonResponse{
-            $validator = Validator::make($request->all(), [
-                'title' => 'required',
-                'description' => 'max:1000000',
-                'start_date' => 'required|date|after_or_equal:today',
-                'end_date' => 'required|date|after_or_equal:today',
-                'status' => 'nullable'
-            ]);
-            // Get the ID of the logged in user
-            $userId = Auth::user()->id;
-            $requirementbins = RequirementBin::where('id', $id)
-            ->where('is_deleted', false)
-            ->where('deleted_at', null)
-            ->get();
-
-            foreach( $requirementbins as $requirementbin){
-                $bin_title = $requirementbin->title;
-                $bin_description = $requirementbin->description;
-            }
-
-            $req_bin = RequirementBin::findOrFail($id);
-            $req_bin->title = $request->input('title');
-            $req_bin->description = $request->input('description');
-
-            //This codes converts the date picker format into datetime format
-            $start_date = trim($request->input('start_date'));
-            $carbon_startDate = Carbon::createFromFormat('Y-m-d\TH:i', $start_date);
-            $formatted_startDate = $carbon_startDate->format('Y-m-d H:i:s');
-            $req_bin->start_datetime = $formatted_startDate;
-
-            //This codes converts the date picker format into datetime format
-            $end_date = trim($request->input('end_date'));
-            $carbon_endDate = Carbon::createFromFormat('Y-m-d\TH:i', $end_date);
-            $formatted_endDate = $carbon_endDate->format('Y-m-d H:i:s');
-            $req_bin->end_datetime = $formatted_endDate;
-
-            $req_bin->updated_by =  $userId;
-
-            $today= Carbon::today();
-            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
-            {
-                 $req_bin->status = "Ongoing";
-            }
-            else{
-                 $req_bin->status = "Pending";
-            }
-
-            if($validator->fails()){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Validation error',
-                    'errors' => $validator->errors(),
-                ]);
-            }
-
-            else{
-                $req_bin->save();
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Requirement Bin updated successfully.'
-                  ], 200);
-            }
-        }
-
-        public function restore(Request $request)
-    {   $deleted_requirementbins = $request->input('deleted_reqs');
-
-        if ($deleted_requirementbins != null)
-        {
-            foreach( $deleted_requirementbins as $requirementbin_id ) {
-
-                $requirementbins = RequirementBin::withTrashed()->findOrFail($requirementbin_id);
-                $requirementbins->is_deleted = false;
-                $requirementbins->save();
-                $requirementbins->restore();
-            }
-            return back()->with('success', 'Requirement Bin restored successfully!'); /**Alert Message */
-        }
-        else{
-            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
-        }
-    }
-
-        //HARD DELETE Requiremnts
-        public function destroy($id)
-        {   // Find the role by its ID
-            $requirementbin = RequirementBin::withTrashed()->findOrFail($id);
-            $requirementbin->forceDelete();
-
-            return back()->with('success', 'Requirement Bin permanently deleted successfully!'); /**Alert Message */
-        }
 }
 

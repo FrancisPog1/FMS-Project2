@@ -21,6 +21,7 @@ use App\Http\Controllers\AcadHead\Dashboard_Controller;
 use App\Http\Controllers\AcadHead\ViewUserFiles_Controller;
 use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
 use App\Http\Controllers\AcadHead\ActivitiesParticipants_Controller;
+use App\Http\Controllers\Profile_Controller;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -84,7 +85,6 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/Program', [Program_Controller::class, 'show'])->name('acadhead_Program');
 
 
-
     /**Requirement Bin*/
     Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
 
@@ -125,9 +125,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     /**User Profiles*/
-    Route::get('/UserProfile', function () {
-        return view('/User_Profile', ['page_title' => 'User Profile']);
-        })->name('user_Profile');
+    Route::get('/UserProfile', [Profile_Controller::class,'show'])->name('user_Profile');
 
 
     //This is all the routes for Creating or Adding.
