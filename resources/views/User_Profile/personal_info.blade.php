@@ -1,6 +1,7 @@
 <div class="tab-pane fade show active" id="personal" role="tabpanel"  >
     <div class="card">
         <div class="card-body" >
+
             {{-- edit icon --}}
             <ul class="nav nav-tabs float-right" id="custom-content-above-tab" role="tablist" style="border-bottom:none !important;">
                 <li class="nav-item " role="presentation">
@@ -17,6 +18,7 @@
                     </a>
                 </li>
             </ul>
+
             <div class="tab-content">
                 <div class="ml-3 mt-3 mb-3">
 
@@ -89,6 +91,8 @@
         </div>
     </div>
 </div>
+
+
 {{-- personal - edit tab --}}
 <div class="tab-pane fade" id="personal-edit" role="tabpanel" >
     <div class="card">
