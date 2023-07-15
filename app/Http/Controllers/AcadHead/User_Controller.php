@@ -24,8 +24,6 @@ use Illuminate\Support\Facades\Validator;
 class User_Controller extends Controller
 {
 
-
-
     public function show(){
 
         $roles = DB::table('roles')->get();

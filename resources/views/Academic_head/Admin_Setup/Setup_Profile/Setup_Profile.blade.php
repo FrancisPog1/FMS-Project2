@@ -26,27 +26,17 @@
             <div class="content">
                 <br>
 
-                @include('User_Profile/profile_header')
 
-                <div class="container-fluid">
-                    <div class="row mx-auto col-11 align-content-between ">
-
-                        <!-- Right container -->
-                        <div class="col-12">
-                            <div class="tab-content" id="myTabContent">
-
-                                {{-- personal - view tab [UPDATE: SINGLE CARD WITH DUPLICATE DIV FOR EDITING]--}}
-                                @include('User_Profile/view_profile')
+                {{-- Profile Header --}}
+                @include('/Academic_head/Admin_Setup/Setup_Profile/profile_header')
 
 
-                                {{-- personal - edit tab [UPDATE: SINGLE CARD WITH DUPLICATE DIV FOR EDITING]--}}
-                                @include('User_Profile/edit_profile')
+                {{-- personal - edit tab [UPDATE: SINGLE CARD WITH DUPLICATE DIV FOR EDITING]--}}
+                @include('/Academic_head/Admin_Setup/Setup_Profile/setup_form')
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
+
         </div>
         <!-- Footer Container -->
         <footer class="main-footer">
@@ -63,8 +53,8 @@
         </footer>
     </div>
 
-@include('User_Profile/styles')
-@include('User_Profile/scripts')
+@include('/Academic_head/Admin_Setup/Setup_Profile/scripts')
+@include('/Academic_head/Admin_Setup/Setup_Profile/styles')
 
 
 

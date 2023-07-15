@@ -84,27 +84,36 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <form method="POST" action="{{ route('delete_users', $user->id) }}">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="DELETE">
 
-                                        <button data-toggle="modal" onclick="openViewModal('{{ $user->email }}')"
-                                            data-target="#modal-xl-view" type="button"
-                                            class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                            <i class="far fa-eye"></i>
-                                        </button>
-                                        <button data-toggle="modal"
-                                            onclick="openEditModal('{{ $user->email }}', '{{ $user->id }}')"
-                                            data-target="#modal-xl-edit" type="button"
-                                            class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
-                                            <i class="far fa-edit"></i>
-                                        </button>
-                                        <button type="button"
-                                            class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
-                                            title="Delete">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
+                                    <div class="btn-group">
+                                        <form method="POST" action="{{ route('delete_users', $user->id) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+
+                                            <a href="{{ route('show_profile', $user->id) }}"
+                                                class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300"
+                                                role="button" aria-pressed="true">
+                                                <i class="fa fa-window-restore" aria-hidden="true"></i>
+                                            </a>
+
+                                            <button data-toggle="modal" onclick="openViewModal('{{ $user->email }}')"
+                                                data-target="#modal-xl-view" type="button"
+                                                class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button data-toggle="modal"
+                                                onclick="openEditModal('{{ $user->email }}', '{{ $user->id }}')"
+                                                data-target="#modal-xl-edit" type="button"
+                                                class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
+                                                <i class="far fa-edit"></i>
+                                            </button>
+                                            <button type="button"
+                                                class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
+                                                title="Delete">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
