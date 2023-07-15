@@ -188,8 +188,9 @@
 
 
                                                 <hr> <!-- Line to separate sections -->
+                                                <br>
 
-                                                <div class="form-group">
+                                                <div class="form-group text-right">
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>
                                             </div>
