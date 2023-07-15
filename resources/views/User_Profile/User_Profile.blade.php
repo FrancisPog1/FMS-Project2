@@ -38,7 +38,7 @@
                                 <div class="tab-pane fade show active" role="tabpanel" >
                                     <div class="card ">
                                         <div class="card-body" >
-                                            {{-- edit icon
+                                            {{-- edit icon --}}
                                             <ul class="nav nav-tabs float-right" id="custom-content-above-tab" role="tablist" style="border-bottom:none !important;">
                                                 <li class="nav-item " role="presentation">
                                                     <a href="nav-link active"
@@ -53,7 +53,7 @@
                                                         <i class="fas fa-pen mr-1 float-right"></i>
                                                     </a>
                                                 </li>
-                                            </ul> --}}
+                                            </ul>
 
                                             <div class=" tab-content card-body mr-4 ml-4" id="cardBody">
                                                 <div class="form-group">
@@ -186,13 +186,6 @@
                                                 </div>
                                                 </div>
 
-
-                                                <hr> <!-- Line to separate sections -->
-                                                <br>
-
-                                                <div class="form-group text-right">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
                                             </div>
 
                                         </div>
@@ -208,7 +201,7 @@
                                             <ul class="nav nav-tabs float-right"  style="border-bottom:none !important;">
                                                 <li class="nav-item " role="presentation">
                                                     <a type="button" class="delete-button" style="color: var(--text-color-1); font-size: 1.2rem;">
-                                                        <i class="fas fa-check mr-1 float-right"></i>
+                                                        <i class="fas fa-times fa-lg mr-1 float-right"></i>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -240,9 +233,9 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="gender">Gender</label>
                                                         <select class="form-control rounded cool-white-input" id="gender" name="gender">
-                                                            <option value="male">Male</option>
-                                                            <option value="female">Female</option>
-                                                            <option value="other">Other</option>
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Other">Other</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-md-4">
@@ -346,10 +339,12 @@
 
 
                                                 <hr> <!-- Line to separate sections -->
+                                                <br>
 
-                                                <div class="form-group">
+                                                <div class="form-group text-right">
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>
+
                                             </div>
 
 
