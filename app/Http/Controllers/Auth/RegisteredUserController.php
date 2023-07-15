@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UsersProfile;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -48,23 +49,17 @@ class RegisteredUserController extends Controller
             ->uncompromised()], // Ensure the password appears less than 3 times in the same data leak...
         ]);
         //Get the ID of the logged in user
-        $userId = Auth::user()->id;
+        $created_by = Auth::user()->id;
 
-        //These are my code where it saves the email, password, and user ID
+        //These are my code where it saves the email, password, and user
+        $user_id = Str::uuid()->toString();
         $user = new User();
-        $user->id = Str::uuid()->toString();        //The uuid will generate a string. It will act as default value for the ID
+        $user->id =  $user_id;     //The uuid will generate a string. It will act as default value for the ID
         $user->foreign_role_id = $request->role;    //Foreign for roles
         $user->email = $request ->email;
         $user->password = Hash::make($request ->password);
-        $user->created_by = $userId;
+        $user->created_by = $created_by;
 
-        //These are the old codes for saving the new user.
-        // $user = User::create([
-
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        //     'id' => Str::uuid()->toString()
-        // ]);
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -74,6 +69,15 @@ class RegisteredUserController extends Controller
         }
         else {
             $user->save();
+
+            $id = Str::uuid()->toString();
+            $user = UsersProfile::create([
+                'id' => $id,
+                'created_by' => $created_by,
+                'user_id' => $user_id,
+            ]);
+
+
             return response()->json(['success' => true, 'message' => 'User successfully added.'], 200);
         }
 

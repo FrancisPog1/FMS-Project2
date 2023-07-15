@@ -21,7 +21,8 @@ use App\Http\Controllers\AcadHead\Dashboard_Controller;
 use App\Http\Controllers\AcadHead\ViewUserFiles_Controller;
 use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
 use App\Http\Controllers\AcadHead\ActivitiesParticipants_Controller;
-use App\Http\Controllers\Profile_Controller;
+use App\Http\Controllers\AcadHead\Profile_Controller;
+use App\Http\Controllers\All_Profile_Controller;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -125,7 +126,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     /**User Profiles*/
-    Route::get('/UserProfile', [Profile_Controller::class,'show'])->name('user_Profile');
+    Route::get('/UserProfile', [All_Profile_Controller::class,'show'])->name('user_Profile');
 
 
     //This is all the routes for Creating or Adding.
@@ -140,6 +141,12 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::post('/Create_RequirementType', [RequirementType_Controller::class, 'Create_RequirementType'])->name('Create_RequirementType');
     Route::post('/Create_ActivityType', [ActivityType_Controller::class, 'Create_ActivityType'])->name('Create_ActivityType');
     Route::post('/Create_Activities', [Activities_Controller::class, 'Create_Activities'])->name('Create_Activities');
+
+
+    Route::put('/update_profile/{profile_id}', [Profile_Controller::class, 'update'])->name('update_profile');
+
+    Route::get('/show_profile/{user_id}', [Profile_Controller::class, 'show'])->name('show_profile');
+
 
 
     //New Code

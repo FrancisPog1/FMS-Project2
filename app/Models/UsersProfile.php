@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UsersProfile extends Model
 {
     use HasFactory;
+    public $incrementing = false; //This fix the bug with the Auth::user()->id code.
 
     protected $fillable = [
         'id',
@@ -34,5 +35,6 @@ class UsersProfile extends Model
         'middle_name',
         'image',
         'first_name',
+        'extension_name',
     ];
 }
