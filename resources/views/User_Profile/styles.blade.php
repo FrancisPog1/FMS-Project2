@@ -22,7 +22,7 @@
     color: #fff;
     position: absolute;
     left: 50px;
-    top: 165px;
+    top: -32px;
     text-align: center;
     z-index: 1;
     }
@@ -36,7 +36,7 @@
     }
 
     .profile-cover__img .profile-img-content {
-    margin-top: 77px;
+    margin-top: 60px;
     display: flex;
     margin-left: 10px;
     }
@@ -66,6 +66,15 @@
     text-align: left !important;
     }
 
+</style>
 
 
+<style>
+    .cool-white-input {
+        background-color: #f8f9fa;
+    }
+
+    .form-control {
+    border-color: rgb(222, 220, 220);
+  }
 </style>
