@@ -9,11 +9,13 @@
 <div class="wrapper">
     <div class="content-wrapper gradient-bg">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mt-3">
-                    <div class="col ml-4">
-                        <h1 class="m-0">Dashboard</h1>
+        <div class="content-header ">
+            <div class="mr-5 ml-5">
+                <div class="card ">
+                    <div class="card-header" style="height: 85px;">
+                        <div class="col">
+                            <h1 class="mt-3">Dashboard</h1>
+                        </div>
                     </div>
                 </div>
             </div>

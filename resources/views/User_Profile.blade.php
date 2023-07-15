@@ -149,7 +149,7 @@
                 </div>
 
                 <div class="container-fluid">
-                    <div class="row mx-auto col-11 align-content-between ">
+                    <div class="row mx-auto col-11 align-content-between">
                         <!-- Left container -->
                         <!--div class="col-md-4">
                             <div class="card ">

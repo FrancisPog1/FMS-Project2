@@ -9,6 +9,11 @@
     --text-color-2: #FFF;
 }
 
+.reduced-opacity
+{
+    opacity: 0.5;
+}
+
 .pal-1
 {
     background-color: var(--pallete-1);
@@ -153,4 +158,10 @@ h1
 
 {
     font-weight: 500;
+}
+
+input
+
+{
+    border-radius: .5rem !important;
 }
