@@ -51,10 +51,10 @@
                 <table class="table table-striped">
                     <thead class="pal-1 text-col-2">
                         <tr>
-                            <th style="width: 28%;">Name</th>
-                            <th style="width: 15%;">Email</th>
-                            <th style="width: 12%;">Role</th>
-                            <th style="width: 12%;" class="text-center">Status</th>
+                            <th style="width: 25%;">Name</th>
+                            <th style="width: 18%;">Email</th>
+                            <th style="width: 5%;">Role</th>
+                            <th style="width: 5%;" class="text-center">Status</th>
                             {{-- <th class="text-center" style="width: 20%;">Action</th> --}}
                         </tr>
                     </thead>
@@ -63,7 +63,7 @@
                             <tr>
 
                                 <td>
-                                    Name 1
+                                    {{ $participant->first_name }} {{ $participant->last_name }}
                                 </td>
 
                                 <td>

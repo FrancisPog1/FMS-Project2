@@ -29,9 +29,11 @@ class User_Controller extends Controller
         $roles = DB::table('roles')->get();
 
         $users = DB::table('users')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
         ->where('users.deleted_at', '=', null)
-        ->select('roles.title as user_role', 'users.email', 'users.status', 'users.id', 'users.status')
+        ->select('roles.title as user_role', 'users.email', 'users.status', 'users.id', 'users.status',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', compact('users','roles'));
@@ -97,10 +99,12 @@ class User_Controller extends Controller
     {
         if ($request->ajax()) {
             $query = DB::table('users')
+                ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
                 ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
                 ->where('users.deleted_at','=', null)
-                ->select('users.id as user_id', 'users.email as email', 'roles.title as role_type', 'users.status as status'
-    );
+                ->select('users.id as user_id', 'users.email as email', 'roles.title as role_type', 'users.status as status',
+                'users_profiles.first_name', 'users_profiles.last_name');
+
             if ($request->filter_option) {
                 $filterOption = $request->filter_option;
                 switch ($filterOption) {
@@ -136,12 +140,12 @@ class User_Controller extends Controller
                     case 'All':
                         $query = $query;
                         break;
-                    // case 'az':
-                    //     $query->orderBy('users.name', 'asc');
-                    //     break;
-                    // case 'za':
-                    //     $query->orderBy('users.name', 'desc');
-                    //     break;
+                    case 'az':
+                        $query->orderBy('users_profiles.first_name', 'asc');
+                        break;
+                    case 'za':
+                        $query->orderBy('users_profiles.first_name', 'desc');
+                        break;
                     case 'e_az':
                         $query->orderBy('users.email', 'asc');
                         break;

@@ -12,6 +12,7 @@ use App\Http\Controllers\Director\Director_BinContents_Controller;
 use App\Http\Controllers\Director\Director_MonitorRequirements_Controller;
 use App\Http\Controllers\Director\Director_DownloadUserFiles_Controller;
 use App\Http\Controllers\Director\Director_ViewUserFiles_Controller;
+use App\Http\Controllers\Director\Director_Profile_Controller;
 
 
 /*
@@ -77,6 +78,11 @@ Route::middleware(['auth', 'isDirector'])->group(function () {
 
     Route::get('/director_activity_participants/{activity_id}', [Director_ActivitiesParticipants_Controller::class, 'show'])->name('director_activities_participants');
     Route::get('/director_activities', [Director_Activities_Controller::class, 'show'])->name('director_activities');
+
+
+    //USER PROFILE
+    Route::put('/director_update_my_profile/{profile_id}', [Director_Profile_Controller::class, 'update'])->name('update_director_profile');
+    Route::get('/director_my_profile', [Director_Profile_Controller::class, 'show'])->name('director_profile');
 
 
 });

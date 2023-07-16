@@ -26,7 +26,7 @@
                 if (assignees.length > 0) {
                     for (let i = 0; i < assignees.length; i++) {
                         html += '<tr>' +
-                            '<td>Sample Name</td>' +
+                            '<td>' + assignees[i]['first_name'] + " " + assignees[i]['last_name'] + '</td>' +
                             '<td>' + assignees[i]['email'] + '</td>' +
                             '<td class="text-center">' + assignees[i]['role_type'] + '</td>' +
 

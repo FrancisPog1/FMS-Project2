@@ -11,6 +11,7 @@ use App\Http\Controllers\DeleteTemporaryFiles_Controller;
 use App\Http\Controllers\FacultyUpload_Controller;
 use App\Http\Controllers\Faculty\Faculty_RequirementBin_Controller;
 use App\Http\Controllers\Faculty\Faculty_Activities_Controller;
+use App\Http\Controllers\Faculty\Faculty_Profile_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,11 @@ Route::middleware(['auth', 'isFaculty'])->group(function () {
     Route::post('/upload-file', [UploadTemporaryFiles_Controller::class, 'uploadFile'])->name('upload_file');
     Route::delete('/delete-file', [DeleteTemporaryFiles_Controller::class, 'deleteFile'])->name('delete_file');
     Route::put('/faculty_upload-file/{id}', [FacultyUpload_Controller::class, 'uploadFile'])->name('faculty_uploadfile');
+
+
+    //USER PROFILE
+    Route::put('/faculty_update_my_profile/{profile_id}', [Faculty_Profile_Controller::class, 'update'])->name('update_faculty_profile');
+    Route::get('/faculty_my_profile', [Faculty_Profile_Controller::class, 'show'])->name('faculty_profile');
 
 
     });

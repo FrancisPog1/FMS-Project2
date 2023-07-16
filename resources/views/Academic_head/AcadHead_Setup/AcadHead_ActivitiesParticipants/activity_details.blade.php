@@ -10,6 +10,7 @@
                     <button class="btn btn-link" id="hideButton">Hide</button>
                 </div>
             </div>
+            
             <div class="card-body" id="cardBody">
                 <div class="row">
                     @foreach ($activities as $activity)

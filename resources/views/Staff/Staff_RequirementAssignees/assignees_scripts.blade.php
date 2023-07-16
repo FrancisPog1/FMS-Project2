@@ -1,7 +1,7 @@
 
  <script>
  $(document).ready(function() {
-    var filteredAndSortedAssigneesUrl = "{{ route('filtered_and_sorted_assignees', ':bin_id') }}";
+    var filteredAndSortedAssigneesUrl = "{{ route('staff_filtered_and_sorted_assignees', ':bin_id') }}";
     var binId = "{{$bin_id}}"; // Assuming you have the bin_id value available in the template
 
     $("#filter, #sort").on('change', function() {
@@ -26,7 +26,7 @@
                 if (assignees.length > 0) {
                     for (let i = 0; i < assignees.length; i++) {
                         html += '<tr>' +
-                            '<td>Sample Name</td>' +
+                            '<td>' + assignees[i]['first_name'] + " " + assignees[i]['last_name'] + '</td>' +
                             '<td>' + assignees[i]['email'] + '</td>' +
                             '<td class="text-center">' + assignees[i]['role_type'] + '</td>' +
 

@@ -64,15 +64,17 @@
                 <table class="table table-striped">
                     <thead class="pal-1 text-col-2">
                         <tr>
-                            <th>Email</th>
-                            <th style="width: 25%;">Role</th>
-                            <th class= "text-center" style="width: 15%;">Status</th>
-                            <th class="text-center" style="width: 25%;">Actions</th>
+                            <th style="width: 30%;">Name</th>
+                            <th style="width: 28%;">Email</th>
+                            <th >Role</th>
+                            <th class= "text-center" style="width: 8%;">Status</th>
+                            <th class="text-center" style="width: 20%;">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="filtered-users">
                         @foreach ($users as $user)
                             <tr>
+                                <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->user_role }}</td>
                                 <!--This should be a toggle switch with funct.-->

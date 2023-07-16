@@ -1,10 +1,9 @@
-<section class="container">
+
     <form action=" {{ route('update_profile', $profile_id) }}" method="post">
     @method('PUT')
     @csrf
-        <div class="mr-5 ml-5">
-            <div class="card">
 
+            <div class="card">
                 <div class="card-body mr-4 ml-4" id="cardBody">
                     <div class="form-group">
                         <h5 class="h3 font-weight-bold">Account Information</h5>
@@ -154,6 +153,4 @@
                     </div>
                 </div>
             </div>
-        </div>
     </form>
-</section>

@@ -68,9 +68,7 @@
                                                                     <input type="checkbox" class="form-check-input"
                                                                         id="check" name="users[]"
                                                                         value="{{ $user->id }}">
-                                                                    <label class="form-check-label" for="check">
-                                                                        Faculty
-                                                                        1</label>
+                                                                    <label class="form-check-label" for="check">  {{$user->first_name}} {{$user->last_name}}</label>
                                                                 </div>
 
                                                             </td>

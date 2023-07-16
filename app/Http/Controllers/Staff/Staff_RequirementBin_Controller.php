@@ -101,13 +101,15 @@ class Staff_RequirementBin_Controller extends Controller
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')
             ->join('user_assigned_to_requirement_bins as user_bins', 'users.id', '=', 'user_bins.assigned_to')
+            ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
             ->join('requirement_bins as bin', 'bin.id', '=', 'user_bins.requirement_bin_id')
             ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
             ->where('bin.id', '=', $bin_id)
             ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
                     'user_bins.review_status as review_status',
                     'user_bins.compliance_status as compliance_status',
-                    'user_bins.id as id', 'bin.id as req_bin_id',)
+                    'user_bins.id as id', 'bin.id as req_bin_id',
+                    'users_profiles.first_name', 'users_profiles.last_name')
             ->get();
 
             $requirementbin = DB::table('requirement_bins as bin')
@@ -132,13 +134,15 @@ class Staff_RequirementBin_Controller extends Controller
             if ($request->ajax()) {
                 $query = DB::table('users')
                     ->join('user_assigned_to_requirement_bins', 'users.id', '=', 'user_assigned_to_requirement_bins.assigned_to')
+                    ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
                     ->join('requirement_bins', 'requirement_bins.id', '=', 'user_assigned_to_requirement_bins.requirement_bin_id')
                     ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
                     ->where('requirement_bins.id', '=', $bin_id)
                     ->select('users.id as user_id', 'users.email as email', 'roles.title as role_type',
                         'user_assigned_to_requirement_bins.review_status as review_status',
                         'user_assigned_to_requirement_bins.compliance_status as compliance_status',
-                        'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id');
+                        'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id',
+                        'users_profiles.first_name', 'users_profiles.last_name');
 
                 if ($request->filter_option) {
                     $filterOption = $request->filter_option;
@@ -179,10 +183,10 @@ class Staff_RequirementBin_Controller extends Controller
                     $sortOption = $request->sort_option;
                     switch ($sortOption) {
                         case 'az':
-                            $query->orderBy('users.name', 'asc');
+                            $query->orderBy('users_profiles.first_name', 'asc');
                             break;
                         case 'za':
-                            $query->orderBy('users.name', 'desc');
+                            $query->orderBy('users_profiles.first_name', 'desc');
                             break;
                         case 'e_az':
                             $query->orderBy('users.email', 'asc');

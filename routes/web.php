@@ -60,9 +60,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
      //This protects the page by prohibiting the access of user when they are not logged in
 
     /**Academic Head Dashboard */
-    Route::get('/AcadHead_Dashboard', function () {
-        return view('Academic_head/INTG_AcadHead_Dashboard', ['page_title' => 'Dashboard']);
-        })->name('acadhead_Dashboard');
+    Route::get('/AcadHead_Dashboard', [Dashboard_Controller::class, 'dashboard'])->name('acadhead_Dashboard');
 
     /**Add User */
     Route::get('/AddUser',[User_Controller::class, 'show'])->name('acadhead_AddUser');
@@ -143,11 +141,14 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::post('/Create_Activities', [Activities_Controller::class, 'Create_Activities'])->name('Create_Activities');
 
 
+    //PROFILE SETUP
     Route::put('/update_profile/{profile_id}', [Profile_Controller::class, 'update'])->name('update_profile');
-
     Route::get('/show_profile/{user_id}', [Profile_Controller::class, 'show'])->name('show_profile');
 
 
+    //USER PROFILE
+    Route::put('/acadhead_update_my_profile/{profile_id}', [All_Profile_Controller::class, 'update'])->name('update_acadhead_profile');
+    Route::get('/acadhead_my_profile', [All_Profile_Controller::class, 'show'])->name('acadhead_profile');
 
     //New Code
     Route::post('/Setup_RequirementBin/{id}', [RequirementSetup_Controller::class, 'Create_Requirement'])->name('Setup_RequirementBin');
