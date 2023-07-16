@@ -78,10 +78,10 @@ a
 }
 
 /* for bg color*/
-.gradient-bg
+.content-wrapper
 {
     /* background: linear-gradient(to right, rgb(255, 255, 255), #bebebe 100%); */
-    background-color: #edecec;
+    background-color: #edecec !important;
 }
 
 /* for sidebar color and blur*/
