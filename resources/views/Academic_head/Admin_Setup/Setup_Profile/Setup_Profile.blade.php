@@ -8,34 +8,20 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-            {{-- <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mt-5 ml-5">
-                        <div class="col">
-                            <h1 class="m-0">Hi! {User}</h1>
-
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item active">{{ Breadcrumbs::render('Profile') }}</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
-            <!-- Main content -->
-            <div class="content">
                 <br>
-
 
                 {{-- Profile Header --}}
                 @include('/Academic_head/Admin_Setup/Setup_Profile/profile_header')
 
+                <section class="container">
+                    <div class="mr-5 ml-5">
 
-                {{-- personal - edit tab [UPDATE: SINGLE CARD WITH DUPLICATE DIV FOR EDITING]--}}
-                @include('/Academic_head/Admin_Setup/Setup_Profile/setup_form')
+                        {{-- personal - edit tab [UPDATE: SINGLE CARD WITH DUPLICATE DIV FOR EDITING]--}}
+                        @include('/Academic_head/Admin_Setup/Setup_Profile/setup_form')
 
+                    </div>
+                </section>
 
-            </div>
 
         </div>
         <!-- Footer Container -->
@@ -53,8 +39,8 @@
         </footer>
     </div>
 
-@include('/Academic_head/Admin_Setup/Setup_Profile/scripts')
-@include('/Academic_head/Admin_Setup/Setup_Profile/styles')
+    @include('/Academic_head/Admin_Setup/Setup_Profile/scripts')
+    @include('/Academic_head/Admin_Setup/Setup_Profile/styles')
 
 
 

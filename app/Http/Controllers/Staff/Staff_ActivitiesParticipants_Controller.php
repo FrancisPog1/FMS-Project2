@@ -24,9 +24,11 @@ class Staff_ActivitiesParticipants_Controller extends Controller
         $participants = DB::table('activities')
         ->join('activity_participants', 'activity_participants.activity_id',  '=', 'activities.id')
         ->join('users', 'users.id', '=', 'activity_participants.participant_id')
+        ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
         ->where('activity_participants.activity_id', '=', $activity_id)
-        ->select('users.email', 'roles.title as role', 'activity_participants.id as id')
+        ->select('users.email', 'roles.title as role', 'activity_participants.id as id',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         $activities = DB::table('activities')
@@ -57,7 +59,9 @@ class Staff_ActivitiesParticipants_Controller extends Controller
 
         $users = DB::table('users')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as role', 'users.email', 'users.id')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
+        ->select('roles.title as role', 'users.email', 'users.id',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         return view('Staff/Staff_ActivitiesParticipants/Staff_ActivitiesParticipants',

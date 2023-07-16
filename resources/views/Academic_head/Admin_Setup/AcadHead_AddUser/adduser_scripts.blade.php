@@ -192,6 +192,7 @@
                     if (users.length > 0) {
                         for (let i = 0; i < users.length; i++) {
                             html +=  '<tr>' +
+                                            '<td>' + users[i]['first_name'] + " " + users[i]['last_name']  +'</td>' +
                                             '<td>' + users[i]['email'] + '</td>' +
                                             '<td>' + users[i]['role_type'] + '</td>' +
                                         ' <td class="text-center">' +

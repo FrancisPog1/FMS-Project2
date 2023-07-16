@@ -68,7 +68,7 @@
                             <tr>
 
                                 <td>
-                                    Name 1
+                                    {{ $participant->first_name }}  {{ $participant->last_name }}
                                 </td>
 
                                 <td>

@@ -72,7 +72,7 @@
                     <tbody id="filtered-assignees">
                         @foreach ($assigned_reqrs as $assigned_reqr)
                             <tr>
-                                <td>Sample Name</td>
+                                <td>{{ $assigned_reqr->first_name }} {{ $assigned_reqr->last_name }}</td>
                                 <td>{{ $assigned_reqr->email }}</td>
                                 <td class="text-center">{{ $assigned_reqr->role_type }}</td>
 

@@ -48,7 +48,9 @@ class Staff_RequirementSetup_Controller extends Controller
 
         $users = DB::table('users')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as role', 'users.email', 'users.status', 'users.id')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
+        ->select('roles.title as role', 'users.email', 'users.status', 'users.id',
+                'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         return view('Staff/Staff_Bin_Setup/Staff_Bin_Setup',
@@ -62,17 +64,21 @@ class Staff_RequirementSetup_Controller extends Controller
             if($request->types == 'All')
             {
                  $users = DB::table('users')
+                 ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
                 ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
+                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id',
+                'users_profiles.first_name', 'users_profiles.last_name')
                 ->get();
             }
 
             else
             {
                 $users = DB::table('users')
+                ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
                 ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
                 ->where('roles.id', '=', $request->types)
-                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
+                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id',
+                'users_profiles.first_name', 'users_profiles.last_name')
                 ->get();
             }
 

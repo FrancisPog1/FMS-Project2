@@ -98,6 +98,7 @@ class Director_RequirementBin_Controller extends Controller
         // ------------------------THIS ARE THE CODES FOR THE REQUIREMENT ASSIGNEES PAGE-------------------------- //
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')
+            ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
             ->join('user_assigned_to_requirement_bins as user_bins', 'users.id', '=', 'user_bins.assigned_to')
             ->join('requirement_bins as bin', 'bin.id', '=', 'user_bins.requirement_bin_id')
             ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
@@ -105,7 +106,8 @@ class Director_RequirementBin_Controller extends Controller
             ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
                     'user_bins.review_status as review_status',
                     'user_bins.compliance_status as compliance_status',
-                    'user_bins.id as id', 'bin.id as req_bin_id',)
+                    'user_bins.id as id', 'bin.id as req_bin_id',
+                    'users_profiles.first_name', 'users_profiles.last_name')
             ->get();
 
             $requirementbin = DB::table('requirement_bins as bin')

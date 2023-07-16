@@ -24,9 +24,11 @@ class ActivitiesParticipants_Controller extends Controller
         $participants = DB::table('activities')
         ->join('activity_participants', 'activity_participants.activity_id',  '=', 'activities.id')
         ->join('users', 'users.id', '=', 'activity_participants.participant_id')
+        ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
         ->where('activity_participants.activity_id', '=', $activity_id)
-        ->select('users.email', 'roles.title as role', 'activity_participants.id as id')
+        ->select('users.email', 'roles.title as role', 'activity_participants.id as id',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         $activities = DB::table('activities')
@@ -56,8 +58,10 @@ class ActivitiesParticipants_Controller extends Controller
         $roles = DB::table('roles')->get();
 
         $users = DB::table('users')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as role', 'users.email', 'users.id')
+        ->select('roles.title as role', 'users.email', 'users.id',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         return view('Academic_head/AcadHead_Setup/AcadHead_ActivitiesParticipants/AcadHead_ActivitiesParticipants',

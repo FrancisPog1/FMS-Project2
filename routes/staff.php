@@ -16,6 +16,8 @@ use App\Http\Controllers\Staff\Staff_RequirementSetup_Controller;
 use App\Http\Controllers\Staff\Staff_ViewUserFiles_Controller;
 use App\Http\Controllers\Staff\Staff_DownloadUserFiles_Controller;
 use App\Http\Controllers\Staff\Staff_ActivitiesParticipants_Controller;
+use App\Http\Controllers\Staff\Staff_Profile_Controller;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +64,7 @@ Route::middleware(['auth', 'isStaff'])->group(function () {
         Route::get('/staff_requirementbin_setup_page', [Staff_RequirementSetup_Controller::class, 'filtered_user'])->name('staff_filtered_users');
         Route::post('/staff_restore_bincontents', [Staff_RequirementSetup_Controller::class, 'restoreRequirement'])->name('staff_restore_requirements');
 
-
+        Route::get('/staff_filtered_and_sorted_assignees/{bin_id}', [Staff_RequirementBin_Controller::class, 'filteredAndSortedAssignees'])->name('staff_filtered_and_sorted_assignees');
 
         //--------------------------------[ CRUD for REQUIREMENT BIN ]-----------------------------//
 
@@ -113,6 +115,11 @@ Route::middleware(['auth', 'isStaff'])->group(function () {
 
             Route::post('/restore_bincontents', [RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
             Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
+
+
+            //USER PROFILE
+            Route::put('/staff_update_my_profile/{profile_id}', [Staff_Profile_Controller::class, 'update'])->name('update_staff_profile');
+            Route::get('/staff_my_profile', [Staff_Profile_Controller::class, 'show'])->name('staff_profile');
 
 
     });

@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="FacultyActivities" class="nav-link active">
+                            <a href="FacultyActivities" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Activities

@@ -31,8 +31,8 @@
     max-width: 185px;
     border: 5px solid #ffffff;
     border-radius: 50%;
-    margin-top: 25px;
-    margin-left: -9px;
+    margin-top: 45px;
+    margin-left: -30px;
     }
 
     .profile-cover__img .profile-img-content {
@@ -66,6 +66,7 @@
     text-align: left !important;
     }
 
+
 </style>
 
 
@@ -78,3 +79,4 @@
     border-color: rgb(222, 220, 220);
   }
 </style>
+

@@ -45,7 +45,7 @@
                                         <td>\
                                             <div class="ml-3">\
                                                 <input type="checkbox" class="form-check-input" id="check" name="users[]" value="' + users[i]['id'] + '">\
-                                                <label class="form-check-label" for="check">Faculty 1</label>\
+                                                <label class="form-check-label" for="check">' + users[i]['first_name'] + " " + users[i]['last_name'] +'</label>\
                                             </div>\
                                         </td>\
                                         <td>' + users[i]['email'] + '</td>\

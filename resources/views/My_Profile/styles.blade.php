@@ -31,8 +31,8 @@
     max-width: 185px;
     border: 5px solid #ffffff;
     border-radius: 50%;
-    margin-top: 25px;
-    margin-left: -9px;
+    margin-top: 45px;
+    margin-left: -30px;
     }
 
     .profile-cover__img .profile-img-content {
@@ -66,6 +66,7 @@
     text-align: left !important;
     }
 
+
 </style>
 
 
@@ -77,4 +78,36 @@
     .form-control {
     border-color: rgb(222, 220, 220);
   }
+</style>
+
+<style>
+        .card-transition {
+            opacity: 0;
+            transition: opacity 1.6s ease-in-out;
+            display: none; /* Add this line to hide the card */
+        }
+
+        .card-transition.active {
+            opacity: 1;
+            display: block; /* Add this line to show the active card */
+        }
+
+
+
+.btn-link {
+  color: black;
+}
+
+.btn-link:hover {
+color: darkred;
+  transform: scale(1.05);
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+#card-body-1 {
+    padding: 0.1rem;
+    margin-left: 10px;
+}
+
+
 </style>

@@ -77,7 +77,6 @@ class Profile_Controller extends Controller
             'gender' => $request->gender ,
             'birthdate' => $request->birthdate ,
             'birthplace' => $request->birthplace ,
-            'email' => $request->email ,
             'phone_number' => $request->phone ,
             'province' => $request->province ,
             'city' => $request->city ,
