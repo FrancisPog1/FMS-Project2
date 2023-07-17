@@ -1,10 +1,10 @@
 <!-- Sidebar Container -->
-<aside class="main-sidebar pal-1 sidebar-dark-maroon elevation-1">
+<aside class="main-sidebar elevation-1 transpa">
     <!-- PUP Logo -->
-    <a href="" class="brand-link" style="height: 70px;">
+    <a href="#" class="brand-link" style="height: 70px;">
         <div class="mt-2">
             <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" class="brand-image img-circle elevation-3">
-            <span class="brand-text font-weight-bolder">PUPQC-FARMS</span>
+            <span class="brand-text font-weight-bolder" style="color: var(--pallete-4);">PUPQC-FARMS</span>
         </div>
     </a>
 
@@ -26,21 +26,21 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link">
-                        <i class="nav-icon fas fa-user-lock"></i>
+                    <a class="nav-link" style="cursor: pointer !important">
+                        <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
                         <p> Class Setup<i class="fas fa-angle-left right"></i> </p>
                     </a>
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="DirectorClassSchedule" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
+                                <i class="fa-regular fa-note-sticky nav-icon"></i>
                                 <p class="p-drop">Class Schedule</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="DirectorClassObservation" class="nav-link">
-                                <i class="fas fa-user-lock nav-icon"></i>
+                                <i class="fa-solid fa-location-pin nav-icon"></i>
                                 <p class="p-drop">Class Observation</p>
                             </a>
                         </li>
@@ -48,15 +48,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link">
-                        <i class="nav-icon fas fa-user-lock"></i>
+                    <a class="nav-link" style="cursor: pointer !important">
+                        <i class="nav-icon fa-solid fa-flag"></i>
                         <p>Activity Setup<i class="fas fa-angle-left right"></i> </p>
                     </a>
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('director_activities') }}" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
+                                <i class="fa-regular fa-flag nav-icon"></i>
                                 <p class="p-drop">Activities</p>
                             </a>
                         </li>
@@ -64,7 +64,7 @@
 
                         <li class="nav-item">
                             <a href="{{ route('director_requirementbin') }}" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
+                                <i class="nav-icon fa-solid fa-book-bookmark"></i>
                                 <p class="p-drop">Requirement Bin</p>
                             </a>
                         </li>
@@ -73,7 +73,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="DirectorReports" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa-solid fa-book-bookmark"></i>
                         <p>
                             Reports
                         </p>

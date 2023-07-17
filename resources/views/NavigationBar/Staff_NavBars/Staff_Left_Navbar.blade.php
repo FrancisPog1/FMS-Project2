@@ -1,10 +1,10 @@
     <!-- Sidebar Container -->
-    <aside class="main-sidebar pal-1 sidebar-dark-maroon elevation-1">
+    <aside class="main-sidebar elevation-1 transpa">
         <!-- PUP Logo -->
-        <a href="" class="brand-link" style="height: 70px;">
+        <a href="#" class="brand-link" style="height: 70px;">
             <div class="mt-2">
                 <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" class="brand-image img-circle elevation-3">
-                <span class="brand-text font-weight-bolder">PUPQC-FARMS</span>
+                <span class="brand-text font-weight-bolder" style="color: var(--pallete-4);">PUPQC-FARMS</span>
             </div>
         </a>
 
@@ -27,34 +27,34 @@
 
                     <li class="nav-item">
                         <a class="nav-link">
-                            <i class="nav-icon fas fa-user-lock"></i>
+                            <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
                             <p> Class Setup<i class="fas fa-angle-left right"></i> </p>
                         </a>
 
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('staff_RequirementBin')}}" class="nav-link">
-                                    <i class="fas fa-folder nav-icon"></i>
+                                    <i class="nav-icon fa-solid fa-bookmark"></i>
                                     <p class="p-drop">Requirements Bin</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('staff_activities')}}" class="nav-link">
-                                    <i class="fas fa-sticky-note nav-icon"></i>
+                                    <i class="nav-icon fa-solid fa-flag"></i>
                                     <p class="p-drop">Activity</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="StaffClassSchedule" class="nav-link">
-                                    <i class="fas fa-user nav-icon"></i>
+                                    <i class="fa-solid fa-users-line nav-icon"></i>
                                     <p class="p-drop">Class Schedule</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="StaffClassObservation" class="nav-link active">
-                                    <i class="fas fa-user-lock nav-icon"></i>
+                                <a href="StaffClassObservation" class="nav-link">
+                                    <i class="fa-solid fa-users-gear nav-icon"></i>
                                     <p class="p-drop">Class Observation</p>
                                 </a>
                             </li>
@@ -62,7 +62,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="StaffReports" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                            <i class="nav-icon fa-solid fa-book-bookmark"></i>
                             <p>
                                 Reports
                             </p>

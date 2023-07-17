@@ -15,7 +15,7 @@
                     <span class="brand-text font-weight-bolder" style="color: var(--pallete-4);">PUPQC-FARMS</span>
                 </div>
             </a>
-            
+
             <!-- Sidebar Menu -->
             <div class="sidebar">
                 <div class="mt-2">
@@ -34,7 +34,7 @@
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user-lock"></i>
+                                <i class="nav-icon fa-solid fa-user-gear"></i>
                                 <p>
                                     Administrator
                                     <i class="fas fa-angle-left right"></i>
@@ -44,21 +44,21 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="Role" class="nav-link">
-                                        <i class="fas fa-user nav-icon"></i>
+                                        <i class="fa-solid fa-scroll nav-icon"></i>
                                         <p class="p-drop">System Role</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="AddUser" class="nav-link">
-                                        <i class="fas fa-user nav-icon"></i>
+                                        <i class="fa-solid fa-user-plus nav-icon"></i>
                                         <p class="p-drop">Add User</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="AcadHead" class="nav-link">
-                                        <i class="far fa-star nav-icon"></i>
+                                        <i class="fa-solid fa-medal nav-icon"></i>
                                         <p class="p-drop">Academic Rank</p>
                                     </a>
                                 </li>
@@ -79,26 +79,26 @@
 
                                 <li class="nav-item">
                                     <a href="ActivityType" class="nav-link">
-                                        <i class="fas fa-envelope-open-text nav-icon"></i>
+                                        <i class="fa-regular fa-folder-open nav-icon"></i>
                                         <p class="p-drop">Activity Type</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="Designation" class="nav-link">
-                                        <i class="fas fa-user-graduate nav-icon"></i>
+                                        <i class="fa-solid fa-thumbtack nav-icon"></i>
                                         <p class="p-drop">Designation</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="Program" class="nav-link">
-                                        <i class="fas fa-archive nav-icon"></i>
+                                        <i class="fa-solid fa-graduation-cap nav-icon"></i>
                                         <p class="p-drop">Programs</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="Specialization" class="nav-link">
-                                        <i class="fas fa-hat-wizard nav-icon"></i>
+                                        <i class="fa-solid fa-wand-sparkles nav-icon"></i>
                                         <p class="p-drop">Specialization</p>
                                     </a>
                                 </li>
