@@ -224,5 +224,8 @@ class CreateAdminUserSeeder extends Seeder
             'status' => 'Ongoing',
         ]);
 
+
+         //-------------------Profile-------------------------//
+
     }
 }

@@ -6,14 +6,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 
     <div class="wrapper">
-
-
-        {{-- <div class="preloader flex-column justify-content-center align-items-center">
-            <div class="spinner-border text-danger" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div> --}}
-
         <!-- Main Sidebar Container -->
         <div class="main-sidebar elevation-1 transpa">
             <!-- PUP Logo -->
@@ -23,11 +15,9 @@
                     <span class="brand-text font-weight-bolder" style="color: var(--pallete-4);">PUPQC-FARMS</span>
                 </div>
             </a>
-
-            <!-- Sidebar -->
+            
+            <!-- Sidebar Menu -->
             <div class="sidebar">
-
-                <!-- Sidebar Menu -->
                 <div class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
@@ -141,7 +131,7 @@
 
 
                                 <li class="nav-item">
-                                    <a href="error_page" class="nav-link">
+                                    <a href="error_page " class="nav-link">
                                         <i class="fas fa-bullhorn nav-icon"></i>
                                         <p class="p-drop">Announcement</p>
                                     </a>
