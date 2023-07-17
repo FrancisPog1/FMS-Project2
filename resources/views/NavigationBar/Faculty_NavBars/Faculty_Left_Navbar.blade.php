@@ -26,7 +26,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" style="cursor: pointer !important;">
-                        <i class="nav-icon fas fa-user-lock"></i>
+                        <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
                         <p> Class Setup<i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -34,13 +34,13 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="FacultyClassSchedule" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
+                                <i class="fa-regular fa-note-sticky nav-icon"></i>
                                 <p class="p-drop">Class Schedule</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="FacultyClassObservation" class="nav-link">
-                                <i class="fas fa-user-lock nav-icon"></i>
+                                <i class="fa-solid fa-location-pin nav-icon"></i>
                                 <p class="p-drop">Class Observation</p>
                             </a>
                         </li>
@@ -48,7 +48,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="FacultyRequirementBin" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa-solid fa-bookmark"></i>
                         <p>
                             Requirement Bin
                         </p>
@@ -56,7 +56,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="FacultyActivities" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa-solid fa-flag"></i>
                         <p>
                             Activities
                         </p>
@@ -64,7 +64,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="FacultyReports" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fa-solid fa-book-bookmark"></i>
                         <p>
                             Reports
                         </p>

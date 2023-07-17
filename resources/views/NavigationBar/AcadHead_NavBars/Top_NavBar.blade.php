@@ -81,6 +81,7 @@
                 <span class="d-block text-regular text-pal-1" style="font-size: .8rem;">Academic Head</span>
             </div>
         </div>
+        
         <!-- Profile Dropdown -->
         <div id="dropdownHover" class="z-10 hidden pal-1 divide-y divide-gray-100 rounded-lg shadow w-44">
             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
