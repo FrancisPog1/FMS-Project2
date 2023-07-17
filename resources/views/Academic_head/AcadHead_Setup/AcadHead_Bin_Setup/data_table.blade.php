@@ -81,14 +81,10 @@
                 <div class="m-4">
                     <div class="text-center">
                         {{-- Search bar --}}
-                        <div class="input-group">
-                            <input type="search" class="form-control" placeholder="e.g. SALN" />
-                            <span class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
+                        <form class="d-flex">
+                            <input class="form-control me-2 rounded-lg" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                        </form>
 
                         <br>
 

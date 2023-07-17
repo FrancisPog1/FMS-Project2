@@ -154,3 +154,14 @@ h1
 {
     font-weight: 500;
 }
+
+/* body */
+input, select
+{
+    border-radius: 0.6rem !important;
+}
+
+.rounded-lg
+{
+    border-radius: .5rem !important;
+}

@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+//use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;// the 'DB' class is part of the Illuminate\Support\Facades namespace, and it is commonly used to interact with the database using raw SQL queries.
+
 
 use App\Http\Controllers\AcadHead\AcademicRank_Controller;
 use App\Http\Controllers\AcadHead\Specialization_Controller;
@@ -27,7 +29,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 
 
 use Carbon\Carbon;
-use App\Http\Middleware\AuthCheck;
+//use App\Http\Middleware\AuthCheck;
 
 
 

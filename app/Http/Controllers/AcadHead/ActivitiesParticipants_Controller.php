@@ -117,11 +117,11 @@ class ActivitiesParticipants_Controller extends Controller
     {
           //HARD DELETE Requiremnts
           // Find the role by its ID
-              $participant = ActivityParticipants::findOrFail($id);
-              $participant->forceDelete();
-              return back()->with('success', 'Participant removed successfully!'); /**Alert Message */
+            $participant = ActivityParticipants::findOrFail($id);
+            $participant->forceDelete();
+            return back()->with('success', 'Participant removed successfully!'); /**Alert Message */
 
-          }
+        }
 
 
 }

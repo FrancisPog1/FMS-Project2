@@ -32,13 +32,10 @@
                                         <div class="col-6">
                                             {{-- Search bar --}}
                                             <div class="input-group">
-                                                <input type="search" class="form-control"
-                                                    placeholder="Search a user" />
-                                                <span class="input-group-append">
-                                                    <button class="btn btn-outline-secondary" type="button">
-                                                        <i class="fas fa-search"></i>
-                                                    </button>
-                                                </span>
+                                                <form class="d-flex">
+                                                    <input class="form-control me-2 rounded-lg" type="search" placeholder="Search a user" aria-label="Search">
+                                                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                                                </form>
                                             </div>
                                         </div>
                                         {{-- Check all button --}}
