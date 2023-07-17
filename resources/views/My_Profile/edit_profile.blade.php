@@ -148,8 +148,7 @@
                     <hr> <!-- Line to separate sections -->
 
                     <div class="form-group text-right">
-                        <label for="submit">Submit</label>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="mt-2 px-4 py-2 text-sm font-medium text-center text-white pal-1 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300">Submit</button>
                     </div>
                 </div>
             </div>
