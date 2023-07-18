@@ -52,7 +52,7 @@
                                 <li class="nav-item">
                                     <a href="AddUser" class="nav-link">
                                         <i class="fa-solid fa-user-plus nav-icon"></i>
-                                        <p class="p-drop">Add User</p>
+                                        <p class="p-drop">System Users</p>
                                     </a>
                                 </li>
 
@@ -131,9 +131,9 @@
 
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="Announcements" class="nav-link">
                                         <i class="fas fa-bullhorn nav-icon"></i>
-                                        <p class="p-drop">Announcement</p>
+                                        <p class="p-drop">Announcements</p>
                                     </a>
                                 </li>
 

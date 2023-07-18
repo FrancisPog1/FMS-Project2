@@ -29,13 +29,18 @@ class Staff_Dashboard_Controller extends Controller
 
         $greeting = '';	//Initialize the greeting variable
 
-        if ($time_now >= $morning_time && $time_now < $afternoon_time) {
-        $greeting = 'Good Morning,';
-        } else if ($time_now >= $afternoon_time && $time_now < $evening_time) {
-        $greeting = 'Good Afternoon,';
-        } else {
-        $greeting = 'Good Evening,';
+        if ($time_now >= $morning_time && $time_now < $afternoon_time || $time_now > $evening_time ) {
+            $greeting = 'Good Morning,';
         }
+
+        else if ($time_now >= $afternoon_time && $time_now < $evening_time || $time_now > $morning_time ) {
+            $greeting = 'Good Afternoon,';
+        }
+
+        else {
+            $greeting = 'Good Evening,';
+        }
+
 
 
 

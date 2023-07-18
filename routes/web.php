@@ -114,6 +114,10 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         return view('Academic_head/AcadHead_Setup/AcadHead_ClassObservation', ['page_title' => 'Class Observation']);
         })->name('acadhead_ClassObservation');
 
+    /**Announcement*/
+    Route::get('/Announcements', function () {
+        return view('Academic_head/AcadHead_Setup/Announcements', ['page_title' => 'Announcements']);
+        })->name('acadhead_Announcements');
 
     /**Academic Head Reports*/
     Route::get('/Reports', function () {
@@ -144,8 +148,8 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     //PROFILE SETUP
-    Route::put('/update_profile/{profile_id}', [Profile_Controller::class, 'update'])->name('update_profile');
-    Route::get('/show_profile/{user_id}', [Profile_Controller::class, 'show'])->name('show_profile');
+    Route::put('/update_profile,{profile_id}', [Profile_Controller::class, 'update'])->name('update_profile');
+    Route::get('/show_profile,{user_id}', [Profile_Controller::class, 'show'])->name('show_profile');
 
 
     //USER PROFILE
