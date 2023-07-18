@@ -12,7 +12,7 @@
                             <div class="flex-wrap">
                                 <b>
                                     <h1 class="ml-1 mt-2">Please setup the requirements for the
-                                        [{{ $requirement_bin->title }}]
+                                        {{ $requirement_bin->title }}
                                     </h1>
                                 </b>
                             </div>
@@ -21,6 +21,9 @@
                                 <button type="button" data-toggle="modal" data-target="#modal-xl-create"
                                     class="px-2 py-2 text-sm rounded-lg text-pal-1 hover:bg-gray-200">
                                     <i class="fa fa-plus"></i>
+                                </button>
+                                <button type="button" data-toggle="modal" data-target="#modal-xl-restore" class="px-2 py-2 mr-1 text-center rounded-lg hover:bg-gray-200 text-pal-1" style="font-size: 1.2rem !important;">
+                                    <i class="fa-solid fa-trash-arrow-up"></i>
                                 </button>
                             </div>
                         </div>
@@ -86,18 +89,19 @@
                             <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                         </form>
 
-                        <br>
 
                         {{-- assign button --}}
-                        <button data-toggle="modal" data-target="#modal-xl-assign" type="button"
-                            class="px-5 py-2 text-sm font-medium text-center text-white bg-green-800 rounded-lg focus:ring-4 focus:outline-none focus:ring-green-300">
-                            Assign a requirement
-                        </button>
+                        <div class="mt-3 mr-3 text-center">
+                            <button data-toggle="modal" data-target="#modal-xl-assign" type="button" class="px-4 py-2 text-sm font-medium text-center text-white pal-1 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300">
+                                Assign a requirement
+                            </button>
+                        </div>
+
                     </div>
 
                     <br>
 
-                    {{-- column row on button back and restore --}}
+                    {{-- column row on button back and restore
                     <div class="col">
                         <div class="text-right">
                             <a type="button" href="/RequirementBin"
@@ -108,10 +112,10 @@
                             <button type="button" data-toggle="modal" data-target="#modal-xl-restore"
                                 class="px-2 py-2 text-sm text-center rounded-lg hover:bg-gray-200 text-center mr-2 mb-2"
                                 style="color: #28a745">
-                                <i class="fa fa-undo"></i>
+                                <i class="fa-solid fa-trash-arrow-up"></i>
                             </button>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
 

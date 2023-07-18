@@ -6,13 +6,13 @@
                 <h3 class="card-title mt-2">List of Users</h3>
                 <div class="text-right">
                     <button data-toggle="modal" data-target="#modal-xl-create" type="button"
-                        class="px-4 py-2 text-sm font-medium text-center text-white bg-green-800 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">Add
+                        class="px-4 py-2 text-sm font-medium text-white pal-1 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300">Add
                         New User</button>
                 </div>
             </div>
 
-                           {{-- CODE FOR THE FILTERING --}}
-                           <div class="card-header">
+                        {{-- CODE FOR THE FILTERING --}}
+                        <div class="card-header">
                             <div class="row">
                                 <div class="col-4">
                                     <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>

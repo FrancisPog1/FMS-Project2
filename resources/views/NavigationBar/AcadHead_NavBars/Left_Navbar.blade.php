@@ -131,7 +131,7 @@
 
 
                                 <li class="nav-item">
-                                    <a href="error_page " class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="fas fa-bullhorn nav-icon"></i>
                                         <p class="p-drop">Announcement</p>
                                     </a>
