@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AcadHead;
+namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class DownloadUserFiles_Controller extends Controller
+class Staff_DownloadUserFiles_Controller extends Controller
 {
     public function downloadFiles($file)
     {

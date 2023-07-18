@@ -21,9 +21,11 @@ use App\Http\Controllers\AcadHead\Dashboard_Controller;
 use App\Http\Controllers\AcadHead\ViewUserFiles_Controller;
 use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
 use App\Http\Controllers\AcadHead\ActivitiesParticipants_Controller;
+use App\Http\Controllers\AcadHead\Reports_Controller;
 use App\Http\Controllers\AcadHead\Profile_Controller;
 use App\Http\Controllers\All_Profile_Controller;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ExportXLS_Controller;
 
 
 use Carbon\Carbon;
@@ -114,9 +116,15 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     /**Academic Head Reports*/
-    Route::get('/Reports', function () {
-        return view('Academic_head/AcadHead_Setup/AcadHead_Reports', ['page_title' => 'Reports']);
-        })->name('acadhead_Reports');
+    Route::get('/Reports', [Reports_Controller::class,'show'])->name('acadhead_Reports');
+    /**Requirement Assignees*/
+
+    Route::get('/RequirementAssigneesReports{bin_id}', [Reports_Controller::class, 'show_assignees'])->name('requirement_assignees_reports');
+
+    Route::get('/requirementbin_content_reports{id}', [Reports_Controller::class, 'show_bin_contents'])->name('bin_content_reports');
+
+    Route::get('/activity_participants_reports{id}', [Reports_Controller::class, 'show_participants'])->name('activity_participants_reports');
+
 
 
     /**Academic Head Activities*/
@@ -276,79 +284,11 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::put('/ReviewedBin/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
     ->name('acadhead_ReviewRequirements');
 
-    /*
-    *  breadcrumbs of academic head
-    */
 
-    // // Profile
-    // Route::get('/User_Profile', function () {
-    //     return view('/User_Profile', ['page_title' => 'Profile']);
-    // });
+    //------------------------------------------[ EXPORT ROUTES ]-------------------------------------------//
 
-    // // REQ BIN
-    // Route::get('/data_table', function () {
-    //     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/data_table', ['page_title' => 'Requirement Bin']);
-    // });
-
-    // // REQ BIN SETUP
-    // Route::get('/data_table', function () {
-    //     return view('Academic_head/AcadHead_Setup/AcadHead_Bin_Setup/data_table', ['page_title' => 'Requirement Setup']);
-    // });
-
-    // // ASSIGN REQ
-    // Route::get('/AcadHead_AssignedRequirements', function () {
-    //     return view('Academic_head/AcadHead_Setup/AcadHead_AssignedRequirements', ['page_title' => 'Assigned Requirement']);
-    // });
-
-    // // REQ BIN ASSIGNEES
-    // Route::get('/AcadHead_RequirementAssignees', function () {
-    //     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementsAssignees', ['page_title' => 'Requirement Assignees']);
-    // });
-
-    // // REQ BIN MONITOR
-    // Route::get('/AcadHead_MonitorRequirements', function () {
-    //     return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements', ['page_title' => 'Monitor User']);
-    // });
-
-    // // ADMIN USER ROLE
-    // Route::get('/AcadHead_Role', function () {
-    //     return view('Academic_head/Admin_Setup/AcadHead_Role/AcadHead_Role', ['page_title' => 'System role user']);
-    // });
-
-    // // ADMIN SYSTEM USERS
-    // Route::get('/AcadHead_AddUser', function () {
-    //     return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', ['page_title' => 'System Users']);
-    // });
-
-    // // ADMIN ACADEMIC RANK
-    // Route::get('/AcadHead_AcademicRank', function () {
-    //     return view('Academic_head/Admin_Setup/AcadHead_AcademicRank/AcadHead_AcademicRank', ['page_title' => 'Faculty Academic Rank']);
-    // });
-
-    // // ADMIN FACULTY TYPE
-    // Route::get('/AcadHead_AcademicRank', function () {
-    //     return view('Academic_head/Admin_Setup/AcadHead_FacultyType/AcadHead_FacultyType', ['page_title' => 'Faculty Types']);
-    // });
-
-    // // ADMIN REQUIREMENT TYPES
-    // Route::get('/AcadHead_RequirementType', function () {
-    //     return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType', ['page_title' => 'Requirement Types']);
-    // });
-
-    // // ADMIN ACT TYPES
-    // Route::get('/AcadHead_ActivityType', function () {
-    //     return view('Academic_head/AcadHead_Setup/AcadHead_ActivityType/AcadHead_ActivityType', ['page_title' => 'Activity Types']);
-    // });
-
-    // // ADMIN DESIGNATION
-    // Route::get('/AcadHead_Designation', function () {
-    //     return view('Academic_head/Admin_Setup/AcadHead_Designation/AcadHead_Designation', ['page_title' => 'Designation']);
-    // });
-
-    // // ADMIN PROGRAMS
-    // Route::get('/AcadHead_Specialization', function () {
-    //     return view('Academic_head/Admin_Setup/AcadHead_Specialization/AcadHead_Specialization', ['page_title' => 'Specialization']);
-    // });
+    Route::get('/requirementbins/exports',[ExportXLS_Controller::class, 'export_requirementbin'])
+    ->name('requirementbins_export');
 
 
 
