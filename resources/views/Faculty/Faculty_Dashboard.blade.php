@@ -1,8 +1,8 @@
 @extends('layouts.Faculty_master')
 
 
-{{-- CONTENTS --}}  
-@section('content')  
+{{-- CONTENTS --}}
+@section('content')
 
             <!-- Content Wrapper. Outer Container -->
             <div class="content-wrapper">
@@ -11,7 +11,7 @@
                     <div class="container-fluid">
                         <div class="row-col-sm-6 mb-2">
                             <div class="col-md-6 ml-4">
-                                <h1 class="m-0">Dashboard</h1>
+                                <h1 class="m-0">{{$greeting}} {{$name}}!</h1>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-            
+
                 <!-- List Tables for Activities and Meetings -->
                 <div class="col-lg-12 m-auto">
                     <div class="row">
@@ -134,7 +134,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                
+
                                         <div class="card-header">
                                             <p class="card-title ml-4 mt-1 row-cols-2"
                                                 style="font-size: .95rem;">Show entries</p>
@@ -156,7 +156,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                
+
                                         <!-- Tables of roles -->
                                         <div class="card-body p-0">
                                             <table class="table table-striped">
@@ -178,8 +178,8 @@
                                                         </td>
                                                         <td>
                                                             On-Going
-                                                        </td>                
-                
+                                                        </td>
+
                                                         <td class="text-center">
                                                             <button data-toggle="modal"
                                                                 data-target="#modal-xl"
@@ -189,8 +189,8 @@
                                                                 rounded-lg hover:bg-blue-800
                                                                 focus:ring-4 focus:outline-none
                                                                 focus:ring-blue-300
-                                                               
-                                                               
+
+
                                                                ">View</button>
                                                         </td>
                                                     </tr>
@@ -241,7 +241,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                
+
                                         <div class="card-header">
                                             <p class="card-title ml-4 mt-1 row-cols-2"
                                                 style="font-size: .95rem;">Show entries</p>
@@ -263,7 +263,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                
+
                                         <!-- Tables of roles -->
                                         <div class="card-body p-0">
                                             <table class="table table-striped">
@@ -285,8 +285,8 @@
                                                         </td>
                                                         <td>
                                                             On-Going
-                                                        </td>                
-                
+                                                        </td>
+
                                                         <td class="text-center">
                                                             <button data-toggle="modal"
                                                                 data-target="#modal-xl"
@@ -296,8 +296,8 @@
                                                                 rounded-lg hover:bg-blue-800
                                                                 focus:ring-4 focus:outline-none
                                                                 focus:ring-blue-300
-                                                               
-                                                               
+
+
                                                                ">View</button>
                                                         </td>
                                                     </tr>

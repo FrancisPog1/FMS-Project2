@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row-col-sm-6 mb-2">
                     <div class="col-md-6 ml-4">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">{{$greeting}} {{$name}}!</h1>
                     </div>
                 </div>
             </div>

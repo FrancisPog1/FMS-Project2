@@ -13,7 +13,7 @@
             <div class="container-fluid">
                 <div class="row mt-3">
                     <div class="col ml-4">
-                        <h1 class="m-0">Welcome, {User}!</h1>
+                        <h1 class="m-0">{{$greeting}} {{$name}}!</h1>
                     </div>
                 </div>
             </div>
