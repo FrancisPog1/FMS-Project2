@@ -37,4 +37,5 @@ class UsersProfile extends Model
         'first_name',
         'extension_name',
     ];
+
 }
