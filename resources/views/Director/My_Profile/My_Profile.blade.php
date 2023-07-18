@@ -22,7 +22,7 @@
                             @include('Director/My_Profile/edit_profile')
                     </div>
                 </section>
-
+                <br>
 
         </div>
         <!-- Footer Container -->

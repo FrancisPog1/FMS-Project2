@@ -101,4 +101,8 @@ Breadcrumbs::for('Profile', function (BreadcrumbTrail $trail) {
     $trail->push('Profile', route('user_Profile'));
 });
 
-
+// Dashboard > Report
+Breadcrumbs::for('Reports', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Reports', route('acadhead_Reports'));
+});
