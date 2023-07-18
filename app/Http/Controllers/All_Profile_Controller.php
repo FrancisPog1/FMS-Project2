@@ -25,6 +25,7 @@ class All_Profile_Controller extends Controller
     /**
      * Display the user's profile form.
      */
+
     public function show(): View
     {
         $user_id = Auth::user()->id;

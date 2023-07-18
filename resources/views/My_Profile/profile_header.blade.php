@@ -12,7 +12,7 @@
                             <div class="profile-img-content text-dark text-start">
                                 <div class="text-dark">
                                     <h3 class="h3 mb-1" style="font-weight: 600">{{$user_profile->first_name}} {{$user_profile->middle_name }}
-                                         {{$user_profile->last_name}} {{$user_profile->extension_name}}</h3>
+                                        {{$user_profile->last_name}} {{$user_profile->extension_name}}</h3>
                                     <h5 class="h5 mb-1 text-muted">{{ $email }}</h5>
                                     <p class="text-muted">{{ $role }}</p>
                                 </div>
