@@ -13,6 +13,7 @@ use App\Http\Controllers\Director\Director_MonitorRequirements_Controller;
 use App\Http\Controllers\Director\Director_DownloadUserFiles_Controller;
 use App\Http\Controllers\Director\Director_ViewUserFiles_Controller;
 use App\Http\Controllers\Director\Director_Profile_Controller;
+use App\Http\Controllers\Director\Director_Dashboard_Controller;
 
 
 /*
@@ -44,10 +45,9 @@ Route::middleware(['auth', 'isDirector'])->group(function () {
             return view('Director/Director_ActivityTypes', ['page_title' => 'Director Class Schedule']);
             })->name('Director_ActivityTypes');
 
+            //----------- DIRECTOR DASHBOARD -----------------//
+    Route::get('/DirectorDashboard', [Director_Dashboard_Controller::class, 'dashboard'])->name('Director_Dashboard');
 
-    Route::get('/DirectorDashboard', function () {
-        return view('Director/Director_Dashboard', ['page_title' => 'Director Dashboard']);
-        })->name('Director_Dashboard');
 
     // Route::get('/DirectorProfile', function () {
     //     return view('Director/Director_Profile', ['page_title' => 'Director Profile']);

@@ -12,6 +12,7 @@ use App\Http\Controllers\FacultyUpload_Controller;
 use App\Http\Controllers\Faculty\Faculty_RequirementBin_Controller;
 use App\Http\Controllers\Faculty\Faculty_Activities_Controller;
 use App\Http\Controllers\Faculty\Faculty_Profile_Controller;
+use App\Http\Controllers\Faculty\Faculty_Dashboard_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +40,9 @@ Route::middleware(['auth', 'isFaculty'])->group(function () {
         return view('Faculty/Faculty_ClassSchedule', ['page_title' => 'Faculty Class Schedule']);
         })->name('faculty_ClassSchedule');
 
-    Route::get('/FacultyDashboard', function () {
-        return view('Faculty/Faculty_Dashboard', ['page_title' => 'Faculty Dashboard']);
-        })->name('faculty_Dashboard');
+
+        //----------- FACULTY DASHBOARD -----------------//
+    Route::get('/FacultyDashboard', [Faculty_Dashboard_Controller::class, 'dashboard'])->name('faculty_Dashboard');
 
     Route::get('/FacultyProfile', function () {
         return view('Faculty/Faculty_Profile', ['page_title' => 'Faculty Profile']);
