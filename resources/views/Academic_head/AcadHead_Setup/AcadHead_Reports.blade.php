@@ -459,7 +459,7 @@
                 </div>
                 {{-- Requirements Submission Reports --}}
                 <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
-                    <!-- Submission Reqs Reports -->
+                    {{-- <!-- Submission Reqs Reports -->
                     <section class="container">
                         <div class="mr-5 ml-5">
                             <div class="card">
@@ -556,6 +556,22 @@
                                     </div>
                                 </div>
                             </div>
+                    </section>
+                    --}}
+                    <section class="content" style="padding-top: 5rem;">
+                        <div class="error-page">
+                            <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                            <div class="error-content">
+                                <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                                <p>
+                                Unfortunately, we could not display this page yet.
+                                    <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                                </p>
+                            </div>
+                            <!-- /.error-content -->
+                        </div>
                     </section>
                 </div>
                 {{-- Activity Reports --}}
@@ -710,14 +726,5 @@
 <!-- Script for Date picker -->
 <script src="{{ asset('js/farms.datepicker.js') }}"></script>
 
-<script>
-    function showTooltip(button) {
-  button.parentNode.classList.add("show");
-}
 
-function hideTooltip(button) {
-  button.parentNode.classList.remove("show");
-}
-
-</script>
 @endsection
