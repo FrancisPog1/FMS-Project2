@@ -10,9 +10,6 @@ class UsersProfile extends Model
     use HasFactory;
     public $incrementing = false; //This fix the bug with the Auth::user()->id code.
 
-    protected $primaryKey = 'id';
-    protected $keyType = 'uuid';
-
     protected $fillable = [
         'id',
         'title',
@@ -40,5 +37,4 @@ class UsersProfile extends Model
         'first_name',
         'extension_name',
     ];
-
 }

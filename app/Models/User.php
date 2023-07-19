@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Models;
-use App\Models\RequirementBin;
-use App\Models\Activities;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\UsersProfile;
 
 class User extends Model implements Authenticatable
 {
@@ -24,8 +22,7 @@ class User extends Model implements Authenticatable
         'password',
     ];
 
-    protected $primaryKey = 'id';
-    protected $keyType = 'uuid';
+
 
     protected $hidden = [
         'password',
@@ -62,18 +59,5 @@ class User extends Model implements Authenticatable
         $this->remember_token = $token;
     }
 
-
-    public function profile(){
-        return $this->hasOne(UsersProfile::class);
-    }
-
-
-    public function requirementbin(){
-        return $this->hasMany(RequirementBin::class, 'created_by');
-    }
-
-    public function activities(){
-        return $this->hasMany(Activities::class, 'created_by');
-    }
 
 }
