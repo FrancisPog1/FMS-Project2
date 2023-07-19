@@ -290,6 +290,9 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/requirementbins/exports',[ExportXLS_Controller::class, 'export_requirementbin'])
     ->name('requirementbins_export');
 
+    Route::get('/requirementbins/exports/pdf',[ExportXLS_Controller::class, 'export_requirementbin_pdf'])
+    ->name('requirementbins_export_pdf');
+
 
 
 });

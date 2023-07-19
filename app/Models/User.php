@@ -23,7 +23,8 @@ class User extends Model implements Authenticatable
         'password',
     ];
 
-
+    protected $primaryKey = 'id';
+    protected $keyType = 'uuid';
 
     protected $hidden = [
         'password',
@@ -67,7 +68,7 @@ class User extends Model implements Authenticatable
 
 
     public function requirementbin(){
-        return $this->hasOne(RequirementBin::class);
+        return $this->hasMany(RequirementBin::class, 'created_by');
     }
 
 }

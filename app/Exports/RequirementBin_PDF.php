@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 
-class RequirementBin_Excel implements FromCollection,
+class RequirementBin_PDF implements FromCollection,
     ShouldAutoSize,
     WithMapping,
     WithHeadings,
@@ -24,30 +24,34 @@ class RequirementBin_Excel implements FromCollection,
      *     @return \Illuminate\Support\Collection
      */
 
+    //For exporting PDF
+     public function registerEvents(): array
+     {
+         return [
 
-         //For exporting PDF
-         public function registerEvents(): array
-         {
-             return [
 
+             // Register an event listener that will be fired before the export process starts.
+             BeforeExport::class => function (BeforeExport $event) {
+                 // Do something before the export process starts.
 
-                 // Register an event listener that will be fired before the export process starts.
-                 BeforeExport::class => function (BeforeExport $event) {
-                     // Do something before the export process starts.
+             },
 
-                 },
+             // Register an event listener that will be fired after the export process ends.
+             AfterExport::class => function (AfterExport $event) {
+                 // Do something after the export process ends.
+             },
+         ];
+     }
 
-                 // Register an event listener that will be fired after the export process ends.
-                 AfterExport::class => function (AfterExport $event) {
-                     // Do something after the export process ends.
-                 },
-             ];
-         }
 
     public function collection()
     {
 
+
         return User::with('requirementbin','profile')->get();
+
+
+
     }
 
     public function map($user): array {

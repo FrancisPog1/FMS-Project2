@@ -8,13 +8,14 @@ aria-labelledby="custom-content-above-messages-tab">
                 <div class="card-header">
                     <div class="row justify-content-between">
                         <div class="dt-buttons btn-group flex-wrap">
-                            <button tabindex="0"
+                            <a href = "{{ route('requirementbins_export_pdf') }}"
+                                tabindex="0"
                                 aria-controls="dataTable" type="button"
                                 class="text-col-1 buttons-pdf
                                 buttons-html5 btn btn-primary mr-2"
                                 title="PDF export.">
                                 <span>Export as PDF</span>
-                            </button>
+                            </a>
                             <a href="{{ route('requirementbins_export') }}"
                                 tabindex="0"
                                 aria-controls="dataTable" type="button"
