@@ -81,7 +81,7 @@
                                 <td class="text-center">
                                     <button type="button"
                                         class="  font-medium rounded-full text-sm  px-3 py-1 mr-2 mb-2
-                                {{ $user->status == 'Inactive' ? 'text-white bg-red-500' : 'text-white bg-green-400' }}
+                                {{ $user->status == 'Offline' ? 'text-white bg-gray-500' : 'text-white bg-green-400' }}
                                 ">{{ $user->status }}</button>
                                 </td>
 

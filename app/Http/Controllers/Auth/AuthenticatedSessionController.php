@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         //Make the status "Active when the user is logged in"
         $userId = Auth::user()->id;
         $user = User::find($userId);
-        $user->status = "Active";
+        $user->status = "Online";
         $user->save();
 
 
@@ -76,7 +76,7 @@ class AuthenticatedSessionController extends Controller
     {    //Make the status "Active when the user is logged in"
         $userId = Auth::user()->id;
         $user = User::find($userId);
-        $user->status = "Inactive";
+        $user->status = "Offline";
         $user->save();
 
         Auth::guard('web')->logout();

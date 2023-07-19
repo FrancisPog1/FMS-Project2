@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\AcadHead;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
