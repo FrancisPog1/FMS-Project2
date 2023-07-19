@@ -2,10 +2,10 @@
 
 {{-- CONTENTS --}}
 @section('content')
-    <!-- Content Wrapper. Outer Container -->
+    <!-- Content Wrapper. Outer Container
     <div class="content-wrapper">
 
-        <!-- Content Header (Page header) -->
+        < Content Header (Page header) >
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row-col-sm-6 mb-2">
@@ -15,58 +15,104 @@
                 </div>
             </div>
         </div>
+
+    </div>-->
+
+<div class="wrapper">
+
+
+    <!-- Content Wrapper. Outer Container -->
+    <div class="content-wrapper">
+
+        {{-- New Page Header --}}
+        <section class="content-header ">
+            <div class="mr-5 ml-5" >
+                <div class="card " >
+                    <div class="card-header" style="height: 85px;">
+                        <h1 class="m-0">Reports Dashboard</h1>
+
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">{{ Breadcrumbs::render('Reports') }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Body -->
         <div class="card-body">
-            <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+
+            <!-- Menu toggle -->
+            <ul class="nav nav-tabs justify-content-center" id="custom-content-above-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill"
-                        href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home"
-                        aria-selected="true">Class Reports</a>
+                    <a class="nav-link active"
+                        id="custom-content-above-home-tab"
+                        data-toggle="pill"
+                        href="#custom-content-above-home" role="tab"
+                        aria-controls="custom-content-above-home"
+                        aria-selected="true"
+                        style="color: var(--pallete-1);">Class Schedule Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill"
-                        href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile"
-                        aria-selected="false">Observation Reports</a>
+                    <a class="nav-link"
+                        id="custom-content-above-profile-tab"
+                        data-toggle="pill"
+                        href="#custom-content-above-profile" role="tab"
+                        aria-controls="custom-content-above-profile"
+                        aria-selected="false"
+                        style="color: var(--pallete-1);">Observation Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="custom-content-above-messages-tab" data-toggle="pill"
-                        href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages"
-                        aria-selected="false">Requirement Submission Reports</a>
+                    <a class="nav-link"
+                        id="custom-content-above-messages-tab"
+                        data-toggle="pill"
+                        href="#custom-content-above-messages" role="tab"
+                        aria-controls="custom-content-above-messages"
+                        aria-selected="false"
+                        style="color: var(--pallete-1);">Requirement Submission Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="custom-content-above-settings-tab" data-toggle="pill"
-                        href="#custom-content-above-settings" role="tab" aria-controls="custom-content-above-settings"
-                        aria-selected="false">Activity Reports</a>
+                    <a class="nav-link"
+                        id="custom-content-above-settings-tab"
+                        data-toggle="pill"
+                        href="#custom-content-above-settings" role="tab"
+                        aria-controls="custom-content-above-settings"
+                        aria-selected="false"
+                        style="color: var(--pallete-1);">Activity Reports</a>
                 </li>
             </ul>
-            <div class="tab-custom-content">
-                <div class="card-header">
+
+            <!-- Table Header -->
+            <div class="tab-content">
+                <div class="m-3">
                     <!-- Date range -->
-                    <div class="row justify-content-between" style="height: 40px;">
+                    <div class="row justify-content-between"
+                        style="height: 40px;">
                         <div class="btn-group btn-group-sm">
                             <div>
                                 <p class="text-dark pl-3 pr-2 mt-2">Date
                                     From:</p>
                             </div>&nbsp;&nbsp;
                             <div>
-                                <input type="date"
-                                    class="form-control
-                                            date-range-filter"
-                                    id="date_from" name="date_from" placeholder="date" tabindex="1" required>
+                                <input type="date" class="form-control
+                                    date-range-filter" id="date_from"
+                                    name="date_from" placeholder="date"
+                                    tabindex="1" required>
                             </div>&nbsp;&nbsp;
                             <div>
                                 <p class="text-dark pl-3 pr-2 mt-2">Date
                                     To: </p>
                             </div>&nbsp;&nbsp;
                             <div>
-                                <input type="date"
-                                    class="form-control
-                                            date-range-filter"
-                                    id="date_to" name="date_to" placeholder="date" tabindex="1" required>
+                                <input type="date" class="form-control
+                                    date-range-filter" id="date_to"
+                                    name="date_to" placeholder="date"
+                                    tabindex="1" required>
                             </div>
                             <div>
                                 <button id="btnDateReset" type="button"
                                     class="text-col-1 btn btn-secondary
-                                            btn-s p-drop ml-2 mb-5 pr-3 mt-1">Reset</button>
+                                    btn-s p-drop ml-2 mb-5 pr-3 mt-1">Reset</button>
                             </div>
                         </div>
 
@@ -74,50 +120,85 @@
                             <div>
                                 <p class="text-dark pl-3 pr-2 mt-2">Status
                                     Filter:</p>
-                            </div>&nbsp;&nbsp;
+                            </div>
+                            {{-- &nbsp;&nbsp;
                             <div>
                                 <button type="button"
                                     class="text-col-1 btn btn-block
-                                            btn-warning btn-s p-drop">Pending</button>
+                                    btn-warning btn-s p-drop">Pending</button>
                             </div>
                             <div>
                                 <button type="button"
                                     class="text-col-1 btn btn-block
-                                            btn-danger btn-s p-drop">Cancelled</button>
+                                    btn-danger btn-s p-drop">Cancelled</button>
                             </div>
                             <div>
                                 <button type="button"
                                     class="text-col-1 btn btn-block
-                                            btn-info btn-s p-drop">Ongoing</button>
+                                    btn-info btn-s p-drop">Ongoing</button>
                             </div>
                             <div>
                                 <button type="button"
                                     class="text-col-1 btn btn-block
-                                            btn-success btn-s p-drop">Done</button>
+                                    btn-success btn-s p-drop">Done</button>
+                            </div> --}}
+                            <div>
+                                <button data-toggle="modal"
+                                        data-target="#modal-xl-view" type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
+                                        <i class="fa-solid fa-exclamation"></i>
+                                </button>
                             </div>
+                            <div>
+                                <button data-toggle="modal"
+                                        data-target="#modal-xl-edit" type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300"
+                                        title="">
+                                        <i class="fa-regular fa-flag"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button data-toggle="modal"
+                                        data-target="#modal-xl-view" type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-green focus:ring-4 focus:outline-none focus:ring-green-300">
+                                        <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Actual Table    -->
             <div class="tab-content" id="custom-content-above-tabContent">
-                <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel"
-                    aria-labelledby="custom-content-above-home-tab">
-                    <!-- Class Attendace Reports -->
+                {{-- Class Reports --}}
+                <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
+                    {{-- <!-- Class Attendace Reports -->
                     <section class="container">
                         <div class="mr-5 ml-5">
                             <div class="card">
+
                                 <div class="card-header">
                                     <div class="row justify-content-between">
                                         <div class="dt-buttons btn-group flex-wrap">
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-pdf
-                                                        buttons-html5 btn btn-primary mr-2"
+                                                buttons-html5 btn btn-primary mr-2"
                                                 title="PDF export.">
                                                 <span>Export as PDF</span>
                                             </button>
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-excel
-                                                        buttons-html5 btn btn-success"
+                                                buttons-html5 btn btn-success"
                                                 title="Excel export.">
                                                 <span>Export as XLS</span>
                                             </button>
@@ -125,17 +206,18 @@
                                         <!-- Search function --->
                                         <div class="text-right">
                                             <div class="form-inline float-right">
-                                                <div class="input-group" data-widget="sidebar-search">
-                                                    <input
-                                                        class="form-control
-                                                                form-control-sidebar px-4 py-2
-                                                                text-sm font-medium"
-                                                        type="search" placeholder="Search" aria-label="Search">
+                                                <div class="input-group"
+                                                    data-widget="sidebar-search">
+                                                    <input class="form-control
+                                                        form-control-sidebar px-4 py-2
+                                                        text-sm font-medium"
+                                                        type="search"
+                                                        placeholder="Search"
+                                                        aria-label="Search">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-sidebar">
-                                                            <i
-                                                                class="fas fa-search
-                                                                        fa-fw"></i>
+                                                            <i class="fas fa-search
+                                                                fa-fw"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -192,55 +274,81 @@
                                                     ACAD-202
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-info btn-sm"
-                                                        onclick="window.open('http://127.0.0.1:8000/uploads/class_proof_of_attendance/8598523fd7500e3120ebe6193abd3336.jpg')"
-                                                        target="_blank">IG-230426-191028.jpg
-                                                    </button>
+                                                    <button type="button"
+                                                        class="text-white bg-blue-500
+                                                        hover:bg-blue-600
+                                                        focus:outline-none focus:ring-4
+                                                        focus:ring-blue-300 font-medium
+                                                        rounded-full text-sm px-2
+                                                        text-center mr-2 mb-2
+
+
+                                                        ">Ongoing</button>
                                                 </td>
                                                 <td>
                                                     <button type="button"
                                                         class="text-white bg-blue-500
-                                                                hover:bg-blue-600
-                                                                focus:outline-none focus:ring-4
-                                                                focus:ring-blue-300 font-medium
-                                                                rounded-full text-sm px-2
-                                                                text-center mr-2 mb-2
-                                                                dark:bg-blue-600
-                                                                dark:hover:bg-blue-600
-                                                                dark:focus:ring-red-800">Ongoing</button>
-                                                </td>
-                                        </tbody>
-                                        <tfoot>
-                                            <td class="dataTables_info text-col-1" id="dataTable_info" role="status"
-                                                aria-live="polite" colspan="12" style="font-size: .9rem;">
-                                                Showing x to x of x entries
-                                            </td>
-                                        </tfoot>
+                                                        hover:bg-blue-600
+                                                        focus:outline-none focus:ring-4
+                                                        focus:ring-blue-300 font-medium
+                                                        rounded-full text-sm px-2
+                                                        text-center mr-2 mb-2
 
-                                    </table>
+
+                                                        ">Ongoing</button>
+                                                </td>
+                                            </tbody>
+                                            <tfoot>
+                                                <td class="dataTables_info text-col-1"
+                                                    id="dataTable_info" role="status"
+                                                    aria-live="polite" colspan="12"
+                                                    style="font-size: .9rem;">
+                                                    Showing x to x of x entries
+                                                </td>
+                                            </tfoot>
+
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+                    </section>
+                    --}}
+                    <section class="content" style="padding-top: 5rem;">
+                        <div class="error-page">
+                            <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                            <div class="error-content">
+                                <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                                <p>
+                                Unfortunately, we could not display this page yet.
+                                    <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                                </p>
+                            </div>
+                            <!-- /.error-content -->
                         </div>
                     </section>
                 </div>
-                <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel"
-                    aria-labelledby="custom-content-above-profile-tab">
-                    <!-- Class Observation Reports -->
+                {{-- Observation Reports --}}
+                <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
+                    {{-- <!-- Class Observation Reports -->
                     <section class="container">
                         <div class="mr-5 ml-5">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row justify-content-between">
                                         <div class="dt-buttons btn-group flex-wrap">
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-pdf
-                                                        buttons-html5 btn btn-primary mr-2"
+                                                buttons-html5 btn btn-primary mr-2"
                                                 title="PDF export.">
                                                 <span>Export as PDF</span>
                                             </button>
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-excel
-                                                        buttons-html5 btn btn-success"
+                                                buttons-html5 btn btn-success"
                                                 title="Excel export.">
                                                 <span>Export as XLS</span>
                                             </button>
@@ -248,17 +356,18 @@
                                         <!-- Search function --->
                                         <div class="text-right">
                                             <div class="form-inline float-right">
-                                                <div class="input-group" data-widget="sidebar-search">
-                                                    <input
-                                                        class="form-control
-                                                                form-control-sidebar px-4 py-2
-                                                                text-sm font-medium"
-                                                        type="search" placeholder="Search" aria-label="Search">
+                                                <div class="input-group"
+                                                    data-widget="sidebar-search">
+                                                    <input class="form-control
+                                                        form-control-sidebar px-4 py-2
+                                                        text-sm font-medium"
+                                                        type="search"
+                                                        placeholder="Search"
+                                                        aria-label="Search">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-sidebar">
-                                                            <i
-                                                                class="fas fa-search
-                                                                        fa-fw"></i>
+                                                            <i class="fas fa-search
+                                                                fa-fw"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -320,47 +429,67 @@
                                                 <td>
                                                     <button type="button"
                                                         class="text-white bg-blue-500
-                                                                hover:bg-blue-600
-                                                                focus:outline-none focus:ring-4
-                                                                focus:ring-blue-300 font-medium
-                                                                rounded-full text-sm px-3
-                                                                text-center mr-2 mb-2
-                                                                dark:bg-blue-600
-                                                                dark:hover:bg-blue-600
-                                                                dark:focus:ring-red-800">Ongoing</button>
-                                                </td>
-                                        </tbody>
-                                        <tfoot>
-                                            <td class="dataTables_info text-col-1" id="dataTable_info" role="status"
-                                                aria-live="polite" colspan="12" style="font-size: .9rem;">
-                                                Showing x to x of x entries
-                                            </td>
-                                        </tfoot>
+                                                        hover:bg-blue-600
+                                                        focus:outline-none focus:ring-4
+                                                        focus:ring-blue-300 font-medium
+                                                        rounded-full text-sm px-3
+                                                        text-center mr-2 mb-2
 
-                                    </table>
+
+                                                        ">Ongoing</button>
+                                                </td>
+                                            </tbody>
+                                            <tfoot>
+                                                <td class="dataTables_info text-col-1"
+                                                    id="dataTable_info" role="status"
+                                                    aria-live="polite" colspan="12"
+                                                    style="font-size: .9rem;">
+                                                    Showing x to x of x entries
+                                                </td>
+                                            </tfoot>
+
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+                    </section>
+                    --}}
+                    <section class="content" style="padding-top: 5rem;">
+                        <div class="error-page">
+                            <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                            <div class="error-content">
+                                <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                                <p>
+                                Unfortunately, we could not display this page yet.
+                                    <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                                </p>
+                            </div>
+                            <!-- /.error-content -->
                         </div>
                     </section>
                 </div>
-                <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel"
-                    aria-labelledby="custom-content-above-messages-tab">
-                    <!-- Submission Reqs Reports -->
+                {{-- Requirements Submission Reports --}}
+                <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
+                    {{-- <!-- Submission Reqs Reports -->
                     <section class="container">
                         <div class="mr-5 ml-5">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row justify-content-between">
                                         <div class="dt-buttons btn-group flex-wrap">
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-pdf
-                                                        buttons-html5 btn btn-primary mr-2"
+                                                buttons-html5 btn btn-primary mr-2"
                                                 title="PDF export.">
                                                 <span>Export as PDF</span>
                                             </button>
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-excel
-                                                        buttons-html5 btn btn-success"
+                                                buttons-html5 btn btn-success"
                                                 title="Excel export.">
                                                 <span>Export as XLS</span>
                                             </button>
@@ -368,17 +497,18 @@
                                         <!-- Search function --->
                                         <div class="text-right">
                                             <div class="form-inline float-right">
-                                                <div class="input-group" data-widget="sidebar-search">
-                                                    <input
-                                                        class="form-control
-                                                                form-control-sidebar px-4 py-2
-                                                                text-sm font-medium"
-                                                        type="search" placeholder="Search" aria-label="Search">
+                                                <div class="input-group"
+                                                    data-widget="sidebar-search">
+                                                    <input class="form-control
+                                                        form-control-sidebar px-4 py-2
+                                                        text-sm font-medium"
+                                                        type="search"
+                                                        placeholder="Search"
+                                                        aria-label="Search">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-sidebar">
-                                                            <i
-                                                                class="fas fa-search
-                                                                        fa-fw"></i>
+                                                            <i class="fas fa-search
+                                                                fa-fw"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -405,8 +535,7 @@
                                                     04-16-23
                                                 </td>
                                                 <td>
-                                                    Getting Started with Interview Preparation. Free online Course in
-                                                    Simplilearn.
+                                                    Getting Started with Interview Preparation. Free online Course in Simplilearn.
                                                 </td>
                                                 <td>
                                                     Proof of Meeting/Activity Attendance
@@ -417,47 +546,67 @@
                                                 <td>
                                                     <button type="button"
                                                         class="text-white bg-blue-500
-                                                                hover:bg-blue-600
-                                                                focus:outline-none focus:ring-4
-                                                                focus:ring-blue-300 font-medium
-                                                                rounded-full text-sm px-3
-                                                                text-center mr-2 mb-2
-                                                                dark:bg-blue-600
-                                                                dark:hover:bg-blue-600
-                                                                dark:focus:ring-red-800">Ongoing</button>
-                                                </td>
-                                        </tbody>
-                                        <tfoot>
-                                            <td class="dataTables_info text-col-1" id="dataTable_info" role="status"
-                                                aria-live="polite" colspan="12" style="font-size: .9rem;">
-                                                Showing x to x of x entries
-                                            </td>
-                                        </tfoot>
+                                                        hover:bg-blue-600
+                                                        focus:outline-none focus:ring-4
+                                                        focus:ring-blue-300 font-medium
+                                                        rounded-full text-sm px-3
+                                                        text-center mr-2 mb-2
 
-                                    </table>
+
+                                                        ">Ongoing</button>
+                                                </td>
+                                            </tbody>
+                                            <tfoot>
+                                                <td class="dataTables_info text-col-1"
+                                                    id="dataTable_info" role="status"
+                                                    aria-live="polite" colspan="12"
+                                                    style="font-size: .9rem;">
+                                                    Showing x to x of x entries
+                                                </td>
+                                            </tfoot>
+
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+                    </section>
+                    --}}
+                    <section class="content" style="padding-top: 5rem;">
+                        <div class="error-page">
+                            <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                            <div class="error-content">
+                                <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                                <p>
+                                Unfortunately, we could not display this page yet.
+                                    <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                                </p>
+                            </div>
+                            <!-- /.error-content -->
                         </div>
                     </section>
                 </div>
-                <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel"
-                    aria-labelledby="custom-content-above-settings-tab">
-                    <!-- Activity Reports -->
+                {{-- Activity Reports --}}
+                <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
+                    {{-- <!-- Activity Reports -->
                     <section class="container">
                         <div class="mr-5 ml-5">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row justify-content-between">
                                         <div class="dt-buttons btn-group flex-wrap">
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-pdf
-                                                        buttons-html5 btn btn-primary mr-2"
+                                                buttons-html5 btn btn-primary mr-2"
                                                 title="PDF export.">
                                                 <span>Export as PDF</span>
                                             </button>
-                                            <button tabindex="0" aria-controls="dataTable" type="button"
+                                            <button tabindex="0"
+                                                aria-controls="dataTable" type="button"
                                                 class="text-col-1 buttons-excel
-                                                        buttons-html5 btn btn-success"
+                                                buttons-html5 btn btn-success"
                                                 title="Excel export.">
                                                 <span>Export as XLS</span>
                                             </button>
@@ -465,17 +614,18 @@
                                         <!-- Search function --->
                                         <div class="text-right">
                                             <div class="form-inline float-right">
-                                                <div class="input-group" data-widget="sidebar-search">
-                                                    <input
-                                                        class="form-control
-                                                                form-control-sidebar px-4 py-2
-                                                                text-sm font-medium"
-                                                        type="search" placeholder="Search" aria-label="Search">
+                                                <div class="input-group"
+                                                    data-widget="sidebar-search">
+                                                    <input class="form-control
+                                                        form-control-sidebar px-4 py-2
+                                                        text-sm font-medium"
+                                                        type="search"
+                                                        placeholder="Search"
+                                                        aria-label="Search">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-sidebar">
-                                                            <i
-                                                                class="fas fa-search
-                                                                        fa-fw"></i>
+                                                            <i class="fas fa-search
+                                                                fa-fw"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -520,33 +670,51 @@
                                                 <td>
                                                     <button type="button"
                                                         class="text-white bg-blue-500
-                                                                hover:bg-blue-600
-                                                                focus:outline-none focus:ring-4
-                                                                focus:ring-blue-300 font-medium
-                                                                rounded-full text-sm px-3
-                                                                text-center mr-2 mb-2
-                                                                dark:bg-blue-600
-                                                                dark:hover:bg-blue-600
-                                                                dark:focus:ring-red-800">Ongoing</button>
+                                                        hover:bg-blue-600
+                                                        focus:outline-none focus:ring-4
+                                                        focus:ring-blue-300 font-medium
+                                                        rounded-full text-sm px-3
+                                                        text-center mr-2 mb-2
+
+
+                                                        ">Ongoing</button>
                                                 </td>
                                                 <td>
 
                                                     11-30-24 05:00 PM
                                                 </td>
                                                 <td>
-                                                    uploads/memo/<br>1119b23b12cbd646a4<br>a6c665efcb2bfe.pdf
+                                                    uploads/ memorandum/ 1119b23b12cbd646a4a6c665efcb2bfe.pdf
                                                 </td>
-                                        </tbody>
-                                        <tfoot>
-                                            <td class="dataTables_info text-col-1" id="dataTable_info" role="status"
-                                                aria-live="polite" colspan="12" style="font-size: .9rem;">
-                                                Showing x to x of x entries
-                                            </td>
-                                        </tfoot>
+                                            </tbody>
+                                            <tfoot>
+                                                <td class="dataTables_info text-col-1"
+                                                    id="dataTable_info" role="status"
+                                                    aria-live="polite" colspan="12"
+                                                    style="font-size: .9rem;">
+                                                    Showing x to x of x entries
+                                                </td>
+                                            </tfoot>
 
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
+                        </div>
+                    </section>
+                    --}}
+                    <section class="content" style="padding-top: 5rem;">
+                        <div class="error-page">
+                            <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                            <div class="error-content">
+                                <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                                <p>
+                                Unfortunately, we could not display this page yet.
+                                    <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                                </p>
                             </div>
+                            <!-- /.error-content -->
                         </div>
                     </section>
                 </div>
@@ -554,36 +722,14 @@
         </div>
     </div>
 
-    <!--View Modal-->
-    <section class="content">
-        <div class="modal fade" id="modal-xl">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">View Modal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>One fine body&hellip;</p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
+        <!-- Content Footer -->
+        <footer class="main-footer">
+            <strong>Faculty Records & Monitoring System &copy; 2024 <a
+                    href="https://pup.edu.ph">PUPQC.</a></strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 2.2.0
             </div>
-        </div>
-    </section>
-
-    <!-- Footer Container -->
-    <footer class="main-footer">
-        <strong>director Records & Monitoring System &copy; 2024 <a href="https://pup.edu.ph">PUPQC.</a></strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 2.2.0
-        </div>
-    </footer>
-    </div>
+        </footer>
+</div>
 @endsection
