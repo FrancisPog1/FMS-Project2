@@ -22,7 +22,7 @@
 
 <script>
     $(document).ready(function() {
-        var filteredUsersUrl = "{{ route('filtered_users') }}";
+        var filteredUsersUrl = "{{ route('admin.filtered_users') }}";
         $("#types").on('change', function() {
             var types = $(this).val();
             // alert('Hello fuck');
@@ -97,11 +97,11 @@
         form.submit();
     }
 
-    function localWarning(event) {
+    $(document).on('click', '.remove-button', function(event) {
         event.preventDefault();
 
         var participant_id = this.getAttribute("name");
-        var action = "{{ route('remove_participants', '') }}" + participant_id; // Replace with the actual delete route
+        var action = "{{ route('admin.remove_participants', '') }}" + participant_id; // Replace with the actual delete route
 
         Swal.fire({
             title: "Are you sure?",
@@ -120,35 +120,5 @@
                 createDeleteForm(action, participant_id);
             }
         });
-    }
-    // const button = document.querySelector('.remove-button');
-    // button.addEventListener('click', localWarning);
-
-    const deleteButtons = document.querySelectorAll('.remove-button');
-    deleteButtons.forEach((removebutton) => {
-    removebutton.addEventListener('click', localWarning);
     });
-
-
-    document.getElementById('show-modal-logout').addEventListener('click', function () {
-    Swal.fire({
-        title: 'Are you sure?',
-        icon: 'info',
-        html:
-            'Do you want to <b>Log Out</b>?',
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Yes',
-        confirmButtonColor: '#3085d6',
-        confirmButtonAriaLabel: '...',
-        cancelButtonColor: '#d33',
-        cancelButtonAriaLabel: '...'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.replace("logout");
-        }
-    })
-});
-
 </script>

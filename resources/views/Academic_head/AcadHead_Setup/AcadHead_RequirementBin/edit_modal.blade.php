@@ -1,6 +1,6 @@
 <!--Edit Modal-->
 <section class="content">
-    <form id="editForm-{{$requirementbin->id}}" action="{{ route('update_requirementbins', $requirementbin->id) }}"  method="post">
+    <form id="editForm-{{$requirementbin->id}}" action="{{ route('admin.update_requirementbins', $requirementbin->id) }}"  method="post">
         @method('PUT')
         @csrf
         <div class="modal fade" id="modal-xl-edit-{{$requirementbin->id}}">

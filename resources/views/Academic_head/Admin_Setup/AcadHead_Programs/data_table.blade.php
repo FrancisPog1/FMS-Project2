@@ -65,7 +65,7 @@
                                 <td>{{ $program->title }}</td>
                                 <td>{{ $program->description }}</td>
                                 <td class="text-center">
-                                    <form method="POST" action="{{ route('delete_programs', $program->id) }}">
+                                    <form method="POST" action="{{ route('admin.delete_programs', $program->id) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button data-toggle="modal"

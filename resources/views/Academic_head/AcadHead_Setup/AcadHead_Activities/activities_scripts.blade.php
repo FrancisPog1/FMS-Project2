@@ -79,7 +79,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('Create_Activities') }}",
+                url: "{{ route('admin.activities.store') }}",
                 data: jQuery('#createForm').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -137,7 +137,7 @@
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_activities', '') }}" + id,
+                    url: "{{ route('admin.update_activities', '') }}" + id,
                     data: jQuery(formID).serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -215,7 +215,7 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_activities', '') }}" + name; // Replace with the actual delete route
+        var action = "{{ route('admin.destroy_activities', '') }}" + name; // Replace with the actual delete route
 
         Swal.fire({
             title: "Are you sure?",

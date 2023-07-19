@@ -66,7 +66,7 @@
                                         <td>{{ $requirement_type->description }}</td>
                                         <td class="text-center">
                                             <form method="POST"
-                                                action="{{ route('delete_requirementtypes', $requirement_type->id) }}">
+                                                action="{{ route('admin.delete_requirementtypes', $requirement_type->id) }}">
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
 

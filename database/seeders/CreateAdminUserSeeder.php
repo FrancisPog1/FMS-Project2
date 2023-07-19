@@ -15,6 +15,7 @@ use App\Models\RequirementType;
 use App\Models\Specialization;
 use App\Models\AcademicRank;
 use App\Models\RequirementBin;
+use App\Models\UsersProfile;
 use Illuminate\Support\Str;
 
 class CreateAdminUserSeeder extends Seeder
@@ -38,28 +39,64 @@ class CreateAdminUserSeeder extends Seeder
 
         // For users account data inject
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcA',
             'email' => 'acadhead@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
             'foreign_role_id' => 1,
         ]);
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcF',
             'email' => 'faculty@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
             'foreign_role_id' => 2,
         ]);
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS',
             'email' => 'staff@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
             'foreign_role_id' => 3,
         ]);
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcD',
             'email' => 'director@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
             'foreign_role_id' => 4,
+        ]);
+
+//--------------------------For User Profile----------------------------//
+
+        $profile = UsersProfile::create([
+            'id' => '6646A592-e6aa-4a71-9eb6-16fccd7c1bcD',
+            'first_name' => 'Demelyn',
+            'last_name' => 'Monzon',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcA'
+        ]);
+
+        $profile = UsersProfile::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16adcd7c1bcD',
+            'first_name' => 'Francis',
+            'last_name' => 'Candelaria',
+            'middle_name' => 'Constancio',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcF'
+        ]);
+
+
+        $profile = UsersProfile::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16adcd7c1aed',
+            'first_name' => 'Andrew',
+            'last_name' => 'Brinas',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS'
+        ]);
+
+
+        $profile = UsersProfile::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16fccaaa1bcD',
+            'first_name' => 'Daniel',
+            'last_name' => 'Reyes',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcD'
         ]);
 
 

@@ -1,5 +1,5 @@
 <section class="content">
-    <form id="create_program" action="{{ route('CreateProgram') }}" method="post">
+    <form id="create_program" action="{{ route('admin.programs.store') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered">

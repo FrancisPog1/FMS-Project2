@@ -1,6 +1,6 @@
         <!-- Assigning Modal -->
         <section class="content">
-            <form id="assign" action="{{ route('add_participants', $activity_id) }}" method="post">
+            <form id="assign" action="{{ route('admin.add_participants', $activity_id) }}" method="post">
                 @csrf
                 <div class="modal fade" id="modal-xl-add-participants">
                     <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">

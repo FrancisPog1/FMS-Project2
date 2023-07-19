@@ -17,7 +17,7 @@
 
                 jQuery.ajax({
                     type: 'post',
-                    url: "{{ route('update_designations', '') }}" + designationId,
+                    url: "{{ route('admin.update_designations', '') }}" + designationId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -104,7 +104,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('CreateDesignation') }}",
+                url: "{{ route('admin.designations.store') }}",
                 data: jQuery('#create_designation').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -182,7 +182,7 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_designations', '') }}" + name; // Replace with the actual delete route
+        var action = "{{ route('admin.destroy_designations', '') }}" + name; // Replace with the actual delete route
 
         Swal.fire({
             title: "Are you sure?",
@@ -232,7 +232,7 @@
 {{-- AJAX SCRIPT FOR SORTING --}}
 <script>
     $(document).ready(function() {
-        var sortedRoute = "{{ route('sorted_designations') }}";
+        var sortedRoute = "{{ route('admin.sorted_designations') }}";
 
         $("#sort").on('change', function() {
             var sortOption = $("#sort").val();
@@ -250,7 +250,7 @@
                 success: function(data) {
                     var designations = data.designations;
                     var html = '';
-                    var deleteRoute = "{{ route('delete_designations', ':id') }}";
+                    var deleteRoute = "{{ route('admin.delete_designations', ':id') }}";
 
                     if (designations.length > 0) {
                         for (let i = 0; i < designations.length; i++) {

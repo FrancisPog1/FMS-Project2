@@ -89,7 +89,7 @@
 
                                 <td class="text-center">
 
-                                    <a href="{{ route('acadhead_MonitorRequirements', [
+                                    <a href="{{ route('admin.monitor_requirements.show', [
                                         'user_id' => $assigned_reqr->user_id,
                                         'assigned_bin_id' => $assigned_reqr->id,
                                         'req_bin_id' => $assigned_reqr->req_bin_id,

@@ -16,7 +16,7 @@
 
                 jQuery.ajax({
                     type: 'post',
-                    url: "{{ route('update_users', '') }}" + userId,
+                    url: "{{ route('admin.update_users', '') }}" + userId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -118,7 +118,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('register_user') }}",
+                url: "{{ route('admin.register_user') }}",
                 data: jQuery('#adduser').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -168,7 +168,7 @@
 
 <script>
     $(document).ready(function() {
-        var filteredAndSortedUsersUrl = "{{ route('filtered_and_sorted_users') }}";
+        var filteredAndSortedUsersUrl = "{{ route('admin.filtered_and_sorted_users') }}";
         $("#filter, #sort").on('change', function() {
             var filterOption = $("#filter").val();
             var sortOption = $("#sort").val();
@@ -188,7 +188,7 @@
                 success: function(data) {
                     var users = data.users;
                     var html = '';
-                    var deleteRoute = "{{ route('delete_users', ':user_id') }}";
+                    var deleteRoute = "{{ route('admin.delete_users', ':user_id') }}";
                     if (users.length > 0) {
                         for (let i = 0; i < users.length; i++) {
                             html +=  '<tr>' +
