@@ -79,7 +79,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('staff_create_activities') }}",
+                url: "{{ route('staff.activities.store') }}",
                 data: jQuery('#createForm').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -131,13 +131,17 @@
         $(document).ready(function() {
                 var countdown = 2;
                 var formID = '#editForm-' + id;
+
+                var route = "{{ route('staff.update_activities', ':id') }}"; // Replace with the actual delete route
+                var url= route.replace(':id', id);
+
             // Handle form submission
             $(formID).on('submit', function(e) {
                 e.preventDefault(); // Prevent default form submission behavior
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('staff_update_activities', '') }}" + id,
+                    url: url,
                     data: jQuery(formID).serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -215,7 +219,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('staff_destroy_activities', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('staff.destroy_activities', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",

@@ -1,6 +1,6 @@
     <!-- Restoring Modal -->
     <section class="content">
-        <form action="{{ route('staff_restore_requirements') }}" method="post">
+        <form action="{{ route('staff.restore_requirements') }}" method="post">
             @csrf
             <div class="modal fade" id="modal-xl-restore">
                 <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">

@@ -13,10 +13,13 @@ use App\Http\Controllers\Staff\Staff_Activities_Controller;
 use App\Http\Controllers\Staff\Staff_Dashboard_Controller;
 
 use App\Http\Controllers\Staff\Staff_RequirementSetup_Controller;
-use App\Http\Controllers\Staff\Staff_ViewUserFiles_Controller;
-use App\Http\Controllers\Staff\Staff_DownloadUserFiles_Controller;
 use App\Http\Controllers\Staff\Staff_ActivitiesParticipants_Controller;
 use App\Http\Controllers\Staff\Staff_Profile_Controller;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+//Reuse the controller from the controller/AcadHead
+use App\Http\Controllers\AcadHead\ViewUserFiles_Controller;
+use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
 
 
 /*
@@ -31,97 +34,96 @@ use App\Http\Controllers\Staff\Staff_Profile_Controller;
 */
 
 //------------------------------------------------------------------ STAFF --------------------------------------------------------------------//
-Route::middleware(['auth', 'isStaff'])->group(function () {
-    Route::get('/StaffClassObservation', function () {
+Route::middleware(['auth', 'isStaff'])->prefix('staff')->name('staff.')->group(function () {
+    Route::get('class_observation', function () {
         return view('Staff/Staff_ClassObservation', ['page_title' => 'Staff Class Observation']);
-        })->name('Staff_ClassObservation');
+        })->name('class_observation');
 
-    Route::get('/StaffClassSchedule', function () {
+    Route::get('class_schedule', function () {
         return view('Staff/Staff_ClassSchedule', ['page_title' => 'Staff Class Schedule']);
-        })->name('Staff_ClassSchedule');
+        })->name('class_schedule');
 
-    Route::get('/StaffDashboard',[Staff_Dashboard_Controller::class, 'dashboard'])->name('Staff_Dashboard');
-
-
-
-
-
+    Route::get('dashboard',[Staff_Dashboard_Controller::class, 'dashboard'])->name('dashboard');
 
 
     // Route::get('/StaffProfile', function () {
     //     return view('Staff/Staff_Profile', ['page_title' => 'Staff Profile']);
     //     })->name('Staff_Profile');
 
-    Route::get('/StaffReports', function () {
+    Route::get('reports', function () {
         return view('Staff/Staff_Reports', ['page_title' => 'Staff Reports']);
-        })->name('Staff_Reports');
+        })->name('reports');
 
 
 
-        Route::put('/staff_update_bincontents{id}', [Staff_RequirementSetup_Controller::class, 'updateRequirement'])->name('staff_update_requirements');
-        Route::delete('/staff_delete_bincontents/{id}', [Staff_RequirementSetup_Controller::class, 'deleteRequirement'])->name('staff_delete_requirements');
-        Route::delete('/staff_destroy_bincontents{id}', [Staff_RequirementSetup_Controller::class, 'destroyRequirement'])->name('staff_destroy_requirements');
-        Route::get('/staff_requirementbin_setup_page', [Staff_RequirementSetup_Controller::class, 'filtered_user'])->name('staff_filtered_users');
-        Route::post('/staff_restore_bincontents', [Staff_RequirementSetup_Controller::class, 'restoreRequirement'])->name('staff_restore_requirements');
+        Route::put('update_bincontents/{id}', [Staff_RequirementSetup_Controller::class, 'updateRequirement'])->name('update_requirements');
+        Route::delete('delete_bincontents/{id}', [Staff_RequirementSetup_Controller::class, 'deleteRequirement'])->name('delete_requirements');
+        Route::delete('destroy_bincontents/{id}', [Staff_RequirementSetup_Controller::class, 'destroyRequirement'])->name('destroy_requirements');
+        Route::get('requirementbin_setup', [Staff_RequirementSetup_Controller::class, 'filtered_user'])->name('filtered_users');
+        Route::post('restore_requirementbin_contents', [Staff_RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
 
-        Route::get('/staff_filtered_and_sorted_assignees/{bin_id}', [Staff_RequirementBin_Controller::class, 'filteredAndSortedAssignees'])->name('staff_filtered_and_sorted_assignees');
+        Route::get('filtered_and_sorted_assignees/{bin_id}', [Staff_RequirementBin_Controller::class, 'filteredAndSortedAssignees'])->name('filtered_and_sorted_assignees');
 
         //--------------------------------[ CRUD for REQUIREMENT BIN ]-----------------------------//
 
-        Route::get('/StaffRequirementBin',[Staff_RequirementBin_Controller::class, 'show'])->name('staff_RequirementBin');
-        Route::put('/staff_update_requirementbins{requirementbinId}', [Staff_RequirementBin_Controller::class, 'updateRequirementbins'])->name('staff_update_requirementbins');
-        Route::delete('/staff_delete_requirementbins/{requirementbinId}', [Staff_RequirementBin_Controller::class, 'deleteRequirementBins'])->name('staff_delete_requirementbins');
-        Route::delete('/staff_destroy_requirementbins{requirementbinId}', [Staff_RequirementBin_Controller::class, 'destroy'])->name('staff_destroy_requirementbins');
-        Route::post('/staff_create_requirementbin', [Staff_RequirementBin_Controller::class, 'Create_RequirementBin'])->name('staff_create_requirementbins');
-        Route::get('/staff_filtered_and_sorted_bin', [Staff_RequirementBin_Controller::class, 'filteredAndSortedBin'])->name('staff_filtered_and_sorted_bins');
-        Route::post('/staff_restore_RequirementBin', [Staff_RequirementBin_Controller::class, 'restore'])->name('staff_restore_requirementbin');
+        Route::get('requirement_bins',[Staff_RequirementBin_Controller::class, 'show'])->name('requirement_bins.show');
+        Route::put('update_requirementbins/{requirementbinId}', [Staff_RequirementBin_Controller::class, 'updateRequirementbins'])->name('update_requirementbins');
+        Route::delete('delete_requirementbins/{requirementbinId}', [Staff_RequirementBin_Controller::class, 'deleteRequirementBins'])->name('delete_requirementbins');
+        Route::delete('destroy_requirementbins/{id}', [Staff_RequirementBin_Controller::class, 'destroy'])->name('destroy_requirementbins');
+        Route::post('create_requirementbin', [Staff_RequirementBin_Controller::class, 'Create_RequirementBin'])->name('requirement_bins.store');
+        Route::get('filtered_and_sorted_bin', [Staff_RequirementBin_Controller::class, 'filteredAndSortedBin'])->name('filtered_and_sorted_bins');
+        Route::post('restore_RequirementBin', [Staff_RequirementBin_Controller::class, 'restore'])->name('restore_requirementbin');
 
           //--------------------------------[ CRUD for ACTIVITIES ]-----------------------------//
-          Route::post('/staff_create_activities', [Staff_Activities_Controller::class, 'Create_Activities'])->name('staff_create_activities');
-          Route::put('/staff_update_activities{activitiesId}', [Staff_Activities_Controller::class, 'updateActivities'])->name('staff_update_activities');
-          Route::delete('/staff_delete_activities/{activitiesId}', [Staff_Activities_Controller::class, 'delete'])->name('staff_delete_activity');
-          Route::delete('/staff_destroy_activities{activitiesId}', [Staff_Activities_Controller::class, 'destroy'])->name('staff_destroy_activities');
-          Route::get('/staff_activities', [Staff_Activities_Controller::class, 'show'])->name('staff_activities');
-          Route::post('/staff_restore_activities', [Staff_Activities_Controller::class, 'restore'])->name('staff_restore_activities');
+          Route::post('store_activities', [Staff_Activities_Controller::class, 'Create_Activities'])->name('activities.store');
+          Route::put('update_activities/{activitiesId}', [Staff_Activities_Controller::class, 'updateActivities'])->name('update_activities');
+          Route::delete('delete_activities/{activitiesId}', [Staff_Activities_Controller::class, 'delete'])->name('delete_activity');
+          Route::delete('destroy_activities/{activitiesId}', [Staff_Activities_Controller::class, 'destroy'])->name('destroy_activities');
+          Route::get('activities', [Staff_Activities_Controller::class, 'show'])->name('activities.show');
+          Route::post('restore_activities', [Staff_Activities_Controller::class, 'restore'])->name('restore_activities');
 
 
         //--------------------------------[ CRUD for ACTIVITY PARTICIPANTS ]-----------------------------//
 
-          Route::get('/staff_activity_participants/{activity_id}', [Staff_ActivitiesParticipants_Controller::class, 'show'])->name('staff_activities_participants');
-          Route::post('/staff_add_participants/{activity_id}', [Staff_ActivitiesParticipants_Controller::class, 'add_participants'])->name('staff_add_participants');
-          Route::delete('/staff_ remove_participants{id}', [Staff_ActivitiesParticipants_Controller::class, 'destroy'])->name('staff_remove_participants');
+          Route::get('activity_participants/{activity_id}', [Staff_ActivitiesParticipants_Controller::class, 'show'])->name('activity_participants.show');
+          Route::post('store_participants/{activity_id}', [Staff_ActivitiesParticipants_Controller::class, 'add_participants'])->name('participants.store');
+          Route::delete('remove_participants/{id}', [Staff_ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
 
 
             //--------------------------------[ CRUD for REQUIREMENT BIN SETUP ]-----------------------------//
-            Route::get('/staff_requirementbin_setup_page{id}', [Staff_RequirementSetup_Controller::class, 'show'])->name('staff_bin_setup');
-            Route::post('/staff_setup_requirementbin/{id}', [Staff_RequirementSetup_Controller::class, 'Create_Requirement'])->name('staff_setup_requirementbin');
+            Route::get('requirementbin_setup/{id}', [Staff_RequirementSetup_Controller::class, 'show'])->name('requirementbin_setup.show');
+            Route::post('setup_requirementbin/{id}', [Staff_RequirementSetup_Controller::class, 'Create_Requirement'])->name('setup_requirementbin.store');
 
 
              //--------------------------------[ CRUD for Requirement Assignees ]-----------------------------//
 
-            Route::get('/staff_RequirementAssignees{bin_id}', [Staff_RequirementBin_Controller::class, 'view_assigned_user'
-            ])->name('staff_RequirementAssignees');
-            Route::get('staff_MonitorRequirements,{user_id},{assigned_bin_id},{req_bin_id}',[Staff_MonitorRequirements_Controller::class, 'show'])
-            ->name('staff_MonitorRequirements');
-            Route::put('staff/ReviewedBin/{assigned_bin_id}/{req_bin_id}',[Staff_MonitorRequirements_Controller::class, 'reviewedMark'])
-            ->name('staff_ReviewRequirements');
+            Route::get('requirement_assignees/{bin_id}', [Staff_RequirementBin_Controller::class, 'view_assigned_user'
+            ])->name('requirement_assignees.show');
+            Route::get('monitor_requirements.show/{user_id}/{assigned_bin_id}/{req_bin_id}',[Staff_MonitorRequirements_Controller::class, 'show'])
+            ->name('monitor_requirements');
+            Route::put('mark_Review/{assigned_bin_id}/{req_bin_id}',[Staff_MonitorRequirements_Controller::class, 'reviewedMark'])
+            ->name('requirementbins.mark');
 
-            Route::put('/staff_validate_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [Staff_MonitorRequirements_Controller::class, 'validateRequirement'])
-            ->name('staff_validate_requirements');
+            Route::put('validate_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [Staff_MonitorRequirements_Controller::class, 'validateRequirement'])
+            ->name('validate_requirements');
 
-            Route::post('/staff-assign-Requirement{id}', [Staff_AssignRequirement_Controller::class, 'assign_to_user'])->name('staff_assign_requirement');
-
-
-
-            Route::post('/restore_bincontents', [RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
-            Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
+            Route::post('assign_requirement/{id}', [Staff_AssignRequirement_Controller::class, 'assign_to_user'])->name('assign_requirement');
 
 
             //USER PROFILE
-            Route::put('/staff_update_my_profile/{profile_id}', [Staff_Profile_Controller::class, 'update'])->name('update_staff_profile');
-            Route::get('/staff_my_profile', [Staff_Profile_Controller::class, 'show'])->name('staff_profile');
+            Route::put('update_my_profile/{profile_id}', [Staff_Profile_Controller::class, 'update'])->name('my_profile.update');
+            Route::get('my_profile', [Staff_Profile_Controller::class, 'show'])->name('my_profile.show');
 
 
+    //------------------------------------------[ ROUTES FOR VIEWING FILES ]-------------------------------------------//
+
+            Route::get('view/files', [ViewUserFiles_Controller::class, 'viewFiles'])->name('files.view');
+            Route::get('display/files', [ViewUserFiles_Controller::class, 'displayFiles'])->name('files.display');
+            Route::get('download/files/{file}', [DownloadUserFiles_Controller::class, 'downloadFiles'])->name('files.download');
+
+
+            Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
+            ->name('logout');
     });
 
 

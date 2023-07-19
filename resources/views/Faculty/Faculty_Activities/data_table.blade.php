@@ -75,7 +75,7 @@
 
                                 <td class="text-sm-center">
 
-                                        <a href="{{route('activity_details', $activity->id)}}" data-toggle="modal" data-target="#modal-xl-view-{{$activity->id}}"
+                                        <a href="{{route('faculty.activity_details', $activity->id)}}" data-toggle="modal" data-target="#modal-xl-view-{{$activity->id}}"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300 edit-button">
                                             <i class="far fa-eye"></i>
                                         </a>

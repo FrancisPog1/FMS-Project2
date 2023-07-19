@@ -184,7 +184,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('admin.destroy_specialization', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_specialization', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",

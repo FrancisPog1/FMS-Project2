@@ -308,7 +308,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     ->name('activities_export_pdf');
 
 
-    Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('admin.logout');
 
 });

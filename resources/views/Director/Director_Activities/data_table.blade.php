@@ -80,7 +80,7 @@
 
                                 <td class="text-sm-center">
 
-                                        <a href="{{ route('director_activities_participants', $activity->id)}}"
+                                        <a href="{{ route('director.activities_participants', $activity->id)}}"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             <i class="far fa-eye"></i>
                                         </a>

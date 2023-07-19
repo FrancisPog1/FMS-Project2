@@ -19,9 +19,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const AcadHead_HOME = 'admin/dashboard';
     public const AddUser_PAGE = '/AddUser';
-    public const Staff_HOME = '/StaffDashboard';
-    public const Faculty_HOME = '/FacultyDashboard';
-    public const Director_HOME = '/DirectorDashboard';
+    public const Staff_HOME = 'staff/dashboard';
+    public const Faculty_HOME = 'faculty/dashboard';
+    public const Director_HOME = 'director/dashboard';
     public const Landing_PAGE = '/';
 
     /**

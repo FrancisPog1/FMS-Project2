@@ -47,7 +47,7 @@
 
 
                                         <td class="text-center">
-                                            <form action="{{ route('staff_delete_requirements', $requirement->id) }}"
+                                            <form action="{{ route('staff.delete_requirements', $requirement->id) }}"
                                                 method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')

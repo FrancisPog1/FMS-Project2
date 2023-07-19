@@ -1,5 +1,5 @@
 <section class="content">
-    <form id="uploadForm" action="{{ route('faculty_uploadfile', '__requirementId__') }}" method="POST">
+    <form id="uploadForm" action="{{ route('faculty.submit_uploads', '__requirementId__') }}" method="POST">
         @method('PUT')
         @csrf
         <div class="modal fade" id="modal-xl-upload">

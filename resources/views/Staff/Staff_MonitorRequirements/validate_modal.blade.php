@@ -1,7 +1,7 @@
 <section class="content">
 
     <form id="validateForm"
-        action="{{ route('staff_validate_requirements', ['requirementId' => '__requirementId__', 'req_bin_id' => '__req_bin_id__', 'assigned_bin_id' => $assigned_bin_id]) }}"
+        action="{{ route('staff.validate_requirements', ['requirementId' => '__requirementId__', 'req_bin_id' => '__req_bin_id__', 'assigned_bin_id' => $assigned_bin_id]) }}"
         method="POST">
 
         @method('PUT')

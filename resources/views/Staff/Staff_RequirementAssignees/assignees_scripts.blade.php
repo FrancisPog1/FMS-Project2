@@ -1,7 +1,7 @@
 
  <script>
  $(document).ready(function() {
-    var filteredAndSortedAssigneesUrl = "{{ route('staff_filtered_and_sorted_assignees', ':bin_id') }}";
+    var filteredAndSortedAssigneesUrl = "{{ route('staff.filtered_and_sorted_assignees', ':bin_id') }}";
     var binId = "{{$bin_id}}"; // Assuming you have the bin_id value available in the template
 
     $("#filter, #sort").on('change', function() {
@@ -22,7 +22,7 @@
             success: function(data) {
                 var assignees = data.assignees;
                 var html = '';
-                var monitorRoute = "{{ route('acadhead_MonitorRequirements', ['user_id' => ':user_id', 'assigned_bin_id' => ':assigned_req_id', 'req_bin_id' => ':req_bin_id']) }}";
+                var monitorRoute = "{{ route('staff.monitor_requirements', ['user_id' => ':user_id', 'assigned_bin_id' => ':assigned_req_id', 'req_bin_id' => ':req_bin_id']) }}";
                 if (assignees.length > 0) {
                     for (let i = 0; i < assignees.length; i++) {
                         html += '<tr>' +

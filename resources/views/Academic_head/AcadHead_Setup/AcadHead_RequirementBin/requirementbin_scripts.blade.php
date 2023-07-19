@@ -99,7 +99,7 @@
 <script>
     function createDeleteForm(action, inputValue) {
         var form = document.createElement("form");
-        form.method = "POST";
+        form.method = "DELETE";
         form.action = action;
 
         var input = document.createElement("input");

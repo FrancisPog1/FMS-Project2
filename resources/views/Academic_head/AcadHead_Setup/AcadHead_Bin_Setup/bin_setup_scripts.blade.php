@@ -143,7 +143,10 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('admin.destroy_requirements', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_requirements', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
+
+
 
         Swal.fire({
             title: "Are you sure?",

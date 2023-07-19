@@ -42,12 +42,17 @@
         $(document).ready(function() {
             var countdown = 2;
             var formID = '#editForm-' + binId;
+
+
+            var route = "{{ route('staff.update_requirementbins', ':id') }}"; // Replace with the actual delete route
+            var Url = route.replace(':id', binId);
+
             // Handle form submission
             $(formID).on('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission behavior
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('staff_update_requirementbins', '') }}" + binId,
+                    url: Url,
                     data: jQuery(formID).serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -128,7 +133,9 @@
     event.preventDefault(); // Prevent the default form submission
 
         var name = this.getAttribute("name");
-        var action = "{{ route('staff_destroy_requirementbins', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('staff.destroy_requirementbins', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
+
 
         Swal.fire({
             title: "Are you sure?",
@@ -176,7 +183,7 @@
 {{-- AJAX SCRIPT FOR SORTING --}}
 <script>
     $(document).ready(function() {
-        var filteredAndSortedBinsUrl = "{{ route('staff_filtered_and_sorted_bins') }}";
+        var filteredAndSortedBinsUrl = "{{ route('staff.filtered_and_sorted_bins') }}";
 
         $("#filter, #sort").on('change', function() {
             var filterOption = $("#filter").val();
@@ -198,10 +205,10 @@
                     var html = '';
 
                     // Generate the route URL on the server-side
-                    var binSetupRoute = "{{ route('staff_bin_setup', ['id' => ':id']) }}";
+                    var binSetupRoute = "{{ route('staff.requirementbin_setup.show', ['id' => ':id']) }}";
                     // Generate the route URL on the server-side
-                    var requirementAssigneesRoute = "{{ route('staff_RequirementAssignees', ['bin_id' => ':bin_id']) }}";
-                    var deleteBinRoute = "{{ route('staff_delete_requirementbins', ['requirementbinId' => ':id']) }}";
+                    var requirementAssigneesRoute = "{{ route('staff.requirement_assignees.show', ['bin_id' => ':bin_id']) }}";
+                    var deleteBinRoute = "{{ route('staff.delete_requirementbins', ['requirementbinId' => ':id']) }}";
                     var deleteButton = "<button type='button' class='px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button' title='Delete'>";
 
 
@@ -294,7 +301,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('staff_create_requirementbins') }}",
+                url: "{{ route('staff.requirement_bins.store') }}",
                 data: jQuery('#create_bin').serialize(), // Serialize the form data
 
                 success: function(response) {

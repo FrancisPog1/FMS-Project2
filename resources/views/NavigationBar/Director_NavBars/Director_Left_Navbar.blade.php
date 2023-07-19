@@ -17,7 +17,7 @@
                 data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="DirectorDashboard" class="nav-link">
+                    <a href="{{ route('director.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Dashboard
@@ -33,13 +33,13 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="DirectorClassSchedule" class="nav-link">
+                            <a href="{{ route('director.class_schedule') }}" class="nav-link">
                                 <i class="fa-regular fa-note-sticky nav-icon"></i>
                                 <p class="p-drop">Class Schedule</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="DirectorClassObservation" class="nav-link">
+                            <a href="{{ route('director.class_observation') }}" class="nav-link">
                                 <i class="fa-solid fa-location-pin nav-icon"></i>
                                 <p class="p-drop">Class Observation</p>
                             </a>
@@ -55,7 +55,7 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('director_activities') }}" class="nav-link">
+                            <a href="{{ route('director.activities') }}" class="nav-link">
                                 <i class="fa-regular fa-flag nav-icon"></i>
                                 <p class="p-drop">Activities</p>
                             </a>
@@ -63,7 +63,7 @@
 
 
                         <li class="nav-item">
-                            <a href="{{ route('director_requirementbin') }}" class="nav-link">
+                            <a href="{{ route('director.requirement_bins') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-book-bookmark"></i>
                                 <p class="p-drop">Requirement Bin</p>
                             </a>
@@ -72,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="DirectorReports" class="nav-link">
+                    <a href="{{ route('director.reports') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-book-bookmark"></i>
                         <p>
                             Reports

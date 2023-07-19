@@ -1,6 +1,6 @@
    <!--Create Modal-->
    <section class="content">
-       <form id="create_bin" action="{{ route('staff_create_requirementbins') }}" method="post">
+       <form id="create_bin" action="{{ route('staff.requirement_bins.store') }}" method="post">
            @csrf
            <div class="modal fade" id="modal-xl-create">
                <div class="modal-dialog modal-dialog-centered modal-xl">

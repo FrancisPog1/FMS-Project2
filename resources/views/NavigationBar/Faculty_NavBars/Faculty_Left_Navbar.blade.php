@@ -16,7 +16,7 @@
                 data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="FacultyDashboard" class="nav-link">
+                    <a href="{{ route('faculty.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Dashboard
@@ -33,13 +33,13 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="FacultyClassSchedule" class="nav-link">
+                            <a href="{{ route('faculty.class_schedule') }}" class="nav-link">
                                 <i class="fa-regular fa-note-sticky nav-icon"></i>
                                 <p class="p-drop">Class Schedule</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="FacultyClassObservation" class="nav-link">
+                            <a href="{{ route('faculty.class_observation') }}" class="nav-link">
                                 <i class="fa-solid fa-location-pin nav-icon"></i>
                                 <p class="p-drop">Class Observation</p>
                             </a>
@@ -47,7 +47,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="FacultyRequirementBin" class="nav-link">
+                    <a href="{{ route('faculty.requirement_bins.show') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-bookmark"></i>
                         <p>
                             Requirement Bin
@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="FacultyActivities" class="nav-link">
+                    <a href="{{ route('faculty.activities') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-flag"></i>
                         <p>
                             Activities
@@ -63,7 +63,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="FacultyReports" class="nav-link">
+                    <a href="{{ route('faculty.reports') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-book-bookmark"></i>
                         <p>
                             Reports
