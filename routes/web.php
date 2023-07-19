@@ -123,6 +123,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     /**Academic Head Reports*/
     Route::get('/Reports', [Reports_Controller::class,'show'])->name('acadhead_Reports');
+
     /**Requirement Assignees*/
 
     Route::get('/RequirementAssigneesReports{bin_id}', [Reports_Controller::class, 'show_assignees'])->name('requirement_assignees_reports');

@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
     <section class="container">
-        <div class="mr-5 ml-5">
+        {{-- <div class="mr-5 ml-5">
             <div class="card">
                 <div class="card-header">
                     <div class="row justify-content-between">
@@ -105,19 +105,35 @@
 
                                         ">Ongoing</button>
                                 </td>
-                            </tbody>
-                            <tfoot>
-                                <td class="dataTables_info text-col-1"
-                                    id="dataTable_info" role="status"
-                                    aria-live="polite" colspan="12"
-                                    style="font-size: .9rem;">
-                                    Showing x to x of x entries
-                                </td>
-                            </tfoot>
+                        </tbody>
+                        <tfoot>
+                            <td class="dataTables_info text-col-1"
+                                id="dataTable_info" role="status"
+                                aria-live="polite" colspan="12"
+                                style="font-size: .9rem;">
+                                Showing x to x of x entries
+                            </td>
+                        </tfoot>
 
-                        </table>
-                    </div>
+                    </table>
                 </div>
             </div>
+        </div> --}}
+
+        <section class="content" style="padding-top: 5rem;">
+            <div class="error-page">
+                <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                <div class="error-content">
+                    <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                    <p>
+                    Unfortunately, we could not display this page yet.
+                        <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                    </p>
+                </div>
+                <!-- /.error-content -->
+            </div>
+        </section>
     </section>
 </div>
