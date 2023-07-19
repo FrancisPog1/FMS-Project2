@@ -8,20 +8,22 @@ aria-labelledby="custom-content-above-settings-tab">
             <div class="card-header">
                 <div class="row justify-content-between">
                     <div class="dt-buttons btn-group flex-wrap">
-                        <button tabindex="0"
+                        <a href="{{ route('activities_export_pdf') }}"
+                            tabindex="0"
                             aria-controls="dataTable" type="button"
                             class="text-col-1 buttons-pdf
                             buttons-html5 btn btn-primary mr-2"
                             title="PDF export.">
                             <span>Export as PDF</span>
-                        </button>
-                        <button tabindex="0"
+                        </a>
+                        <a href = "{{ route('activities_export_xls') }}"
+                            tabindex="0"
                             aria-controls="dataTable" type="button"
                             class="text-col-1 buttons-excel
                             buttons-html5 btn btn-success"
                             title="Excel export.">
                             <span>Export as XLS</span>
-                        </button>
+                         </a>
                     </div>
                     <!-- Search function --->
                     <div class="text-right">

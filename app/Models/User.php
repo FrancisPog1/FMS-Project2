@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\RequirementBin;
+use App\Models\Activities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -69,6 +70,10 @@ class User extends Model implements Authenticatable
 
     public function requirementbin(){
         return $this->hasMany(RequirementBin::class, 'created_by');
+    }
+
+    public function activities(){
+        return $this->hasMany(Activities::class, 'created_by');
     }
 
 }

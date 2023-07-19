@@ -287,11 +287,19 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     //------------------------------------------[ EXPORT ROUTES ]-------------------------------------------//
 
-    Route::get('/requirementbins/exports',[ExportXLS_Controller::class, 'export_requirementbin'])
+    Route::get('/requirementbins/exports/xls',[ExportXLS_Controller::class, 'export_requirementbin_xls'])
     ->name('requirementbins_export');
 
     Route::get('/requirementbins/exports/pdf',[ExportXLS_Controller::class, 'export_requirementbin_pdf'])
     ->name('requirementbins_export_pdf');
+
+
+
+    Route::get('/activities/exports',[ExportXLS_Controller::class, 'export_activities_xls'])
+    ->name('activities_export_xls');
+
+    Route::get('/activities/exports/pdf',[ExportXLS_Controller::class, 'export_activities_pdf'])
+    ->name('activities_export_pdf');
 
 
 
