@@ -56,7 +56,7 @@
                                         data-requirement-id="{{ $data->id }}"
                                         data-req-bin-id="{{ $req_bin_id }}"
                                         class="upload-button px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                        Upload
+                                        {{ $data->status == 'Rejected' ? 'Reupload' : ($data->status == 'In review' ? 'View' : 'Upload') }}
                                     </button>
                                 </td>
                             </tr>

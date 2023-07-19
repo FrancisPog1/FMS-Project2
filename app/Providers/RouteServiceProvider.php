@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const AcadHead_HOME = '/AcadHead_Dashboard';
+    public const AcadHead_HOME = 'admin/dashboard';
     public const AddUser_PAGE = '/AddUser';
     public const Staff_HOME = '/StaffDashboard';
     public const Faculty_HOME = '/FacultyDashboard';

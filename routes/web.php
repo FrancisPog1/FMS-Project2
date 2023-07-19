@@ -59,73 +59,73 @@ require __DIR__.'/staff.php';
 
 //------------------------------------------------------------------ ACADEMIC HEAD --------------------------------------------------------------------//
 // Route::middleware(['auth','isAdmin'])->group(function () {
-Route::middleware(['auth','isAdmin'])->group(function () {
+Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
      // Define your protected routes here
      //This protects the page by prohibiting the access of user when they are not logged in
 
     /**Academic Head Dashboard */
-    Route::get('/AcadHead_Dashboard', [Dashboard_Controller::class, 'dashboard'])->name('acadhead_Dashboard');
+    Route::get('/dashboard', [Dashboard_Controller::class, 'dashboard'])->name('acadhead_Dashboard');
 
     /**Add User */
-    Route::get('/AddUser',[User_Controller::class, 'show'])->name('acadhead_AddUser');
+    Route::get('/users',[User_Controller::class, 'show'])->name('acadhead_AddUser');
 
     /**Academic Rank */
-    Route::get('/AcadHead', [AcademicRank_Controller::class, 'show'])->name('acadhead_AcademicRank');
+    Route::get('/ranks', [AcademicRank_Controller::class, 'show'])->name('acadhead_AcademicRank');
 
     /**Role */
-    Route::get('/Role', [Role_Controller::class, 'show'])->name('acadhead_UserRole');
+    Route::get('/roles', [Role_Controller::class, 'show'])->name('acadhead_UserRole');
 
     /**Faculty Type */
-    Route::get('/FacultyType',[FacultyType_Controller::class, 'show'])->name('acadhead_FacultyType');
+    Route::get('/faculty_types',[FacultyType_Controller::class, 'show'])->name('acadhead_FacultyType');
 
     /**Designation */
-    Route::get('/Designation', [Designation_Controller::class, 'show'])->name('acadhead_Designation');
+    Route::get('/designations', [Designation_Controller::class, 'show'])->name('acadhead_Designation');
 
     /**Specialization */
-    Route::get('/Specialization',[Specialization_Controller::class, 'show'])->name('acadhead_Specialization');
+    Route::get('/specializations',[Specialization_Controller::class, 'show'])->name('acadhead_Specialization');
 
     /**Program*/
-    Route::get('/Program', [Program_Controller::class, 'show'])->name('acadhead_Program');
+    Route::get('/programs', [Program_Controller::class, 'show'])->name('acadhead_Program');
 
 
     /**Requirement Bin*/
-    Route::get('/RequirementBin', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
+    Route::get('/requirement_bins', [RequirementBin_Controller::class, 'show'])->name('acadhead_RequirementBin');
 
     //EDITED July 02, 2023
     /**Requirement Type*/
-    Route::get('/RequirementType',[RequirementType_Controller::class, 'show'])->name('acadhead_RequirementType');
+    Route::get('/requirement_type',[RequirementType_Controller::class, 'show'])->name('acadhead_RequirementType');
 
     /**Activity Type*/
-    Route::get('/ActivityType', [ActivityType_Controller::class, 'show'])->name('acadhead_ActivityType');
+    Route::get('/activity_type', [ActivityType_Controller::class, 'show'])->name('acadhead_ActivityType');
 
-    Route::get('/ActivityParticipants/{activity_id}', [ActivitiesParticipants_Controller::class, 'show'])->name('activities_participants');
+    Route::get('/activity_participants/{activity_id}', [ActivitiesParticipants_Controller::class, 'show'])->name('activities_participants');
 
-    Route::post('/AddParticipants/{activity_id}', [ActivitiesParticipants_Controller::class, 'add_participants'])->name('add_participants');
+    Route::post('/store_participants/{activity_id}', [ActivitiesParticipants_Controller::class, 'add_participants'])->name('add_participants');
 
-    Route::delete('/RemoveParticipants{id}', [ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
+    Route::delete('/remove_participants{id}', [ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
 
 
     /**Class Schedule*/
-    Route::get('/ClassSchedule', function () {
+    Route::get('/class_schedule', function () {
         return view('Academic_head/AcadHead_Setup/AcadHead_ClassSchedule', ['page_title' => 'Class Schedule']);
         })->name('acadhead_ClassSchedule');
 
 
     /**Class Observation*/
-    Route::get('/ClassObservation', function () {
+    Route::get('/class_observation', function () {
         return view('Academic_head/AcadHead_Setup/AcadHead_ClassObservation', ['page_title' => 'Class Observation']);
         })->name('acadhead_ClassObservation');
 
     /**Announcement*/
-    Route::get('/Announcements', function () {
+    Route::get('/announcements', function () {
         return view('Academic_head/AcadHead_Setup/Announcements', ['page_title' => 'Announcements']);
         })->name('acadhead_Announcements');
 
     /**Academic Head Reports*/
-    Route::get('/Reports', [Reports_Controller::class,'show'])->name('acadhead_Reports');
+    Route::get('/reports', [Reports_Controller::class,'show'])->name('acadhead_Reports');
     /**Requirement Assignees*/
 
-    Route::get('/RequirementAssigneesReports{bin_id}', [Reports_Controller::class, 'show_assignees'])->name('requirement_assignees_reports');
+    Route::get('/requirement_assignees_reports{bin_id}', [Reports_Controller::class, 'show_assignees'])->name('requirement_assignees_reports');
 
     Route::get('/requirementbin_content_reports{id}', [Reports_Controller::class, 'show_bin_contents'])->name('bin_content_reports');
 
@@ -134,25 +134,25 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     /**Academic Head Activities*/
-    Route::get('/AcadHead_Activities', [Activities_Controller::class, 'show'])->name('acadhead_activities');
+    Route::get('/acadHead_activities', [Activities_Controller::class, 'show'])->name('acadhead_activities');
 
 
     /**User Profiles*/
-    Route::get('/UserProfile', [All_Profile_Controller::class,'show'])->name('user_Profile');
+    Route::get('/user_profile', [All_Profile_Controller::class,'show'])->name('user_Profile');
 
 
     //This is all the routes for Creating or Adding.
-    Route::post('/Create_AcademicRank', [AcademicRank_Controller::class, 'Create_AcadRank'])->name('Create_AcademicRank');
-    Route::post('/CreateProgram', [Program_Controller::class, 'Create_Program'])->name('CreateProgram');
-    Route::post('/CreateSpecialization', [Specialization_Controller::class, 'Create_Specialization'])->name('CreateSpecialization');
-    Route::post('/CreateDesignation', [Designation_Controller::class, 'Create_Designation'])->name('CreateDesignation');
-    Route::post('/CreateFacultyType', [FacultyType_Controller::class, 'Create_FacultyType'])->name('CreateFacultyType');
-    Route::post('/CreateRole', [Role_Controller::class, 'Create_Roles'])->name('CreateRole');
+    Route::post('/store_ranks', [AcademicRank_Controller::class, 'Create_AcadRank'])->name('Create_AcademicRank');
+    Route::post('/store_programs', [Program_Controller::class, 'Create_Program'])->name('CreateProgram');
+    Route::post('/store_specializations', [Specialization_Controller::class, 'Create_Specialization'])->name('CreateSpecialization');
+    Route::post('/store_designations', [Designation_Controller::class, 'Create_Designation'])->name('CreateDesignation');
+    Route::post('/store_faculty_types', [FacultyType_Controller::class, 'Create_FacultyType'])->name('CreateFacultyType');
+    Route::post('/store_roles', [Role_Controller::class, 'Create_Roles'])->name('CreateRole');
     // Route::post('/register_user', [User_Controller::class, 'registerUser'])->name('register_user');
-    Route::post('/Create_RequirementBin', [RequirementBin_Controller::class, 'Create_RequirementBin'])->name('Create_RequirementBin');
-    Route::post('/Create_RequirementType', [RequirementType_Controller::class, 'Create_RequirementType'])->name('Create_RequirementType');
-    Route::post('/Create_ActivityType', [ActivityType_Controller::class, 'Create_ActivityType'])->name('Create_ActivityType');
-    Route::post('/Create_Activities', [Activities_Controller::class, 'Create_Activities'])->name('Create_Activities');
+    Route::post('/store__requirementbin', [RequirementBin_Controller::class, 'Create_RequirementBin'])->name('Create_RequirementBin');
+    Route::post('/store__requirement_types', [RequirementType_Controller::class, 'Create_RequirementType'])->name('Create_RequirementType');
+    Route::post('/store__activity_types', [ActivityType_Controller::class, 'Create_ActivityType'])->name('Create_ActivityType');
+    Route::post('/store__activities', [Activities_Controller::class, 'Create_Activities'])->name('Create_Activities');
 
 
     //PROFILE SETUP
@@ -197,17 +197,17 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     //--------------------------RESTORE DELETED RECORDS ROUTES---------------------------//
-    Route::post('/restore_bincontents', [RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
-    Route::post('/restore_requirementtypes', [RequirementType_Controller::class, 'restore'])->name('restore_requirementtypes');
-    Route::post('/restore_AcademicRank', [AcademicRank_Controller::class, 'restore'])->name('restore_ranks');
-    Route::post('/restore_Program', [Program_Controller::class, 'restore'])->name('restore_program');
-    Route::post('/restore_Specialization', [Specialization_Controller::class, 'restore'])->name('restore_specialization');
-    Route::post('/restore_Designation', [Designation_Controller::class, 'restore'])->name('restore_designation');
-    Route::post('/restore_FacultyType', [FacultyType_Controller::class, 'restore'])->name('restore_facultyType');
-    Route::post('/restore_Role', [Role_Controller::class, 'restore'])->name('restore_roles');
-    Route::post('/restore_RequirementBin', [RequirementBin_Controller::class, 'restore'])->name('restore_requirementbin');
-    Route::post('/restore_ActivityType', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
-    Route::post('/restore_Activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
+    Route::post('/restore_requirementbin_contents', [RequirementSetup_Controller::class, 'restoreRequirement'])->name('restore_requirements');
+    Route::post('/restore_requirement_types', [RequirementType_Controller::class, 'restore'])->name('restore_requirementtypes');
+    Route::post('/restore_Academic_ranks', [AcademicRank_Controller::class, 'restore'])->name('restore_ranks');
+    Route::post('/restore_programs', [Program_Controller::class, 'restore'])->name('restore_program');
+    Route::post('/restore_specializations', [Specialization_Controller::class, 'restore'])->name('restore_specialization');
+    Route::post('/restore_designations', [Designation_Controller::class, 'restore'])->name('restore_designation');
+    Route::post('/restore_faculty_types', [FacultyType_Controller::class, 'restore'])->name('restore_facultyType');
+    Route::post('/restore_roles', [Role_Controller::class, 'restore'])->name('restore_roles');
+    Route::post('/restore_requirement_bins', [RequirementBin_Controller::class, 'restore'])->name('restore_requirementbin');
+    Route::post('/restore_activity_types', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
+    Route::post('/restore_activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
 
     //--------------------------UPDATING A RECORD ROUTES---------------------------//
     Route::put('/update_ranks{id}', [AcademicRank_Controller::class, 'updateRanks'])->name('update_ranks');
@@ -256,8 +256,8 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     // For registering users
-    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('register_user', [RegisteredUserController::class, 'Create_User'])->name('register_user');
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register_user', [RegisteredUserController::class, 'Create_User'])->name('register_user');
 
 
 
@@ -267,11 +267,11 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     //Routes for Assigning a requirement to one or more users
-    Route::post('/assign-Requirement{id}', [AssignRequirement_Controller::class, 'assign_to_user'])->name('Assign_Requirement');
+    Route::post('/assign_requirement{id}', [AssignRequirement_Controller::class, 'assign_to_user'])->name('Assign_Requirement');
 
 
     /**Assigned Requirement*/
-    Route::get('/AssignedRequirement', function () {
+    Route::get('/assigned_requirement', function () {
         $requirementbins = DB::table('requirement_bins')->get();
         //Format the deadline or date into more readable date format
         foreach ($requirementbins as $requirementbin) {
@@ -281,13 +281,13 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     })->name('acadhead_AssignedRequirements');
 
     /**Requirement Assignees*/
-    Route::get('/RequirementAssignees{bin_id}', [RequirementBin_Controller::class, 'view_assigned_user'
+    Route::get('/requirement_assignees{bin_id}', [RequirementBin_Controller::class, 'view_assigned_user'
     ])->name('acadhead_RequirementAssignees');
 
-    Route::get('MonitorRequirements,{user_id},{assigned_bin_id},{req_bin_id}',[MonitorRequirements_Controller::class, 'show'])
+    Route::get('monitor_requirements,{user_id},{assigned_bin_id},{req_bin_id}',[MonitorRequirements_Controller::class, 'show'])
     ->name('acadhead_MonitorRequirements');
 
-    Route::put('/ReviewedBin/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
+    Route::put('/review_mark/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
     ->name('acadhead_ReviewRequirements');
 
 
