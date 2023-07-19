@@ -11,11 +11,15 @@
     <div class="content-wrapper">
 
         <br>
-        <!-- Menu toggle --> <!-- Content Header -->
-        @include('Academic_head/AcadHead_Setup/AcadHead_Reports/menu_toggle')
+      <!-- Content Header -->
+      @include('Academic_head/AcadHead_Setup/AcadHead_Reports/reports_header')
+
 
         <!-- Content Body -->
         <div class="card-body">
+
+         <!-- Menu toggle -->
+         @include('Academic_head/AcadHead_Setup/AcadHead_Reports/menu_toggle')
 
             <!-- Table Header -->
             @include('Academic_head/AcadHead_Setup/AcadHead_Reports/table_header')

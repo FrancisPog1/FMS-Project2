@@ -22,24 +22,31 @@ class Dashboard_Controller extends Controller
         $name = $user->first_name;
 
         // to fetch realtime using carbon laravel
-        $morning_time = '12:00 AM';
-        $afternoon_time = '12:00 PM';
-        $evening_time = '06:00 PM';
+        // $morning_time = '00:01 AM';
+        // $afternoon_time = '00:01 PM';
+        // $evening_time = '06:00 PM';
 
-        $now = Carbon::now();//Get the current date
-        $time_now = $now->format('g:i A');	//Formatting the date into time only
+        $time_now = Carbon::now('Asia/Manila');//Get the current date
 
-        $greeting = '';	//Initialize the greeting variable
+        $h = $time_now->format('H');	//Formatting the date into time only
+        // $h = 14;
 
-            if ($time_now >= $morning_time && $time_now < $afternoon_time || $time_now > $evening_time ) {
+        // $greeting = '';	//Initialize the greeting variable
+        // $morning = $h >= '0' && $h < '12';
+        // $afternoon = $h >= '12' && $h < '18' ;
+        // $evening = $h >= '18' && $h < '24' ;
+
+        // dd($morning, $afternoon, $evening, $h);
+
+            if ($h >= '0' && $h < '12') {
                 $greeting = 'Good Morning,';
             }
 
-            else if ($time_now >= $afternoon_time && $time_now < $evening_time || $time_now > $morning_time ) {
+            else if ($h >= '12' && $h < '18') {
                 $greeting = 'Good Afternoon,';
             }
 
-            else {
+            else if ($h >= '18' && $h < '24') {
                 $greeting = 'Good Evening,';
             }
 

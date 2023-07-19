@@ -36,26 +36,39 @@
                     <p class="text-dark pl-3 pr-2 mt-2">Status
                         Filter:</p>
                 </div>&nbsp;&nbsp;
-                <div>
-                    <button type="button"
-                        class="text-col-1 btn btn-block
-                        btn-warning btn-s p-drop">Pending</button>
-                </div>
-                <div>
-                    <button type="button"
-                        class="text-col-1 btn btn-block
-                        btn-danger btn-s p-drop">Cancelled</button>
-                </div>
-                <div>
-                    <button type="button"
-                        class="text-col-1 btn btn-block
-                        btn-info btn-s p-drop">Ongoing</button>
-                </div>
-                <div>
-                    <button type="button"
-                        class="text-col-1 btn btn-block
-                        btn-success btn-s p-drop">Done</button>
-                </div>
+
+
+                <div class="btn-group btn-group-sm">
+                            <div>
+                                <button data-toggle="modal"
+                                        data-target="#modal-xl-view" type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
+                                        <i class="fa-solid fa-exclamation"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button data-toggle="modal"
+                                        data-target="#modal-xl-edit" type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300"
+                                        title="">
+                                        <i class="fa-regular fa-flag"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button data-toggle="modal"
+                                        data-target="#modal-xl-view" type="button"
+                                        class="px-2 py-2 text-sm text-center rounded-lg text-green focus:ring-4 focus:outline-none focus:ring-green-300">
+                                        <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+
+                        </div>
             </div>
         </div>
     </div>
