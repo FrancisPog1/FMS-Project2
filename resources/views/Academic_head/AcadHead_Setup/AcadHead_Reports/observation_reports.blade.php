@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
     <section class="container">
-        <div class="mr-5 ml-5">
+        {{-- <div class="mr-5 ml-5">
             <div class="card">
                 <div class="card-header">
                     <div class="row justify-content-between">
@@ -105,21 +105,20 @@
 
                                         ">Ongoing</button>
                                 </td>
-                            </tbody>
-                            <tfoot>
-                                <td class="dataTables_info text-col-1"
-                                    id="dataTable_info" role="status"
-                                    aria-live="polite" colspan="12"
-                                    style="font-size: .9rem;">
-                                    Showing x to x of x entries
-                                </td>
-                            </tfoot>
+                        </tbody>
+                        <tfoot>
+                            <td class="dataTables_info text-col-1"
+                                id="dataTable_info" role="status"
+                                aria-live="polite" colspan="12"
+                                style="font-size: .9rem;">
+                                Showing x to x of x entries
+                            </td>
+                        </tfoot>
 
-                        </table>
-                    </div>
+                    </table>
                 </div>
             </div>
-    </section> --}}
+        </div> --}}
 
         <section class="content" style="padding-top: 5rem;">
             <div class="error-page">
@@ -136,4 +135,5 @@
                 <!-- /.error-content -->
             </div>
         </section>
+    </section>
 </div>

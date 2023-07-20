@@ -38,7 +38,7 @@
                         href="#custom-content-above-home" role="tab"
                         aria-controls="custom-content-above-home"
                         aria-selected="true"
-                        style="color: var(--pallete-1);">Class Reports</a>
+                        style="color: var(--pallete-1);">Class Schedule Reports</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
