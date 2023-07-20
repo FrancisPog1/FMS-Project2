@@ -1,29 +1,35 @@
 @extends('layouts.Faculty_master')
 
 
-{{-- CONTENTS --}}  
-@section('content')  
+{{-- CONTENTS --}}
+@section('content')
 
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
             <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row-col-sm-6 mb-2">
-                        <div class="col-md-6 ml-4">
-                            <h1 class="m-0">Class Observation</h1>
+            <section class="content-header ">
+                <div class="mr-5 ml-5" >
+                    <div class="card " >
+                        <div class="card-header" style="height: 85px;">
+                            <h1 class="m-0">Observation</h1>
+
+                            <ol class="breadcrumb">
+                                {{-- <li class="breadcrumb-item active">{{ Breadcrumbs::render('Reports') }}</li> --}}
+                                <li class="breadcrumb-item active"><a href="dashboard">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Observation</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Main content -->
             <section class="container">
                 <div class="mr-5 ml-5">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title mt-2">List of class observation/h3>
+                            <h3 class="card-title mt-2">List of class observation</h3>
                             <!-- Search function --->
                             <div class="text-right">
                                 <div class="form-inline float-right">
@@ -92,8 +98,8 @@
                                                 rounded-lg hover:bg-blue-800
                                                 focus:ring-4 focus:outline-none
                                                 focus:ring-blue-300
-                                               
-                                               
+
+
                                                ">View</button>
                                         </td>
                                     </tr>
@@ -142,7 +148,7 @@
                                                     Remarks:
                                                 </p>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +210,7 @@
                                             Program: <b>HRM, MM, Entrep</b>
                                         </p>
                                     </div>
-                                </div>                             
+                                </div>
                             </div>
 
                             <div class="modal-footer
@@ -230,4 +236,3 @@
         </footer>
 @endsection
 
-   

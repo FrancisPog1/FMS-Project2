@@ -75,17 +75,17 @@ class CreateAdminUserSeeder extends Seeder
 
         $profile = UsersProfile::create([
             'id' => '66464592-e6aa-4a71-9eb6-16adcd7c1bcD',
-            'first_name' => 'Francis',
-            'last_name' => 'Candelaria',
-            'middle_name' => 'Constancio',
+            'first_name' => 'Irynne',
+            'last_name' => 'Gatchalian',
+            'middle_name' => '',
             'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcF'
         ]);
 
 
         $profile = UsersProfile::create([
             'id' => '66464592-e6aa-4a71-9eb6-16adcd7c1aed',
-            'first_name' => 'Andrew',
-            'last_name' => 'Brinas',
+            'first_name' => 'Mr. Staff',
+            'last_name' => 'Checker',
             'middle_name' => '',
             'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS'
         ]);
@@ -93,8 +93,8 @@ class CreateAdminUserSeeder extends Seeder
 
         $profile = UsersProfile::create([
             'id' => '66464592-e6aa-4a71-9eb6-16fccaaa1bcD',
-            'first_name' => 'Daniel',
-            'last_name' => 'Reyes',
+            'first_name' => 'Mr. Director',
+            'last_name' => '',
             'middle_name' => '',
             'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcD'
         ]);

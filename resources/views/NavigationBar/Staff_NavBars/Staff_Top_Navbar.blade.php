@@ -77,7 +77,7 @@
                     class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info m-auto">
-                <a href="#" class="d-block text-bold text-pal-1">Mr. Checker</a>
+                <a href="#" class="d-block text-bold text-pal-1">Mr. Staff</a>
                 <span class="d-block text-regular text-pal-1" style="font-size: .8rem;">Faculty Member</span>
             </div>
         </div>
