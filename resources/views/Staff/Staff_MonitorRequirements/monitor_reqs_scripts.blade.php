@@ -36,13 +36,11 @@
                     if (file.length > 0) {
                         for (let i = 0; i < file.length; i++) {
 
-                        html += '<li class="list-group-item rounded-pill border mb-2 shadow">'+
+                            html += '<li class="list-group-item rounded-pill border mb-2 shadow" style="background-color: rgba(54,151,99); color: white;" onclick="displayFileModal('+ "'" + file[i]['id'] + "'" + ')" >'+
                                                             '<div class="d-flex justify-content-between align-items-center">' +
                                                               '  <span>' + file[i]['file_name'] +'</span>' +
                                                                 '<div class="d-flex">' +
-                                                                   ' <button type="button" onclick="displayFileModal('+ "'" + file[i]['id'] + "'" + ')" > <i class="far fa-eye" style="color: #3a86e9;"></i></button>' +
-
-                                                                    '<a href="' + downloadRoute.replace(':file_id', file[i]['id'])  + '"> <i class="fa fa-download fa-2xs" style="color: #8edb1a;"></i></a>' +
+                                                                    '<a href="' + downloadRoute.replace(':file_id', file[i]['id'])  + '" onclick="event.stopPropagation();"> <i class="fa fa-download fa-s" style="color: white;"  title="Download"></i></a>' +
                                                                ' </div>' +
                                                             '</div>' +
                                                         '</li>';
@@ -79,9 +77,15 @@
 </script>
 
 
+<style>
+    .list-group-item:hover {
+    /* Change the font size */
+    font-size: 1.2em;
+    }
+</style>
+
 
 <script>
-
 function displayFileModal(file_id) {
 
         var Url = "{{ route('staff.files.display') }}";

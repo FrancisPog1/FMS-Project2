@@ -14,6 +14,7 @@ use App\Http\Controllers\Faculty\Faculty_Activities_Controller;
 use App\Http\Controllers\Faculty\Faculty_Profile_Controller;
 use App\Http\Controllers\Faculty\Faculty_Dashboard_Controller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Faculty\Faculty_ViewUserFiles_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,9 @@ Route::middleware(['auth', 'isFaculty'])->prefix('faculty')->name('faculty.')->g
     Route::put('update_my_profile/{profile_id}', [Faculty_Profile_Controller::class, 'update'])->name('update_my_profile');
     Route::get('my_profile', [Faculty_Profile_Controller::class, 'show'])->name('my_profile');
 
+    Route::get('view/files', [Faculty_ViewUserFiles_Controller::class, 'viewFiles'])->name('files.view');
+    Route::get('display/files', [Faculty_ViewUserFiles_Controller::class, 'displayFiles'])->name('files.display');
+    Route::get('unsubmit/files/{id}', [Faculty_ViewUserFiles_Controller::class, 'unsubmit'])->name('files.unsubmit');
 
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');

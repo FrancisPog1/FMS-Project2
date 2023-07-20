@@ -12,14 +12,16 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 
 
+
 class Dashboard_Controller extends Controller
 {
-
     public function dashboard(){
         // to fetch name from users table
         $user_id = Auth::user()->id;
         $user = UsersProfile::where('user_id', $user_id)->firstOrFail();
-        $name = $user->first_name;
+        $name = $user->first_name . " " . $user->last_name;
+
+
 
         // to fetch realtime using carbon laravel
         $morning_time = '12:00 AM';
