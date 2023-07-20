@@ -20,12 +20,13 @@ class Dashboard_Controller extends Controller
         $user_id = Auth::user()->id;
         $user = UsersProfile::where('user_id', $user_id)->firstOrFail();
         $name = $user->first_name;
-
-        // to fetch realtime using carbon laravel
-        // $morning_time = '00:01 AM';
-        // $afternoon_time = '00:01 PM';
-        // $evening_time = '06:00 PM';
-
+        /**
+         *  to fetch realtime using carbon laravel
+         *  $morning_time = '00:01 AM';
+         *  $afternoon_time = '00:01 PM';
+         *  $evening_time = '06:00 PM';
+         */
+    
         $time_now = Carbon::now('Asia/Manila');//Get the current date
 
         $h = $time_now->format('H');	//Formatting the date into time only
@@ -52,10 +53,13 @@ class Dashboard_Controller extends Controller
 
         return view('Academic_head/INTG_AcadHead_Dashboard', compact('name','greeting'));
     }
-/**Academic Head Dashboard
-    public function dashboard(){
-        return view("Academic_head/INTG_AcadHead_Dashboard");
-    }*/
+    /*
+    *Academic Head Dashboard
+        public function dashboard()
+        {
+            return view("Academic_head/INTG_AcadHead_Dashboard");
+        }
+    */
 
 
 }
