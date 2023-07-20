@@ -32,7 +32,9 @@
                         <h1 class="m-0">Reports Dashboard</h1>
 
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">{{ Breadcrumbs::render('Reports') }}</li>
+                            {{-- <li class="breadcrumb-item active">{{ Breadcrumbs::render('Reports') }}</li> --}}
+                            <li class="breadcrumb-item active"><a href="dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Reports</li>
                         </ol>
                     </div>
                 </div>
