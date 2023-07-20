@@ -41,6 +41,9 @@
             {{-- Upload Modal --}}
             @include('Faculty/Faculty_RequirementList/upload_modal')
 
+                {{-- File Modal --}}
+            @include('Faculty/Faculty_RequirementList/file_modal')
+
 
             {{-- <div class="d-flex justify-content-between">
                 <a href="{{ route('acadhead_RequirementAssignees', $req_bin_id) }}" class="btn btn-outline-danger btn-lg"

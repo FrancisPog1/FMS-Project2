@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-
+use App\Http\Controllers\GetVariable_Controller;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,9 +21,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-
 
     }
 }

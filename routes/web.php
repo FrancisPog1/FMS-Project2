@@ -132,15 +132,12 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
     Route::get('/activity_participants_reports/{id}', [Reports_Controller::class, 'show_participants'])->name('activity_participants_reports');
 
-
-
     /**Academic Head Activities*/
     Route::get('/activities', [Activities_Controller::class, 'show'])->name('activities.show');
 
 
     /**User Profiles*/
     Route::get('/user_profile', [All_Profile_Controller::class,'show'])->name('user_Profile');
-
 
     //This is all the routes for Creating or Adding.
     Route::post('/store_ranks', [AcademicRank_Controller::class, 'Create_AcadRank'])->name('ranks.store');

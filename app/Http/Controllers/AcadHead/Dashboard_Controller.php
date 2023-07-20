@@ -12,9 +12,9 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 
 
+
 class Dashboard_Controller extends Controller
 {
-
     public function dashboard(){
         // to fetch name from users table
         $user_id = Auth::user()->id;
@@ -26,7 +26,7 @@ class Dashboard_Controller extends Controller
          *  $afternoon_time = '00:01 PM';
          *  $evening_time = '06:00 PM';
          */
-    
+
         $time_now = Carbon::now('Asia/Manila');//Get the current date
 
         $h = $time_now->format('H');	//Formatting the date into time only

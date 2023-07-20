@@ -47,6 +47,12 @@
                                                 <input type="file" class="filepond" name="file" id="file"
                                                     multiple credits="false">
                                             </div>
+
+                                            {{-- This is where all the list of uploaded file will be shown --}}
+                                            <ul id="files" class="list-group">
+
+                                            </ul>
+
                                         </div>
                                     </div>
                                 </div>

@@ -73,7 +73,7 @@ class Faculty_RequirementBin_Controller extends Controller
             }
 
             return view('Faculty/Faculty_RequirementList/Faculty_RequirementList'
-            , compact('datas','assigned_bin_id', 'req_bin_id', 'requirementbin'));
+            , compact('datas','assigned_bin_id', 'req_bin_id', 'requirementbin', 'user_id'));
 
         }
 
