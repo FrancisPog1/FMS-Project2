@@ -24,7 +24,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" style="cursor: pointer !important;">
                         <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
                         <p> Class Setup<i class="fas fa-angle-left right"></i>
@@ -45,7 +45,21 @@
                             </a>
                         </li>
                     </ul>
+                </li> --}}
+                <li class="nav-item">
+                    <a href="FacultyClassSchedule" class="nav-link">
+                        <i class="fa-regular fa-note-sticky nav-icon"></i>
+                        <p class="p-drop">Class Schedule</p>
+                    </a>
                 </li>
+                <li class="nav-item">
+                    <a href="FacultyClassObservation" class="nav-link">
+                        <i class="fa-solid fa-location-pin nav-icon"></i>
+                        <p class="p-drop">Class Observation</p>
+                    </a>
+                </li>
+
+
                 <li class="nav-item">
                     <a href="FacultyRequirementBin" class="nav-link">
                         <i class="nav-icon fa-solid fa-bookmark"></i>

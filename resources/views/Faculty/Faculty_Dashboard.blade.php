@@ -76,7 +76,7 @@
                             <div class="col-7 pl-5 pr-5">
 
                                 <div class="card" style="display: inline-block; width: 100%; border-top: 2px solid #800000;">
-                                    <div class="card-header">
+                                    <div class="card-header pb-0">
                                         <label>Requirement Stats</label>
                                     </div>
                                     <div>
@@ -86,7 +86,7 @@
 
 
                                 <div class="card" style="display: inline-block; width: 100%; border-top: 2px solid #800000;">
-                                    <div class="card-header">
+                                    <div class="card-header pb-0">
                                         <label>Activity Status</label>
                                     </div>
                                     <div>
