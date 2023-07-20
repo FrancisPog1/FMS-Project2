@@ -79,7 +79,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('Create_Activities') }}",
+                url: "{{ route('admin.activities.store') }}",
                 data: jQuery('#createForm').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -131,13 +131,16 @@
         $(document).ready(function() {
                 var countdown = 2;
                 var formID = '#editForm-' + id;
+                var route = "{{ route('admin.update_activities', ':id') }}"; // Replace with the actual delete route
+                var Url = route.replace(':id', id);
+
             // Handle form submission
             $(formID).on('submit', function(e) {
                 e.preventDefault(); // Prevent default form submission behavior
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_activities', '') }}" + id,
+                    url: Url,
                     data: jQuery(formID).serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -215,7 +218,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_activities', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_activities', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",

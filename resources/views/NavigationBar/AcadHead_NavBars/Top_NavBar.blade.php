@@ -81,15 +81,14 @@
                 <span class="d-block text-regular text-pal-1" style="font-size: .8rem;">Academic Head</span>
             </div>
         </div>
-        
+
         <!-- Profile Dropdown -->
         <div id="dropdownHover" class="z-10 hidden pal-1 divide-y divide-gray-100 rounded-lg shadow w-44">
             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
-                <a href="{{ route('acadhead_profile') }}" class="block px-4 py-2 text-white">Profile</a>
+                <a href="{{ route('admin.my_profile.show') }}" class="block px-4 py-2 text-white">Profile</a>
                 </li>
                 <li>
-                    <a id="show-modal-logout" class="block px-4 py-2 text-white"><button>Log out</button></a>
-
+                    <a id="show-modal-logout" class="block px-4 py-2 text-white admin-logout-button"><button>Log out</button></a>
 
                 </li>
             </ul>

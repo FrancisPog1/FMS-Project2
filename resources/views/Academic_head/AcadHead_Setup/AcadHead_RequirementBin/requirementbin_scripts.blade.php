@@ -47,7 +47,7 @@
                 event.preventDefault(); // Prevent default form submission behavior
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_requirementbins', '') }}" + binId,
+                    url: "{{ route('admin.update_requirementbins', '') }}" + binId,
                     data: jQuery(formID).serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -99,7 +99,7 @@
 <script>
     function createDeleteForm(action, inputValue) {
         var form = document.createElement("form");
-        form.method = "POST";
+        form.method = "DELETE";
         form.action = action;
 
         var input = document.createElement("input");
@@ -128,7 +128,7 @@
     event.preventDefault(); // Prevent the default form submission
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_requirementbins', '') }}" + name; // Replace with the actual delete route
+        var action = "{{ route('admin.destroy_requirementbins', '') }}" + name; // Replace with the actual delete route
 
         Swal.fire({
             title: "Are you sure?",
@@ -176,7 +176,7 @@
 {{-- AJAX SCRIPT FOR SORTING --}}
 <script>
     $(document).ready(function() {
-        var filteredAndSortedBinsUrl = "{{ route('filtered_and_sorted_bins') }}";
+        var filteredAndSortedBinsUrl = "{{ route('admin.filtered_and_sorted_bins') }}";
 
         $("#filter, #sort").on('change', function() {
             var filterOption = $("#filter").val();
@@ -198,10 +198,10 @@
                     var html = '';
 
                     // Generate the route URL on the server-side
-                    var binSetupRoute = "{{ route('acadhead_bin_setup', ['id' => ':id']) }}";
+                    var binSetupRoute = "{{ route('admin.requirementbin_setup.show', ['id' => ':id']) }}";
                     // Generate the route URL on the server-side
-                    var requirementAssigneesRoute = "{{ route('acadhead_RequirementAssignees', ['bin_id' => ':bin_id']) }}";
-                    var deleteBinRoute = "{{ route('delete_requirementbins', ['requirementbinId' => ':id']) }}";
+                    var requirementAssigneesRoute = "{{ route('admin.requirement_assignees.show', ['bin_id' => ':bin_id']) }}";
+                    var deleteBinRoute = "{{ route('admin.delete_requirementbins', ['requirementbinId' => ':id']) }}";
                     var deleteButton = "<button type='button' class='px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button' title='Delete'>";
 
 
@@ -294,7 +294,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('Create_RequirementBin') }}",
+                url: "{{ route('admin.requirement_bins.store') }}",
                 data: jQuery('#create_bin').serialize(), // Serialize the form data
 
                 success: function(response) {

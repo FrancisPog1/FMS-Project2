@@ -1,5 +1,5 @@
 <section class="content">
-    <form id="create_designation" action="{{ route('CreateDesignation') }}" method="post">
+    <form id="create_designation" action="{{ route('admin.designations.store') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered">

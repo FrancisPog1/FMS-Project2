@@ -1,7 +1,7 @@
 
  <script>
  $(document).ready(function() {
-    var filteredAndSortedAssigneesUrl = "{{ route('filtered_and_sorted_assignees', ':bin_id') }}";
+    var filteredAndSortedAssigneesUrl = "{{ route('director.filtered_and_sorted_assignees', ':bin_id') }}";
     var binId = "{{$bin_id}}"; // Assuming you have the bin_id value available in the template
 
     $("#filter, #sort").on('change', function() {

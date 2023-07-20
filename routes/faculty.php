@@ -13,6 +13,7 @@ use App\Http\Controllers\Faculty\Faculty_RequirementBin_Controller;
 use App\Http\Controllers\Faculty\Faculty_Activities_Controller;
 use App\Http\Controllers\Faculty\Faculty_Profile_Controller;
 use App\Http\Controllers\Faculty\Faculty_Dashboard_Controller;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,49 +28,48 @@ use App\Http\Controllers\Faculty\Faculty_Dashboard_Controller;
 
 
 //------------------------------------------------------------------ FACULTIES --------------------------------------------------------------------//
-Route::middleware(['auth', 'isFaculty'])->group(function () {
+Route::middleware(['auth', 'isFaculty'])->prefix('faculty')->name('faculty.')->group(function () {
 
-    Route::get('/FacultyActivities', [Faculty_Activities_Controller::class, 'show'])->name('faculty_Activities');
-    Route::get('/FacultyActivities/{id}', [Faculty_Activities_Controller::class, 'show_details'])->name('activity_details');
+    Route::get('activities', [Faculty_Activities_Controller::class, 'show'])->name('activities');
+    Route::get('activities/{id}', [Faculty_Activities_Controller::class, 'show_details'])->name('activity_details');
 
-    Route::get('/FacultyClassObservation', function () {
+    Route::get('class_observation', function () {
         return view('Faculty/Faculty_ClassObservation', ['page_title' => 'Faculty Class Observation']);
-        })->name('faculty_ClassObservation');
+        })->name('class_observation');
 
-    Route::get('/FacultyClassSchedule', function () {
+    Route::get('class_schedule', function () {
         return view('Faculty/Faculty_ClassSchedule', ['page_title' => 'Faculty Class Schedule']);
-        })->name('faculty_ClassSchedule');
+        })->name('class_schedule');
 
 
         //----------- FACULTY DASHBOARD -----------------//
-    Route::get('/FacultyDashboard', [Faculty_Dashboard_Controller::class, 'dashboard'])->name('faculty_Dashboard');
+    Route::get('dashboard', [Faculty_Dashboard_Controller::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/FacultyProfile', function () {
-        return view('Faculty/Faculty_Profile', ['page_title' => 'Faculty Profile']);
-        })->name('faculty_Profile');
-
-    Route::get('/FacultyReports', function () {
+    Route::get('reports', function () {
         return view('Faculty/Faculty_Reports', ['page_title' => 'Faculty Reports']);
-        })->name('faculty_Reports');
+        })->name('reports');
 
 
     //----------- Requirement Bin -----------------//
-    Route::get('/FacultyRequirementBin', [Faculty_RequirementBin_Controller::class, 'show'])->name('faculty_RequirementBin');
-    Route::get('/FacultyRequirements/{assigned_bin_id}/{req_bin_id}', [Faculty_RequirementBin_Controller::class, 'show_requirements'])->name('faculty_Requirements');
+    Route::get('requirement_bins', [Faculty_RequirementBin_Controller::class, 'show'])->name('requirement_bins.show');
+    Route::get('requirements/{assigned_bin_id}/{req_bin_id}', [Faculty_RequirementBin_Controller::class, 'show_requirements'])->name('requirements.show');
 
 
 
     //-------------------- File Pond Routes -----------------//
     // UPLOADING ROUTES
-    Route::post('/upload-file', [UploadTemporaryFiles_Controller::class, 'uploadFile'])->name('upload_file');
-    Route::delete('/delete-file', [DeleteTemporaryFiles_Controller::class, 'deleteFile'])->name('delete_file');
-    Route::put('/faculty_upload-file/{id}', [FacultyUpload_Controller::class, 'uploadFile'])->name('faculty_uploadfile');
+    Route::post('upload-file', [UploadTemporaryFiles_Controller::class, 'uploadFile'])->name('upload_file');
+    Route::delete('delete-file', [DeleteTemporaryFiles_Controller::class, 'deleteFile'])->name('delete_file');
+    Route::put('submit-uploads/{id}', [FacultyUpload_Controller::class, 'uploadFile'])->name('submit_uploads');
 
 
     //USER PROFILE
-    Route::put('/faculty_update_my_profile/{profile_id}', [Faculty_Profile_Controller::class, 'update'])->name('update_faculty_profile');
-    Route::get('/faculty_my_profile', [Faculty_Profile_Controller::class, 'show'])->name('faculty_profile');
+    Route::put('update_my_profile/{profile_id}', [Faculty_Profile_Controller::class, 'update'])->name('update_my_profile');
+    Route::get('my_profile', [Faculty_Profile_Controller::class, 'show'])->name('my_profile');
 
+
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
 
     });
 

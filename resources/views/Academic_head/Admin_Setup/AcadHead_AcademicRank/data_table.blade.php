@@ -66,7 +66,7 @@
                                 <td>{{ $acadrank->title }}</td>
                                 <td>{{ $acadrank->description }}</td>
                                 <td class="text-center">
-                                    <form method="POST" action="{{ route('delete_ranks', $acadrank->id) }}">
+                                    <form method="POST" action="{{ route('admin.delete_ranks', $acadrank->id) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
 

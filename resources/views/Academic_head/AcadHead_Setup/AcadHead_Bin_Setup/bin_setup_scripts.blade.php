@@ -13,7 +13,7 @@
         document.getElementById('editForm').elements['type'].value = type;
         document.getElementById('editForm').elements['notes'].value = notes;
 
-        document.getElementById('editForm').action = "{{ route('update_requirements', '') }}" + reqId;
+        document.getElementById('editForm').action = "{{ route('admin.update_requirements', '') }}" + reqId;
 
         // Open the edit modal
         $('#modal-xl-edit').modal('show');
@@ -143,7 +143,10 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_requirements', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_requirements', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
+
+
 
         Swal.fire({
             title: "Are you sure?",
@@ -183,7 +186,7 @@
 
 <script>
 $(document).ready(function() {
-    var filteredUsersUrl = "{{ route('filtered_users') }}";
+    var filteredUsersUrl = "{{ route('admin.filtered_users') }}";
     $("#types").on('change', function() {
         var types = $(this).val();
         // alert('Hello fuck');

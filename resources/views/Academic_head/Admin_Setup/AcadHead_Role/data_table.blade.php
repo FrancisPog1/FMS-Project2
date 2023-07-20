@@ -66,7 +66,7 @@
                                 <td>{{ $role->title }}</td>
                                 <td>{{ $role->description }}</td>
                                 <td class="text-center">
-                                    <form method="POST" action="{{ route('delete_roles', $role->id) }}">
+                                    <form method="POST" action="{{ route('admin.delete_roles', $role->id) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button data-toggle="modal"

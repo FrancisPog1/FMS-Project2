@@ -22,7 +22,7 @@
 
 <script>
     $(document).ready(function() {
-        var filteredUsersUrl = "{{ route('staff_filtered_users') }}";
+        var filteredUsersUrl = "{{ route('staff.filtered_users') }}";
         $("#types").on('change', function() {
             var types = $(this).val();
             // alert('Hello fuck');
@@ -101,7 +101,8 @@
         event.preventDefault();
 
         var participant_id = this.getAttribute("name");
-        var action = "{{ route('staff_remove_participants', '') }}" + participant_id; // Replace with the actual delete route
+        var route = "{{ route('staff.remove_participants', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', participant_id);
 
         Swal.fire({
             title: "Are you sure?",

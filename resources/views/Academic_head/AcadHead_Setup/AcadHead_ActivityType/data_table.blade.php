@@ -76,7 +76,7 @@
                                         <td>{{ $activitytype->category }}</td>
                                         <td class="text-center">
                                             <form method="POST"
-                                                action="{{ route('delete_activitytypes', $activitytype->id) }}">
+                                                action="{{ route('admin.delete_activitytypes', $activitytype->id) }}">
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
 

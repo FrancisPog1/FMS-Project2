@@ -18,7 +18,7 @@
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_facultytypes', '') }}" + typeId,
+                    url: "{{ route('admin.update_facultytypes', '') }}" + typeId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -108,7 +108,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('CreateFacultyType') }}",
+                url: "{{ route('admin.faculty_types.store') }}",
                 data: jQuery('#create_type').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -185,7 +185,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_facultytypes', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_facultytypes', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -234,7 +235,7 @@
 {{-- AJAX SCRIPT FOR SORTING --}}
 <script>
     $(document).ready(function() {
-        var sortedTypeRoute = "{{ route('sorted_facultytypes') }}";
+        var sortedTypeRoute = "{{ route('admin.sorted_facultytypes') }}";
 
         $("#sort").on('change', function() {
             var sortOption = $("#sort").val();
@@ -252,7 +253,7 @@
                 success: function(data) {
                     var types = data.types;
                     var html = '';
-                    var deleteTypeRoute = "{{ route('delete_facultytypes', ':type_id') }}";
+                    var deleteTypeRoute = "{{ route('admin.delete_facultytypes', ':type_id') }}";
 
                     if (types.length > 0) {
                         for (let i = 0; i < types.length; i++) {

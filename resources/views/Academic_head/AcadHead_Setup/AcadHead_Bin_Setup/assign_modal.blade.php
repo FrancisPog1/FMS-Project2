@@ -1,6 +1,6 @@
         <!-- Assigning Modal -->
         <section class="content">
-            <form id="assign" action="{{ route('Assign_Requirement', $bin_id) }}" method="post">
+            <form id="assign" action="{{ route('admin.assign_requirement', $bin_id) }}" method="post">
                 @csrf
                 <div class="modal fade" id="modal-xl-assign">
                     <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">

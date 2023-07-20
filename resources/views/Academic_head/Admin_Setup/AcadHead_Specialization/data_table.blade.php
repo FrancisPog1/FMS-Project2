@@ -66,7 +66,7 @@
                                     <td>{{ $specialization->description }}</td>
                                     <td class="text-center">
                                         <form method="POST"
-                                            action="{{ route('delete_specializations', $specialization->id) }}">
+                                            action="{{ route('admin.delete_specializations', $specialization->id) }}">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
 

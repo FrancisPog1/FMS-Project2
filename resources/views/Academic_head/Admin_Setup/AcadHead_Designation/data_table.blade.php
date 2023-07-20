@@ -65,7 +65,7 @@
                                 <td class="text-center">{{ $designation->title }}</td>
                                 <td>{{ $designation->description }}</td>
                                 <td class="text-center">
-                                    <form method="POST" action="{{ route('delete_designations', $designation->id) }}">
+                                    <form method="POST" action="{{ route('admin.delete_designations', $designation->id) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button data-toggle="modal"

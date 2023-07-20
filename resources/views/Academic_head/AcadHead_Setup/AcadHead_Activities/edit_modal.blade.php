@@ -1,6 +1,6 @@
    <!--Edit Modal-->
    <section class="content">
-       <form id="editForm-{{$activity->id}}" action="{{ route('update_activities', $activity->id) }}" method="post">
+       <form id="editForm-{{$activity->id}}" action="{{ route('admin.update_activities', $activity->id) }}" method="post">
            @method('PUT')
            @csrf
            <div class="modal fade" id="modal-xl-edit-{{ $activity->id }}">

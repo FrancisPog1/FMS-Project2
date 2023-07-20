@@ -18,7 +18,7 @@
 
                 jQuery.ajax({
                     type: 'post',
-                    url: "{{ route('update_requirementtypes', '') }}" + typeId,
+                    url: "{{ route('admin.update_requirementtypes', '') }}" + typeId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -103,7 +103,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('Create_RequirementType') }}",
+                url: "{{ route('admin.requirement_types.store') }}",
                 data: jQuery('#create_type').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -177,11 +177,12 @@
         form.submit();
     }
 
-    function localWarning(event) {
+    $(document).on('click', '.destroy-button', function(event) {
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_requirementtypes', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_requirementtypes', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -200,10 +201,7 @@
                 createDeleteForm(action, name);
             }
         });
-    }
-
-    const button = document.querySelector('.destroy-button');
-    button.addEventListener('click', localWarning);
+    });
 </script>
 
 <script>
@@ -232,7 +230,7 @@
 {{-- AJAX SCRIPT FOR SORTING --}}
 <script>
     $(document).ready(function() {
-        var sortedTypeRoute = "{{ route('sorted_requirementtypes') }}";
+        var sortedTypeRoute = "{{ route('admin.sorted_requirementtypes') }}";
 
         $("#sort").on('change', function() {
             var sortOption = $("#sort").val();
@@ -250,7 +248,7 @@
                 success: function(data) {
                     var types = data.types;
                     var html = '';
-                    var deleteRankRoute = "{{ route('delete_requirementtypes', ':id') }}";
+                    var deleteRankRoute = "{{ route('admin.delete_requirementtypes', ':id') }}";
 
                     if (types.length > 0) {
                         for (let i = 0; i < types.length; i++) {
@@ -295,7 +293,7 @@
     });
 </script>
 
-{{-- Local Warning Modal Before Deleting--}}
+{{-- Local Warning Modal Before Deleting
 <script>
     $(document).on('click', '.local-delete-button', function(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -321,4 +319,4 @@
         }
     });
 });
-</script>
+</script> --}}

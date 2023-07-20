@@ -103,7 +103,7 @@
 
                         {{-- assign button --}}
                         <form
-                            action="{{ route('acadhead_ReviewRequirements', ['assigned_bin_id' => $assigned_bin_id, 'req_bin_id' => $req_bin_id]) }}"
+                            action="{{ route('admin.review_requirements.store', ['assigned_bin_id' => $assigned_bin_id, 'req_bin_id' => $req_bin_id]) }}"
                             method="post">
                             @method('PUT')
                             @csrf

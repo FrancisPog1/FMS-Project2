@@ -88,11 +88,11 @@
                                 <td class="text-center">
 
                                     <div class="btn-group">
-                                        <form method="POST" action="{{ route('delete_users', $user->id) }}">
+                                        <form method="POST" action="{{ route('admin.delete_users', $user->id) }}">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
 
-                                            <a href="{{ route('show_profile', $user->id) }}"
+                                            <a href="{{ route('admin.show_profile', $user->id) }}"
                                                 class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300"
                                                 role="button" aria-pressed="true">
                                                 <i class="fa fa-window-restore" aria-hidden="true"></i>

@@ -1,6 +1,6 @@
 {{-- To add user role --}}
 <section class="content">
-    <form id="adduser" action="{{ route('register_user') }}" method="post">
+    <form id="adduser" action="{{ route('admin.register_user') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered">

@@ -8,7 +8,7 @@ aria-labelledby="custom-content-above-settings-tab">
             <div class="card-header">
                 <div class="row justify-content-between">
                     <div class="dt-buttons btn-group flex-wrap">
-                        <a href="{{ route('activities_export_pdf') }}"
+                        <a href="{{ route('admin.activities_export_pdf') }}"
                             tabindex="0"
                             aria-controls="dataTable" type="button"
                             class="text-col-1 buttons-pdf
@@ -16,7 +16,7 @@ aria-labelledby="custom-content-above-settings-tab">
                             title="PDF export.">
                             <span>Export as PDF</span>
                         </a>
-                        <a href = "{{ route('activities_export_xls') }}"
+                        <a href = "{{ route('admin.activities_export_xls') }}"
                             tabindex="0"
                             aria-controls="dataTable" type="button"
                             class="text-col-1 buttons-excel
@@ -79,7 +79,7 @@ aria-labelledby="custom-content-above-settings-tab">
                                 </td>
                                 <td class="text-sm-center">
 
-                                        <a href="{{ route('activity_participants_reports', $activity->id)}}"
+                                        <a href="{{ route('admin.activity_participants_reports', $activity->id)}}"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             <i class="far fa-eye"></i>
                                         </a>

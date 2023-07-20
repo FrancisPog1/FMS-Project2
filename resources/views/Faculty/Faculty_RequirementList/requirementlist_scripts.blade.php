@@ -70,13 +70,13 @@
     FilePond.setOptions({
         server: {
             process: {
-                url: '/upload-file',
+                url: "{{ route('faculty.upload_file') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
             },
             revert: {
-                url: "{{ route('delete_file') }}",
+                url: "{{ route('faculty.delete_file') }}",
                 method: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

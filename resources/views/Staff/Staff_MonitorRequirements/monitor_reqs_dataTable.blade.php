@@ -103,7 +103,7 @@
 
                         {{-- assign button --}}
                         <form
-                            action="{{ route('staff_ReviewRequirements', ['assigned_bin_id' => $assigned_bin_id, 'req_bin_id' => $req_bin_id]) }}"
+                            action="{{ route('staff.requirementbins.mark', ['assigned_bin_id' => $assigned_bin_id, 'req_bin_id' => $req_bin_id]) }}"
                             method="post">
                             @method('PUT')
                             @csrf

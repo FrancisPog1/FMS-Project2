@@ -81,7 +81,7 @@
 
                                 <td class="text-center">
 
-                                    <a href="{{ route('faculty_Requirements', [
+                                    <a href="{{ route('faculty.requirements.show', [
                                         'assigned_bin_id' => $requirement_bin->id,
                                         'req_bin_id' => $requirement_bin->req_bin_id,
                                     ]) }}"

@@ -92,16 +92,16 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <form method="POST"
-                                                    action="{{ route('staff_delete_requirementbins', $requirementbin->id) }}">
+                                                    action="{{ route('staff.delete_requirementbins', $requirementbin->id) }}">
                                                     @csrf
-                                                    <a href="{{ route('staff_bin_setup', $requirementbin->id) }}"
+                                                    <a href="{{ route('staff.requirementbin_setup.show', $requirementbin->id) }}"
                                                         class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300"
                                                         role="button" aria-pressed="true">
                                                         <i class="fa fa-window-restore" aria-hidden="true"></i>
                                                     </a>
                                                     <input name="_method" type="hidden" value="DELETE">
 
-                                                    <a href="{{ route('staff_RequirementAssignees', ['bin_id' => $requirementbin->id]) }}"
+                                                    <a href="{{ route('staff.requirement_assignees.show', ['bin_id' => $requirementbin->id]) }}"
                                                         role="button" aria-pressed="true"
                                                         class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
 

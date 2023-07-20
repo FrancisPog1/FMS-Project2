@@ -21,7 +21,7 @@
             form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__',
                 reqBinId);
             $.ajax({
-                url: "{{ route('files.view') }}",
+                url: "{{ route('staff.files.view') }}",
                 method: 'GET',
                 data: {
                     req_bin_id: reqBinId,
@@ -31,7 +31,7 @@
                 success: function(data) {
                     var file = data.files;
                     var html = '';
-                    var downloadRoute = "{{ route('files.download', ':file_id')}}";
+                    var downloadRoute = "{{ route('staff.files.download', ':file_id')}}";
                     // Update the modal content with the files
                     if (file.length > 0) {
                         for (let i = 0; i < file.length; i++) {
@@ -84,7 +84,7 @@
 
 function displayFileModal(file_id) {
 
-        var Url = "{{ route('files.display') }}";
+        var Url = "{{ route('staff.files.display') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             $.ajax({

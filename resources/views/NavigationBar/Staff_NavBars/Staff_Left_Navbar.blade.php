@@ -17,7 +17,7 @@
                     data-accordion="false">
 
                     <li class="nav-item">
-                        <a href="StaffDashboard" class="nav-link">
+                        <a href="{{ route('staff.dashboard')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Dashboard
@@ -33,27 +33,27 @@
 
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('staff_RequirementBin')}}" class="nav-link">
+                                <a href="{{ route('staff.requirement_bins.show')}}" class="nav-link">
                                     <i class="nav-icon fa-solid fa-bookmark"></i>
                                     <p class="p-drop">Requirements Bin</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('staff_activities')}}" class="nav-link">
+                                <a href="{{ route('staff.activities.show')}}" class="nav-link">
                                     <i class="nav-icon fa-solid fa-flag"></i>
                                     <p class="p-drop">Activity</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="StaffClassSchedule" class="nav-link">
+                                <a href="{{ route('staff.class_schedule')}}" class="nav-link">
                                     <i class="fa-solid fa-users-line nav-icon"></i>
                                     <p class="p-drop">Class Schedule</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="StaffClassObservation" class="nav-link">
+                                <a href="{{ route('staff.class_observation')}}" class="nav-link">
                                     <i class="fa-solid fa-users-gear nav-icon"></i>
                                     <p class="p-drop">Class Observation</p>
                                 </a>
@@ -61,7 +61,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="StaffReports" class="nav-link">
+                        <a href="{{ route('staff.reports')}}" class="nav-link">
                             <i class="nav-icon fa-solid fa-book-bookmark"></i>
                             <p>
                                 Reports

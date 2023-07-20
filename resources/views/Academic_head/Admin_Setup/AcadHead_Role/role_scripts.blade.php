@@ -17,7 +17,7 @@
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_roles', '') }}" + roleId,
+                    url: "{{ route('admin.update_roles', '') }}" + roleId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -106,7 +106,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('CreateRole') }}",
+                url: "{{ route('admin.roles.store') }}",
                 data: jQuery('#create_role').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -184,7 +184,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_roles', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_roles', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -234,7 +235,7 @@
 {{-- AJAX SCRIPT FOR SORTING --}}
 <script>
     $(document).ready(function() {
-        var sortedRoleRoute = "{{ route('sorted_roles') }}";
+        var sortedRoleRoute = "{{ route('admin.sorted_roles') }}";
 
         $("#sort").on('change', function() {
             var sortOption = $("#sort").val();
@@ -252,7 +253,7 @@
                 success: function(data) {
                     var roles = data.roles;
                     var html = '';
-                    var deleteRoleRoute = "{{ route('delete_roles', ':role_id') }}";
+                    var deleteRoleRoute = "{{ route('admin.delete_roles', ':role_id') }}";
 
                     if (roles.length > 0) {
                         for (let i = 0; i < roles.length; i++) {

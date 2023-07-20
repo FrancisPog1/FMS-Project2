@@ -85,11 +85,11 @@
                                 </td>
 
                                 <td class="text-sm-center">
-                                    <form method="POST" action="{{ route('staff_delete_activity', $activity->id) }}">
+                                    <form method="POST" action="{{ route('staff.delete_activity', $activity->id) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
 
-                                        <a href="{{ route('staff_activities_participants', $activity->id)}}"
+                                        <a href="{{ route('staff.activity_participants.show', $activity->id)}}"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             <i class="far fa-eye"></i>
                                         </a>

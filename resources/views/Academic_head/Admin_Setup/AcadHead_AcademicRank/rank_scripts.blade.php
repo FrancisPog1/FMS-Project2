@@ -17,7 +17,7 @@
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_ranks', '') }}" + roleId,
+                    url: "{{ route('admin.update_ranks', '') }}" + roleId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -105,7 +105,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('Create_AcademicRank') }}",
+                url: "{{ route('admin.ranks.store') }}",
                 data: jQuery('#create_rank').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -183,7 +183,9 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_ranks', '') }}" + name; // Replace with the actual delete route
+
+        var route = "{{ route('admin.destroy_ranks', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -232,7 +234,7 @@
 {{-- AJAX SCRIPT FOR SORTING --}}
 <script>
     $(document).ready(function() {
-        var sortedRankRoute = "{{ route('sorted_ranks') }}";
+        var sortedRankRoute = "{{ route('admin.sorted_ranks') }}";
 
         $("#sort").on('change', function() {
             var sortOption = $("#sort").val();
@@ -250,7 +252,7 @@
                 success: function(data) {
                     var ranks = data.ranks;
                     var html = '';
-                    var deleteRankRoute = "{{ route('delete_ranks', ':rank_id') }}";
+                    var deleteRankRoute = "{{ route('admin.delete_ranks', ':rank_id') }}";
 
                     if (ranks.length > 0) {
                         for (let i = 0; i < ranks.length; i++) {
