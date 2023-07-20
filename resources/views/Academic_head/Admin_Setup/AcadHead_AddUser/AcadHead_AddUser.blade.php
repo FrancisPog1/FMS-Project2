@@ -32,11 +32,6 @@
 
             {{-- CREATE MODAL --}}
             @include('Academic_head/Admin_Setup/AcadHead_AddUser/create_modal')
-
-
-
-
-
         </div>
         <!-- Footer Container -->
         <footer class="main-footer">

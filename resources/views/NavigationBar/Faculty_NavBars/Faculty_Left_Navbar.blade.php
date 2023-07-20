@@ -24,7 +24,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" style="cursor: pointer !important;">
                         <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
                         <p> Class Setup<i class="fas fa-angle-left right"></i>

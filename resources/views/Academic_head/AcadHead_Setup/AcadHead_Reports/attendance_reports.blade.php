@@ -1,7 +1,7 @@
 <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
     <!-- Class Attendace Reports -->
     {{-- <section class="container">
-        <div class="mr-5 ml-5">
+        {{-- <div class="mr-5 ml-5">
             <div class="card">
 
                 <div class="card-header">
@@ -116,15 +116,15 @@
 
                                         ">Ongoing</button>
                                 </td>
-                            </tbody>
-                            <tfoot>
-                                <td class="dataTables_info text-col-1"
-                                    id="dataTable_info" role="status"
-                                    aria-live="polite" colspan="12"
-                                    style="font-size: .9rem;">
-                                    Showing x to x of x entries
-                                </td>
-                            </tfoot>
+                        </tbody>
+                        <tfoot>
+                            <td class="dataTables_info text-col-1"
+                                id="dataTable_info" role="status"
+                                aria-live="polite" colspan="12"
+                                style="font-size: .9rem;">
+                                Showing x to x of x entries
+                            </td>
+                        </tfoot>
 
                         </table>
                     </div>

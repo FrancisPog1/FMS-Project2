@@ -1,7 +1,7 @@
 <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
 
     {{-- <section class="container">
-        <div class="mr-5 ml-5">
+        {{-- <div class="mr-5 ml-5">
             <div class="card">
                 <div class="card-header">
                     <div class="row justify-content-between">
