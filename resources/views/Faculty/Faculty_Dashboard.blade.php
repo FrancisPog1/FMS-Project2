@@ -99,18 +99,18 @@
                             <div class="col-5 pt-0">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">
+                                        <h3 class="card-title  text-pal-1">
                                             <i class="ion ion-clipboard mr-1"></i>
-                                            To Do List
+                                            <b>To Do List</b>
                                         </h3>
 
                                         <div class="card-tools">
                                             <ul class="pagination pagination-sm">
-                                            <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">3</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
+                                                <li class="page-item"><a href="#" class="page-link text-pal-1">&laquo;</a></li>
+                                                <li class="page-item pal-1"><a href="#" class="page-link text-pal-1">1</a></li>
+                                                <li class="page-item pal-1"><a href="#" class="page-link text-pal-1">2</a></li>
+                                                <li class="page-item pal-1"><a href="#" class="page-link text-pal-1">3</a></li>
+                                                <li class="page-item"><a href="#" class="page-link text-pal-1">&raquo;</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -127,7 +127,7 @@
                                                     <input type="checkbox" value="" name="todo1" id="todoCheck1">
                                                     <label for="todoCheck1"></label>
                                                 </div>
-                                                <span class="text">Design a nice theme</span>
+                                                <span class="text">Eat lunch</span>
                                                 <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
                                                 <!-- General tools such as edit or delete-->
                                                 <div class="tools">
@@ -145,7 +145,7 @@
                                                     <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
                                                     <label for="todoCheck2"></label>
                                                 </div>
-                                                <span class="text">Make the theme responsive</span>
+                                                <span class="text">Make a class plan</span>
                                                 <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
                                                 <div class="tools">
                                                     <i class="fas fa-edit"></i>
@@ -162,7 +162,7 @@
                                                     <input type="checkbox" value="" name="todo3" id="todoCheck3">
                                                     <label for="todoCheck3"></label>
                                                 </div>
-                                                <span class="text">Let theme shine like a star</span>
+                                                <span class="text">Go to Sydney, Australia</span>
                                                 <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
                                                 <div class="tools">
                                                     <i class="fas fa-edit"></i>
@@ -179,7 +179,7 @@
                                                     <input type="checkbox" value="" name="todo4" id="todoCheck4">
                                                     <label for="todoCheck4"></label>
                                                 </div>
-                                                <span class="text">Let theme shine like a star</span>
+                                                <span class="text">Find my crush when i was in college</span>
                                                 <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
                                                 <div class="tools">
                                                     <i class="fas fa-edit"></i>
@@ -196,7 +196,7 @@
                                                     <input type="checkbox" value="" name="todo5" id="todoCheck5">
                                                     <label for="todoCheck5"></label>
                                                 </div>
-                                                <span class="text">Check your messages and notifications</span>
+                                                <span class="text">Check my meeting scheds</span>
                                                 <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
                                                 <div class="tools">
                                                     <i class="fas fa-edit"></i>
@@ -213,7 +213,7 @@
                                                     <input type="checkbox" value="" name="todo6" id="todoCheck6">
                                                     <label for="todoCheck6"></label>
                                                 </div>
-                                                <span class="text">Let theme shine like a star</span>
+                                                <span class="text">Get a fight with my boss</span>
                                                 <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
                                                 <div class="tools">
                                                     <i class="fas fa-edit"></i>
