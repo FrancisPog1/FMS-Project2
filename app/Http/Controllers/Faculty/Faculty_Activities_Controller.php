@@ -28,6 +28,8 @@ class Faculty_Activities_Controller extends Controller
         $activities = DB::table('activities')
         ->join('activity_participants', 'activity_participants.activity_id', '=', 'activities.id')
         ->join('users', 'users.id', '=', 'activity_participants.participant_id')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'activities.created_by')
+        ->leftJoin('users_profiles as assigner', 'assigner.user_id', '=', 'activity_participants.assigned_by')
         ->join('activity_types', 'activity_types.id', '=', 'activities.activity_type_id')
         ->where('activities.is_deleted', false)
         ->where('activities.deleted_at', null)
@@ -39,10 +41,12 @@ class Faculty_Activities_Controller extends Controller
                 , 'activity_types.title as type_title'
                 , 'activities.description'
                 , 'activities.location'
-                , 'activities.agenda'
                 , 'activities.id'
                 , 'activities.created_at'
-                , 'users.email as email')
+                , 'users_profiles.first_name'
+                , 'users_profiles.last_name'
+                , 'assigner.first_name as assigner_firstname'
+                , 'assigner.last_name as assigner_lastname')
 
         ->get();
 

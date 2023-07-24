@@ -14,12 +14,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h5 class="font-weight-bold ">Posted by:</h5>
-                            <p> {{ $detail->email }}</p><br>
+                            <p> {{ $detail->first_name }} {{ $detail->last_name }}</p><br>
                         </div>
 
                         <div class="col-md-6">
-                            <h5 class="font-weight-bold">Starting date:</h5>
-                            <p>{{ $detail->bin_start_datetime }}</p> <br>
+                            <h5 class="font-weight-bold">Deadline:</h5>
+                            <p>{{ $detail->bin_deadline }}</p> <br>
                         </div>
                     </div>
 
@@ -30,8 +30,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <h5 class="font-weight-bold">Ending date:</h5>
-                            <p>{{ $detail->bin_end_datetime }}</p> <br>
+                            <h5 class="font-weight-bold">Status:</h5>
+                            <p>{{ $detail->bin_status }}</p>
                         </div>
                     </div>
 
@@ -41,10 +41,6 @@
                             <p>{{ $detail->bin_title }}</p> <br>
                         </div>
 
-                        <div class="col-md-6">
-                            <h5 class="font-weight-bold">Status:</h5>
-                            <p>{{ $detail->bin_status }}</p>
-                        </div>
                     </div>
 
                     <div class="row">

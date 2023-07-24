@@ -6,6 +6,8 @@
     <link rel="icon" href="{{ asset('img/pup.png') }}" />
     <title>PUPQC | Faculty Records and Monitoring System</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @yield('head')
 
     {{-- CSS DEPENDENCIES --}}

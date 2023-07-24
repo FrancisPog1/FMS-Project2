@@ -42,12 +42,15 @@
         $(document).ready(function() {
             var countdown = 2;
             var formID = '#editForm-' + binId;
+            var route = "{{ route('admin.update_requirementbins', ':binId') }}" ;
+
+
             // Handle form submission
             $(formID).on('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission behavior
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('admin.update_requirementbins', '') }}" + binId,
+                    url:  route.replace(':binId', binId),
                     data: jQuery(formID).serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -99,7 +102,7 @@
 <script>
     function createDeleteForm(action, inputValue) {
         var form = document.createElement("form");
-        form.method = "DELETE";
+        form.method = "POST";
         form.action = action;
 
         var input = document.createElement("input");
@@ -128,7 +131,8 @@
     event.preventDefault(); // Prevent the default form submission
 
         var name = this.getAttribute("name");
-        var action = "{{ route('admin.destroy_requirementbins', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_requirementbins', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -210,9 +214,8 @@
                             deleteBinRoute = deleteBinRoute.replace(':id', bins[i]['id']);
 
                             html += '<tr>' +
-                                        '<td class="text-center">' + bins[i]['title'] + '</td>' +
-                                        '<td>' + bins[i]['start_datetime'] + '</td>' +
-                                        '<td>' + bins[i]['end_datetime'] + '</td>' +
+                                        '<td>' + bins[i]['title'] + '</td>' +
+                                        '<td>' + bins[i]['deadline'] + '</td>' +
                                         '<td class="text-center">' +
                                             '<button type="button" class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-2 text-center mr-2 mb-2">' + bins[i]['status'] + '</button>' +
                                         '</td>' +
@@ -339,5 +342,16 @@
     });
 </script>
 
+
+<script>
+
+import DataTable from 'datatables.net-dt';
+import 'datatables.net-responsive-dt';
+
+let table = new DataTable('#myTable', {
+    responsive: true
+});
+
+</script>
 
 

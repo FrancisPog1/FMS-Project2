@@ -33,8 +33,6 @@
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th>Requirement Type</th>
-                            <th style="width:30%;">Notes</th>
-                            <th style="width:20%;">File Format</th>
                             <th class="text-center" style="width:20%;">Actions</th>
                         </tr>
                     </thead>
@@ -42,13 +40,12 @@
                         @foreach ($requirements as $requirement)
                             <tr>
                                 <th scope="row">{{ $requirement->title }}</th>
-                                <td>{{ $requirement->note }}</td>
-                                <td>{{ $requirement->file_format }}</td>
+
 
                                 <td class="text-center">
 
                                         <button
-                                            onclick="openViewModal('{{ $requirement->title }}',  '{{ $requirement->note }}')"
+                                            onclick="openViewModal('{{ $requirement->title }}')"
                                             type="button"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             <i class="far fa-eye"></i>

@@ -54,18 +54,16 @@ aria-labelledby="custom-content-above-messages-tab">
                         <thead class="pal-1 text-col-2">
                             <tr>
                                 <th>Title</th>
-                                <th>Starting date</th>
-                                <th>Ending date</th>
+                                <th>Deadline</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
-                            </tr>
+                        </tr>
                         </thead>
                         <tbody id='filtered-bins'>
                             @foreach ($requirementbins as $requirementbin)
                                 <tr>
                                     <td>{{ $requirementbin->title }}</td>
-                                    <td>{{ $requirementbin->start_datetime }}</td>
-                                    <td>{{ $requirementbin->end_datetime }}</td>
+                                    <td>{{ $requirementbin->deadline }}</td>
 
                                     <td class="text-center">
                                         <button type="button"

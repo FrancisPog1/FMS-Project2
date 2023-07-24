@@ -30,13 +30,12 @@ class Director_RequirementBin_Controller extends Controller
         ->get();
 
         foreach ($requirementbins as $requirementbin) {
-            $requirementbin->start_datetime = Carbon::parse($requirementbin->start_datetime)->format('F d, Y h:i A');
-            $requirementbin->end_datetime = Carbon::parse($requirementbin->end_datetime)->format('F d, Y h:i A');
+            $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+
         }
 
         return view('Director/Director_RequirementBin/Director_RequirementBin',
         compact('deleted_requirementbins', 'requirementbins'));
-
     }
 
     public function filteredAndSortedBin(Request $request){
@@ -86,8 +85,7 @@ class Director_RequirementBin_Controller extends Controller
             $requirementbins = $query->get();
 
             foreach ($requirementbins as $requirementbin) {
-                $requirementbin->start_datetime = Carbon::parse($requirementbin->start_datetime)->format('F d, Y h:i A');
-                $requirementbin->end_datetime = Carbon::parse($requirementbin->end_datetime)->format('F d, Y h:i A');
+                $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
             }
 
             return response()->json(['requirementbins' => $requirementbins]);
@@ -103,27 +101,39 @@ class Director_RequirementBin_Controller extends Controller
             ->join('requirement_bins as bin', 'bin.id', '=', 'user_bins.requirement_bin_id')
             ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
             ->where('bin.id', '=', $bin_id)
-            ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
-                    'user_bins.review_status as review_status',
-                    'user_bins.compliance_status as compliance_status',
-                    'user_bins.id as id', 'bin.id as req_bin_id',
-                    'users_profiles.first_name', 'users_profiles.last_name')
+            ->select('users.id as user_id',
+                        'users.email as email',
+                        'roles.title as role_type',
+                        'user_bins.review_status as review_status',
+                        'user_bins.compliance_status as compliance_status',
+                        'user_bins.id as id',
+                        'bin.id as req_bin_id',
+                        'users_profiles.first_name',
+                        'users_profiles.last_name')
             ->get();
 
             $requirementbin = DB::table('requirement_bins as bin')
             ->leftJoin('users', 'users.id', '=' ,'bin.created_by')
+            ->leftJoin('users_profiles as UP', 'UP.user_id', '=' ,'bin.created_by')
+
             ->where('bin.id', '=', $bin_id)
-            ->select('bin.title as bin_title', 'bin.status as bin_status', 'bin.created_by as bin_created_by',
-                'bin.created_at as bin_created_at','bin.description as bin_description', 'bin.start_datetime as bin_start_datetime',
-                'bin.end_datetime as bin_end_datetime', 'users.email as email')
+            ->select('bin.title as bin_title',
+                        'bin.status as bin_status',
+                        'bin.created_by as bin_created_by',
+                        'bin.created_at as bin_created_at',
+                        'bin.description as bin_description',
+                        'bin.deadline',
+                        'UP.first_name',
+                        'UP.last_name')
             ->get();
 
             foreach ($requirementbin as $bin) {
-                $bin->bin_start_datetime = Carbon::parse($bin->bin_start_datetime)->format('F d, Y h:i A');
-                $bin->bin_end_datetime = Carbon::parse($bin->bin_end_datetime)->format('F d, Y h:i A');
+                $bin->deadline = Carbon::parse($bin->deadline)->format('F d, Y h:i A');
+                $bin->bin_created_at = Carbon::parse($bin->bin_created_at)->format('F d, Y h:i A');
             }
 
-            return view('Director/Director_RequirementAssignees/Director_RequirementAssignees', compact('assigned_reqrs', 'bin_id', 'requirementbin'));
+            return view('Director/Director_RequirementAssignees/Director_RequirementAssignees',
+            compact('assigned_reqrs', 'bin_id', 'requirementbin'));
         }
 
 

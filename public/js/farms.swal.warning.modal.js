@@ -37,7 +37,7 @@ $(document).on('click', '.staff-logout-button', function (event) {
         cancelButtonAriaLabel: '...'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.replace("/staff/logout");
+            window.location.replace('/staff/logout');
         }
     })
 });

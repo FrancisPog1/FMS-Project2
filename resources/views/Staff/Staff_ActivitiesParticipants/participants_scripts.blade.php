@@ -97,8 +97,9 @@
         form.submit();
     }
 
-    function localWarning(event) {
-        event.preventDefault();
+
+    $(document).on('click', '.remove-button', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
         var participant_id = this.getAttribute("name");
         var route = "{{ route('staff.remove_participants', ':id') }}"; // Replace with the actual delete route
@@ -121,35 +122,5 @@
                 createDeleteForm(action, participant_id);
             }
         });
-    }
-    // const button = document.querySelector('.remove-button');
-    // button.addEventListener('click', localWarning);
-
-    const deleteButtons = document.querySelectorAll('.remove-button');
-    deleteButtons.forEach((removebutton) => {
-    removebutton.addEventListener('click', localWarning);
     });
-
-
-    document.getElementById('show-modal-logout').addEventListener('click', function () {
-    Swal.fire({
-        title: 'Are you sure?',
-        icon: 'info',
-        html:
-            'Do you want to <b>Log Out</b>?',
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Yes',
-        confirmButtonColor: '#3085d6',
-        confirmButtonAriaLabel: '...',
-        cancelButtonColor: '#d33',
-        cancelButtonAriaLabel: '...'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.replace("logout");
-        }
-    })
-});
-
 </script>

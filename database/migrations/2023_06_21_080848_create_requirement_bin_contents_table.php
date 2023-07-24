@@ -23,8 +23,7 @@ return new class extends Migration
             $table->boolean('is_deleted')->default(false);
 
              // Fillables
-             $table->text('notes')->nullable();
-             $table->string('file_format')->nullable();
+             //$table->string('file_format')->nullable();
 
         });
     }

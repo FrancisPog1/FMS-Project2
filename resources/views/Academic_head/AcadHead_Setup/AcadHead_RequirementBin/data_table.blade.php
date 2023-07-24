@@ -37,7 +37,7 @@
                                         <option selected disabled>Filter by</option>
                                         <option value="All">All</option>
                                         <option value="Pending">Pending</option>
-                                        <option value="In progress">In Progress</option>
+                                        <option value="Ongoing">Ongoing</option>
                                         <option value="Closed">Closed</option>
                                     </select>
                                 </div>
@@ -64,12 +64,11 @@
 
                     <!-- Tables of roles -->
                     <div class="card-body p-0">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="myTable">
                             <thead class="pal-1 text-col-2">
                                 <tr>
-                                    <th class="text-center">Title</th>
-                                    <th class="text-center">Starting date</th>
-                                    <th class="text-center">Ending date</th>
+                                    <th>Title</th>
+                                    <th>Deadline</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -77,9 +76,9 @@
                             <tbody id='filtered-bins'>
                                 @foreach ($requirementbins as $requirementbin)
                                     <tr>
-                                        <td class="text-center">{{ $requirementbin->title }}</td>
-                                        <td>{{ $requirementbin->start_datetime }}</td>
-                                        <td>{{ $requirementbin->end_datetime }}</td>
+                                        <td>{{ $requirementbin->title }}</td>
+                                        <td>{{ $requirementbin->deadline }}</td>
+
 
                                         <td class="text-center">
                                             <button type="button"

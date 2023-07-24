@@ -23,12 +23,12 @@
 
                                                             <div class="col-md-6">
                                                                 <h5 class="font-weight-bold">Posted by:</h5>
-                                                                <p>{{ $activity->email }}</p><br>
+                                                                <p>{{ $activity->first_name }} {{ $activity->last_name }}</p><br>
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <h5 class="font-weight-bold">Assigned by:</h5>
-                                                                <p>{{ $activity->email }}</p><br>
+                                                                <p>{{ $activity->assigner_firstname }} {{ $activity->assigner_lastname }}</p><br>
                                                             </div>
 
                                                             <div class="col-md-12">
@@ -61,8 +61,6 @@
                                                     <div class="card-body" style="height: 460px; overflow:auto;" >
                                                         <h5 class="font-weight-bold">Description:</h5>
                                                         <div>{!!$activity->description!!} </div> <br>
-                                                        <h5 class="font-weight-bold">Agenda:</h5>
-                                                        <div>{!!$activity->agenda!!}</div> <br>
                                                         <h5 class="font-weight-bold">Location:</h5>
                                                         <p>{{ $activity->location }}</p><br>
 

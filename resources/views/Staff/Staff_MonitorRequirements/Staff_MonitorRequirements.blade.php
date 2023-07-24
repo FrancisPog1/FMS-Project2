@@ -26,8 +26,7 @@
             @include('Staff/Staff_MonitorRequirements/monitor_reqs_dataTable')
 
 
-            {{-- Validate Modal --}}
-            @include('Staff/Staff_MonitorRequirements/validate_modal')
+
 
             {{-- Display File Modal --}}
             @include('Staff/Staff_MonitorRequirements/file_modal')

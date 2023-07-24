@@ -38,7 +38,6 @@ class AuthenticatedSessionController extends Controller
         $user->status = "Online";
         $user->save();
 
-
     /**
     * I added this if else statement so that after the authentication it will check the
     * role and redirect the user to their deginated home page per role
@@ -82,7 +81,6 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
 
         return redirect('/');
     }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+Use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use illuminate\Support\Facades\Validator;
@@ -52,11 +53,14 @@ class FacultyUpload_Controller extends Controller
                $UserFiles->file_path = $temporaryFile->folder . '/' . $temporaryFile->file_name;
                $UserFiles->save();
 
+
+
                 //Delete the temporary files from the path and tempoarary_files table
                 \Storage::deleteDirectory('uploaded_files/tmp/'. $temporaryFile->folder);
                 $temporaryFile->delete();
             }
             $assigned_requirement->status = "In review";
+            $assigned_requirement->submission_date = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
             $assigned_requirement->save();
             return back()->with('success', 'Files successfully uploaded'); /**Alert Message */
         }

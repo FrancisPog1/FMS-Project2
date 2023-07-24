@@ -50,7 +50,7 @@
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th>Requirement Type</th>
-                                    <th style="width:30%;">Notes</th>
+                                    <th style="width:30%;">Date of submission</th>
                                     <th style="width:13%;" class="text-center ">Status</th>
                                     <th class="text-center" style="width:20%;">Actions</th>
                                 </tr>
@@ -59,7 +59,7 @@
                                 @foreach ($datas as $data)
                                     <tr>
                                         <th scope="row">{{ $data->type }}</th>
-                                        <td>{{ $data->notes }}</td>
+                                        <td>{{ $data->submission_date }}</td>
                                         <td class="text-center ">
                                             <button type="button"
                                                 class="  font-medium rounded-full text-sm  px-3 py-1 mr-2 mb-2
@@ -67,16 +67,20 @@
                                         ">{{ $data->status }}</button>
                                         </td>
                                         <td class="text-center">
-                                            <button type="button" data-status="{{ $data->status }}"
+                                            <button type="button"
                                                 data-remarks="{{ $data->remarks }}"
                                                 data-requirement-id="{{ $data->id }}"
                                                 data-user-id="{{ $data->user_id }}"
                                                 data-req-bin-id="{{ $req_bin_id }}"
+                                                data-toggle="modal" type="button" data-target="#modal-xl-validate-{{$data->id}}"
                                                 class="validate-button px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                                 Validate
                                             </button>
                                         </td>
                                     </tr>
+
+                                    {{-- Validate Modal --}}
+                                    @include('Staff/Staff_MonitorRequirements/validate_modal')
                                 @endforeach
                             </tbody>
                         </table>
@@ -100,20 +104,6 @@
                         </div>
 
                         <br>
-
-                        {{-- assign button --}}
-                        <form
-                            action="{{ route('staff.requirementbins.mark', ['assigned_bin_id' => $assigned_bin_id, 'req_bin_id' => $req_bin_id]) }}"
-                            method="post">
-                            @method('PUT')
-                            @csrf
-                            <button type="submit"
-                                class="px-5 py-2 text-sm font-medium text-center text-white bg-green-800 rounded-lg focus:ring-4 focus:outline-none focus:ring-green-300">Mark
-                                as Reviewed
-                            </button>
-                        </form>
-
-
                     </div>
 
                     <br>

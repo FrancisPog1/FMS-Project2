@@ -50,10 +50,10 @@
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th style='width:30%' >Title</th>
-                            <th style='width:25%' >Dates</th>
-                            <th style='width:10%' class="text-center">Status</th>
-                            <th style='width:10%' class="text-center">Review Status </th>
-                            <th style='width:12%' class="text-center">Compliance Status</th>
+                            <th style='width:20%' >Deadline</th>
+                            <th style='width:6%' class="text-center">Status</th>
+                            <th style='width:12%' class="text-center">Review Status </th>
+                            <th style='width:14%' class="text-center">Compliance Status</th>
                             <th style='width:5%' class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -61,7 +61,7 @@
                         @foreach ($requirement_bins as $requirement_bin)
                             <tr>
                                 <td>{{ $requirement_bin->title }}</td>
-                                <td>{{ $requirement_bin->start_datetime }} - {{ $requirement_bin->end_datetime }} </td>
+                                <td>{{ $requirement_bin->deadline }} </td>
                                 <td class="text-center">
                                     <button type="button"
                                         class="text-white {{ $requirement_bin->review_status === 'Reviewed' ? 'bg-green-500' : 'bg-gray-400' }}

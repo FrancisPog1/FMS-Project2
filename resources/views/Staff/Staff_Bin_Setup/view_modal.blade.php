@@ -21,11 +21,11 @@
                                          <label class="required-input">Requirement Type</label>
                                          <input type="text" class="form-control" readonly value=" {{$requirement->title}}">
                                      </div>
-                                     <div class="form-group">
+                                     {{-- <div class="form-group">
                                          <label>Notes</label>
                                          <textarea type="text" class="form-control" id="notes" name="notes" placeholder="Notes" tabindex="1"
                                              style="height: 100px;" readonly>{{ $requirement->note }}</textarea>
-                                     </div>
+                                     </div> --}}
                                  </div>
                                  {{-- <div class="row">
                                      <div class="form-group ml-3">

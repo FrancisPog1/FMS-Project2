@@ -35,6 +35,10 @@ use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
 
 //------------------------------------------------------------------ STAFF --------------------------------------------------------------------//
 Route::middleware(['auth', 'isStaff'])->prefix('staff')->name('staff.')->group(function () {
+
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
+
     Route::get('class_observation', function () {
         return view('Staff/Staff_ClassObservation', ['page_title' => 'Staff Class Observation']);
         })->name('class_observation');
@@ -84,10 +88,10 @@ Route::middleware(['auth', 'isStaff'])->prefix('staff')->name('staff.')->group(f
 
 
         //--------------------------------[ CRUD for ACTIVITY PARTICIPANTS ]-----------------------------//
-
+        Route::post('store_participants/{activity_id}', [Staff_ActivitiesParticipants_Controller::class, 'add_participants'])->name('participants.store');
+        Route::delete('remove_participants/{id}', [Staff_ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
           Route::get('activity_participants/{activity_id}', [Staff_ActivitiesParticipants_Controller::class, 'show'])->name('activity_participants.show');
-          Route::post('store_participants/{activity_id}', [Staff_ActivitiesParticipants_Controller::class, 'add_participants'])->name('participants.store');
-          Route::delete('remove_participants/{id}', [Staff_ActivitiesParticipants_Controller::class, 'destroy'])->name('remove_participants');
+
 
 
             //--------------------------------[ CRUD for REQUIREMENT BIN SETUP ]-----------------------------//
@@ -101,11 +105,12 @@ Route::middleware(['auth', 'isStaff'])->prefix('staff')->name('staff.')->group(f
             ])->name('requirement_assignees.show');
             Route::get('monitor_requirements.show/{user_id}/{assigned_bin_id}/{req_bin_id}',[Staff_MonitorRequirements_Controller::class, 'show'])
             ->name('monitor_requirements');
-            Route::put('mark_Review/{assigned_bin_id}/{req_bin_id}',[Staff_MonitorRequirements_Controller::class, 'reviewedMark'])
-            ->name('requirementbins.mark');
 
-            Route::put('validate_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [Staff_MonitorRequirements_Controller::class, 'validateRequirement'])
-            ->name('validate_requirements');
+            Route::put('approve_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [Staff_MonitorRequirements_Controller::class, 'approve'])
+            ->name('approve_requirements');
+
+            Route::put('reject_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [Staff_MonitorRequirements_Controller::class, 'reject'])
+            ->name('reject_requirements');
 
             Route::post('assign_requirement/{id}', [Staff_AssignRequirement_Controller::class, 'assign_to_user'])->name('assign_requirement');
 
@@ -121,9 +126,5 @@ Route::middleware(['auth', 'isStaff'])->prefix('staff')->name('staff.')->group(f
             Route::get('display/files', [ViewUserFiles_Controller::class, 'displayFiles'])->name('files.display');
             Route::get('download/files/{file}', [DownloadUserFiles_Controller::class, 'downloadFiles'])->name('files.download');
 
-
-            Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
-            ->name('logout');
     });
-
 

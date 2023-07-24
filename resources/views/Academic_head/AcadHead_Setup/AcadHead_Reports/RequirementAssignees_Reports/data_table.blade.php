@@ -105,7 +105,7 @@
 
                                 <td class="text-center">
 
-                                    <a href="{{ route('director_monitorrequirements', [
+                                    <a href="{{ route('admin.monitor_requirements.show', [
                                         'user_id' => $assigned_reqr->user_id,
                                         'assigned_bin_id' => $assigned_reqr->id,
                                         'req_bin_id' => $assigned_reqr->req_bin_id,

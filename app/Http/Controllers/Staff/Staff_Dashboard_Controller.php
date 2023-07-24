@@ -18,32 +18,36 @@ class Staff_Dashboard_Controller extends Controller
         $user_id = Auth::user()->id;
         $user = UsersProfile::where('user_id', $user_id)->firstOrFail();
         $name = $user->first_name;
+        /**
+         *  to fetch realtime using carbon laravel
+         *  $morning_time = '00:01 AM';
+         *  $afternoon_time = '00:01 PM';
+         *  $evening_time = '06:00 PM';
+         */
 
-        // to fetch realtime using carbon laravel
-        $morning_time = '12:00 AM';
-        $afternoon_time = '12:00 PM';
-        $evening_time = '06:00 PM';
+        $time_now = Carbon::now('Asia/Manila');//Get the current date
 
-        $now = Carbon::now();//Get the current date
-        $time_now = $now->format('g:i A');	//Formatting the date into time only
+        $h = $time_now->format('H');	//Formatting the date into time only
+        // $h = 14;
 
-        $greeting = '';	//Initialize the greeting variable
+        // $greeting = '';	//Initialize the greeting variable
+        // $morning = $h >= '0' && $h < '12';
+        // $afternoon = $h >= '12' && $h < '18' ;
+        // $evening = $h >= '18' && $h < '24' ;
 
-        if ($time_now >= $morning_time && $time_now < $afternoon_time || $time_now > $evening_time ) {
-            $greeting = 'Good Morning,';
-        }
+        // dd($morning, $afternoon, $evening, $h);
 
-        else if ($time_now >= $afternoon_time && $time_now < $evening_time || $time_now > $morning_time ) {
-            $greeting = 'Good Afternoon,';
-        }
+            if ($h >= '0' && $h < '12') {
+                $greeting = 'Good Morning,';
+            }
 
-        else {
-            $greeting = 'Good Evening,';
-        }
+            else if ($h >= '12' && $h < '18') {
+                $greeting = 'Good Afternoon,';
+            }
 
-
-
-
+            else if ($h >= '18' && $h < '24') {
+                $greeting = 'Good Evening,';
+            }
 
         return view('Staff/Staff_Dashboard', compact('name','greeting'));
     }

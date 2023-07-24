@@ -31,8 +31,7 @@ class Reports_Controller extends Controller
         ->get();
 
         foreach ($requirementbins as $requirementbin) {
-            $requirementbin->start_datetime = Carbon::parse($requirementbin->start_datetime)->format('F d, Y h:i A');
-            $requirementbin->end_datetime = Carbon::parse($requirementbin->end_datetime)->format('F d, Y h:i A');
+            $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
         }
 
 
@@ -41,7 +40,7 @@ class Reports_Controller extends Controller
         ->where('activities.is_deleted', false)
         ->where('activities.deleted_at', null)
         ->select('activities.title', 'activities.start_datetime', 'activities.status', 'activities.end_datetime',
-            'activity_types.title as type_title', 'activities.description', 'activities.location', 'activities.agenda','activities.id',
+            'activity_types.title as type_title', 'activities.description', 'activities.location','activities.id',
             'activity_types.id as type')
         ->get();
 
@@ -122,8 +121,7 @@ class Reports_Controller extends Controller
         ->join('requirement_bins', 'requirement_bin_contents.foreign_requirement_bins_id', '=', 'requirement_bins.id')
         ->where('requirement_bins.id', '=', $bin_id)
         ->where('requirement_bin_contents.is_deleted', '=', false)
-                ->select('requirement_types.title as title', 'requirement_bin_contents.notes as note',
-                'requirement_bin_contents.file_format as file_format', 'requirement_bin_contents.id as id',
+                ->select('requirement_types.title as title', 'requirement_bin_contents.id as id',
                 'requirement_bin_contents.foreign_requirement_types_id as typeId')
         ->get();
 
@@ -151,15 +149,16 @@ class Reports_Controller extends Controller
 
         $requirementbin = DB::table('requirement_bins as bin')
         ->leftJoin('users', 'users.id', '=' ,'bin.created_by')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'bin.created_by')
         ->where('bin.id', '=', $bin_id)
         ->select('bin.title as bin_title', 'bin.status as bin_status', 'bin.created_by as bin_created_by',
-            'bin.created_at as bin_created_at','bin.description as bin_description', 'bin.start_datetime as bin_start_datetime',
-            'bin.end_datetime as bin_end_datetime', 'users.email as email')
+            'bin.created_at as bin_created_at','bin.description as bin_description',
+            'bin.deadline as bin_deadline',
+            'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         foreach ($requirementbin as $bin) {
-            $bin->bin_start_datetime = Carbon::parse($bin->bin_start_datetime)->format('F d, Y h:i A');
-            $bin->bin_end_datetime = Carbon::parse($bin->bin_end_datetime)->format('F d, Y h:i A');
+            $bin->bin_deadline = Carbon::parse($bin->bin_deadline)->format('F d, Y h:i A');
         }
 
         return view('Academic_head/AcadHead_Setup/AcadHead_Reports/RequirementAssignees_Reports/RequirementAssignees_Reports', compact('assigned_reqrs', 'bin_id', 'requirementbin'));
@@ -255,20 +254,21 @@ class Reports_Controller extends Controller
         ->get();
 
         $activities = DB::table('activities')
-        ->join('users', 'users.id', '=', 'activities.created_by')
+        ->leftJoin('users', 'users.id', '=', 'activities.created_by')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'activities.created_by')
         ->join('activity_types', 'activity_types.id', '=', 'activities.activity_type_id')
         ->where('activities.id', '=', $activity_id)
         ->select('activities.created_at'
                 , 'activities.created_by'
                 , 'activities.location'
                 , 'activities.description'
-                , 'activities.agenda'
                 , 'activities.status'
                 , 'activities.start_datetime'
                 , 'activities.end_datetime'
                 , 'activity_types.title as type'
                 , 'activities.title'
-                , 'users.email'
+                , 'users_profiles.first_name'
+                , 'users_profiles.last_name'
                 )
         ->get();
 

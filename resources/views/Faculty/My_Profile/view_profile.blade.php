@@ -1,7 +1,7 @@
 <div id="view-card" class="card card-transition active">
     <div class="card-body mr-4 ml-4" id="cardBody">
         <div class="form-group">
-            <h5 class="h3 font-weight-bold">Account Infoasdasdsadrmation</h5>
+            <h5 class="h3 font-weight-bold">View Account Information</h5>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">

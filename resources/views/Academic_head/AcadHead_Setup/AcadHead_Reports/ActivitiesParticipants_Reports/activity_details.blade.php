@@ -18,7 +18,7 @@
                             <div class="card ">
                                 <div class="card-body" style="height: 400px; overflow:auto;">
                                     <h5 class="font-weight-bold ">Posted by:</h5>
-                                    <p> {{ $activity->email }}</p><br>
+                                    <p> {{ $activity->first_name }} {{ $activity->last_name }}</p><br>
                                     <h5 class="font-weight-bold">Posted at:</h5>
                                     <p>{{ $activity->created_at }}</p> <br>
                                     <h5 class="font-weight-bold">Title:</h5>
@@ -34,8 +34,6 @@
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="card-body" style="height: 400px; overflow:auto;">
-                                    <h5 class="font-weight-bold">Agenda:</h5>
-                                    <div>{!!$activity->agenda!!}</div> <br>
                                     <h5 class="font-weight-bold">Location:</h5>
                                     <p>{{ $activity->location }}</p><br>
                                     <h5 class="font-weight-bold">Starting date:</h5>

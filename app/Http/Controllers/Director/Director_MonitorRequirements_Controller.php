@@ -28,10 +28,18 @@ class Director_MonitorRequirements_Controller extends Controller
         ->where('requirement_bin_contents.foreign_requirement_bins_id', '=', $req_bin_id)
         ->where('user_upload_requirements.assigned_to', '=', $user_id)
 
-        ->select('requirement_types.title as type', 'requirement_bin_contents.notes as notes', 'user_upload_requirements.status as status',
-        'user_upload_requirements.acadhead_remarks as remarks', 'requirement_bin_contents.file_format as file_format',
+        ->select('requirement_types.title as type',
+        'user_upload_requirements.status as status',
+        'user_upload_requirements.acadhead_remarks as remarks',
+        'user_upload_requirements.submission_date',
         'user_upload_requirements.id as id', 'users.id as user_id')
         ->get();
+
+        foreach ($datas as $data) {
+            if( $data->submission_date != null){
+            $data->submission_date = Carbon::parse($data->submission_date)->format('F d, Y h:i A');
+            }
+        }
 
         return view('Director/Director_MonitorRequirements/Director_MonitorRequirements'
         , compact('datas','assigned_bin_id', 'req_bin_id', 'user_id'));

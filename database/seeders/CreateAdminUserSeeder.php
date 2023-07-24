@@ -246,8 +246,7 @@ class CreateAdminUserSeeder extends Seeder
             'description' => 'This requirement bin must contain the documents that are used to track
                                 the performance of faculty members during the first semester of this academic year.
                                 Please comply with the requirements before the deadline',
-            'start_datetime' => '2023-07-30 12:00:00',
-            'end_datetime' => '2023-07-30 12:00:00',
+            'deadline' => '2023-07-30 12:00:00',
             'status' => 'Ongoing',
         ]);
         $requirement_bin = RequirementBin::create([
@@ -256,8 +255,7 @@ class CreateAdminUserSeeder extends Seeder
             'description' => 'This requirement bin must contain the documents that are used to track
                                 the performance of faculty members during the second semester of this academic year.
                                 Please comply with the requirements before the deadline',
-            'start_datetime' => '2023-07-30 12:00:00',
-            'end_datetime' => '2023-07-30 12:00:00',
+            'deadline' => '2023-07-30 12:00:00',
             'status' => 'Ongoing',
         ]);
 

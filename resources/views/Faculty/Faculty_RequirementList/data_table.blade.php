@@ -34,7 +34,7 @@
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th>Requirement Type</th>
-                            <th style="width:30%;">Notes</th>
+                            <th style="width:30%;">Date of submission</th>
                             <th style="width:13%;" class="text-center ">Status</th>
                             <th class="text-center" style="width:20%;">Actions</th>
                         </tr>
@@ -43,7 +43,7 @@
                         @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $data->type }}</th>
-                                <td>{{ $data->notes }}</td>
+                                <td>{{ $data->submission_date }}</td>
                                 <td class="text-center ">
                                     <button type="button"
                                         class="  font-medium rounded-full text-sm  px-3 py-1 text-center mr-2 mb-2
@@ -55,10 +55,12 @@
                                         data-remarks="{{ $data->remarks }}"
                                         data-requirement-id="{{ $data->id }}"
                                         data-req-bin-id="{{ $req_bin_id }}"
-                                        data-user-id="{{ $user_id }}"
+                                        data-name="{{ $data->first_name }} {{ $data->last_name }}"
+                                        data-reviewed_at = "{{ $data->reviewed_at}}"
+                                        data-user-id = "{{ $user_id }}"
 
                                         class="upload-button px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                        {{ $data->status == 'Rejected' ? 'Reupload' : ($data->status == 'In review' ? 'View' : 'Upload') }}
+                                        {{ $data->status == 'Rejected' ? 'Reupload' : ($data->status == 'In review' || $data->status == 'Approved' ? 'View' :  'Upload')}}
                                     </button>
                                 </td>
                             </tr>

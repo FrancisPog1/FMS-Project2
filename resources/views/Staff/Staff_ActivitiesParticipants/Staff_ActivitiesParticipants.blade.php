@@ -7,8 +7,6 @@
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
 
-
-
             {{-- New Page Header --}}
             <section class="content-header ">
                 <div class="mr-5 ml-5" >

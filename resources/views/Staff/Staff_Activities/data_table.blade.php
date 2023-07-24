@@ -95,7 +95,7 @@
                                         </a>
 
                                         <button data-toggle="modal" type="button" data-target="#modal-xl-edit-{{$activity->id}}"
-                                            onclick="editDescription('#edit-description-{{$activity->id}}', '#edit-agenda-{{$activity->id}}'), editModal('{{ $activity->id }}')"
+                                            onclick="editDescription('#edit-description-{{$activity->id}}'), editModal('{{ $activity->id }}')"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300 edit-button">
                                             <i class="far fa-edit"></i>
                                         </button>

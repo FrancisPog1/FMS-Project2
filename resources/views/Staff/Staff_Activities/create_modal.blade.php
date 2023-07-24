@@ -44,13 +44,6 @@
 
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label>Agenda</label>
-                                    <textarea type="text" class="form-control" id="agenda" name="agenda"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-md-12">
                                     <label>Location</label>
                                     <input type="text" class="form-control" id="location" name="location"
                                         placeholder="Location" tabindex="1" required="">

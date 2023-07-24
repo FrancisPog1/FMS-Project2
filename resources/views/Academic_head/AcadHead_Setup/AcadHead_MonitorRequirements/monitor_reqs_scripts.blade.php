@@ -5,21 +5,12 @@
     document.addEventListener('click', function(event) {
         if (event.target.matches('.validate-button')) {
             var button = event.target;
-            var status = button.getAttribute('data-status');
             var remarks = button.getAttribute('data-remarks');
             var requirementId = button.getAttribute('data-requirement-id');
             var reqBinId = button.getAttribute('data-req-bin-id');
             var user_id = button.getAttribute('data-user-id');
+            var viewFiles = "#files-" + requirementId;
 
-            // Set the values in the form fields
-            document.getElementById('changeStatus').value = status;
-            document.getElementById('remarks').value = remarks;
-
-
-            // Set the action of the form dynamically using JavaScript
-            var form = document.getElementById('validateForm');
-            form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__',
-                reqBinId);
             $.ajax({
                 url: "{{ route('admin.files.view') }}",
                 method: 'GET',
@@ -44,36 +35,17 @@
                                                                ' </div>' +
                                                             '</div>' +
                                                         '</li>';
-
                         }
                     }
-                    $('#files').html(html);
+                    $(viewFiles).html(html);
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr.responseText);
                 }
                 });
-
-            // Open the upload modal
-            $('#modal-xl-validate').modal('show');
-
         }
     });
 
-    // Add event listener for modal shown event
-    $('#modal-xl-validate').on('shown.bs.modal', function() {
-        // Focus on the remarks input field when the modal is shown
-        document.getElementById('changeStatus').focus();
-    });
-
-    // Add event listeners to close the modal
-    document.getElementById('closeModalButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
-    });
-
-    document.getElementById('cancelButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
-    });
 </script>
 
 <style>
@@ -83,9 +55,7 @@
     }
 </style>
 
-
 <script>
-
 function displayFileModal(file_id) {
 
         var Url = "{{ route('admin.files.display') }}";
@@ -128,42 +98,6 @@ function displayFileModal(file_id) {
 
     </script>
 
-
-{{-- <script>
-    function openValidateModal(status, remarks, requirementId, req_bin_id) {
-        // Set the values in the form fields
-
-
-        document.getElementById('changeStatus').value = status;
-        document.getElementById('remarks').value = remarks;
-
-        // Set the action of the form dynamically using JavaScript
-        var form = document.getElementById('validateForm');
-        form.action = form.action.replace('__requirementId__', requirementId).replace('__req_bin_id__', req_bin_id);
-
-
-
-        // Open the validate modal
-        $('#modal-xl-validate').modal('show');
-    }
-
-    // Add event listener for modal shown event
-    $('#modal-xl-validate').on('shown.bs.modal', function() {
-        // Focus on the remarks input field when the modal is shown
-        document.getElementById('changeStatus').focus();
-    });
-
-    // Add event listeners to close the modal
-    document.getElementById('closeModalButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
-    });
-
-    document.getElementById('cancelButton').addEventListener('click', function() {
-        $('#modal-xl-validate').modal('hide');
-    });
-</script> --}}
-
-
 <style>
     .d-flex {
         gap: 1rem;
@@ -176,3 +110,138 @@ function displayFileModal(file_id) {
         margin-bottom: 8px;
     }
 </style>
+
+<script>
+    // AJAX CODES TO MAKE THE MODAL TO NOT RELOAD
+    document.addEventListener('click', function(event) {
+        if (event.target.matches('#reject-button')) {
+            var button = event.target;
+            var remarks = button.getAttribute('data-remarks');
+            var requirementId = button.getAttribute('data-requirement-id');
+            var reqBinId = button.getAttribute('data-req-bin-id');
+            var assignedBinId = button.getAttribute('data-assigned-bin-id');
+            var user_id = button.getAttribute('data-user-id');
+            var countdown = 2;
+            var formID = "#Form-" + requirementId;
+
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            var rejectRoute = "{{ route('admin.reject_requirements', ['requirementId' => ':requirementId', 'req_bin_id' => ':req_bin_id', 'assigned_bin_id' => ':assignId']) }}";
+            var rejectUrl = rejectRoute.replace(':requirementId', requirementId).replace(':req_bin_id', reqBinId).replace(':assignId', assignedBinId);
+            event.preventDefault(); // Prevent default form submission behavior
+
+            jQuery.ajax({
+                type: 'put',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                url: rejectUrl,
+                data: jQuery(formID).serialize(), // Serialize the form data
+
+                success: function(response) {
+                    if (response.success === true) {
+                        // Hide the modal using the modal's instance
+                        $('.modal').hide();
+                        $('.modal-backdrop').remove();
+                        toastr.success(response.message, 'Success Alert', {
+                            timeOut: 5000
+                        });
+
+                        //Countdown before reloading the page
+                        var timer = setInterval(function() {
+                            countdown--;
+
+                            if (countdown === 0) {
+                                clearInterval(timer);
+                                location.reload();
+                            }
+                        }, 1000);
+                    } else {
+                        // Display validation errors using toastr
+                        if (response.errors) {
+                            $.each(response.errors, function(key, value) {
+                                toastr.error(value[0], 'Validation Error', {
+                                    timeOut: 3000
+                                });
+                            });
+                        } else {
+                            toastr.error(response.message, 'Error Alert', {
+                                timeOut: 3000
+                            });
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); // Log any errors to the console
+                }
+            });
+        }
+
+        else if (event.target.matches('#approve-button')) {
+            var button = event.target;
+            var remarks = button.getAttribute('data-remarks');
+            var requirementId = button.getAttribute('data-requirement-id');
+            var reqBinId = button.getAttribute('data-req-bin-id');
+            var assignedBinId = button.getAttribute('data-assigned-bin-id');
+            var user_id = button.getAttribute('data-user-id');
+            var countdown = 2;
+
+            var formAID = "#Form-" + requirementId;
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            var approveRoute = "{{ route('admin.approve_requirements', ['requirementId' => ':requirementId', 'req_bin_id' => ':req_bin_id', 'assigned_bin_id' => ':assignId']) }}";
+            var approveUrl = approveRoute.replace(':requirementId', requirementId).replace(':req_bin_id', reqBinId).replace(':assignId', assignedBinId);
+            event.preventDefault(); // Prevent default form submission behavior
+
+            jQuery.ajax({
+                type: 'put',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                url: approveUrl,
+                data: jQuery(formAID).serialize(), // Serialize the form data
+
+                success: function(response) {
+                    if (response.success === true) {
+                        // Hide the modal using the modal's instance
+                        $('.modal').hide();
+                        $('.modal-backdrop').remove();
+                        toastr.success(response.message, 'Success Alert', {
+                            timeOut: 5000
+                        });
+
+                        //Countdown before reloading the page
+                        var timer = setInterval(function() {
+                            countdown--;
+
+                            if (countdown === 0) {
+                                clearInterval(timer);
+                                location.reload();
+                            }
+                        }, 1000);
+                    } else {
+                        // Display validation errors using toastr
+                        if (response.errors) {
+                            $.each(response.errors, function(key, value) {
+                                toastr.error(value[0], 'Validation Error', {
+                                    timeOut: 3000
+                                });
+                            });
+                        } else {
+                            toastr.error(response.message, 'Error Alert', {
+                                timeOut: 3000
+                            });
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); // Log any errors to the console
+                }
+            });
+        }
+
+    });
+
+
+
+</script>

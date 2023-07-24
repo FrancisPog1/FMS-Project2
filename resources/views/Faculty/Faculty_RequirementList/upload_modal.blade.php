@@ -13,7 +13,7 @@
                         </button>
                     </div>
                     <div class="modal-body" style="height: 500px;">
-                        <div class="card-body">
+                        <div class="card-body" >
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -21,15 +21,27 @@
                                         <div class="card-header">
                                             <h5 class="card-title">Requirement Details</h5>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="changeStatus">Status</label>
-                                                <input type="text" class="form-control" id="changeStatus"
-                                                    name="changeStatus" readonly>
-                                            </div>
+                                        <div class="card-body" style="height: 374px; overflow-y: auto;">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="font-weight-bold ">Reviewed by</h5>
+                                                    <p id="reviewer-name"> </p><br>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <h5 class="font-weight-bold ">Reviewed at</h5>
+                                                    <p id="reviewed-at"> </p><br>
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <h5 class="font-weight-bold ">Status</h5>
+                                                <p id="p-status"> </p>
+                                                </div>
+
                                             <div class="form-group">
                                                 <label for="remarks">Remarks</label>
-                                                <textarea class="form-control" id="remarks" name="remarks" style="height: 200px; resize: none;" readonly></textarea>
+                                                <textarea class="form-control" id="remarks" name="remarks" style="height: 150px; resize: none;" readonly></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -41,7 +53,7 @@
                                         <div class="card-header">
                                             <h5 class="card-title">Upload File</h5>
                                         </div>
-                                        <div class="card-body" style="height: 374px; overflow-y: scroll;">
+                                        <div class="card-body" style="height: 374px; overflow-y: auto;">
                                             <div class="form-group">
 
                                                 <input type="file" class="filepond" name="file" id="file"

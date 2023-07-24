@@ -285,8 +285,13 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('monitor_requirements/{user_id}/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'show'])
     ->name('monitor_requirements.show');
 
-    Route::put('/review_mark/{assigned_bin_id}/{req_bin_id}',[MonitorRequirements_Controller::class, 'reviewedMark'])
-    ->name('review_requirements.store');
+
+        /**Requirement Validation for AcadHead*/
+    Route::put('approve_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'approve'])
+    ->name('approve_requirements');
+
+    Route::put('reject_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'reject'])
+    ->name('reject_requirements');
 
 
     //------------------------------------------[ EXPORT ROUTES ]-------------------------------------------//
@@ -306,6 +311,6 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
 
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->name('admin.logout');
+    ->name('logout');
 
 });

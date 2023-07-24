@@ -30,16 +30,8 @@
 
                                <div class="row">
                                    <div class="form-group col-md-6">
-                                       <label class="required-input">Starting date</label>
-                                       <input type="datetime-local" class="form-control" id="start_date" name="start_date"
-                                           tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
-                                           min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
-
-                                   </div>
-
-                                   <div class="form-group col-md-6">
-                                        <label class="required-input">Ending date</label>
-                                        <input type="datetime-local" class="form-control" id="end_date" name="end_date"
+                                        <label class="required-input">Deadline</label>
+                                        <input type="datetime-local" class="form-control" id="deadline" name="deadline"
                                             tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
                                             min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
 

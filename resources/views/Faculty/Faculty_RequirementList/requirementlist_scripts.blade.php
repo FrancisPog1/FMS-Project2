@@ -9,10 +9,16 @@
             var requirementId = button.getAttribute('data-requirement-id');
             var reqBinId = button.getAttribute('data-req-bin-id');
             var user_id = button.getAttribute('data-user-id');
+            var reviewer_name = button.getAttribute('data-name');
+            var reviewed_at = button.getAttribute('data-reviewed_at');
 
-            // Set the values in the form fields
-            document.getElementById('changeStatus').value = status;
+
+            //Displaying the data to the page
             document.getElementById('remarks').value = remarks;
+            document.getElementById("reviewed-at").innerHTML = reviewed_at;
+            document.getElementById("reviewer-name").innerHTML = reviewer_name;
+            document.getElementById("p-status").innerHTML = status;
+
 
             // Set the action of the form dynamically using JavaScript
             var form = document.getElementById('uploadForm');
@@ -30,17 +36,18 @@
                 success: function(data) {
                     var file = data.files;
                     var html = '';
-                    var deleteFile = "{{ route('faculty.files.unsubmit', ':id')}}";
 
                     // Update the modal content with the files
                     if (file.length > 0) {
                         for (let i = 0; i < file.length; i++) {
 
-                        html += '<li class="list-group-item rounded-pill border mb-2 shadow" style="background-color: rgba(54,151,99); color: white;" onclick="displayFileModal('+ "'" + file[i]['id'] + "'" + ')" >'+
+                        html += '<li id="list-' + file[i]['id'] + '" class="list-group-item rounded-pill border mb-2 shadow" style="background-color: rgba(54,151,99); color: white;" onclick="displayFileModal('+ "'" + file[i]['id'] + "'" + ')" >'+
                                                             '<div class="d-flex justify-content-between align-items-center">' +
                                                               '  <span>' + file[i]['file_name'] +'</span>' +
                                                                 '<div class="d-flex">' +
-                                                                   ' <a type="button" href="'+ deleteFile.replace(':id', file[i]['id']) +'"  onclick="event.stopPropagation();"> <i class="far fa-trash-alt" style="color: white;" title="Download"></i></a>' +
+                                                                   ' <button type="button" id="delete-file-button" onclick="deleteFile(this), event.stopPropagation();"'+
+                                                                   'data-id="' + file[i]['id'] + '">' +
+                                                                    '<i class="far fa-trash-alt" style="color: white;" title="Delete"></i></button>' +
 
                                                                ' </div>' +
                                                             '</div>' +
@@ -76,6 +83,33 @@
 </script>
 
 
+<script>
+    // This is for deleting the files
+    function deleteFile(button) {
+        var id = button.getAttribute('data-id');
+        var deleteFile = "{{ route('faculty.files.unsubmit', ':id')}}";
+        var deleteRoute = deleteFile.replace(':id', id);
+
+        // Make an Ajax request to delete the file.
+        $.ajax({
+            url: deleteRoute,
+            type: 'get',
+            success: function() {
+                $('#list-'+id).hide(500);
+            },
+            error: function() {
+                // File deletion failed.
+            }
+        });
+    }
+
+    document.addEventListener('click', function(event) {
+        if (event.target.matches('#delete-file-button')) {
+            deleteFile(event.target);
+        }
+    });
+
+</script>
 
 <style>
     .list-group-item:hover {

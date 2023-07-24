@@ -45,14 +45,6 @@
                                    </div>
                                </div>
 
-                               <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label>Agenda</label>
-                                    <textarea type="text" class="form-control" id="edit-agenda-{{$activity->id}}" name="agenda"
-                                        tabindex="1" style="height: 100px;">{{ $activity->agenda }}</textarea>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label>Location</label>

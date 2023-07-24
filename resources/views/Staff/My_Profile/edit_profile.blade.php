@@ -1,5 +1,5 @@
 
-    <form action=" {{ route('update_staff_profile', $profile_id) }}" method="post">
+    <form action=" {{ route('staff.my_profile.update', $profile_id) }}" method="post">
     @method('PUT')
     @csrf
 

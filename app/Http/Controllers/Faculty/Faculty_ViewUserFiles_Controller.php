@@ -48,15 +48,17 @@ class Faculty_ViewUserFiles_Controller extends Controller
 
         return response()->json(['files' => $files]);
 
+
+
     }
 
 
-    public function unsubmit(Request $request, $id)
+    public function unsubmit(Request $request, $id) : JsonResponse
     {
         $files = UsersFiles::findOrFail($id); // Retrieve the file by its ID
         $files->forceDelete();
 
-        return back()->with('success', 'Academic Rank permanently deleted successfully!'); /**Alert Message */
+        return response()->json(['success' => true, 'message' => 'File is deleted successfully!'], 200);
     }
 
 }

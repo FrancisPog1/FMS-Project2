@@ -22,8 +22,7 @@ return new class extends Migration
              // Fillables
              $table->string('title');
              $table->longText('description')->nullable();
-             $table->dateTime('start_datetime')->nullable();
-             $table->dateTime('end_datetime')->nullable();
+             $table->dateTime('deadline')->nullable();
              $table->string('status')->nullable();
              $table->boolean('is_deleted')->default(false);
 

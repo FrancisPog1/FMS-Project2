@@ -88,7 +88,7 @@
                 <a href="{{ route('staff.my_profile.show') }}" class="block px-4 py-2 text-white">Profile</a>
                 </li>
                 <li>
-                    <a id="show-modal-logout" class="block px-4 py-2 text-white staff-logout-button"><button>Log out</button></a>
+                    <button id="show-modal-logout" class="block px-4 py-2 text-white staff-logout-button">Log out</button>
 
 
                 </li>

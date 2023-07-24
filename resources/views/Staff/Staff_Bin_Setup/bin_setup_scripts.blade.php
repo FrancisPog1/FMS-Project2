@@ -6,12 +6,12 @@
 </style>
 
 <script>
-    function openEditModal(type, reqId, notes) {
+    function openEditModal(type, reqId) {
         // Set the values in the form fields
 
         // Set the value of the `type` element in the `editForm` form to the selected value
         document.getElementById('editForm').elements['type'].value = type;
-        document.getElementById('editForm').elements['notes'].value = notes;
+        // document.getElementById('editForm').elements['notes'].value = notes;
 
 
         var route = "{{ route('staff.update_requirements', ':id') }}"; // Replace with the actual delete route

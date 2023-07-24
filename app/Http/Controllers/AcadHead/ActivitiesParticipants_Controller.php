@@ -33,19 +33,20 @@ class ActivitiesParticipants_Controller extends Controller
 
         $activities = DB::table('activities')
         ->join('users', 'users.id', '=', 'activities.created_by')
+        ->leftjoin('users_profiles', 'users_profiles.user_id', '=', 'activities.created_by')
         ->join('activity_types', 'activity_types.id', '=', 'activities.activity_type_id')
         ->where('activities.id', '=', $activity_id)
         ->select('activities.created_at'
                 , 'activities.created_by'
                 , 'activities.location'
                 , 'activities.description'
-                , 'activities.agenda'
                 , 'activities.status'
                 , 'activities.start_datetime'
                 , 'activities.end_datetime'
                 , 'activity_types.title as type'
                 , 'activities.title'
-                , 'users.email'
+                , 'users_profiles.first_name'
+                , 'users_profiles.last_name'
                 )
         ->get();
 
@@ -119,7 +120,7 @@ class ActivitiesParticipants_Controller extends Controller
           // Find the role by its ID
             $participant = ActivityParticipants::findOrFail($id);
             $participant->forceDelete();
-            return back()->with('success', 'Participant removed successfully!'); /**Alert Message */
+            return back()->with('success', 'Participant removed successfully!'); /** Alert Message */
 
         }
 

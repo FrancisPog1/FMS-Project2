@@ -34,15 +34,14 @@ class Staff_RequirementSetup_Controller extends Controller
         ->join('requirement_bins', 'requirement_bin_contents.foreign_requirement_bins_id', '=', 'requirement_bins.id')
         ->where('requirement_bins.id', '=', $bin_id)
         ->where('requirement_bin_contents.is_deleted', '=', false)
-                ->select('requirement_types.title as title', 'requirement_bin_contents.notes as note',
-                'requirement_bin_contents.file_format as file_format', 'requirement_bin_contents.id as id',
+                ->select('requirement_types.title as title',  'requirement_bin_contents.id as id',
                 'requirement_bin_contents.foreign_requirement_types_id as typeId')
         ->get();
 
         $deleted_requirements = DB::table('requirement_bin_contents')
         ->join('requirement_types', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
         ->where('requirement_bin_contents.is_deleted', '=', true)
-                ->select('requirement_types.title as title', 'requirement_bin_contents.file_format as file_format',
+                ->select('requirement_types.title as title',
                 'requirement_bin_contents.id as id')
         ->get();
 
@@ -95,7 +94,6 @@ class Staff_RequirementSetup_Controller extends Controller
 
         $request->validate([
             'type'=>'required',
-            'notes'=>'max:300'
         ]);
         try
         {
@@ -107,7 +105,6 @@ class Staff_RequirementSetup_Controller extends Controller
             $bin_setup->id = Str::uuid()->toString();
             $bin_setup->foreign_requirement_types_id = $request->type;
             $bin_setup->foreign_requirement_bins_id = $bin_id;
-            $bin_setup->notes = $request ->notes;
             $bin_setup->created_by =  $userId;
             $res = $bin_setup->save();
 
@@ -153,7 +150,6 @@ class Staff_RequirementSetup_Controller extends Controller
         /**Codes to get the contents of the input field and save it to the database */
         $bin_content = RequirementBinContent::find($id);
         $bin_content->foreign_requirement_types_id = $request->type;
-        $bin_content->notes = $request ->notes;
         $bin_content->updated_by =  $userId;
         $res = $bin_content->save();
 

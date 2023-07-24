@@ -27,11 +27,11 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label>Notes</label>
                                                 <textarea type="text" class="form-control" id="notes" name="notes" placeholder="Notes" tabindex="1"
                                                     style="height: 100px;"></textarea>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         {{-- <div class="row">
                                             <div class="form-group ml-3">
