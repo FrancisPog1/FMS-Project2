@@ -16,8 +16,6 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "datatables.net-bs4": "^1.13.5",
-        "datatables.net-dt": "^1.13.5",
         "filepond": "^4.30.4"
     }
 }
