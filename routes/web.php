@@ -25,6 +25,7 @@ use App\Http\Controllers\AcadHead\DownloadUserFiles_Controller;
 use App\Http\Controllers\AcadHead\ActivitiesParticipants_Controller;
 use App\Http\Controllers\AcadHead\Reports_Controller;
 use App\Http\Controllers\AcadHead\Profile_Controller;
+use App\Http\Controllers\AcadHead\RequirementCategory_Controller;
 use App\Http\Controllers\All_Profile_Controller;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ExportXLS_Controller;
@@ -87,6 +88,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
     /**Program*/
     Route::get('programs', [Program_Controller::class, 'show'])->name('programs.show');
+    Route::get('categories', [RequirementCategory_Controller::class, 'show'])->name('categories.show');
 
 
     /**Requirement Bin*/
@@ -151,6 +153,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::post('/store__requirement_types', [RequirementType_Controller::class, 'Create_RequirementType'])->name('requirement_types.store');
     Route::post('/store__activity_types', [ActivityType_Controller::class, 'Create_ActivityType'])->name('activity_types.store');
     Route::post('/store__activities', [Activities_Controller::class, 'Create_Activities'])->name('activities.store');
+    Route::post('/store__category', [RequirementCategory_Controller::class, 'store'])->name('category.store');
 
 
     //PROFILE SETUP
@@ -178,6 +181,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::delete('/delete_activitytypes/{activitytypeId}', [ActivityType_Controller::class, 'deleteActivitytypes'])->name('delete_activitytypes');
     Route::delete('/delete_activities/{activitiesId}', [Activities_Controller::class, 'delete'])->name('delete_activity');
     Route::delete('/delete_bincontents/{id}', [RequirementSetup_Controller::class, 'deleteRequirement'])->name('delete_requirements');
+    Route::delete('/delete_category/{id}', [RequirementCategory_Controller::class, 'deleteCategory'])->name('delete_category');
+
 
     //--------------------------HARD DELETE ROUTES---------------------------//
     Route::delete('/destroy_bincontents/{id}', [RequirementSetup_Controller::class, 'destroyRequirement'])->name('destroy_requirements');
@@ -192,6 +197,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::delete('/destroy_requirementbins/{requirementbinId}', [RequirementBin_Controller::class, 'destroy'])->name('destroy_requirementbins');
     Route::delete('/destroy_activitytypes/{activitytypeId}', [ActivityType_Controller::class, 'destroy'])->name('destroy_activitytypes');
     Route::delete('/destroy_activities/{activitiesId}', [Activities_Controller::class, 'destroy'])->name('destroy_activities');
+    Route::delete('/destroy_category/{categoryId}', [RequirementCategory_Controller::class, 'destroy'])->name('destroy_category');
 
 
     //--------------------------RESTORE DELETED RECORDS ROUTES---------------------------//
@@ -206,6 +212,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::post('/restore_requirement_bins', [RequirementBin_Controller::class, 'restore'])->name('restore_requirementbin');
     Route::post('/restore_activity_types', [ActivityType_Controller::class, 'restore'])->name('restore_activitytype');
     Route::post('/restore_activities', [Activities_Controller::class, 'restore'])->name('restore_activities');
+    Route::post('/restore_users', [User_Controller::class, 'restore'])->name('restore_users');
+    Route::post('/restore_category', [RequirementCategory_Controller::class, 'restore'])->name('restore_category');
 
     //--------------------------UPDATING A RECORD ROUTES---------------------------//
     Route::put('/update_ranks/{id}', [AcademicRank_Controller::class, 'updateRanks'])->name('update_ranks');
@@ -220,6 +228,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::put('/update_activitytypes/{activitytypeId}', [ActivityType_Controller::class, 'updateActivitytypes'])->name('update_activitytypes');
     Route::put('/update_activities/{activitiesId}', [Activities_Controller::class, 'updateActivities'])->name('update_activities');
     Route::put('/update_bincontents/{id}', [RequirementSetup_Controller::class, 'updateRequirement'])->name('update_requirements');
+    Route::put('/update_category/{id}', [RequirementCategory_Controller::class, 'update'])->name('update_category');
 
     //--------------------------FILTERING ROUTES---------------------------//
     Route::get('/requirementbin_setup_page', [RequirementSetup_Controller::class, 'filtered_user'])->name('filtered_users');

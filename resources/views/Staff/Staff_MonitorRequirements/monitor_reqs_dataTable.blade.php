@@ -17,36 +17,11 @@
                                     </h1>
                                 </b>
                             </div>
-
-                        </div>
-
-                        {{-- CODE FOR THE FILTERING --}}
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-12 d-flex justify-content-end">
-                                    <div class="mr-2">
-                                        <select name="status" id="status" class="form-control">
-                                            <option value="all">All</option>
-                                            <option value="open">Open</option>
-                                            <option value="in-progress">In Progress</option>
-                                            <option value="completed">Completed</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select name="department" id="department" class="form-control">
-                                            <option value="all">All</option>
-                                            <option value="department-1">Department 1</option>
-                                            <option value="department-2">Department 2</option>
-                                            <option value="department-3">Department 3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     {{-- Table body --}}
                     <div class="card-body p-0">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="myTable">
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th>Requirement Type</th>

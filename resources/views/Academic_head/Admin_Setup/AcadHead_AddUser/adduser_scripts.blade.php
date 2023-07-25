@@ -176,7 +176,7 @@
     Swal.fire({
         title: "Are you sure?",
         icon: "info",
-        html: "Do you want to <b>delete</b> this?",
+        html: "Do you want to <b>deactivate</b> the account?",
         showCloseButton: true,
         showCancelButton: true,
         focusConfirm: false,
@@ -191,4 +191,28 @@
         }
     });
 });
+</script>
+
+
+<script>
+    //Function to check all checkboxes on RESTORE
+    $(document).ready(function() {
+        // Check
+        $("#check-all-restore").on("click", function() {
+
+            if ($(this).prop("checked")) {
+                $("input[type='checkbox']").prop("checked", true);
+            } else {
+                $("input[type='checkbox']").prop("checked", false);
+            }
+        });
+
+        // Uncheck
+        $("input[type='checkbox']").on("change", function() {
+            if (!$(this).prop("checked")) {
+                $("#check-all-restore").prop("checked", false);
+            }
+
+        });
+    });
 </script>

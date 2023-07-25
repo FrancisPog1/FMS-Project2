@@ -10,62 +10,16 @@
                         Requirement Bin</button>
                 </div> --}}
             </div>
-
-                    {{-- CODE FOR THE FILTERING UI --}}
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
-                        <select name="dataTable_length" aria-controls="dataTable"
-                            class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <div class="mr-2">
-                            <select name="filter" id="filter" class="form-control">
-                                <option selected disabled>Filter by</option>
-                                <option value="All">All</option>
-                                <option value="Faculty">Role: Faculty</option>
-                                <option value="Staff">Role: Staff</option>
-                                <option value="Director">Role: Director</option>
-
-                                <option value="Reviewed">Review status: Reviewed</option>
-                                <option value="Pending">Review status: Pending</option>
-
-                                <option value="Completed">Compliance status: Completed</option>
-                                <option value="Incomplete">Compliance status: Incomplete</option>
-                                <option value="CPending">Compliance status: Pending</option>
-
-                            </select>
-                        </div>
-                        <div>
-                            <select name="sort" id="sort" class="form-control">
-                                <option selected disabled>Sort by</option>
-                                <option value="az">Name: A to Z</option>
-                                <option value="za">Name: Z to A</option>
-                                <option value="e_az">Email: A to Z</option>
-                                <option value="e_za">Email: Z to A</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
             <!-- Tables of roles -->
             <div class="card-body p-0">
-                <table class="table table-striped">
+                <table class="table table-striped" id="myTable">
                     <thead class="pal-1 text-col-2">
                         <tr>
-                            <th style='width:20%' class="text-center">Name</th>
-                            <th style='width:25%' class="text-center">Email</th>
-                            <th style='width:10%' class="text-center">Role</th>
+                            <th style='width:22%' class="text-center">Name</th>
+                            <th style='width:22%' class="text-center">Email</th>
+                            <th style='width:8%' class="text-center">Role</th>
                             <th style='width:15%' class="text-center">Review Status </th>
-                            <th style='width:15%' class="text-center">Compliance Status</th>
+                            <th style='width:17%' class="text-center">Compliance Status</th>
                             <th style='width:5%' class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -99,18 +53,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot class="text-col-1" style="font-size: .9rem;">
-                        <tr>
-                            <td>
-                                <div class="col-sm-12">
-                                    <div class="dataTables_info" id="dataTable_info" role="status"
-                                        aria-live="polite">
-                                        Showing 1 to 4 of 4 entries
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>

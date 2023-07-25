@@ -4,11 +4,3 @@
     // To upload
 </script>
 
-{{-- <script>
-            new Dropzone("#reqs-upload", {
-                thumbnailWidth: 200,
-                maxFilesize: 1,
-                addRemoveLinks: true,
-                acceptedFiles: ".pdf,.xls,.xml,.doc,.docx"
-            });
-        </script> --}}

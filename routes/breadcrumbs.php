@@ -35,6 +35,12 @@ Breadcrumbs::for('Requirement Assignees', function (BreadcrumbTrail $trail, $bin
     $trail->push('Requirement Assignees', route('admin.requirement_assignees.show', ['bin_id'=>$bin_id]));
 });
 
+// Dashboard > Reqbin > Assign Req
+Breadcrumbs::for('Requirement Category', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Requirement Category', route('admin.categories.show'));
+});
+
 // Dashboard > Reqbin > Assign Req > Monitor User
 Breadcrumbs::for('Monitor User', function (BreadcrumbTrail $trail, $bin_id) {
     $trail->parent('Requirement Assignees', $bin_id);

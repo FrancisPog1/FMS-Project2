@@ -62,10 +62,18 @@
                                         <p class="p-drop">Academic Rank</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a href="{{ route('admin.faculty_types.show')}}" class="nav-link">
                                         <i class="fas fa-users nav-icon"></i>
                                         <p class="p-drop">Faculty Type</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.categories.show')}}" class="nav-link">
+                                        <i class="fas fa-users nav-icon"></i>
+                                        <p class="p-drop">Requirement Category</p>
                                     </a>
                                 </li>
 

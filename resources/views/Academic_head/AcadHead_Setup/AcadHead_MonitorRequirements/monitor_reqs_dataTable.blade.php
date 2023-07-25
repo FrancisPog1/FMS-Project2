@@ -54,7 +54,6 @@
                                             </button>
                                         </td>
                                     </tr>
-
                                     {{-- Validate Modal --}}
                                     @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/validate_modal')
                                 @endforeach

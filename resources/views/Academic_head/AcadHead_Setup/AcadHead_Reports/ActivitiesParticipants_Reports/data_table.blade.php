@@ -24,61 +24,12 @@
                                 <span>Export as XLS</span>
                             </button>
                         </div>
-
-
                 </div>
             </div>
-
-            {{-- CODE FOR THE FILTERING --}}
-            <div class="card-header">
-                <div class="row">
-                        <!-- Search function --->
-                        <div class="text-right">
-                            <div class="form-inline float-right">
-                                <div class="input-group"
-                                    data-widget="sidebar-search">
-                                    <input class="form-control
-                                        form-control-sidebar px-4 py-2
-                                        text-sm font-medium"
-                                        type="search"
-                                        placeholder="Search"
-                                        aria-label="Search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sidebar">
-                                            <i class="fas fa-search
-                                                fa-fw"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <div class="mr-2">
-                            <select name="status" id="status" class="form-control">
-                                <option value="all">All</option>
-                                <option value="open">Open</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="completed">Completed</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select name="department" id="department" class="form-control">
-                                <option value="all">All</option>
-                                <option value="department-1">Department 1</option>
-                                <option value="department-2">Department 2</option>
-                                <option value="department-3">Department 3</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
 
             <!-- Tables of roles -->
             <div class="card-body p-0" >
-                <table class="table table-striped">
+                <table class="table table-striped" id="myTable">
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th style="width: 25%;">Name</th>
@@ -111,13 +62,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot>
-                        <td class="dataTables_info text-col-1" id="dataTable_info" role="status" aria-live="polite"
-                            colspan="12" style="font-size: .9rem;">
-                            Showing x to x of x entries
-                        </td>
-                    </tfoot>
-
                 </table>
             </div>
         </div>

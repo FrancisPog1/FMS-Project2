@@ -32,11 +32,25 @@ class User_Controller extends Controller
         ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
         ->where('users.deleted_at', '=', null)
+        ->where('users.isDeactivated', '=', false)
         ->select('roles.title as user_role', 'users.email', 'users.status', 'users.id', 'users.status',
         'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
-        return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', compact('users','roles'));
+        $deactivated_users = DB::table('users')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
+        ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
+        ->where('users.deleted_at', '!=', null)
+        ->where('users.isDeactivated', '=', true)
+        ->select('roles.title as deact_user_role',
+                    'users.email as deact_email',
+                    'users.status as deact_status',
+                    'users.id as deact_id',
+                    'users_profiles.first_name as deact_firstname',
+                    'users_profiles.last_name as deact_lastname')
+        ->get();
+
+        return view('Academic_head/Admin_Setup/AcadHead_AddUser/AcadHead_AddUser', compact('users','roles', 'deactivated_users'));
 
     }
 
@@ -47,11 +61,13 @@ class User_Controller extends Controller
 
         // Check if the user exists
         if ($user) {
+            $user->isDeactivated = true;
+            $user->save();
             // Delete the user
             $user->delete();
             // Redirect to a success page or perform any other actions
             // You can customize this based on your requirements
-            return back()->with('success', 'User deleted successfully');
+            return back()->with('success', 'User deactivated successfully');
         }
         // If the role doesn't exist, redirect with an error message
         return back()->with('error', 'User not found');
@@ -95,76 +111,22 @@ class User_Controller extends Controller
         }
     }
 
-    public function filteredAndSortedUser(Request $request)
-    {
-        if ($request->ajax()) {
-            $query = DB::table('users')
-                ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
-                ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
-                ->where('users.deleted_at','=', null)
-                ->select('users.id as user_id', 'users.email as email', 'roles.title as role_type', 'users.status as status',
-                'users_profiles.first_name', 'users_profiles.last_name');
+    public function restore(Request $request)
+    {   $deactivated_users = $request->input('users');
 
-            if ($request->filter_option) {
-                $filterOption = $request->filter_option;
-                switch ($filterOption) {
-                    case 'All':
-                        $query = $query;
-                        break;
-                    case 'Academic Head':
-                        $query->where('roles.title', $filterOption);
-                        break;
-                    case 'Faculty':
-                        $query->where('roles.title', $filterOption);
-                        break;
-                    case 'Director':
-                        $query->where('roles.title', $filterOption);
-                        break;
-                    case 'Staff':
-                        $query->where('roles.title', $filterOption);
-                        break;
-                    case 'Active':
-                        $query->where('users.status', $filterOption);
-                        break;
-                    case 'Inactive':
-                        $query->where('users.status', $filterOption);
-                        break;
-                    default:
-                        break;
-                }
+        if ($deactivated_users != null)
+        {
+            foreach( $deactivated_users as $deactivated_user_id ) {
+
+                $user = User::withTrashed()->findOrFail($deactivated_user_id);
+                $user->isDeactivated = false;
+                $user->save();
+                $user->restore();
             }
-
-            if ($request->sort_option) {
-                $sortOption = $request->sort_option;
-                switch ($sortOption) {
-                    case 'All':
-                        $query = $query;
-                        break;
-                    case 'az':
-                        $query->orderBy('users_profiles.first_name', 'asc');
-                        break;
-                    case 'za':
-                        $query->orderBy('users_profiles.first_name', 'desc');
-                        break;
-                    case 'e_az':
-                        $query->orderBy('users.email', 'asc');
-                        break;
-                    case 'e_za':
-                        $query->orderBy('users.email', 'desc');
-                        break;
-                    case 'r_az':
-                        $query->orderBy('roles.title', 'asc');
-                        break;
-                    case 'r_za':
-                        $query->orderBy('roles.title', 'desc');
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            $users = $query->get();
-            return response()->json(['users' => $users]);
+            return back()->with('success', 'Users reactivated successfully!'); /**Alert Message */
+        }
+        else{
+            return back()->with('error', "You didn't selected any of the records to restore!"); /**Alert Message */
         }
     }
 

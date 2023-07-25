@@ -31,9 +31,9 @@
                         <tr>
                             <th style='width:20%' class="text-center">Name</th>
                             <th style='width:25%' class="text-center">Email</th>
-                            <th style='width:10%' class="text-center">Role</th>
+                            <th style='width:8%' class="text-center">Role</th>
                             <th style='width:15%' class="text-center">Review Status </th>
-                            <th style='width:15%' class="text-center">Compliance Status</th>
+                            <th style='width:17%' class="text-center">Compliance Status</th>
                             <th style='width:5%' class="text-center">Action</th>
                         </tr>
                     </thead>

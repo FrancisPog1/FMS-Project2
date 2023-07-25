@@ -29,12 +29,11 @@
                     </div>
                     {{-- Table body --}}
                     <div class="card-body p-0">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="myTable">
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th>Requirement Type</th>
-                                    {{-- <th style="width:30%;">Notes</th>
-                                    <th style="width:20%;">File Format</th> --}}
+                                    <th style="width:30%;">Category</th>
                                     <th class="text-center" style="width:20%;">Actions</th>
                                 </tr>
                             </thead>
@@ -42,8 +41,8 @@
                                 @foreach ($requirements as $requirement)
                                     <tr>
                                         <th scope="row">{{ $requirement->title }}</th>
-                                        {{-- <td>{{ $requirement->note }}</td>
-                                        <td>{{ $requirement->file_format }}</td> --}}
+                                        <td>Category Name</td>
+
 
                                         <td class="text-center">
                                             <form action="{{ route('staff.delete_requirements', $requirement->id) }}"
@@ -128,3 +127,5 @@
         </div>
     </div>
 </div>
+
+

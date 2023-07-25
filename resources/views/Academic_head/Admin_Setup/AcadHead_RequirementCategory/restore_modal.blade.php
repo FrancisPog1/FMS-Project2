@@ -1,6 +1,6 @@
     <!-- Restoring Modal -->
     <section class="content">
-        <form action="{{ route('admin.restore_requirements') }}" method="post">
+        <form action="{{ route('admin.restore_category') }}" method="post">
             @csrf
             <div class="modal fade" id="modal-xl-restore">
                 <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -26,35 +26,35 @@
                                 <div class="col-md-12 form-group">
                                     {{-- Table body --}}
                                     <div class="card-body p-0">
-                                        <table class="table table-striped" id="myTable1">
+                                        <table class="table table-striped">
                                             <thead class="pal-1 text-col-2">
                                                 <tr>
-                                                    <th>Requirement Type</th>
-                                                    {{-- <th style="width:40%;">File format</th> --}}
+                                                    <th>Academic Rank</th>
+                                                    <th style="width:40%;">Description</th>
                                                     <th style="width:20%;">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($deleted_requirements as $deleted_requirement)
+                                                @foreach ($deleted_categories as $deleted_category)
                                                     <tr>
                                                         <td>
                                                             <div class="ml-3">
                                                                 <input type="checkbox" class="form-check-input"
                                                                     id="checkbox-0_0" name="deleted_reqs[]"
-                                                                    value="{{ $deleted_requirement->id }}">
+                                                                    value="{{ $deleted_category->id }}">
 
                                                                 <label class="form-check-label"
-                                                                    for="checkbox-0_0">{{ $deleted_requirement->title }}</label>
+                                                                    for="checkbox-0_0">{{ $deleted_category->title }}</label>
                                                             </div>
 
                                                         </td>
-                                                        {{-- <td>{{ $deleted_requirement->file_format }}</td> --}}
+                                                        <td>{{ $deleted_category->description }}</td>
 
                                                         <td>
                                                             <button type="button"
                                                                 class="ml-2 px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 destroy-button"
-                                                                name="{{ $deleted_requirement->id }}"
-                                                                data-name="{{ $deleted_requirement->id }}">
+                                                                name="{{ $deleted_category->id }}"
+                                                                data-name="{{ $deleted_category->id }}">
                                                                 <i class="far fa-trash-alt"></i>
                                                             </button>
 

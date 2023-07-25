@@ -74,6 +74,15 @@
       }
       });
     });
+
+    $(document).ready( function () {
+      $('#myTable1').DataTable({
+          fixedHeader: {
+          header: false,
+          footer: true,
+      }
+      });
+    });
   </script>
 
 <!-- Toastr Alert Message -->

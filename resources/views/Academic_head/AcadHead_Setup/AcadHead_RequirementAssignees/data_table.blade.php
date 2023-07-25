@@ -17,8 +17,8 @@
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th style='width:20%'>Name</th>
-                            <th style='width:25%'>Email</th>
-                            <th style='width:8%' class="text-center">Role</th>
+                            <th style='width:20%'>Email</th>
+                            <th style='width:10%' class="text-center">Role</th>
                             <th style='width:15%' class="text-center">Review Status </th>
                             <th style='width:17%' class="text-center">Compliance Status</th>
                             <th style='width:5%' class="text-center">Action</th>

@@ -23,30 +23,10 @@
                 </div>
             </div>
 
-            <div class="card-header">
-                <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
-                <select name="dataTable_length" aria-controls="dataTable"
-                    class="ml-5 col-1
-                    custom-select custom-select-sm form-control
-                    form-control-sm">
-                    <option value="10">
-                        10
-                    </option>
-                    <option value="25">
-                        25
-                    </option>
-                    <option value="50">
-                        50
-                    </option>
-                    <option value="100">
-                        100
-                    </option>
-                </select>
-            </div>
 
             <!-- Tables of roles -->
             <div class="card-body p-0">
-                <table class="table table-striped">
+                <table class="table table-striped" id="myTable">
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th style='width:30%' >Title</th>

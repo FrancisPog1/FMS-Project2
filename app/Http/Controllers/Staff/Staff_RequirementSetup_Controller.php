@@ -25,7 +25,12 @@ class Staff_RequirementSetup_Controller extends Controller
 {
 
     public function show(Request $request, $bin_id){
-        $requirementtypes = DB::table('requirement_types')->get();
+        $requirementtypes = DB::table('requirement_types')
+        ->leftJoin('requirement_bin_contents', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
+        ->whereNull('requirement_bin_contents.foreign_requirement_types_id')
+        ->select('requirement_types.title as title',  'requirement_types.id as id')
+        ->get();
+
         $requirement_bin = RequirementBin::where('id', $bin_id)->first();
         $roles = DB::table('roles')->get();
 
@@ -93,27 +98,32 @@ class Staff_RequirementSetup_Controller extends Controller
         /**Codes to validate the input fields of the registration page */
 
         $request->validate([
-            'type'=>'required',
+            'types'=>'required',
         ]);
         try
         {
             // Get the ID of the logged in user
             $userId = Auth::user()->id;
+            $types = $request->input('types');
 
-            /**Codes to get the contents of the input field and save it to the database */
-            $bin_setup = new RequirementBinContent();
-            $bin_setup->id = Str::uuid()->toString();
-            $bin_setup->foreign_requirement_types_id = $request->type;
-            $bin_setup->foreign_requirement_bins_id = $bin_id;
-            $bin_setup->created_by =  $userId;
-            $res = $bin_setup->save();
+            if ($types != null)
+            {
+                foreach( $types as $type_id ) {
+                    /**Codes to get the contents of the input field and save it to the database */
+                    $bin_setup = new RequirementBinContent();
+                    $bin_setup->id = Str::uuid()->toString();
+                    $bin_setup->foreign_requirement_types_id = $type_id;
+                    $bin_setup->foreign_requirement_bins_id = $bin_id;
+                    $bin_setup->created_by =  $userId;
+                    $res = $bin_setup->save();
+                }
+                return back()->with('success', 'Requirements added successfully!'); /**Alert Message */
+            }
 
-            if($res){
-                return back()->with('success', 'You have Added Requirement!'); /**Alert Message */
+            else
+            {    return back()->with('error', "You didn't selected any of the requirement to add."); /**Alert Message */
             }
-            else{
-                return back()->with('fail', 'Something went Wrong');
-            }
+
         }
 
         catch (QueryException $e) {
@@ -126,6 +136,7 @@ class Staff_RequirementSetup_Controller extends Controller
             throw $e;
         }
     }
+    
     //SOFT DELETE Requiremnts
     public function deleteRequirement($id)
     {   // Find the role by its ID

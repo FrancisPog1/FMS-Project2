@@ -22,6 +22,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th style="width: 42%;">Description</th>
+                                    <th >Category</th>
                                     <th class="text-center" style="width: 25%;">Actions</th>
                                 </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                     <tr>
                                         <td>{{ $requirement_type->title }}</td>
                                         <td>{{ $requirement_type->description }}</td>
+                                        <td>   </td>
                                         <td class="text-center">
                                             <form method="POST"
                                                 action="{{ route('admin.delete_requirementtypes', $requirement_type->id) }}">

@@ -52,6 +52,23 @@
                 $("#check-all-assign").prop("checked", false);
             }
         });
+
+
+
+        $("#check-all-add").on("click", function() {
+            if ($(this).prop("checked")) {
+                $("input[type='checkbox']").prop("checked", true);
+            } else {
+                $("input[type='checkbox']").prop("checked", false);
+            }
+        });
+
+        // Uncheck
+        $("input[type='checkbox']").on("change", function() {
+            if (!$(this).prop("checked")) {
+                $("#check-all-add").prop("checked", false);
+            }
+        });
     });
 </script>
 

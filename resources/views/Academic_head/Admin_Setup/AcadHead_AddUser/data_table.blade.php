@@ -5,6 +5,11 @@
             <div class="card-header">
                 <h3 class="card-title mt-2">List of Users</h3>
                 <div class="text-right">
+                    <button data-toggle="modal" data-target="#modal-xl-restore" type="button"
+                        class="px-3 py-2 text-sm font-medium text-white pal-1 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300">
+                        Archive </button>
+                         {{-- <i class="fas fa-archive"></i> --}}
+
                     <button data-toggle="modal" data-target="#modal-xl-create" type="button"
                         class="px-4 py-2 text-sm font-medium text-white pal-1 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300">Add
                         New User</button>
@@ -62,11 +67,15 @@
                                                 class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">
                                                 <i class="far fa-edit"></i>
                                             </button>
-                                            <button type="button"
-                                                class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 delete-button"
-                                                title="Delete">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button>
+
+                                            @if($user->user_role != 'Admin' && $user->user_role != 'Staff')
+                                                <button type="button"
+                                                    class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"
+                                                    title="Delete">
+                                                    <i class="fas fa-user-times"></i>
+                                                </button>
+                                            @endif
+
                                         </form>
                                     </div>
                                 </td>

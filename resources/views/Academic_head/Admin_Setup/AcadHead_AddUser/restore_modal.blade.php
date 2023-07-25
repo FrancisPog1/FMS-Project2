@@ -1,13 +1,13 @@
     <!-- Restoring Modal -->
     <section class="content">
-        <form action="{{ route('restore_requirements') }}" method="post">
+        <form action="{{ route('admin.restore_users') }}" method="post">
             @csrf
             <div class="modal fade" id="modal-xl-restore">
                 <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h4 class="modal-title">Restore requirements</h4>
+                            <h4 class="modal-title">Reactivate Users</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -26,39 +26,28 @@
                                 <div class="col-md-12 form-group">
                                     {{-- Table body --}}
                                     <div class="card-body p-0">
-                                        <table class="table table-striped">
+                                        <table class="table table-striped" id="myTable1">
                                             <thead class="pal-1 text-col-2">
                                                 <tr>
-                                                    <th>Requirement Type</th>
-                                                    <th style="width:40%;">File format</th>
-                                                    <th style="width:20%;">Actions</th>
+                                                    <th>Name</th>
+                                                    <th style="width:40%;">Email</th>
+                                                    <th style="width:20%;">Role</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach ($deleted_requirements as $deleted_requirement)
+                                            <tbody id="filtered-records">
+                                                @foreach ($deactivated_users as $user)
                                                     <tr>
                                                         <td>
                                                             <div class="ml-3">
                                                                 <input type="checkbox" class="form-check-input"
-                                                                    id="checkbox-0_0" name="deleted_reqs[]"
-                                                                    value="{{ $deleted_requirement->id }}">
-
-                                                                <label class="form-check-label"
-                                                                    for="checkbox-0_0">{{ $deleted_requirement->title }}</label>
+                                                                    id="check" name="users[]"
+                                                                    value="{{ $user->deact_id }}">
+                                                                <label class="form-check-label" for="check">{{ $user->deact_firstname }} {{ $user->deact_lastname }}</label>
                                                             </div>
 
                                                         </td>
-                                                        <td>{{ $deleted_requirement->file_format }}</td>
-
-                                                        <td>
-                                                            <button type="button"
-                                                                class="ml-2 px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 destroy-button"
-                                                                name="{{ $deleted_requirement->id }}"
-                                                                data-name="{{ $deleted_requirement->id }}">
-                                                                <i class="far fa-trash-alt"></i>
-                                                            </button>
-
-                                                        </td>
+                                                        <td>{{ $user->deact_email }}</td>
+                                                        <td>{{ $user->deact_user_role }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

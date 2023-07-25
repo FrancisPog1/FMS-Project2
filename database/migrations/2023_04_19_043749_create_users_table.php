@@ -21,7 +21,7 @@ return new class extends Migration
             $table->rememberToken();
 
             $table->string('status')->default('Offline');
-            $table->boolean('is_deleted')->default(false);
+            $table->boolean('isDeactivated')->nullable()->default(false);
         });
     }
 

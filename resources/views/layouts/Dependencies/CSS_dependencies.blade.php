@@ -74,5 +74,9 @@
             margin-right: 10px;
         }
 
+        table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_desc:after, table.dataTable thead>tr>td.sorting_asc:before, table.dataTable thead>tr>td.sorting_desc:after
+        {  opacity: 1;
+        }
+
 
     </style>

@@ -6,8 +6,9 @@ aria-labelledby="custom-content-above-messages-tab">
         <div class="mr-5 ml-5">
             <div class="card">
                 <div class="card-header">
-                    <div class="row justify-content-between">
-                        <div class="dt-buttons btn-group flex-wrap">
+                    <h3 class="card-title mt-2">List of Requirement Bins</h3>
+                    <div class="text-right">
+                        <div class="dt-buttons btn-group flex-wrap text-right">
                             <a href = "{{ route('admin.requirementbins_export_pdf') }}"
                                 tabindex="0"
                                 aria-controls="dataTable" type="button"
@@ -25,36 +26,17 @@ aria-labelledby="custom-content-above-messages-tab">
                                 <span>Export as XLS</span>
                             </a>
                         </div>
-                        <!-- Search function --->
-                        <div class="text-right">
-                            <div class="form-inline float-right">
-                                <div class="input-group"
-                                    data-widget="sidebar-search">
-                                    <input class="form-control
-                                        form-control-sidebar px-4 py-2
-                                        text-sm font-medium"
-                                        type="search"
-                                        placeholder="Search"
-                                        aria-label="Search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sidebar">
-                                            <i class="fas fa-search
-                                                fa-fw"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Tables of roles -->
                 <div class="card-body p-0">
-                    <table class="table table-striped">
+                    <table class="table table-striped"  id="myTable">
                         <thead class="pal-1 text-col-2">
                             <tr>
                                 <th>Title</th>
                                 <th>Deadline</th>
+                                <th>Category</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                         </tr>
@@ -64,6 +46,7 @@ aria-labelledby="custom-content-above-messages-tab">
                                 <tr>
                                     <td>{{ $requirementbin->title }}</td>
                                     <td>{{ $requirementbin->deadline }}</td>
+                                    <td>Category Name</td>
 
                                     <td class="text-center">
                                         <button type="button"
@@ -95,14 +78,6 @@ aria-labelledby="custom-content-above-messages-tab">
 
                             @endforeach
                         </tbody>
-                            <tfoot>
-                                <td class="dataTables_info text-col-1"
-                                    id="dataTable_info" role="status"
-                                    aria-live="polite" colspan="12"
-                                    style="font-size: .9rem;">
-                                    Showing x to x of x entries
-                                </td>
-                            </tfoot>
 
                         </table>
                     </div>
