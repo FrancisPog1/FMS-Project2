@@ -17,36 +17,12 @@
                                     </h1>
                                 </b>
                             </div>
-
-                        </div>
-
-                        {{-- CODE FOR THE FILTERING --}}
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-12 d-flex justify-content-end">
-                                    <div class="mr-2">
-                                        <select name="status" id="status" class="form-control">
-                                            <option value="all">All</option>
-                                            <option value="open">Open</option>
-                                            <option value="in-progress">In Progress</option>
-                                            <option value="completed">Completed</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select name="department" id="department" class="form-control">
-                                            <option value="all">All</option>
-                                            <option value="department-1">Department 1</option>
-                                            <option value="department-2">Department 2</option>
-                                            <option value="department-3">Department 3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
+
                     {{-- Table body --}}
                     <div class="card-body p-0">
-                        <table class="table table-striped">
+                        <table class="table table-striped"  id="myTable">
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th>Requirement Type</th>
@@ -90,35 +66,6 @@
         </div>
 
         <div class="col-md-3">
-            <div class="col ">
-                <div class="m-4">
-                    <div class="text-center">
-                        {{-- Search bar --}}
-                        <div class="input-group">
-                            <input type="search" class="form-control" placeholder="e.g. SALN" />
-                            <span class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    {{-- column row on button back --}}
-                    {{-- <div class="col">
-                        <div class="text-right">
-                            <a type="button" href="{{ route('acadhead_RequirementAssignees', $req_bin_id) }}"
-                                class="px-2 py-2 text-sm text-center rounded-lg text-pal-1 hover:bg-gray-200 text-center mr-2 mb-2">
-
-                                <i class="fa fa-arrow-left"></i>
-                            </a>
-
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
             {{-- specific user match in specific requirement --}}
             <div class="col p-auto">
                 <div class="m-auto p-4 bg-gray-200 rounded-md">

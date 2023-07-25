@@ -11,57 +11,10 @@
                 </div>
             </div>
 
-                        {{-- CODE FOR THE FILTERING --}}
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-4">
-                                    <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
-                                    <select name="dataTable_length" aria-controls="dataTable"
-                                        class="ml-2 col-3 custom-select custom-select-sm form-control form-control-sm">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </div>
-                                <div class="col-8 d-flex">
-                                    <div class="mr-2">
-                                        <select name="filter" id="filter" class="form-control">
-                                            <option selected disabled>Filter by</option>
-                                            <option value="All">All</option>
-                                            <option value="Faculty">Role: Faculty</option>
-                                            <option value="Staff">Role: Staff</option>
-                                            <option value="Academic Head">Role: Academic Head</option>
-                                            <option value="Director">Role: Director</option>
-                                            <option value="Active">Status: Active</option>
-                                            <option value="Inactive">Status: Inactive</option>
-                                        </select>
-                                    </div>
-                                    <div style="width:20%;">
-                                        <select name="sort" id="sort" class="form-control">
-                                            <option selected disabled>Sort by</option>
-                                            <option value="All">All</option>
-                                            <option value="az">Name: A to Z</option>
-                                            <option value="za">Name: Z to A</option>
-                                            <option value="e_az">Email: A to Z</option>
-                                            <option value="e_za">Email: Z to A</option>
-                                            <option value="r_az">Role: A to Z</option>
-                                            <option value="r_za">Role: Z to A</option>
-                                        </select>
-                                    </div>
-                                    <div class="ml-auto" style="width:40%;">
-                                        <form class="d-flex">
-                                            <input class="form-control me-2 rounded-lg" type="search" placeholder="Search" aria-label="Search">
-                                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
             <!-- Tables of roles -->
             <div class="card-body p-0">
-                <table class="table table-striped">
+                <table class="table table-striped" id="myTable">
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th style="width: 30%;">Name</th>
@@ -120,17 +73,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot class="text-col-1" style="font-size: .9rem;">
-                        <tr>
-                            <td colspan="4">
-                                <div class="col-sm-12">
-                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                                        Showing 1 to 4 of 4 entries
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>

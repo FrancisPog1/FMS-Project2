@@ -30,11 +30,11 @@
                     </div>
                     {{-- Table body --}}
                     <div class="card-body p-0">
-                        <table class="table table-striped">
+                        <table class="table table-striped"  id="myTable">
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th>Requirement Type</th>
-                                    {{-- <th style="width:20%;">File Format</th> --}}
+                                    <th style="width:30%;">Category</th>
                                     <th class="text-center" style="width:20%;">Actions</th>
                                 </tr>
                             </thead>
@@ -42,6 +42,7 @@
                                 @foreach ($requirements as $requirement)
                                     <tr>
                                         <th scope="row">{{ $requirement->title }}</th>
+                                        <td>Category Here</td>
                                         <td class="text-center">
                                             <form action="{{ route('admin.delete_requirements', $requirement->id) }}"
                                                 method="post" style="display: inline;">
@@ -78,13 +79,6 @@
             <div class="col ">
                 <div class="m-4">
                     <div class="text-center">
-                        {{-- Search bar --}}
-                        <form class="d-flex">
-                            <input class="form-control me-2 rounded-lg" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-
-
                         {{-- assign button --}}
                         <div class="mt-3 mr-3 text-center">
                             <button data-toggle="modal" data-target="#modal-xl-assign" type="button" class="px-4 py-2 text-sm font-medium text-center text-white pal-1 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300">

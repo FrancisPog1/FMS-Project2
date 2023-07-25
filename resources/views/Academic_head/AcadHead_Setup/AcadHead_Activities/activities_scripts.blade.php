@@ -18,10 +18,7 @@
     });
 
 
-
-
-
-    function editDescription(editDesc, editAgen){
+    function editDescription(editDesc){
         $(document).ready(function() {
         var summernote = $(editDesc).summernote({
             height: 200,
@@ -37,7 +34,7 @@
         });
         });
 
-        
+
     }
     </script>
 

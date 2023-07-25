@@ -60,6 +60,22 @@
 <!-- Script for Date picker -->
 <script src="{{ asset('js/farms.datepicker.js') }}"></script>
 
+<!-- Script for DataTable package -->
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Script for DataTable package to work on any tables-->
+<script>
+    $(document).ready( function () {
+      $('#myTable').DataTable({
+          fixedHeader: {
+          header: false,
+          footer: true
+      }
+      });
+    });
+  </script>
+
 <!-- Toastr Alert Message -->
 <script>
     $(document).ready(function() {

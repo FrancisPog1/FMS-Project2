@@ -26,7 +26,7 @@
                                 <div class="col-md-12 form-group">
                                     {{-- Table body --}}
                                     <div class="card-body p-0">
-                                        <table class="table table-striped">
+                                        <table class="table table-striped" >
                                             <thead class="pal-1 text-col-2">
                                                 <tr>
                                                     <th>Requirement Bin</th>
