@@ -38,7 +38,7 @@
                                                             value="{{ $type->id }}">
                                                         </td>
                                                         <td>{{ $type->title }}</td>
-                                                        <td>Category Name</td>
+                                                        <td>{{ $type->category }}</td>
 
                                                     </tr>
                                                 @endforeach

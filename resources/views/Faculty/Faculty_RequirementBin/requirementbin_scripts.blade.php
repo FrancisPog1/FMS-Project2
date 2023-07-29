@@ -4,3 +4,9 @@
     // To upload
 </script>
 
+<style>
+    /* Custom CSS for smaller font size in table headers */
+    .small-font {
+        font-size: 13px; /* Adjust the font size as per your requirement */
+    }
+</style>

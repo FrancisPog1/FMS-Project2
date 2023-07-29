@@ -26,10 +26,14 @@ class Staff_RequirementSetup_Controller extends Controller
 
     public function show(Request $request, $bin_id){
         $requirementtypes = DB::table('requirement_types')
+        ->join('requirement_categories as RC', 'RC.id', '=', 'requirement_types.category_id')
+        ->join('requirement_bins', 'requirement_bins.category_id', '=', 'RC.id')
         ->leftJoin('requirement_bin_contents', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
         ->whereNull('requirement_bin_contents.foreign_requirement_types_id')
-        ->select('requirement_types.title as title',  'requirement_types.id as id')
+        ->where('requirement_bins.id', '=', $bin_id)
+        ->select('requirement_types.title as title',  'requirement_types.id as id', 'RC.title as category')
         ->get();
+
 
         $requirement_bin = RequirementBin::where('id', $bin_id)->first();
         $roles = DB::table('roles')->get();
@@ -37,17 +41,23 @@ class Staff_RequirementSetup_Controller extends Controller
         $requirements = DB::table('requirement_bin_contents')
         ->join('requirement_types', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
         ->join('requirement_bins', 'requirement_bin_contents.foreign_requirement_bins_id', '=', 'requirement_bins.id')
+        ->join('requirement_categories as RC', 'RC.id', '=', 'requirement_bins.category_id')
         ->where('requirement_bins.id', '=', $bin_id)
         ->where('requirement_bin_contents.is_deleted', '=', false)
-                ->select('requirement_types.title as title',  'requirement_bin_contents.id as id',
-                'requirement_bin_contents.foreign_requirement_types_id as typeId')
+                ->select('requirement_types.title as title', 'requirement_bin_contents.id as id',
+                'requirement_bin_contents.foreign_requirement_types_id as typeId',
+                'RC.title as category')
         ->get();
+
 
         $deleted_requirements = DB::table('requirement_bin_contents')
         ->join('requirement_types', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
+        ->join('requirement_categories as RC', 'RC.id', '=', 'requirement_types.category_id')
+        ->join('requirement_bins', 'requirement_bins.category_id', '=', 'RC.id')
         ->where('requirement_bin_contents.is_deleted', '=', true)
+        ->where('requirement_bins.id', '=', $bin_id)
                 ->select('requirement_types.title as title',
-                'requirement_bin_contents.id as id')
+                'requirement_bin_contents.id as id', 'RC.title as category')
         ->get();
 
         $users = DB::table('users')
@@ -136,7 +146,7 @@ class Staff_RequirementSetup_Controller extends Controller
             throw $e;
         }
     }
-    
+
     //SOFT DELETE Requiremnts
     public function deleteRequirement($id)
     {   // Find the role by its ID

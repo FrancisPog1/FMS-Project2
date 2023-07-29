@@ -42,7 +42,7 @@
                                 @foreach ($requirements as $requirement)
                                     <tr>
                                         <th scope="row">{{ $requirement->title }}</th>
-                                        <td>Category Here</td>
+                                        <td>{{ $requirement->category }}</td>
                                         <td class="text-center">
                                             <form action="{{ route('admin.delete_requirements', $requirement->id) }}"
                                                 method="post" style="display: inline;">

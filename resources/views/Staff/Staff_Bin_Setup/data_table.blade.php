@@ -41,7 +41,7 @@
                                 @foreach ($requirements as $requirement)
                                     <tr>
                                         <th scope="row">{{ $requirement->title }}</th>
-                                        <td>Category Name</td>
+                                        <td>{{ $requirement->category }}</td>
 
 
                                         <td class="text-center">

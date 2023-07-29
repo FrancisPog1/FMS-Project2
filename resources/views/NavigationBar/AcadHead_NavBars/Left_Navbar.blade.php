@@ -129,6 +129,13 @@
                                     </a>
                                 </li>
 
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.monitor_faculties.show')}}" class="nav-link">
+                                        <i class="fas fa-folder nav-icon"></i>
+                                        <p class="p-drop">Monitor Faculties</p>
+                                    </a>
+                                </li>
+
 
                                 <li class="nav-item">
                                     <a href="{{ route('admin.activities.show')}}" class="nav-link">
@@ -138,7 +145,7 @@
                                 </li>
 
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('admin.announcements.show')}}" class="nav-link">
                                         <i class="fas fa-bullhorn nav-icon"></i>
                                         <p class="p-drop">Announcements</p>
@@ -156,7 +163,7 @@
                                         <i class="fas fa-list-ol nav-icon"></i>
                                         <p class="p-drop">Class Observation</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('admin.reports.show')}}" class="nav-link">
                                         <i class="fas fa-clipboard nav-icon"></i>

@@ -26,6 +26,7 @@ use App\Http\Controllers\AcadHead\ActivitiesParticipants_Controller;
 use App\Http\Controllers\AcadHead\Reports_Controller;
 use App\Http\Controllers\AcadHead\Profile_Controller;
 use App\Http\Controllers\AcadHead\RequirementCategory_Controller;
+use App\Http\Controllers\AcadHead\MonitorFaculties_Controller;
 use App\Http\Controllers\All_Profile_Controller;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ExportXLS_Controller;
@@ -102,6 +103,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('activity_type', [ActivityType_Controller::class, 'show'])->name('activity_types.show');
 
     Route::get('/activity_participants/{activity_id}', [ActivitiesParticipants_Controller::class, 'show'])->name('activities_participants.show');
+    Route::get('/monitor_faculties', [MonitorFaculties_Controller::class, 'show'])->name('monitor_faculties.show');
 
     Route::post('/store_participants/{activity_id}', [ActivitiesParticipants_Controller::class, 'add_participants'])->name('add_participants');
 

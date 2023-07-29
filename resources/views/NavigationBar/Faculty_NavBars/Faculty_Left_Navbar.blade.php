@@ -47,19 +47,19 @@
                     </ul>
                 </li>--}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('faculty.class_schedule') }}" class="nav-link">
                         <i class="fa-regular fa-note-sticky nav-icon"></i>
                         <p class="p-drop">Class Schedule</p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{ route('faculty.class_observation') }}" class="nav-link">
                         <i class="fa-solid fa-location-pin nav-icon"></i>
                         <p class="p-drop">Class Observation</p>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a href="{{ route('faculty.requirement_bins.show') }}" class="nav-link">

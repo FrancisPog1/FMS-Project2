@@ -30,7 +30,7 @@
                                             <thead class="pal-1 text-col-2">
                                                 <tr>
                                                     <th>Requirement Type</th>
-                                                    {{-- <th style="width:40%;">File format</th> --}}
+                                                  <th style="width:40%;">Category</th>
                                                     <th style="width:20%;">Actions</th>
                                                 </tr>
                                             </thead>
@@ -48,7 +48,7 @@
                                                             </div>
 
                                                         </td>
-                                                        {{-- <td>{{ $deleted_requirement->file_format }}</td> --}}
+                                                        <td>{{ $deleted_requirement->category }}</td>
 
                                                         <td>
                                                             <button type="button"

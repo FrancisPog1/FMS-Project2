@@ -25,13 +25,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
-                            <p> Class Setup<i class="fas fa-angle-left right"></i> </p>
-                        </a>
 
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('staff.requirement_bins.show')}}" class="nav-link">
                                     <i class="nav-icon fa-solid fa-bookmark"></i>
@@ -46,7 +40,7 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('staff.class_schedule')}}" class="nav-link">
                                     <i class="fa-solid fa-users-line nav-icon"></i>
                                     <p class="p-drop">Class Schedule</p>
@@ -57,9 +51,8 @@
                                     <i class="fa-solid fa-users-gear nav-icon"></i>
                                     <p class="p-drop">Class Observation</p>
                                 </a>
-                            </li>
-                        </ul>
-                    </li>
+                            </li> --}}
+
                     <li class="nav-item">
                         <a href="{{ route('staff.reports')}}" class="nav-link">
                             <i class="nav-icon fa-solid fa-book-bookmark"></i>

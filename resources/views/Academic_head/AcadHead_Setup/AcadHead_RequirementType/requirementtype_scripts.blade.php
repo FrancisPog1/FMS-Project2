@@ -11,6 +11,8 @@
         //---------------------- AJAX CODES FOR EDIT MODAL ------------------------//
         $(document).ready(function() {
             var countdown = 2;
+            var route =  "{{ route('admin.update_requirementtypes', ':id') }}";
+
 
             // Handle form submission
             $('#editForm').on('submit', function(event) {
@@ -18,7 +20,7 @@
 
                 jQuery.ajax({
                     type: 'post',
-                    url: "{{ route('admin.update_requirementtypes', '') }}" + typeId,
+                    url: route.replace(':id', typeId),
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {

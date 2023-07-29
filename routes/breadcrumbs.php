@@ -23,6 +23,13 @@ Breadcrumbs::for('Requirement Bin', function (BreadcrumbTrail $trail) {
     $trail->push('Requirement Bin', route('admin.requirement_bins.show'));
 });
 
+// Dashboard > Monitor Faculties
+Breadcrumbs::for('Monitor Faculties', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Monitor Faculties', route('admin.monitor_faculties.show'));
+});
+
+
 // Dashboard > Requirement Bin > Bin Setup
 Breadcrumbs::for('Requirement Setup', function (BreadcrumbTrail $trail, $bin_id) {
     $trail->parent('Requirement Bin');

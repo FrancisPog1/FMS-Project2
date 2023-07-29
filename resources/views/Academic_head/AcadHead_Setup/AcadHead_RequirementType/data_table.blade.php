@@ -21,17 +21,18 @@
                             <thead class="pal-1 text-col-2">
                                 <tr>
                                     <th>Title</th>
-                                    <th style="width: 42%;">Description</th>
-                                    <th >Category</th>
-                                    <th class="text-center" style="width: 25%;">Actions</th>
+                                    <th style="width: 18%">Category</th>
+                                    <th style="width: 40%;">Description</th>
+                                    <th class="text-center" style="width: 13%;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="filtered-types">
                                 @foreach ($requirement_types as $requirement_type)
                                     <tr>
-                                        <td>{{ $requirement_type->title }}</td>
+                                        <th>{{ $requirement_type->title }}</th>
+                                        <td>{{ $requirement_type->cat_title }}   </td>
                                         <td>{{ $requirement_type->description }}</td>
-                                        <td>   </td>
+
                                         <td class="text-center">
                                             <form method="POST"
                                                 action="{{ route('admin.delete_requirementtypes', $requirement_type->id) }}">

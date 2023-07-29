@@ -25,16 +25,18 @@
                         <table class="table table-striped" id="myTable">
                             <thead class="pal-1 text-col-2">
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Deadlne</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Action</th>
+                                    <th style="width: ">Title</th>
+                                    <th style="width: 18%">Category</th>
+                                    <th style="width: 21%">Deadline</th>
+                                    <th style="width: 4% "class="text-center">Status</th>
+                                    <th style="width: 16%" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody id='filtered-bins'>
                                 @foreach ($requirementbins as $requirementbin)
                                     <tr>
                                         <td>{{ $requirementbin->title }}</td>
+                                        <td>{{ $requirementbin->cat_title }}</td>
                                         <td>{{ $requirementbin->deadline }}</td>
 
                                         <td class="text-center">

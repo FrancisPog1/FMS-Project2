@@ -24,13 +24,14 @@ class Faculty_RequirementBin_Controller extends Controller
             $requirement_bins = DB::table('users')
             ->join('user_assigned_to_requirement_bins as URB', 'users.id', '=', 'URB.assigned_to')
             ->join('requirement_bins as RB', 'RB.id', '=', 'URB.requirement_bin_id')
+            ->leftJoin('requirement_categories as cat', 'cat.id', '=' ,'RB.category_id')
             ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
             ->where('users.id', '=', $user_id)
             ->select('RB.title as title', 'RB.description as description',
                     'RB.deadline as deadline', 'RB.status as status',
                     'URB.review_status as review_status', 'RB.created_at as created_at',
                     'URB.compliance_status as compliance_status', 'RB.created_by as created_by',
-                    'URB.id as id', 'RB.id as req_bin_id', 'RB.status as status')
+                    'URB.id as id', 'RB.id as req_bin_id', 'RB.status as status', 'cat.title as category')
             ->get();
 
             foreach ( $requirement_bins as  $requirement_bin) {

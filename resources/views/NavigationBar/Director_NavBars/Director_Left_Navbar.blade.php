@@ -25,7 +25,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" style="cursor: pointer !important">
                         <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
                         <p> Class Setup<i class="fas fa-angle-left right"></i> </p>
@@ -45,19 +45,13 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
-                    <a class="nav-link" style="cursor: pointer !important">
-                        <i class="nav-icon fa-solid fa-flag"></i>
-                        <p>Activity Setup<i class="fas fa-angle-left right"></i> </p>
-                    </a>
 
-                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('director.activities') }}" class="nav-link">
                                 <i class="fa-regular fa-flag nav-icon"></i>
-                                <p class="p-drop">Activities</p>
+                                <p>Activities</p>
                             </a>
                         </li>
 
@@ -65,12 +59,11 @@
                         <li class="nav-item">
                             <a href="{{ route('director.requirement_bins') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-book-bookmark"></i>
-                                <p class="p-drop">Requirement Bin</p>
+                                <p>Requirement Bin</p>
                             </a>
                         </li>
 
-                    </ul>
-                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('director.reports') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-book-bookmark"></i>

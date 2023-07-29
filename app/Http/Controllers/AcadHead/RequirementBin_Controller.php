@@ -9,6 +9,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\RequirementBin;
+use App\Models\RequirementCategory;
 Use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -27,71 +28,27 @@ class RequirementBin_Controller extends Controller
         ->where('is_deleted', true)
         ->get();
 
-        $requirementbins = RequirementBin::where('deleted_at', null)
-        ->where('is_deleted', false)
+        $categories = RequirementCategory::get();
+
+        $requirementbins = DB::table('requirement_bins as bin')
+        ->leftJoin('requirement_categories as cat', 'cat.id', '=' ,'bin.category_id')
+        ->where('bin.deleted_at', '='  , null)
+        ->where('bin.is_deleted', '='  , false)
+        ->select('bin.title as title',
+                    'bin.status as status',
+                    'bin.id as id',
+                    'bin.description as description',
+                    'bin.deadline as deadline',
+                    'cat.title as cat_title')
         ->get();
+
 
         foreach ($requirementbins as $requirementbin) {
             $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
         }
 
         return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
-        compact('deleted_requirementbins', 'requirementbins'));
-
-    }
-
-    public function filteredAndSortedBin(Request $request){
-        if ($request->ajax()) {
-            $query = RequirementBin::whereNull('deleted_at')
-                ->where('is_deleted', false);
-
-            if ($request->filter_option) {
-                $filterOption = $request->filter_option;
-
-                if ( $filterOption  == 'All') {
-                    $query = $query;
-                }
-                else{
-                    $query->where('status',  $filterOption);
-                }
-            }
-
-            if ($request->sort_option) {
-                $sortOption = $request->sort_option;
-                switch ($sortOption) {
-                    case 'az':
-                        $query->orderBy('title', 'asc');
-                        break;
-                    case 'za':
-                        $query->orderBy('title', 'desc');
-                        break;
-                    case 'newest':
-                        $query->orderBy('deadline', 'desc');
-                        break;
-                    case 'oldest':
-                        $query->orderBy('deadline', 'asc');
-                        break;
-                    case 'All':
-                        $query->orderBy('deadline', 'desc');
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            if ($request->deadline) {
-                $deadline = Carbon::parse($request->deadline)->format('Y-m-d');
-                $query->whereDate('deadline', $deadline);
-            }
-
-            $requirementbins = $query->get();
-
-            foreach ($requirementbins as $requirementbin) {
-                $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
-            }
-
-            return response()->json(['requirementbins' => $requirementbins]);
-        }
+        compact('deleted_requirementbins', 'requirementbins','categories'));
 
     }
 
@@ -210,7 +167,7 @@ class RequirementBin_Controller extends Controller
                 'title' => 'required|unique:requirement_bins',
                 'description' => 'max:1000000',
                 'deadline' => 'required|date|after_or_equal:today',
-                'status' => 'nullable'
+                'category' => 'required'
             ]);
 
             // Get the ID of the logged in user
@@ -221,6 +178,7 @@ class RequirementBin_Controller extends Controller
             $reqbin->id = Str::uuid()->toString();
             $reqbin->title = $request ->title;
             $reqbin->description = $request ->description;
+            $reqbin->category_id = $request ->category;
 
             //This codes converts the date picker format into datetime format
             $deadline = trim($request->input('deadline'));
@@ -274,7 +232,9 @@ class RequirementBin_Controller extends Controller
                 'title' => 'required',
                 'description' => 'max:1000000',
                 'deadline' => 'required|date|after_or_equal:today',
-                'status' => 'nullable'
+                'status' => 'nullable',
+                'category' => 'required'
+
             ]);
             // Get the ID of the logged in user
             $userId = Auth::user()->id;
@@ -291,6 +251,7 @@ class RequirementBin_Controller extends Controller
             $req_bin = RequirementBin::findOrFail($id);
             $req_bin->title = $request->input('title');
             $req_bin->description = $request->input('description');
+            $req_bin->category_id = $request->input('category');
 
             //This codes converts the date picker format into datetime format
             $deadlines = trim($request->input('deadline'));
