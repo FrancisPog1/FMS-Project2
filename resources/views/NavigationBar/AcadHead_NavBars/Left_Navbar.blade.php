@@ -129,12 +129,12 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('admin.monitor_faculties.show')}}" class="nav-link">
                                         <i class="fas fa-folder nav-icon"></i>
                                         <p class="p-drop">Monitor Faculties</p>
                                     </a>
-                                </li>
+                                </li> --}}
 
 
                                 <li class="nav-item">

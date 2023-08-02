@@ -24,37 +24,40 @@ class MonitorFaculties_Controller extends Controller
     public function show()
     {   $user_id = Auth::user()->id;
 
-        $users = DB::table('requirement_bin_contents')
-        ->leftJoin('requirement_types', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
-        ->leftJoin('requirement_bins', 'requirement_bin_contents.foreign_requirement_bins_id', '=', 'requirement_bins.id')
-        ->leftJoin('requirement_categories as RC', 'RC.id', '=', 'requirement_bins.category_id')
-         ->join('user_upload_requirements', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
-         ->leftJoin('users', 'user_upload_requirements.assigned_to', '=', 'users.id')
-        //  ->join('user_assigned_to_requirement_bins', 'requirement_bins.id', '=', 'user_assigned_to_requirement_bins.requirement_bin_id')
-         ->leftJoin('users_profiles', 'users.id', '=', 'users_profiles.user_id')
-         ->leftJoin('users as reviewers', 'user_upload_requirements.reviewed_by', '=', 'reviewers.id') // Left join to get the reviewer's info
-         ->leftJoin('users_profiles as reviewer_profiles', 'reviewers.id', '=', 'reviewer_profiles.user_id') // Left join to get the reviewer's profile info
-        ->where('requirement_bin_contents.is_deleted', '=', false)
-                ->select(
-                'requirement_bin_contents.id as id',
-                'requirement_bin_contents.foreign_requirement_types_id as typeId',
-                'RC.title as category',
-                'requirement_types.title as type',
-                'requirement_bins.title as requirement_bin',
-                'user_upload_requirements.status as status',
-                'user_upload_requirements.acadhead_remarks as remarks',
-                'user_upload_requirements.submission_date',
-                'user_upload_requirements.id as id',
-                'users.id as user_id', 'users_profiles.first_name' ,
-                'users_profiles.last_name' ,
-                'user_upload_requirements.reviewed_at',
-                'users_profiles.first_name as first_name', // Alias for users's first name
-                'users_profiles.last_name as last_name',
-                // 'user_assigned_to_requirement_bins.id as assigned_bin_id', // Alias for users's last name
-                'requirement_bins.id as req_bin_id')
-        ->distinct()
-        ->get();
+        $users = DB::table('user_upload_requirements as UUR')
+        ->join('users as U', 'U.id', '=', 'UUR.assigned_to')
+        ->join('users_profiles as UP', 'UP.user_id', '=', 'U.id')
+        ->join('user_assigned_to_requirement_bins as UARB','UARB.assigned_to', '=', 'UUR.assigned_to')
+        ->join('requirement_bin_contents as RBC', 'RBC.id', '=', 'UUR.foreign_bin_content_id') // Left join to get the reviewer's profile info
+        ->join('requirement_types as RT', 'RT.id', '=', 'RBC.foreign_requirement_types_id')
+        ->join('requirement_bins as RB', 'RB.id', '=', 'RBC.foreign_requirement_bins_id')
+        ->join('requirement_categories as RC', 'RC.id', '=', 'RB.category_id')
 
+        ->leftJoin('users as reviewers', 'UUR.reviewed_by', '=', 'reviewers.id') // Left join to get the reviewer's info
+        ->leftJoin('users_profiles as reviewer_profiles', 'reviewers.id', '=', 'reviewer_profiles.user_id') // Left join to get the reviewer's profile info
+        ->where('RBC.is_deleted', '=', false)
+                ->select(
+                'RBC.id as id',
+                'RBC.foreign_requirement_types_id as typeId',
+                'RC.title as category',
+                'RT.title as type',
+                'RB.title as requirement_bin',
+                'UUR.status as status',
+                'UUR.acadhead_remarks as remarks',
+                'UUR.submission_date',
+                'UUR.id as id',
+                'U.id as user_id',
+                'UP.first_name' ,
+                'UP.last_name' ,
+                'UUR.reviewed_at',
+                'UP.first_name as first_name', // Alias for users's first name
+                'UP.last_name as last_name',// Alias for users's last name
+                'UARB.id as assigned_bin_id',
+                'RB.id as req_bin_id',
+                'reviewer_profiles.first_name as rev_firstname', // Alias for reviewer's first name
+                'reviewer_profiles.last_name as rev_lastname') // Alias for reviewer's last name))
+                ->distinct() // Use the DISTINCT keyword to retrieve only unique records
+                ->get();
 
         foreach ($users as $user) {
             if( $user->submission_date != null){
@@ -98,6 +101,7 @@ class MonitorFaculties_Controller extends Controller
 
     public function reject(Request $request, $id, $req_bin_id, $assigned_bin_id): JsonResponse
     {
+
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
         $assigned_bin = UserAssignedToRequirementBins::findOrFail($assigned_bin_id);

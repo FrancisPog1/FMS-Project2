@@ -29,7 +29,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <h5 class="font-weight-bold ">Reviewed by:</h5>
-                                                            <p> {{ $user->first_name }} {{ $user->last_name }}</p><br>
+                                                            <p> {{ $user->rev_firstname }} {{ $user->rev_lastname }}</p><br>
                                                         </div>
 
                                                         <div class="col-md-6">
@@ -72,7 +72,7 @@
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-danger"
                                 data-requirement-id="{{ $user->id }}"
-                                data-user-id="{{ $user_id }}"
+                                data-user-id="{{ $user->user_id }}"
                                 data-req-bin-id="{{ $user->req_bin_id }}"
                                 data-assigned-bin-id="{{ $user->assigned_bin_id }}"
                                 id="reject-button">Reject</button>
@@ -80,7 +80,7 @@
                         <button  class="btn btn-outline-primary swalDefaultSuccess"
                                 type="button"
                                 data-requirement-id="{{ $user->id }}"
-                                data-user-id="{{ $user_id }}"
+                                data-user-id="{{ $user->user_id }}"
                                 data-req-bin-id="{{ $user->req_bin_id }}"
                                 data-assigned-bin-id="{{ $user->assigned_bin_id }}"
                                 id="approve-button">Approve</button>

@@ -29,6 +29,10 @@
             {{-- CREATE MODAL --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_MonitorFaculties/create_modal')
 
+
+            {{-- CREATE MODAL --}}
+            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorFaculties/file_modal')
+
         </div>
 
         <!-- Footer Container -->

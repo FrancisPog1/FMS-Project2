@@ -30,7 +30,7 @@
                                         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                         <td>{{ $user->type }}</td>
                                         <td>{{ $user->requirement_bin }}</td>
-                                        <td>{{ $user->submission_date }}</td>
+                                        <td>{{ $user->assigned_bin_id }}</td>
 
 
 
@@ -51,7 +51,7 @@
                                                     <button type="button" data-status="{{ $user->status }}"
                                                         data-remarks="{{ $user->remarks }}"
                                                         data-requirement-id="{{ $user->id }}"
-                                                        data-user-id="{{ $user_id }}"
+                                                        data-user-id="{{ $user->user_id }}"
                                                         data-req-bin-id="{{ $user->req_bin_id }}"
                                                         data-toggle="modal" data-target="#modal-xl-validate-{{$user->id}}"
                                                         class="validate-button px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">

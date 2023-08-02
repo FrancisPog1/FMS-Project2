@@ -129,6 +129,8 @@ function displayFileModal(file_id) {
             var countdown = 2;
             var formID = "#Form-" + requirementId;
 
+            alert("Assigned bin id = " + assignedBinId );
+
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             var rejectRoute = "{{ route('admin.reject_requirements', ['requirementId' => ':requirementId', 'req_bin_id' => ':req_bin_id', 'assigned_bin_id' => ':assignId']) }}";
@@ -190,7 +192,7 @@ function displayFileModal(file_id) {
             var assignedBinId = button.getAttribute('data-assigned-bin-id');
             var user_id = button.getAttribute('data-user-id');
             var countdown = 2;
-
+            alert("Assigned bin id = " + assignedBinId );
             var formAID = "#Form-" + requirementId;
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
