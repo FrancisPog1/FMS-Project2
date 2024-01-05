@@ -16,6 +16,6 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "filepond": "^4.30.4"
+        "filepond": "^4.30.5"
     }
 }
