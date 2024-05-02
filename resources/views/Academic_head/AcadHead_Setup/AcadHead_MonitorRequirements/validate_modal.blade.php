@@ -40,8 +40,7 @@
 
                                                     <div class="form-group">
                                                         <label for="remarks">Remarks</label>
-                                                        <textarea type="text" class="form-control" id="remarks" name="remarks" style="height: 200px; resize: none;"> {{ $data->remarks }}
-                                                        </textarea>
+                                                        <textarea type="text" class="form-control" id="remarks" name="remarks" style="height: 200px; resize: none;"> {{ $data->remarks }}</textarea>
 
                                                     </div>
                                                 </div>

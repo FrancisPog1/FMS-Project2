@@ -24,16 +24,25 @@ class CreateAdminUserSeeder extends Seeder
     {
         // For user role data inject
         $role = Role::create([
+            'id' => '1',
             'title' => 'Admin',
         ]);
         $role = Role::create([
-            'title' => 'Faculty',
+            'id' => '2',
+            'title' => 'Faculty (Regular)',
         ]);
         $role = Role::create([
+            'id' => '3',
             'title' => 'Staff',
         ]);
         $role = Role::create([
+            'id' => '4',
             'title' => 'Director',
+        ]);
+
+        $role = Role::create([
+            'id' => '5',
+            'title' => 'Faculty (Part time)',
         ]);
 
 
@@ -42,25 +51,31 @@ class CreateAdminUserSeeder extends Seeder
             'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcA',
             'email' => 'acadhead@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 1,
+            'foreign_role_id' => '1',
+        ]);
+        $user = User::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bc5',
+            'email' => 'allanbelenisko@gmail.com',
+            'password' => bcrypt('pupqcfarms'),
+            'foreign_role_id' => '5',
         ]);
         $user = User::create([
             'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcF',
             'email' => 'faculty@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 2,
+            'foreign_role_id' => '2',
         ]);
         $user = User::create([
             'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS',
             'email' => 'staff@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 3,
+            'foreign_role_id' => '3',
         ]);
         $user = User::create([
             'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcD',
             'email' => 'director@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 4,
+            'foreign_role_id' => '4',
         ]);
 
 //--------------------------For User Profile----------------------------//
@@ -71,6 +86,14 @@ class CreateAdminUserSeeder extends Seeder
             'last_name' => 'Monzon',
             'middle_name' => '',
             'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcA'
+        ]);
+
+        $profile = UsersProfile::create([
+            'id' => '6646A592-e6aa-4a71-9eb6-16fccd7c1bcj',
+            'first_name' => 'Francis',
+            'last_name' => 'Candelaria',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bc5'
         ]);
 
         $profile = UsersProfile::create([

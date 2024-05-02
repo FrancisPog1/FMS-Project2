@@ -181,11 +181,11 @@
 </style>
 
 {{-- SCRIPTS FOR FILE POND --}}
-
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+
 <script>
-    FilePond.registerPlugin(FilePondPluginImagePreview);
+    // FilePond.registerPlugin(FilePondPluginImagePreview);
     // Get a reference to the file input element
     const inputElement = document.querySelector('input[type="file"]');
 
@@ -211,6 +211,10 @@
         },
     });
 </script>
+
+
+
+
 
 {{-- <script>
 

@@ -25,10 +25,11 @@ class Faculty_Middleware
 
         if (Auth::check()) {
             // Admin == 1
-            // Faculty member == 2
+            // Faculty member (Regular) == 2
+            // Faculty member (Part time) == 5
             // Staff == 3
             // Director == 4
-            if (Auth::user()->foreign_role_id == '2') {
+            if (Auth::user()->foreign_role_id == '2' || Auth::user()->foreign_role_id == '5') {
                 return $next($request);
             } else {
 

@@ -96,7 +96,7 @@ class Faculty_RequirementBin_Controller extends Controller
                 $bin->bin_created_at = Carbon::parse($bin->bin_created_at)->format('F d, Y h:i A');
             }
 
-            return view('Faculty/Faculty_RequirementList/Faculty_RequirementList'
+            return view('Faculty/Faculty_RequirementList/landing-page'
             , compact('datas','assigned_bin_id', 'req_bin_id', 'requirementbin', 'user_id'));
 
         }

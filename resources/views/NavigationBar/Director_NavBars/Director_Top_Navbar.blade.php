@@ -13,7 +13,7 @@
     <!-- Right -->
     <ul class="navbar-nav ml-auto">
 
-        <!-- Message Dropdown Menu -->
+        {{-- <!-- Message Dropdown Menu -->
         <li class="nav-item dropdown text-pal-1">
             <a class="nav-link" data-toggle="dropdown" href="#" style="color: var(--text-pal-1); transform: none !important;">
                 <i class="mt-2 far fa-envelope-open" style="font-size: 1.3em"></i>
@@ -67,7 +67,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
-        </li>
+        </li> --}}
 
         <!-- User Panel -->
         <div id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"

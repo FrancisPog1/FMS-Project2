@@ -35,14 +35,7 @@
 
         </div>
 
-        <!-- Footer Container -->
-        <footer class="main-footer">
-            <strong>Faculty Records & Monitoring System &copy; 2024 <a href="https://pup.edu.ph">PUPQC.</a></strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 2.2.0
-            </div>
-        </footer>
+      
     </div>
 
     {{-- SCRIPTS --}}

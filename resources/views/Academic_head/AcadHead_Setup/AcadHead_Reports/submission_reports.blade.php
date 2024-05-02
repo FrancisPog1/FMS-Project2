@@ -1,9 +1,6 @@
-<div class="tab-pane fade"
-id="custom-content-above-messages" role="tabpanel"
-aria-labelledby="custom-content-above-messages-tab">
 
     <section class="container">
-        <div class="mr-5 ml-5">
+        <div class="">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title mt-2">List of Requirement Bins</h3>
@@ -84,4 +81,4 @@ aria-labelledby="custom-content-above-messages-tab">
                 </div>
             </div>
     </section>
-</div>
+

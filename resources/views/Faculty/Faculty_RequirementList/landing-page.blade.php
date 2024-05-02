@@ -30,19 +30,19 @@
             </section>
 
             {{-- Requirement Bin details --}}
-            @include('Faculty/Faculty_RequirementList/bin_details')
+            @include('Faculty/Faculty_RequirementList/requirement-bin-details')
 
 
             {{-- Data Table --}}
-            @include('Faculty/Faculty_RequirementList/data_table')
+            @include('Faculty/Faculty_RequirementList/data-table')
 
 
 
             {{-- Upload Modal --}}
-            @include('Faculty/Faculty_RequirementList/upload_modal')
+            @include('Faculty/Faculty_RequirementList/upload-modal')
 
                 {{-- File Modal --}}
-            @include('Faculty/Faculty_RequirementList/file_modal')
+            @include('Faculty/Faculty_RequirementList/file-modal')
 
 
             {{-- <div class="d-flex justify-content-between">
@@ -69,6 +69,13 @@
         </footer>
     </div>
 
+
+@endsection
+
+{{-- Place Holder where you can put your module's javascript codes --}}
+@section('js_contents')
+
     {{-- Scripts --}}
-    @include('Faculty/Faculty_RequirementList/requirementlist_scripts')
+    @include('Faculty/Faculty_RequirementList/scripts')
+
 @endsection

@@ -16,30 +16,13 @@
             <!-- Content Body -->
             <div class="card-body">
 
-            <!-- Menu toggle -->
-            @include('Academic_head/AcadHead_Setup/AcadHead_Reports/menu_toggle')
-
                 <!-- Table Header -->
                 @include('Academic_head/AcadHead_Setup/AcadHead_Reports/table_header')
 
-                <!-- Actual Table    -->
-                <div class="tab-content" id="custom-content-above-tabContent">
 
-                    {{-- Attendance Reports --}}
-                    @include('Academic_head/AcadHead_Setup/AcadHead_Reports/attendance_reports')
+                <!-- Submission Reqs Reports -->
+                @include('Academic_head/AcadHead_Setup/AcadHead_Reports/submission_reports')
 
-                    <!-- Class Observation Reports -->
-                    @include('Academic_head/AcadHead_Setup/AcadHead_Reports/observation_reports')
-
-
-                    <!-- Submission Reqs Reports -->
-                    @include('Academic_head/AcadHead_Setup/AcadHead_Reports/submission_reports')
-
-
-                    <!-- Activity Reports -->
-                    @include('Academic_head/AcadHead_Setup/AcadHead_Reports/activity_reports')
-
-                </div>
             </div>
         </div>
 
