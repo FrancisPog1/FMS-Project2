@@ -16,7 +16,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignUuid('reviewed_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->datetime('reviewed_at')->nullable();
+            $table->datetime('submission_date')->nullable();
             $table->foreignUuid('assigned_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignUuid('foreign_bin_content_id')->nullable()->constrained('requirement_bin_contents')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignUuid('assigned_to')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');

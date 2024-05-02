@@ -13,7 +13,7 @@
     <!-- Right -->
     <ul class="navbar-nav ml-auto">
 
-        <!-- Message Dropdown Menu -->
+        {{-- <!-- Message Dropdown Menu -->
         <li class="nav-item dropdown text-pal-1">
             <a class="nav-link" data-toggle="dropdown" href="#" style="color: var(--text-pal-1); transform: none !important;">
                 <i class="mt-2 far fa-envelope-open" style="font-size: 1.3em"></i>
@@ -39,9 +39,9 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
-        </li>
+        </li> --}}
 
-        <!-- Notifications Dropdown Menu -->
+        {{-- <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown text-pal-1">
             <a class="nav-link" data-toggle="dropdown" href="#" style="color: var(--text-pal-1); transform: none !important;">
                 <i class="mt-2 far fa-bell" style="font-size: 1.3em"></i>
@@ -67,7 +67,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
-        </li>
+        </li> --}}
 
         <!-- User Panel -->
         <div id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
@@ -81,14 +81,14 @@
                 <span class="d-block text-regular text-pal-1" style="font-size: .8rem;">Academic Head</span>
             </div>
         </div>
+
         <!-- Profile Dropdown -->
         <div id="dropdownHover" class="z-10 hidden pal-1 divide-y divide-gray-100 rounded-lg shadow w-44">
             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
-                <a href="UserProfile" class="block px-4 py-2 text-white">Profile</a>
+                <a href="{{ route('admin.my_profile.show') }}" class="block px-4 py-2 text-white">Profile</a>
                 </li>
                 <li>
-                    <a id="show-modal-logout" class="block px-4 py-2 text-white"><button>Log out</button></a>
-
+                    <a id="show-modal-logout" class="block px-4 py-2 text-white admin-logout-button"><button>Log out</button></a>
 
                 </li>
             </ul>

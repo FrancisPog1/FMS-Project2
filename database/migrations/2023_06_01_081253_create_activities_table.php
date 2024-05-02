@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('memorandum_file_directory')->nullable();
             $table->string('location');
             $table->longText('description')->nullable();
-            $table->longText('agenda')->nullable();
             $table->string('status');
             $table->dateTime('start_datetime');
             $table->dateTime('end_datetime');

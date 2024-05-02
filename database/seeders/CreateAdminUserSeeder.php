@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+//use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
 
-use App\Models\ActivityType;
+//use App\Models\ActivityType;
 use App\Models\Designation;
 use App\Models\FacultyType;
 use App\Models\Program;
@@ -15,6 +15,7 @@ use App\Models\RequirementType;
 use App\Models\Specialization;
 use App\Models\AcademicRank;
 use App\Models\RequirementBin;
+use App\Models\UsersProfile;
 use Illuminate\Support\Str;
 
 class CreateAdminUserSeeder extends Seeder
@@ -23,43 +24,104 @@ class CreateAdminUserSeeder extends Seeder
     {
         // For user role data inject
         $role = Role::create([
+            'id' => '1',
             'title' => 'Admin',
         ]);
         $role = Role::create([
-            'title' => 'Faculty',
+            'id' => '2',
+            'title' => 'Faculty (Regular)',
         ]);
         $role = Role::create([
+            'id' => '3',
             'title' => 'Staff',
         ]);
         $role = Role::create([
+            'id' => '4',
             'title' => 'Director',
         ]);
 
+        $role = Role::create([
+            'id' => '5',
+            'title' => 'Faculty (Part time)',
+        ]);
+
+
         // For users account data inject
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcA',
             'email' => 'acadhead@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 1,
+            'foreign_role_id' => '1',
         ]);
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bc5',
+            'email' => 'allanbelenisko@gmail.com',
+            'password' => bcrypt('pupqcfarms'),
+            'foreign_role_id' => '5',
+        ]);
+        $user = User::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcF',
             'email' => 'faculty@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 2,
+            'foreign_role_id' => '2',
         ]);
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS',
             'email' => 'staff@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 3,
+            'foreign_role_id' => '3',
         ]);
         $user = User::create([
-            'id' => Str::uuid()->toString(),
+            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcD',
             'email' => 'director@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
-            'foreign_role_id' => 4,
+            'foreign_role_id' => '4',
         ]);
+
+//--------------------------For User Profile----------------------------//
+
+        $profile = UsersProfile::create([
+            'id' => '6646A592-e6aa-4a71-9eb6-16fccd7c1bcD',
+            'first_name' => 'Demelyn',
+            'last_name' => 'Monzon',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcA'
+        ]);
+
+        $profile = UsersProfile::create([
+            'id' => '6646A592-e6aa-4a71-9eb6-16fccd7c1bcj',
+            'first_name' => 'Francis',
+            'last_name' => 'Candelaria',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bc5'
+        ]);
+
+        $profile = UsersProfile::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16adcd7c1bcD',
+            'first_name' => 'Irynne',
+            'last_name' => 'Gatchalian',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcF'
+        ]);
+
+
+        $profile = UsersProfile::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16adcd7c1aed',
+            'first_name' => 'Mr. Staff',
+            'last_name' => 'Checker',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS'
+        ]);
+
+
+        $profile = UsersProfile::create([
+            'id' => '66464592-e6aa-4a71-9eb6-16fccaaa1bcD',
+            'first_name' => 'Mr. Director',
+            'last_name' => '',
+            'middle_name' => '',
+            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcD'
+        ]);
+
 
         //--------------------------For Specialization----------------------------//
         $specialization = Specialization::create([
@@ -68,23 +130,18 @@ class CreateAdminUserSeeder extends Seeder
             'description' => null,
             'created_by' => null,
         ]);
-
         $specialization = Specialization::create([
             'id' => Str::uuid()->toString(),
             'title' => 'General Psychology',
             'description' => null,
             'created_by' => null,
         ]);
-
-
         $specialization = Specialization::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Information Security',
             'description' => null,
             'created_by' => null,
         ]);
-
-
 
 
         //--------------------------For Requirement Type----------------------------//
@@ -94,36 +151,30 @@ class CreateAdminUserSeeder extends Seeder
             'description' => null,
             'created_by' => null,
         ]);
-
         $requirement_type = RequirementType::create([
             'id' => Str::uuid()->toString(),
             'title' => 'ONLINE CLASS SCREENSHOT ',
             'description' => null,
             'created_by' => null,
         ]);
-
         $requirement_type = RequirementType::create([
             'id' => Str::uuid()->toString(),
             'title' => 'GRADESHEET',
             'description' => null,
             'created_by' => null,
         ]);
-
         $requirement_type = RequirementType::create([
             'id' => Str::uuid()->toString(),
             'title' => 'CLASS RECORD',
             'description' => null,
             'created_by' => null,
         ]);
-
         $requirement_type = RequirementType::create([
             'id' => Str::uuid()->toString(),
             'title' => 'COPY OF EXAMINATION ',
             'description' => null,
             'created_by' => null,
         ]);
-
-
         $requirement_type = RequirementType::create([
             'id' => Str::uuid()->toString(),
             'title' => 'SYLLABI',
@@ -139,14 +190,12 @@ class CreateAdminUserSeeder extends Seeder
             'description' => null,
             'created_by' => null,
         ]);
-
         $Designation = Designation::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Faculty Extentionist',
             'description' => null,
             'created_by' => null,
         ]);
-
         $Designation = Designation::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Disbursement Officer',
@@ -162,7 +211,6 @@ class CreateAdminUserSeeder extends Seeder
             'description' => null,
             'created_by' => null,
         ]);
-
         $AcademicRank = AcademicRank::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Instructor',
@@ -178,14 +226,12 @@ class CreateAdminUserSeeder extends Seeder
             'description' => null,
             'created_by' => null,
         ]);
-
         $facultytype = FacultyType::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Part-time',
             'description' => null,
             'created_by' => null,
         ]);
-
         $facultytype = FacultyType::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Temporary',
@@ -201,15 +247,12 @@ class CreateAdminUserSeeder extends Seeder
             'description' => null,
             'created_by' => null,
         ]);
-
         $program = Program::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Bachelor of Science in Business Administration (BSBA)',
             'description' => null,
             'created_by' => null,
         ]);
-
-
         $program = Program::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Bachelor in Technology and Livelihood Education With Specialization
@@ -226,19 +269,16 @@ class CreateAdminUserSeeder extends Seeder
             'description' => 'This requirement bin must contain the documents that are used to track
                                 the performance of faculty members during the first semester of this academic year.
                                 Please comply with the requirements before the deadline',
-            'start_datetime' => '2023-07-30 12:00:00',
-            'end_datetime' => '2023-07-30 12:00:00',
+            'deadline' => '2023-07-30 12:00:00',
             'status' => 'Ongoing',
         ]);
-
         $requirement_bin = RequirementBin::create([
             'id' => Str::uuid()->toString(),
             'title' => 'Second Semester: Faculty Monitoring Report',
             'description' => 'This requirement bin must contain the documents that are used to track
                                 the performance of faculty members during the second semester of this academic year.
                                 Please comply with the requirements before the deadline',
-            'start_datetime' => '2023-07-30 12:00:00',
-            'end_datetime' => '2023-07-30 12:00:00',
+            'deadline' => '2023-07-30 12:00:00',
             'status' => 'Ongoing',
         ]);
 

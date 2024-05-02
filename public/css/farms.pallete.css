@@ -82,12 +82,6 @@ a
     background-color: var(--pallete-4);
 }
 
-/* for bg color*/
-.gradient-bg
-{
-    /* background: linear-gradient(to right, rgb(255, 255, 255), #bebebe 100%); */
-    background-color: #edecec;
-}
 
 /* for sidebar color and blur*/
 .transpa
@@ -160,8 +154,23 @@ h1
     font-weight: 500;
 }
 
-input
+/* body */
+input, select
+{
+    border-radius: 0.6rem !important;
+}
 
+.rounded-lg
 {
     border-radius: .5rem !important;
+}
+
+.content-wrapper
+{
+    background-color: #e5e3e3 !important;
+}
+
+.card, .info-box, .card-header
+{
+    border-radius: .7rem !important;
 }

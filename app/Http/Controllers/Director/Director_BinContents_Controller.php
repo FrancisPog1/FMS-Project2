@@ -34,21 +34,24 @@ class Director_BinContents_Controller extends Controller
         ->join('requirement_bins', 'requirement_bin_contents.foreign_requirement_bins_id', '=', 'requirement_bins.id')
         ->where('requirement_bins.id', '=', $bin_id)
         ->where('requirement_bin_contents.is_deleted', '=', false)
-                ->select('requirement_types.title as title', 'requirement_bin_contents.notes as note',
-                'requirement_bin_contents.file_format as file_format', 'requirement_bin_contents.id as id',
-                'requirement_bin_contents.foreign_requirement_types_id as typeId')
+                ->select('requirement_types.title as title',
+                        'requirement_bin_contents.id as id',
+                        'requirement_bin_contents.foreign_requirement_types_id as typeId')
         ->get();
 
         $deleted_requirements = DB::table('requirement_bin_contents')
         ->join('requirement_types', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
         ->where('requirement_bin_contents.is_deleted', '=', true)
-                ->select('requirement_types.title as title', 'requirement_bin_contents.file_format as file_format',
-                'requirement_bin_contents.id as id')
+                ->select('requirement_types.title as title',
+                        'requirement_bin_contents.id as id')
         ->get();
 
         $users = DB::table('users')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as role', 'users.email', 'users.status', 'users.id')
+        ->select('roles.title as role',
+                'users.email',
+                'users.status',
+                'users.id')
         ->get();
 
         return view('Director/Director_BinContents/Director_BinContents',

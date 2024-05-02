@@ -16,7 +16,7 @@
 
                 jQuery.ajax({
                     type: 'post',
-                    url: "{{ route('update_users', '') }}" + userId,
+                    url: "{{ route('admin.update_users', '') }}" + userId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -118,7 +118,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('register_user') }}",
+                url: "{{ route('admin.register_user') }}",
                 data: jQuery('#adduser').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -165,80 +165,6 @@
     });
 </script>
 
-
-<script>
-    $(document).ready(function() {
-        var filteredAndSortedUsersUrl = "{{ route('filtered_and_sorted_users') }}";
-        $("#filter, #sort").on('change', function() {
-            var filterOption = $("#filter").val();
-            var sortOption = $("#sort").val();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            console.log(filteredAndSortedUsersUrl);
-
-            $.ajax({
-                url: filteredAndSortedUsersUrl,
-                type: "GET",
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                data: {
-                    'filter_option': filterOption,
-                    'sort_option': sortOption
-                },
-                success: function(data) {
-                    var users = data.users;
-                    var html = '';
-                    var deleteRoute = "{{ route('delete_users', ':user_id') }}";
-                    if (users.length > 0) {
-                        for (let i = 0; i < users.length; i++) {
-                            html +=  '<tr>' +
-                                            '<td>' + users[i]['email'] + '</td>' +
-                                            '<td>' + users[i]['role_type'] + '</td>' +
-                                        ' <td class="text-center">' +
-                                            '<button type="button" class="font-medium rounded-full text-sm px-3 py-1 mr-2 mb-2 ' +
-                                            (users[i]['status'] === 'Inactive' ? 'text-white bg-red-500' : 'text-white bg-green-400') +
-                                            '">' + users[i]['status'] + '</button>' +
-                                        ' </td>' +
-
-                                            '<td class="text-center">' +
-                                                '<form method="POST" action="'+ deleteRoute.replace(':user_id', users[i]['user_id']) +' ">' +
-                                                    '@csrf' +
-                                                ' <input name="_method" type="hidden" value="DELETE">' +
-
-                                                ' <button data-toggle="modal" onclick="openViewModal(' +"'"+ users[i]['email'] + "'" +')"' +
-                                                        'data-target="#modal-xl-view" type="button"' +
-                                                        'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
-                                                        '<i class="far fa-eye"></i>' +
-                                                    '</button>' +
-                                                    '<button data-toggle="modal"' +
-                                                        'onclick="openEditModal(' + " ' " + users[i]['email'] + "', '" + users[i]['user_id'] + "'" + ' )" ' +
-                                                    ' data-target="#modal-xl-edit" type="button"' +
-                                                        'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
-                                                        '<i class="far fa-edit"></i>' +
-                                                ' </button>' +
-                                                    '<button type="button"' +
-                                                        'class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
-                                                        'title="Delete">' +
-                                                        '<i class="far fa-trash-alt"></i>' +
-                                                    '</button>' +
-                                                '</form>' +
-                                            '</td>' +
-                                        '</tr>';
-                            }
-                    } else {
-                        html += '<tr><td colspan="4"> No Records </td></tr>';
-                    }
-
-                    $('#filtered-users').html(html);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-    });
-    </script>
-
     {{-- Local Warning Modal Before Deleting--}}
 <script>
     $(document).on('click', '.local-delete-button', function(event) {
@@ -250,7 +176,7 @@
     Swal.fire({
         title: "Are you sure?",
         icon: "info",
-        html: "Do you want to <b>delete</b> this?",
+        html: "Do you want to <b>deactivate</b> the account?",
         showCloseButton: true,
         showCancelButton: true,
         focusConfirm: false,
@@ -265,4 +191,28 @@
         }
     });
 });
+</script>
+
+
+<script>
+    //Function to check all checkboxes on RESTORE
+    $(document).ready(function() {
+        // Check
+        $("#check-all-restore").on("click", function() {
+
+            if ($(this).prop("checked")) {
+                $("input[type='checkbox']").prop("checked", true);
+            } else {
+                $("input[type='checkbox']").prop("checked", false);
+            }
+        });
+
+        // Uncheck
+        $("input[type='checkbox']").on("change", function() {
+            if (!$(this).prop("checked")) {
+                $("#check-all-restore").prop("checked", false);
+            }
+
+        });
+    });
 </script>

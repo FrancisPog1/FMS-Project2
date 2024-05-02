@@ -17,7 +17,7 @@
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_ranks', '') }}" + roleId,
+                    url: "{{ route('admin.update_ranks', '') }}" + roleId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -105,7 +105,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('Create_AcademicRank') }}",
+                url: "{{ route('admin.ranks.store') }}",
                 data: jQuery('#create_rank').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -183,7 +183,9 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_ranks', '') }}" + name; // Replace with the actual delete route
+
+        var route = "{{ route('admin.destroy_ranks', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -225,72 +227,6 @@
             if (!$(this).prop("checked")) {
                 $("#check-all-restore").prop("checked", false);
             }
-        });
-    });
-</script>
-
-{{-- AJAX SCRIPT FOR SORTING --}}
-<script>
-    $(document).ready(function() {
-        var sortedRankRoute = "{{ route('sorted_ranks') }}";
-
-        $("#sort").on('change', function() {
-            var sortOption = $("#sort").val();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajax({
-                url: sortedRankRoute,
-                type: "GET",
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                data: {
-                    'option': sortOption
-                },
-                success: function(data) {
-                    var ranks = data.ranks;
-                    var html = '';
-                    var deleteRankRoute = "{{ route('delete_ranks', ':rank_id') }}";
-
-                    if (ranks.length > 0) {
-                        for (let i = 0; i < ranks.length; i++) {
-                            html += '<tr>' +
-                                '<td>' + ranks[i]['title'] + '</td>' +
-                                '<td>' + ranks[i]['description'] + '</td>' +
-                                ' <td class="text-center">' +
-                                    '<form method="POST" action=" '+ deleteRankRoute.replace(':rank_id', ranks[i]['id']) +' ">' +
-                                        '@csrf' +
-                                        ' <input name="_method" type="hidden" value="DELETE">' +
-                                        '<button data-toggle="modal"' +
-                                            'onclick="openViewModal(' +"'"+ ranks[i]['title'] + "', '" + ranks[i]['description'] + "'"+ ')" ' +
-                                            ' data-target="#modal-xl-view" type="button"' +
-                                            'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
-                                            '  <i class="far fa-eye"></i>' +
-                                    '   </button>' +
-                                        '<button type="button"' +
-                                            ' onclick="openEditModal(' +" ' "+ ranks[i]['title'] + " ' " + ", '" + ranks[i]['description'] + " ' " + ", '" + ranks[i]['id'] + "' " + ' )" ' +
-                                            'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
-                                            ' <i class="far fa-edit"></i>' +
-                                        '</button>' +
-                                        '  <button type="button"' +
-                                            '  class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
-                                            ' title="Delete">' +
-                                            '  <i class="far fa-trash-alt"></i>' +
-                                        '</button>' +
-                                    '</form>' +
-                                '  </td>' +
-                            ' </tr>';
-                        }
-                    } else {
-                        html += '<tr><td colspan="3"> No Records </td></tr>';
-                    }
-
-                    $('#filtered-ranks').html(html);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
         });
     });
 </script>

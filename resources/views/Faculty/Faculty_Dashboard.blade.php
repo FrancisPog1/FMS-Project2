@@ -1,8 +1,8 @@
 @extends('layouts.Faculty_master')
 
 
-{{-- CONTENTS --}}  
-@section('content')  
+{{-- CONTENTS --}}
+@section('content')
 
             <!-- Content Wrapper. Outer Container -->
             <div class="content-wrapper">
@@ -11,7 +11,8 @@
                     <div class="container-fluid">
                         <div class="row-col-sm-6 mb-2">
                             <div class="col-md-6 ml-4">
-                                <h1 class="m-0">Dashboard</h1>
+                                <br>
+                                <h1 class="m-0">{{$greeting}} {{$name}}!</h1>
                             </div>
                         </div>
                     </div>
@@ -19,312 +20,219 @@
 
                 <!-- Main content -->
                 <!-- Summary Cards -->
-                <div class="col-md-12 m-auto">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="container-fluid">
-                                <div class="info-box">
-                                    <span class="info-box-icon  pal-1 pal-1 text-col-2 elevation-1"><i class="fas fa-user-shield"></i></span>
+                <div class="pl-5 pr-5 pt-2">
+                    <div class="col-md-12 m-auto">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="container-fluid">
+                                    <div class="info-box">
+                                        <span class="info-box-icon  pal-1 pal-1 text-col-2 elevation-1"><i class="fas fa-user-shield"></i></span>
 
-                                    <div class="info-box-content">
-                                    <span class="info-box-text">Total Requirement Bin</span>
-                                    <span class="info-box-number">
-                                        0
-                                    </span>
+                                        <div class="info-box-content">
+                                        <span class="info-box-text">Total Bin Submitted</span>
+                                        <span class="info-box-number">
+                                            0
+                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="container-fluid">
-                                <div class="info-box">
-                                    <span class="info-box-icon pal-1 text-col-2 elevation-1"><i class="fas fa-folder"></i></span>
+                            <div class="col-md-4">
+                                <div class="container-fluid">
+                                    <div class="info-box">
+                                        <span class="info-box-icon pal-1 text-col-2 elevation-1"><i class="fas fa-folder"></i></span>
 
-                                    <div class="info-box-content">
-                                    <span class="info-box-text">Total Activities</span>
-                                    <span class="info-box-number">
-                                        0
-                                        <small>%</small>
-                                    </span>
+                                        <div class="info-box-content">
+                                        <span class="info-box-text">Activities</span>
+                                        <span class="info-box-number">
+                                            0
+                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="container-fluid">
-                                <div class="info-box">
-                                    <span class="info-box-icon pal-1 text-col-2 pal-1 elevation-1"><i class="fas fa-user-graduate"></i></span>
+                            <div class="col-md-4">
+                                <div class="container-fluid">
+                                    <div class="info-box">
+                                        <span class="info-box-icon pal-1 text-col-2 pal-1 elevation-1"><i class="fas fa-user-graduate"></i></span>
 
-                                    <div class="info-box-content">
-                                    <span class="info-box-text">Total Meetings</span>
-                                    <span class="info-box-number">
-                                        0
-                                    </span>
+                                        <div class="info-box-content">
+                                        <span class="info-box-text">Meetings</span>
+                                        <span class="info-box-number">
+                                            0
+                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Pie Graphs -->
-                <div class="col-md-12 m-auto">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card" style="display: inline-block; width: 100%; border-top: 2px solid #800000;">
-                                <div class="card-header">
-                                    <label>Submitted Requirements Status</label>
-                                </div>
-                                <div>
-                                    <canvas id="" width="324" height="269" style="display: block; box-sizing: border-box; height: 300px; width: 360px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card" style="display: inline-block; width: 100%; border-top: 2px solid #800000;">
-                                <div class="card-header">
-                                    <label>Meeting Status</label>
-                                </div>
-                                <div>
-                                    <canvas id="" width="324" height="269" style="display: block; box-sizing: border-box; height: 300px; width: 360px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card" style="display: inline-block; width: 100%; border-top: 2px solid #800000;">
-                                <div class="card-header">
-                                    <label>Activity Status</label>
-                                </div>
-                                <div>
-                                    <canvas id="" width="324" height="269" style="display: block; box-sizing: border-box; height: 300px; width: 360px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Pie Graphs -->
+                    <div class="col-md-12 m-auto">
+                        <div class="row justify-content-between">
+                            <div class="col-7 pl-5 pr-5">
 
-            
-                <!-- List Tables for Activities and Meetings -->
-                <div class="col-lg-12 m-auto">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="container">
-                                <div class="m-2">
-                                    <div class="card" style="border-top: 2px solid #800000;">
-                                        <div class="card-header">
-                                            <h3 class="card-title mt-2">List of on-going activities</h3>
-                                            <!-- Search function --->
-                                            <div class="text-right">
-                                                <div class="form-inline float-right">
-                                                    <div class="input-group"
-                                                        data-widget="sidebar-search">
-                                                        <input class="form-control
-                                                            form-control-sidebar px-4 py-2
-                                                            text-sm font-medium border-0" type="search"
-                                                            placeholder="Search"
-                                                            aria-label="Search">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-sidebar">
-                                                                <i class="fas fa-search fa-fw"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                                <div class="card" style="display: inline-block; width: 100%; border-top: 2px solid #800000;">
+                                    <div class="card-header pb-0">
+                                        <label>Requirement Stats</label>
+                                    </div>
+                                    <div>
+                                        <canvas id="" width="324" height="269" style="display: block; box-sizing: border-box; height: 150px; width: 360px;"></canvas>
+                                    </div>
+                                </div>
+
+
+                                <div class="card" style="display: inline-block; width: 100%; border-top: 2px solid #800000;">
+                                    <div class="card-header pb-0">
+                                        <label>Activity Status</label>
+                                    </div>
+                                    <div>
+                                        <canvas id="" width="324" height="269" style="display: block; box-sizing: border-box; height: 150px; width: 360px;"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-5 pt-0">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title  text-pal-1">
+                                            <i class="ion ion-clipboard mr-1"></i>
+                                            <b>To Do List</b>
+                                        </h3>
+
+                                        <div class="card-tools">
+                                            <ul class="pagination pagination-sm">
+                                                <li class="page-item"><a href="#" class="page-link text-pal-1">&laquo;</a></li>
+                                                <li class="page-item pal-1"><a href="#" class="page-link text-pal-1">1</a></li>
+                                                <li class="page-item pal-1"><a href="#" class="page-link text-pal-1">2</a></li>
+                                                <li class="page-item pal-1"><a href="#" class="page-link text-pal-1">3</a></li>
+                                                <li class="page-item"><a href="#" class="page-link text-pal-1">&raquo;</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <ul class="todo-list" data-widget="todo-list">
+
+                                            <li>
+                                                <span class="handle">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </span>
+                                                <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                                    <label for="todoCheck1"></label>
                                                 </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="card-header">
-                                            <p class="card-title ml-4 mt-1 row-cols-2"
-                                                style="font-size: .95rem;">Show entries</p>
-                                            <select name="dataTable_length"
-                                                aria-controls="dataTable" class="ml-5 col-1
-                                                custom-select custom-select-sm form-control
-                                                form-control-sm">
-                                                <option value="10">
-                                                    10
-                                                </option>
-                                                <option value="25">
-                                                    25
-                                                </option>
-                                                <option value="50">
-                                                    50
-                                                </option>
-                                                <option value="100">
-                                                    100
-                                                </option>
-                                            </select>
-                                        </div>
-                
-                                        <!-- Tables of roles -->
-                                        <div class="card-body p-0">
-                                            <table class="table table-striped">
-                                                <thead class="pal-1 text-col-2">
-                                                    <tr>
-                                                        <th>Title</th>
-                                                        <th>Type</th>
-                                                        <th>Status</th>
-                                                        <th class="text-center">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            Rosicar Escober
-                                                        </td>
-                                                        <td>
-                                                            P
-                                                        </td>
-                                                        <td>
-                                                            On-Going
-                                                        </td>                
-                
-                                                        <td class="text-center">
-                                                            <button data-toggle="modal"
-                                                                data-target="#modal-xl"
-                                                                type="button" class="px-3 py-2
-                                                                text-sm font-medium text-center
-                                                                text-white bg-blue-700
-                                                                rounded-lg hover:bg-blue-800
-                                                                focus:ring-4 focus:outline-none
-                                                                focus:ring-blue-300
-                                                               
-                                                               
-                                                               ">View</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot class="text-col-1" style="font-size:
-                                                    .9rem;">
-                                                    <tr>
-                                                        <td>
-                                                            <div class="col-sm-12">
-                                                                <div class="dataTables_info"
-                                                                    id="dataTable_info"
-                                                                    role="status"
-                                                                    aria-live="polite">
-                                                                    Showing 1 to 4 of 4 entries
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="container">
-                                <div class="m-2">
-                                    <div class="card" style="border-top: 2px solid #800000;">
-                                        <div class="card-header">
-                                            <h3 class="card-title mt-2">List of on-going meetings</h3>
-                                            <!-- Search function --->
-                                            <div class="text-right">
-                                                <div class="form-inline float-right">
-                                                    <div class="input-group"
-                                                        data-widget="sidebar-search">
-                                                        <input class="form-control
-                                                            form-control-sidebar px-4 py-2
-                                                            text-sm font-medium border-0" type="search"
-                                                            placeholder="Search"
-                                                            aria-label="Search">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-sidebar">
-                                                                <i class="fas fa-search fa-fw"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                                                <span class="text">Eat lunch</span>
+                                                <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
+                                                <!-- General tools such as edit or delete-->
+                                                <div class="tools">
+                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-trash-o"></i>
                                                 </div>
-                                            </div>
-                                        </div>
-                
-                                        <div class="card-header">
-                                            <p class="card-title ml-4 mt-1 row-cols-2"
-                                                style="font-size: .95rem;">Show entries</p>
-                                            <select name="dataTable_length"
-                                                aria-controls="dataTable" class="ml-5 col-1
-                                                custom-select custom-select-sm form-control
-                                                form-control-sm">
-                                                <option value="10">
-                                                    10
-                                                </option>
-                                                <option value="25">
-                                                    25
-                                                </option>
-                                                <option value="50">
-                                                    50
-                                                </option>
-                                                <option value="100">
-                                                    100
-                                                </option>
-                                            </select>
-                                        </div>
-                
-                                        <!-- Tables of roles -->
-                                        <div class="card-body p-0">
-                                            <table class="table table-striped">
-                                                <thead class="pal-1 text-col-2">
-                                                    <tr>
-                                                        <th>Title</th>
-                                                        <th>Type</th>
-                                                        <th>Status</th>
-                                                        <th class="text-center">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            Rosicar Escober
-                                                        </td>
-                                                        <td>
-                                                            P
-                                                        </td>
-                                                        <td>
-                                                            On-Going
-                                                        </td>                
-                
-                                                        <td class="text-center">
-                                                            <button data-toggle="modal"
-                                                                data-target="#modal-xl"
-                                                                type="button" class="px-3 py-2
-                                                                text-sm font-medium text-center
-                                                                text-white bg-blue-700
-                                                                rounded-lg hover:bg-blue-800
-                                                                focus:ring-4 focus:outline-none
-                                                                focus:ring-blue-300
-                                                               
-                                                               
-                                                               ">View</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot class="text-col-1" style="font-size:
-                                                    .9rem;">
-                                                    <tr>
-                                                        <td>
-                                                            <div class="col-sm-12">
-                                                                <div class="dataTables_info"
-                                                                    id="dataTable_info"
-                                                                    role="status"
-                                                                    aria-live="polite">
-                                                                    Showing 1 to 4 of 4 entries
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
+                                            </li>
+
+                                            <li>
+                                                <span class="handle">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </span>
+                                                <div  class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
+                                                    <label for="todoCheck2"></label>
+                                                </div>
+                                                <span class="text">Make a class plan</span>
+                                                <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+                                                <div class="tools">
+                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-trash-o"></i>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <span class="handle">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </span>
+                                                <div  class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" value="" name="todo3" id="todoCheck3">
+                                                    <label for="todoCheck3"></label>
+                                                </div>
+                                                <span class="text">Go to Sydney, Australia</span>
+                                                <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
+                                                <div class="tools">
+                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-trash-o"></i>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <span class="handle">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </span>
+                                                <div  class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" value="" name="todo4" id="todoCheck4">
+                                                    <label for="todoCheck4"></label>
+                                                </div>
+                                                <span class="text">Find my crush when i was in college</span>
+                                                <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
+                                                <div class="tools">
+                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-trash-o"></i>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <span class="handle">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </span>
+                                                <div  class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" value="" name="todo5" id="todoCheck5">
+                                                    <label for="todoCheck5"></label>
+                                                </div>
+                                                <span class="text">Check my meeting scheds</span>
+                                                <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
+                                                <div class="tools">
+                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-trash-o"></i>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <span class="handle">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </span>
+                                                <div  class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" value="" name="todo6" id="todoCheck6">
+                                                    <label for="todoCheck6"></label>
+                                                </div>
+                                                <span class="text">Get a fight with my boss</span>
+                                                <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
+                                                <div class="tools">
+                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-trash-o"></i>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-footer clearfix">
+                                        <button type="button" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add item</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
+                <br>
 
             </div>
 

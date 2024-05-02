@@ -1,6 +1,6 @@
     <!-- Restoring Modal -->
     <section class="content">
-        <form action="{{ route('restore_requirementtypes') }}" method="post">
+        <form action="{{ route('admin.restore_requirementtypes') }}" method="post">
             @csrf
             <div class="modal fade" id="modal-xl-restore">
                 <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -26,11 +26,11 @@
                                 <div class="col-md-12 form-group">
                                     {{-- Table body --}}
                                     <div class="card-body p-0">
-                                        <table class="table table-striped">
+                                        <table class="table table-striped" id="myTable1">
                                             <thead class="pal-1 text-col-2">
                                                 <tr>
                                                     <th>Requirement Type</th>
-                                                    <th style="width:40%;">Description</th>
+                                                    <th style="width:40%;">Category</th>
                                                     <th style="width:20%;">Actions</th>
                                                 </tr>
                                             </thead>

@@ -20,14 +20,6 @@
                                          tabindex="1" readonly>
                                  </div>
                              </div>
-                             <div class="row">
-                                 <div class="form-group col-md-12">
-                                     <label>Notes</label>
-                                     <textarea type="text" class="form-control" id="notes" name="notes" placeholder="Description" tabindex="1"
-                                         style="height: 100px;" readonly></textarea>
-                                 </div>
-                             </div>
-
                          </div>
                      </div>
 

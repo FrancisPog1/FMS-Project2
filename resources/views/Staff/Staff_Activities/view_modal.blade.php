@@ -6,7 +6,7 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit New Activity</h4>
+                        <h4 class="modal-title">View Activity</h4>
                         <button type="button" class="close" data-dismiss="modal" id="cancelviewButton"
                             aria-label="Close">
                             <span aria-hidden="true">&times;</span>

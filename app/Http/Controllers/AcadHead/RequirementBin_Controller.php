@@ -9,6 +9,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\RequirementBin;
+use App\Models\RequirementCategory;
 Use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -27,79 +28,34 @@ class RequirementBin_Controller extends Controller
         ->where('is_deleted', true)
         ->get();
 
-        $requirementbins = RequirementBin::where('deleted_at', null)
-        ->where('is_deleted', false)
+        $categories = RequirementCategory::get();
+
+        $requirementbins = DB::table('requirement_bins as bin')
+        ->leftJoin('requirement_categories as cat', 'cat.id', '=' ,'bin.category_id')
+        ->where('bin.deleted_at', '='  , null)
+        ->where('bin.is_deleted', '='  , false)
+        ->select('bin.title as title',
+                    'bin.status as status',
+                    'bin.id as id',
+                    'bin.description as description',
+                    'bin.deadline as deadline',
+                    'cat.title as cat_title')
         ->get();
 
+
         foreach ($requirementbins as $requirementbin) {
-            $requirementbin->start_datetime = Carbon::parse($requirementbin->start_datetime)->format('F d, Y h:i A');
-            $requirementbin->end_datetime = Carbon::parse($requirementbin->end_datetime)->format('F d, Y h:i A');
+            $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
         }
 
         return view('Academic_head/AcadHead_Setup/AcadHead_RequirementBin/AcadHead_RequirementBin',
-        compact('deleted_requirementbins', 'requirementbins'));
-
-    }
-
-    public function filteredAndSortedBin(Request $request){
-        if ($request->ajax()) {
-            $query = RequirementBin::whereNull('deleted_at')
-                ->where('is_deleted', false);
-
-            if ($request->filter_option) {
-                $filterOption = $request->filter_option;
-
-                if ( $filterOption  == 'All') {
-                    $query = $query;
-                }
-                else{
-                    $query->where('status',  $filterOption);
-                }
-            }
-
-            if ($request->sort_option) {
-                $sortOption = $request->sort_option;
-                switch ($sortOption) {
-                    case 'az':
-                        $query->orderBy('title', 'asc');
-                        break;
-                    case 'za':
-                        $query->orderBy('title', 'desc');
-                        break;
-                    case 'newest':
-                        $query->orderBy('deadline', 'desc');
-                        break;
-                    case 'oldest':
-                        $query->orderBy('deadline', 'asc');
-                        break;
-                    case 'All':
-                        $query->orderBy('deadline', 'desc');
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            if ($request->deadline) {
-                $deadline = Carbon::parse($request->deadline)->format('Y-m-d');
-                $query->whereDate('deadline', $deadline);
-            }
-
-            $requirementbins = $query->get();
-
-            foreach ($requirementbins as $requirementbin) {
-                $requirementbin->start_datetime = Carbon::parse($requirementbin->start_datetime)->format('F d, Y h:i A');
-                $requirementbin->end_datetime = Carbon::parse($requirementbin->end_datetime)->format('F d, Y h:i A');
-            }
-
-            return response()->json(['requirementbins' => $requirementbins]);
-        }
+        compact('deleted_requirementbins', 'requirementbins','categories'));
 
     }
 
         // ------------------------THIS ARE THE CODES FOR THE REQUIREMENT ASSIGNEES PAGE-------------------------- //
         public function view_assigned_user($bin_id){
             $assigned_reqrs = DB::table('users')
+            ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
             ->join('user_assigned_to_requirement_bins as user_bins', 'users.id', '=', 'user_bins.assigned_to')
             ->join('requirement_bins as bin', 'bin.id', '=', 'user_bins.requirement_bin_id')
             ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
@@ -107,20 +63,22 @@ class RequirementBin_Controller extends Controller
             ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
                     'user_bins.review_status as review_status',
                     'user_bins.compliance_status as compliance_status',
-                    'user_bins.id as id', 'bin.id as req_bin_id',)
+                    'user_bins.id as id', 'bin.id as req_bin_id',
+                    'users_profiles.first_name', 'users_profiles.last_name')
             ->get();
 
             $requirementbin = DB::table('requirement_bins as bin')
             ->leftJoin('users', 'users.id', '=' ,'bin.created_by')
+            ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'bin.created_by')
             ->where('bin.id', '=', $bin_id)
             ->select('bin.title as bin_title', 'bin.status as bin_status', 'bin.created_by as bin_created_by',
-                'bin.created_at as bin_created_at','bin.description as bin_description', 'bin.start_datetime as bin_start_datetime',
-                'bin.end_datetime as bin_end_datetime', 'users.email as email')
+                'bin.created_at as bin_created_at','bin.description as bin_description',
+                'bin.deadline as bin_deadline',
+                'users_profiles.first_name', 'users_profiles.last_name')
             ->get();
 
             foreach ($requirementbin as $bin) {
-                $bin->bin_start_datetime = Carbon::parse($bin->bin_start_datetime)->format('F d, Y h:i A');
-                $bin->bin_end_datetime = Carbon::parse($bin->bin_end_datetime)->format('F d, Y h:i A');
+                $bin->bin_deadline = Carbon::parse($bin->bin_deadline)->format('F d, Y h:i A');
             }
 
             return view('Academic_head/AcadHead_Setup/AcadHead_RequirementAssignees/AcadHead_RequirementAssignees', compact('assigned_reqrs', 'bin_id', 'requirementbin'));
@@ -131,6 +89,7 @@ class RequirementBin_Controller extends Controller
         {
             if ($request->ajax()) {
                 $query = DB::table('users')
+                    ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
                     ->join('user_assigned_to_requirement_bins', 'users.id', '=', 'user_assigned_to_requirement_bins.assigned_to')
                     ->join('requirement_bins', 'requirement_bins.id', '=', 'user_assigned_to_requirement_bins.requirement_bin_id')
                     ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
@@ -138,7 +97,8 @@ class RequirementBin_Controller extends Controller
                     ->select('users.id as user_id', 'users.email as email', 'roles.title as role_type',
                         'user_assigned_to_requirement_bins.review_status as review_status',
                         'user_assigned_to_requirement_bins.compliance_status as compliance_status',
-                        'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id');
+                        'user_assigned_to_requirement_bins.id as id', 'requirement_bins.id as req_bin_id',
+                        'users_profiles.first_name', 'users_profiles.last_name');
 
                 if ($request->filter_option) {
                     $filterOption = $request->filter_option;
@@ -179,10 +139,10 @@ class RequirementBin_Controller extends Controller
                     $sortOption = $request->sort_option;
                     switch ($sortOption) {
                         case 'az':
-                            $query->orderBy('users.name', 'asc');
+                            $query->orderBy('users_profiles.first_name', 'asc');
                             break;
                         case 'za':
-                            $query->orderBy('users.name', 'desc');
+                            $query->orderBy('users_profiles.first_name', 'desc');
                             break;
                         case 'e_az':
                             $query->orderBy('users.email', 'asc');
@@ -206,9 +166,8 @@ class RequirementBin_Controller extends Controller
             $validator = Validator::make($request->all(), [
                 'title' => 'required|unique:requirement_bins',
                 'description' => 'max:1000000',
-                'start_date' => 'required|date|after_or_equal:today',
-                'end_date' => 'required|date|after_or_equal:today',
-                'status' => 'nullable'
+                'deadline' => 'required|date|after_or_equal:today',
+                'category' => 'required'
             ]);
 
             // Get the ID of the logged in user
@@ -219,28 +178,23 @@ class RequirementBin_Controller extends Controller
             $reqbin->id = Str::uuid()->toString();
             $reqbin->title = $request ->title;
             $reqbin->description = $request ->description;
+            $reqbin->category_id = $request ->category;
 
             //This codes converts the date picker format into datetime format
-            $start_date = trim($request->input('start_date'));
-            $carbon_startDate = Carbon::createFromFormat('Y-m-d\TH:i', $start_date);
-            $formatted_startDate = $carbon_startDate->format('Y-m-d H:i:s');
-            $reqbin->start_datetime = $formatted_startDate;
-
-            //This codes converts the date picker format into datetime format
-            $end_date = trim($request->input('end_date'));
-            $carbon_endDate = Carbon::createFromFormat('Y-m-d\TH:i', $end_date);
-            $formatted_endDate = $carbon_endDate->format('Y-m-d H:i:s');
-            $reqbin->end_datetime = $formatted_endDate;
+            $deadline = trim($request->input('deadline'));
+            $carbon_deadline = Carbon::createFromFormat('Y-m-d\TH:i', $deadline);
+            $formatted_deadline = $carbon_deadline->format('Y-m-d H:i:s');
+            $reqbin->deadline = $formatted_deadline;
 
             $reqbin->created_by =  $userId;
 
             $today= Carbon::today();
-            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
+            if($today->format('Y-m-d H:i:s') <= $formatted_deadline)
             {
                 $reqbin->status = "Ongoing";
             }
             else{
-                $reqbin->status = "Pending";
+                $reqbin->status = "Closed";
             }
 
 
@@ -277,9 +231,10 @@ class RequirementBin_Controller extends Controller
             $validator = Validator::make($request->all(), [
                 'title' => 'required',
                 'description' => 'max:1000000',
-                'start_date' => 'required|date|after_or_equal:today',
-                'end_date' => 'required|date|after_or_equal:today',
-                'status' => 'nullable'
+                'deadline' => 'required|date|after_or_equal:today',
+                'status' => 'nullable',
+                'category' => 'required'
+
             ]);
             // Get the ID of the logged in user
             $userId = Auth::user()->id;
@@ -296,28 +251,22 @@ class RequirementBin_Controller extends Controller
             $req_bin = RequirementBin::findOrFail($id);
             $req_bin->title = $request->input('title');
             $req_bin->description = $request->input('description');
+            $req_bin->category_id = $request->input('category');
 
             //This codes converts the date picker format into datetime format
-            $start_date = trim($request->input('start_date'));
-            $carbon_startDate = Carbon::createFromFormat('Y-m-d\TH:i', $start_date);
-            $formatted_startDate = $carbon_startDate->format('Y-m-d H:i:s');
-            $req_bin->start_datetime = $formatted_startDate;
-
-            //This codes converts the date picker format into datetime format
-            $end_date = trim($request->input('end_date'));
-            $carbon_endDate = Carbon::createFromFormat('Y-m-d\TH:i', $end_date);
-            $formatted_endDate = $carbon_endDate->format('Y-m-d H:i:s');
-            $req_bin->end_datetime = $formatted_endDate;
+            $deadlines = trim($request->input('deadline'));
+            $carbon_deadline = Carbon::createFromFormat('Y-m-d\TH:i', $deadlines);
+            $formatted_deadline = $carbon_deadline->format('Y-m-d H:i:s');
+            $req_bin->deadline = $formatted_deadline;
 
             $req_bin->updated_by =  $userId;
-
             $today= Carbon::today();
-            if($formatted_startDate <= $today->format('Y-m-d H:i:s'))
+            if($today->format('Y-m-d H:i:s') <= $formatted_deadline)
             {
-                 $req_bin->status = "Ongoing";
+                $req_bin->status = "Ongoing";
             }
             else{
-                 $req_bin->status = "Pending";
+                $req_bin->status = "Closed";
             }
 
             if($validator->fails()){

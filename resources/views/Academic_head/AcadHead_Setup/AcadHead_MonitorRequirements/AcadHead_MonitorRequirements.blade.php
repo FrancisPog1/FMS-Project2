@@ -26,9 +26,6 @@
             @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/monitor_reqs_dataTable')
 
 
-            {{-- Validate Modal --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/validate_modal')
-
             {{-- Display File Modal --}}
             @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/file_modal')
 

@@ -1,5 +1,5 @@
 <section class="content">
-    <form id='create_type' action="{{ route('Create_RequirementType') }}" method="post">
+    <form id='create_type' action="{{ route('admin.requirement_types.store') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered">
@@ -19,6 +19,19 @@
                                         placeholder="Title" tabindex="1" required="">
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="required-input">Requirement Category</label>
+                                    <select id="category" name="category" class="form-control select2">
+                                        <option disabled selected>Select a requirement category</option>
+                                        @foreach ($categories as $category)
+                                            <option value=" {{ $category->id }} ">{{ $category->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label>Description</label>

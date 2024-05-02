@@ -1,6 +1,6 @@
         <!-- Assigning Modal -->
         <section class="content">
-            <form id="assign" action="{{ route('Assign_Requirement', $bin_id) }}" method="post">
+            <form id="assign" action="{{ route('admin.assign_requirement', $bin_id) }}" method="post">
                 @csrf
                 <div class="modal fade" id="modal-xl-assign">
                     <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -32,13 +32,10 @@
                                         <div class="col-6">
                                             {{-- Search bar --}}
                                             <div class="input-group">
-                                                <input type="search" class="form-control"
-                                                    placeholder="Search a user" />
-                                                <span class="input-group-append">
-                                                    <button class="btn btn-outline-secondary" type="button">
-                                                        <i class="fas fa-search"></i>
-                                                    </button>
-                                                </span>
+                                                <form class="d-flex">
+                                                    <input class="form-control me-2 rounded-lg" type="search" placeholder="Search a user" aria-label="Search">
+                                                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                                                </form>
                                             </div>
                                         </div>
                                         {{-- Check all button --}}
@@ -68,9 +65,7 @@
                                                                     <input type="checkbox" class="form-check-input"
                                                                         id="check" name="users[]"
                                                                         value="{{ $user->id }}">
-                                                                    <label class="form-check-label" for="check">
-                                                                        Faculty
-                                                                        1</label>
+                                                                    <label class="form-check-label" for="check">  {{$user->first_name}} {{$user->last_name}}</label>
                                                                 </div>
 
                                                             </td>

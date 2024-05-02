@@ -8,12 +8,11 @@
 
 
 <script>
-    function openViewModal(type, notes) {
+    function openViewModal(type) {
         // Set the values in the form fields
 
         // Set the value of the `type` element in the `editForm` form to the selected value
         document.getElementById('viewForm').elements['type'].value = type;
-        document.getElementById('viewForm').elements['notes'].value = notes;
 
         // Open the edit modal
         $('#modal-xl-view').modal('show');

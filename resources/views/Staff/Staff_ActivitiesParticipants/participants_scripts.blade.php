@@ -22,7 +22,7 @@
 
 <script>
     $(document).ready(function() {
-        var filteredUsersUrl = "{{ route('staff_filtered_users') }}";
+        var filteredUsersUrl = "{{ route('staff.filtered_users') }}";
         $("#types").on('change', function() {
             var types = $(this).val();
             // alert('Hello fuck');
@@ -45,7 +45,7 @@
                                         <td>\
                                             <div class="ml-3">\
                                                 <input type="checkbox" class="form-check-input" id="check" name="users[]" value="' + users[i]['id'] + '">\
-                                                <label class="form-check-label" for="check">Faculty 1</label>\
+                                                <label class="form-check-label" for="check">' + users[i]['first_name'] + " " + users[i]['last_name'] +'</label>\
                                             </div>\
                                         </td>\
                                         <td>' + users[i]['email'] + '</td>\
@@ -97,11 +97,13 @@
         form.submit();
     }
 
-    function localWarning(event) {
-        event.preventDefault();
+
+    $(document).on('click', '.remove-button', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
         var participant_id = this.getAttribute("name");
-        var action = "{{ route('staff_remove_participants', '') }}" + participant_id; // Replace with the actual delete route
+        var route = "{{ route('staff.remove_participants', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', participant_id);
 
         Swal.fire({
             title: "Are you sure?",
@@ -120,35 +122,5 @@
                 createDeleteForm(action, participant_id);
             }
         });
-    }
-    // const button = document.querySelector('.remove-button');
-    // button.addEventListener('click', localWarning);
-
-    const deleteButtons = document.querySelectorAll('.remove-button');
-    deleteButtons.forEach((removebutton) => {
-    removebutton.addEventListener('click', localWarning);
     });
-
-
-    document.getElementById('show-modal-logout').addEventListener('click', function () {
-    Swal.fire({
-        title: 'Are you sure?',
-        icon: 'info',
-        html:
-            'Do you want to <b>Log Out</b>?',
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Yes',
-        confirmButtonColor: '#3085d6',
-        confirmButtonAriaLabel: '...',
-        cancelButtonColor: '#d33',
-        cancelButtonAriaLabel: '...'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.replace("logout");
-        }
-    })
-});
-
 </script>

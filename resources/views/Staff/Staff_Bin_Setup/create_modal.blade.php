@@ -1,93 +1,67 @@
-        <!-- Create Modal -->
-        <section class="content">
-            <form action="{{ route('staff_setup_requirementbin', $bin_id) }}" method="post">
-                @csrf
-                <div class="modal fade" id="modal-xl-create">
-                    <div class="modal-dialog modal-dialog-centered modal-l">
-                        <div class="modal-content">
+<!-- Assigning Modal -->
+    <section class="content">
+        <form action="{{ route('staff.setup_requirementbin.store', $bin_id) }}" method="post">
+            @csrf
+            <div class="modal fade" id="modal-xl-create">
+                <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
+                    <div class="modal-content">
 
-                            <div class="modal-header">
-                                <h4 class="modal-title">Create Requirement</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add requirements</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
 
-                            <div class="modal-body">
-                                <div class="card-body">
-                                    <div class="row justify-content-between p-6">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="required-input">Requirement Type</label>
-                                                <select id="type" name="type"
-                                                    class="form-control form-control-md">
-                                                    <option disabled selected>List of Requirement type/s</option>
-                                                    @foreach ($requirementtypes as $types)
-                                                        <option value="{{ $types->id }}">{{ $types->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Notes</label>
-                                                <textarea type="text" class="form-control" id="notes" name="notes" placeholder="Notes" tabindex="1"
-                                                    style="height: 100px;"></textarea>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="row">
-                                            <div class="form-group ml-3">
-                                                <label>Please select acceptable file format:</label>
-                                                <div class="row ml-4" id="checkbox_containter">
-                                                    <div class="form-group col">
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="checkbox-0_0">
-                                                        <label class="form-check-label" for="checkbox-0_0">.PDF</label>
+                        <div class="modal-body card-body">
 
-                                                        <br>
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="checkbox-0_0">
-                                                        <label class="form-check-label"
-                                                            for="checkbox-0_0">.DOC/DOCX</label>
+                            <div class="row justify-content-between">
 
-                                                        <br>
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="checkbox-0_0">
-                                                        <label class="form-check-label"
-                                                            for="checkbox-0_0">.PPT/PPTX</label>
-                                                    </div>
-                                                    <div class="form-group col">
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="checkbox-0_0">
-                                                        <label class="form-check-label"
-                                                            for="checkbox-0_0">.JPG/JPEG</label>
+                                <div class="col-md-12 form-group">
+                                    {{-- Table body --}}
+                                    <div class="card-body p-0">
+                                        <table class="table table-striped" id="myTable1">
+                                            <thead class="pal-1 text-col-2">
+                                                <tr>
+                                                    <th><input type="checkbox" class="check-all-assign" id="check-all-add">
+                                                    </th>
 
-                                                        <br>
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="checkbox-0_0">
-                                                        <label class="form-check-label" for="checkbox-0_0">.PNG</label>
+                                                    <th style="width:60%;">Requirement Types</th>
+                                                    <th style="width:30%;">Category</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($requirementtypes as $type)
+                                                    <tr>
+                                                        <td><input type="checkbox"
+                                                            id="check" name="types[]"
+                                                            value="{{ $type->id }}">
+                                                        </td>
+                                                        <td>{{ $type->title }}</td>
+                                                        <td>{{ $type->category }}</td>
 
-                                                        <br>
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="checkbox-0_0">
-                                                        <label class="form-check-label"
-                                                            for="checkbox-0_0">.XLS/XLSX</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-outline-danger"
-                                    data-dismiss="modal">Close</button>
-                                <button type="submit"
-                                    class="btn btn-outline-success swalDefaultSuccess">Create</button>
                             </div>
                         </div>
-                        <!-- /.modal-content -->
+
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-outline-danger"
+                                data-dismiss="modal">Close</button>
+                            <button type="submit" {{-- Should have a modal for success assign in this element --}}
+                                class="btn btn-outline-success swalDefaultSuccess">Add</button>
+                        </div>
                     </div>
-                    <!-- /.modal-dialog -->
+                    <!-- /.modal-content -->
                 </div>
-            </form>
-        </section>
+                <!-- /.modal-dialog -->
+            </div>
+        </form>
+    </section>
+
+

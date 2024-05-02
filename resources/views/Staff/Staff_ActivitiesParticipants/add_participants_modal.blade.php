@@ -1,6 +1,6 @@
         <!-- Assigning Modal -->
         <section class="content">
-            <form id="assign" action="{{ route('staff_add_participants', $activity_id) }}" method="post">
+            <form id="assign" action="{{ route('staff.participants.store', $activity_id) }}" method="post">
                 @csrf
                 <div class="modal fade" id="modal-xl-add-participants">
                     <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -69,9 +69,7 @@
                                                                     <input type="checkbox" class="form-check-input"
                                                                         id="check" name="users[]"
                                                                         value="{{ $user->id }}">
-                                                                    <label class="form-check-label" for="check">
-                                                                        Faculty
-                                                                        1</label>
+                                                                    <label class="form-check-label" for="check"> {{ $user->first_name }}  {{ $user->last_name }}</label>
                                                                 </div>
 
                                                             </td>

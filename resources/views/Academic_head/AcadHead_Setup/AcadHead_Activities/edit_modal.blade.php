@@ -1,6 +1,6 @@
    <!--Edit Modal-->
    <section class="content">
-       <form id="editForm-{{$activity->id}}" action="{{ route('update_activities', $activity->id) }}" method="post">
+       <form id="editForm-{{$activity->id}}" action="{{ route('admin.update_activities', $activity->id) }}" method="post">
            @method('PUT')
            @csrf
            <div class="modal fade" id="modal-xl-edit-{{ $activity->id }}">
@@ -45,13 +45,6 @@
                                    </div>
                                </div>
 
-                               <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label>Agenda</label>
-                                    <textarea type="text" class="form-control" id="edit-agenda-{{$activity->id}}" name="agenda"
-                                        tabindex="1" style="height: 100px;">{{ $activity->agenda }}</textarea>
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="form-group col-md-12">

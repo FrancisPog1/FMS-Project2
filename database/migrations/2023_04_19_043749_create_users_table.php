@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->string('status')->default('Inactive');
-            $table->boolean('is_deleted')->default(false);
+            $table->string('status')->default('Offline');
+            $table->boolean('isDeactivated')->nullable()->default(false);
         });
     }
 

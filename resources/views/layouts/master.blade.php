@@ -27,11 +27,16 @@
     {{-- LEFT NAVBAR --}}
     @include('NavigationBar.AcadHead_Navbars.Left_NavBar')
 
+    {{-- CONTENT OF THE PAGE --}}
     @yield('content')
+
+    {{-- MODAL CONTENTS --}}
+    @yield('modal_content')
 
     {{-- BODY JS DEPENDENCIES --}}
     @include('layouts.Dependencies.BODY_JS_dependencies')
 
-
+    {{-- JS CONTENTS --}}
+    @yield('js_content')
 </body>
 </html>

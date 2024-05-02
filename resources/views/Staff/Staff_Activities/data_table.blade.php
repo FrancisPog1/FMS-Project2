@@ -20,44 +20,9 @@
                 </div>
             </div>
 
-            {{-- CODE FOR THE FILTERING --}}
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="card-title ml-4 mt-1 row-cols-2" style="font-size: .95rem;">Show entries</p>
-                        <select name="dataTable_length" aria-controls="dataTable"
-                            class="ml-5 col-1 custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <div class="mr-2">
-                            <select name="status" id="status" class="form-control">
-                                <option value="all">All</option>
-                                <option value="open">Open</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="completed">Completed</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select name="department" id="department" class="form-control">
-                                <option value="all">All</option>
-                                <option value="department-1">Department 1</option>
-                                <option value="department-2">Department 2</option>
-                                <option value="department-3">Department 3</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
             <!-- Tables of roles -->
             <div class="card-body p-0">
-                <table class="table table-striped">
+                <table class="table table-striped" id="myTable">
                     <thead class="pal-1 text-col-2">
                         <tr>
                             <th style="width: 28%;">Title</th>
@@ -85,17 +50,17 @@
                                 </td>
 
                                 <td class="text-sm-center">
-                                    <form method="POST" action="{{ route('staff_delete_activity', $activity->id) }}">
+                                    <form method="POST" action="{{ route('staff.delete_activity', $activity->id) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
 
-                                        <a href="{{ route('staff_activities_participants', $activity->id)}}"
+                                        <a href="{{ route('staff.activity_participants.show', $activity->id)}}"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             <i class="far fa-eye"></i>
                                         </a>
 
                                         <button data-toggle="modal" type="button" data-target="#modal-xl-edit-{{$activity->id}}"
-                                            onclick="editDescription('#edit-description-{{$activity->id}}', '#edit-agenda-{{$activity->id}}'), editModal('{{ $activity->id }}')"
+                                            onclick="editDescription('#edit-description-{{$activity->id}}'), editModal('{{ $activity->id }}')"
                                             class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300 edit-button">
                                             <i class="far fa-edit"></i>
                                         </button>
@@ -114,13 +79,6 @@
 
                         @endforeach
                     </tbody>
-                    <tfoot>
-                        <td class="dataTables_info text-col-1" id="dataTable_info" role="status" aria-live="polite"
-                            colspan="12" style="font-size: .9rem;">
-                            Showing x to x of x entries
-                        </td>
-                    </tfoot>
-
                 </table>
             </div>
         </div>

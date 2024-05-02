@@ -7,9 +7,7 @@
     <body class="hold-transition sidebar-mini layout-fixed">
 
         <div class="wrapper">
-
-
-            <!-- Content Wrapper. Outer Container -->
+            {{-- <!-- Content Wrapper. Outer Container -->
             <div class="content-wrapper">
 
                 <!-- Content Header (Page header) -->
@@ -256,6 +254,30 @@
 
                 </section>
 
+            </div>
+            --}}
+
+            <!-- Content Wrapper. Outer Container -->
+            <div class="content-wrapper">
+
+                <!-- Main content -->
+                <section class="content" style="padding-top: 15rem;">
+                <div class="error-page">
+                    <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                    <div class="error-content">
+                        <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                        <p>
+                        Unfortunately, we could not display this page yet.
+                            <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                        </p>
+                    </div>
+                    <!-- /.error-content -->
+                </div>
+                <!-- /.error-page -->
+                </section>
+                <!-- /.content -->
             </div>
 
             <!-- Footer Container -->

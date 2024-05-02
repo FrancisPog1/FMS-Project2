@@ -23,27 +23,28 @@ return new class extends Migration
 
             // Fillables
             $table->string('image')->nullable();
-            $table->string('salutation')->nullable();
-            $table->string('first_name');
+            $table->string('extension_name')->nullable();
+            $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('last_name');
-            $table->string('gender');
-            $table->string('birthdate');
-            $table->string('birthplace');
-            $table->string('hire_date');
-            $table->string('phone_number');
-            $table->string('province');
-            $table->string('city');
-            $table->string('barangay');
-            $table->string('street');
-            $table->string('house_number');
+            $table->string('last_name')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('birthdate')->nullable();
+            $table->string('birthplace')->nullable();
+            $table->string('hire_date')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
+            $table->string('barangay')->nullable();
+            $table->string('street')->nullable();
+            $table->string('house_number')->nullable();
 
             // Relationship sample
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignUuid('faculty_type_id')->constrained('faculty_types')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignUuid('academic_rank_id')->constrained('academic_ranks')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignUuid('designation_id')->constrained('designations')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignUuid('specialization_id')->constrained('specializations')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignUuid('faculty_type_id')->nullable()->constrained('faculty_types')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignUuid('academic_rank_id')->nullable()->constrained('academic_ranks')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignUuid('designation_id')->nullable()->constrained('designations')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignUuid('specialization_id')->nullable()->constrained('specializations')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

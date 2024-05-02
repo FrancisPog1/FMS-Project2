@@ -4,11 +4,9 @@
     // To upload
 </script>
 
-{{-- <script>
-            new Dropzone("#reqs-upload", {
-                thumbnailWidth: 200,
-                maxFilesize: 1,
-                addRemoveLinks: true,
-                acceptedFiles: ".pdf,.xls,.xml,.doc,.docx"
-            });
-        </script> --}}
+<style>
+    /* Custom CSS for smaller font size in table headers */
+    .small-font {
+        font-size: 13px; /* Adjust the font size as per your requirement */
+    }
+</style>

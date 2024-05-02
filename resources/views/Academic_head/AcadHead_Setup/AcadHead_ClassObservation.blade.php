@@ -17,43 +17,40 @@
 @section('content')
 
 
-        <div class="wrapper">
+    <div class="wrapper">
 
+        {{-- <!-- Content Wrapper. Outer Container -->
+        <div class="content-wrapper">
 
-
-            <!-- Content Wrapper. Outer Container -->
-            <div class="content-wrapper">
-
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row-col-sm-6 mb-2">
-                            <div class="col-md-3 ml-4">
-                                <h1 class="m-0">Observations</h1>
-                            </div>
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row-col-sm-6 mb-2">
+                        <div class="col-md-3 ml-4">
+                            <h1 class="m-0">Observations</h1>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- Main content -->
+            <section class="container">
+                <div class="mr-5 ml-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
 
-                <!-- Main content -->
-                <section class="container">
-                    <div class="mr-5 ml-5">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
+                                <div class="form-group row">
 
-                                    <div class="form-group row">
-
-                                        <label for="datetimepicker">Select a date and time:</label>
-                                        <div class="input-group date" id="datetimepicker" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker"/>
-                                            <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
+                                    <label for="datetimepicker">Select a date and time:</label>
+                                    <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker"/>
+                                        <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
                                     </div>
-
                                 </div>
+
+                            </div>
 
                             <!-- Search function --->
                             <div class="text-right">
@@ -157,8 +154,28 @@
                     </div>
                 </div>
             </section>
+        </div>
+        --}}
 
+        <!-- Content Wrapper. Outer Container -->
+        <div class="content-wrapper">
 
+            <!-- Main content -->
+            <section class="content" style="padding-top: 15rem;">
+                <div class="error-page">
+                    <h2 class="headline" style="color: #800000 !important;">:(</h2>
+
+                    <div class="error-content">
+                        <h3><i class="fas fa-exclamation-triangle text-warning"></i>   This page is in development</h3>
+
+                        <p>
+                        Unfortunately, we could not display this page yet.
+                            <br>Meanwhile, you may <a href="/AcadHead_Dashboard" class="text-pal-1">return to dashboard for now.</a> <br>Thank you for understanding.
+                        </p>
+                    </div>
+                    <!-- /.error-content -->
+                </div>
+            </section>
         </div>
 
         <!-- Footer Container -->

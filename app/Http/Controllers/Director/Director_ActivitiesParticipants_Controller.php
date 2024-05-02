@@ -24,34 +24,38 @@ class Director_ActivitiesParticipants_Controller extends Controller
         $participants = DB::table('activities')
         ->join('activity_participants', 'activity_participants.activity_id',  '=', 'activities.id')
         ->join('users', 'users.id', '=', 'activity_participants.participant_id')
+        ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
         ->where('activity_participants.activity_id', '=', $activity_id)
-        ->select('users.email', 'roles.title as role', 'activity_participants.id as id')
+        ->select('users.email', 'roles.title as role', 'activity_participants.id as id',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
-        $activities = DB::table('activities')
-        ->join('users', 'users.id', '=', 'activities.created_by')
+        $detail = DB::table('activities')
+        ->leftJoin('users', 'users.id', '=', 'activities.created_by')
+        ->leftjoin('activity_participants', 'activity_participants.activity_id',  '=', 'activities.id')
+        ->leftJoin('users_profiles as UP', 'UP.user_id', '=', 'activities.created_by')
         ->join('activity_types', 'activity_types.id', '=', 'activities.activity_type_id')
         ->where('activities.id', '=', $activity_id)
         ->select('activities.created_at'
                 , 'activities.created_by'
                 , 'activities.location'
                 , 'activities.description'
-                , 'activities.agenda'
                 , 'activities.status'
                 , 'activities.start_datetime'
                 , 'activities.end_datetime'
                 , 'activity_types.title as type'
                 , 'activities.title'
-                , 'users.email'
+                , 'UP.first_name'
+                , 'UP.last_name'
                 )
-        ->get();
+        ->first();
 
-        foreach ($activities as $activity) {
-            $activity->start_datetime = Carbon::parse($activity->start_datetime)->format('F d, Y h:i A');
-            $activity->end_datetime = Carbon::parse($activity->end_datetime)->format('F d, Y h:i A');
-            $activity->created_at = Carbon::parse($activity->created_at)->format('F d, Y h:i A');
-        }
+
+            $detail->start_datetime = Carbon::parse($detail->start_datetime)->format('F d, Y h:i A');
+            $detail->end_datetime = Carbon::parse($detail->end_datetime)->format('F d, Y h:i A');
+            $detail->created_at = Carbon::parse($detail->created_at)->format('F d, Y h:i A');
+
 
         $roles = DB::table('roles')->get();
 
@@ -61,7 +65,7 @@ class Director_ActivitiesParticipants_Controller extends Controller
         ->get();
 
         return view('Director/Director_ActivitiesParticipants/Director_ActivitiesParticipants',
-        compact('participants', 'roles', 'users', 'activity_id', 'activities'));
+        compact('participants', 'roles', 'users', 'activity_id', 'detail'));
 
     }
 

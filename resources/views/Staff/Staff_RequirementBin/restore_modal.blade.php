@@ -1,6 +1,6 @@
     <!-- Restoring Modal -->
     <section class="content">
-        <form action="{{ route('staff_restore_requirementbin') }}" method="post">
+        <form action="{{ route('staff.restore_requirementbin') }}" method="post">
             @csrf
             <div class="modal fade" id="modal-xl-restore">
                 <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -16,7 +16,6 @@
                         <div class="modal-body card-body">
 
                             <div class="row justify-content-between">
-
                                 {{-- Check all button --}}
                                 <div class="ml-2 mt-2">
                                     <label for="check-all-restore">Select/unselect all options: </label>
@@ -26,7 +25,7 @@
                                 <div class="col-md-12 form-group">
                                     {{-- Table body --}}
                                     <div class="card-body p-0">
-                                        <table class="table table-striped">
+                                        <table class="table table-striped" id="myTable1">
                                             <thead class="pal-1 text-col-2">
                                                 <tr>
                                                     <th>Requirement Bin</th>

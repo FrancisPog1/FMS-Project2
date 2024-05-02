@@ -1,6 +1,6 @@
 <!--Edit Modal-->
 <section class="content">
-    <form id="editForm-{{$requirementbin->id}}" action="{{ route('update_requirementbins', $requirementbin->id) }}"  method="post">
+    <form id="editForm-{{$requirementbin->id}}" action=""  method="post">
         @method('PUT')
         @csrf
         <div class="modal fade" id="modal-xl-edit-{{$requirementbin->id}}">
@@ -14,6 +14,19 @@
                     </div>
                     <div class="modal-body" style="height: 500px; overflow:auto;">
                         <div class="card-body">
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="required-input">Requirement Category</label>
+                                    <select id="category" name="category" class="form-control select2">
+                                        <option disabled selected>Select a requirement category</option>
+                                        @foreach ($categories as $category)
+                                            <option value=" {{ $category->id }} ">{{ $category->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label class="required-input">Title</label>
@@ -21,6 +34,8 @@
                                         placeholder="Title" tabindex="1" required="">
                                 </div>
                             </div>
+
+
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label>Description</label>
@@ -31,20 +46,12 @@
 
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="required-input">Starting date</label>
-                                    <input type="datetime-local" class="form-control" id="start_date" name="start_date"
+                                    <label class="required-input">Deadline</label>
+                                    <input type="datetime-local" class="form-control" id="deadline" name="deadline"
                                         tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
                                         min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
 
                                 </div>
-
-                                <div class="form-group col-md-6">
-                                     <label class="required-input">Ending date</label>
-                                     <input type="datetime-local" class="form-control" id="end_date" name="end_date"
-                                         tabindex="1" value="{{ date('Y-m-d 00:00:00') }}"
-                                         min="{{ date('Y-m-d 00:01:00') }}" data-parsley-excluded="true">
-
-                                 </div>
                             </div>
 
                         </div>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users_files', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreignUuid('uploaded_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignUuid('requirement_id')->nullable()->constrained('user_upload_requirements')->onDelete('cascade')->onUpdate('cascade');
             $table->string('file_name');

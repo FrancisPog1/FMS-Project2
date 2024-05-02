@@ -1,6 +1,6 @@
 <!--Create Modal-->
 <section class="content">
-    <form id="createForm" action="{{ route('staff_create_activities') }}" method="post">
+    <form id="createForm" action="{{ route('staff.activities.store') }}" method="post">
         @csrf
         <div class="modal fade" id="modal-xl-create">
             <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -39,13 +39,6 @@
                                     <label>Description</label>
                                     <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"
                                         tabindex="1" style="height: 100px;"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label>Agenda</label>
-                                    <textarea type="text" class="form-control" id="agenda" name="agenda"></textarea>
                                 </div>
                             </div>
 

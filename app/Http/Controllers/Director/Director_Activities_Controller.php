@@ -33,9 +33,15 @@ class Director_Activities_Controller extends Controller
         ->join('activity_types', 'activities.activity_type_id', '=', 'activity_types.id')
         ->where('activities.is_deleted', false)
         ->where('activities.deleted_at', null)
-        ->select('activities.title', 'activities.start_datetime', 'activities.status', 'activities.end_datetime',
-            'activity_types.title as type_title', 'activities.description', 'activities.location', 'activities.agenda','activities.id',
-            'activity_types.id as type')
+        ->select('activities.title',
+                'activities.start_datetime',
+                'activities.status',
+                'activities.end_datetime',
+                'activity_types.title as type_title',
+                'activities.description',
+                'activities.location',
+                'activities.id',
+                'activity_types.id as type')
         ->get();
 
         // Convert start_datetime and end_datetime to the desired format

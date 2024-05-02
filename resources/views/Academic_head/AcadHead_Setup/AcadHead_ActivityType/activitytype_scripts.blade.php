@@ -19,7 +19,7 @@
 
                 jQuery.ajax({
                     type: 'post',
-                    url: "{{ route('update_activitytypes', '') }}" + typeId,
+                    url: "{{ route('admin.update_activitytypes', '') }}" + typeId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -108,7 +108,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('Create_ActivityType') }}",
+                url: "{{ route('admin.activity_types.store') }}",
                 data: jQuery('#create_type').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -188,7 +188,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_activitytypes', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_activitytypes', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -232,77 +233,6 @@
             if (!$(this).prop("checked")) {
                 $("#check-all-restore").prop("checked", false);
             }
-        });
-    });
-</script>
-
-
-
-{{-- AJAX SCRIPT FOR SORTING --}}
-<script>
-    $(document).ready(function() {
-        var filteredAndSortedTypeUrl = "{{ route('filtered_and_sorted_activitytypes') }}";
-
-        $("#filter, #sort").on('change', function() {
-            var filterOption = $("#filter").val();
-            var sortOption = $("#sort").val();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajax({
-                url: filteredAndSortedTypeUrl,
-                type: "GET",
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                data: {
-                    'filter_option': filterOption,
-                    'sort_option': sortOption
-                },
-                success: function(data) {
-                    var types = data.types;
-                    var html = '';
-                    var deleteTypeRoute = "{{ route('delete_activitytypes', ':type_id') }}";
-
-                    if (types.length > 0) {
-                        for (let i = 0; i < types.length; i++) {
-                            html += '<tr>' +
-                                '<td>' + types[i]['title'] + '</td>' +
-                                '<td>' + types[i]['description'] + '</td>' +
-                                '<td>' + types[i]['category'] + '</td>' +
-                                ' <td class="text-center">' +
-                                    '<form method="POST" action=" '+ deleteTypeRoute.replace(':type_id', types[i]['id']) +' ">' +
-                                        '@csrf' +
-                                        ' <input name="_method" type="hidden" value="DELETE">' +
-                                        '<button data-toggle="modal"' +
-                                            'onclick="openViewModal(' +"'"+ types[i]['title'] + "', '" + types[i]['description'] + "', '" +  types[i]['category'] + "' " +')" ' +
-                                            ' data-target="#modal-xl-view" type="button"' +
-                                            'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
-                                            '  <i class="far fa-eye"></i>' +
-                                    '   </button>' +
-                                        '<button type="button"' +
-                                            ' onclick="openEditModal(' +" ' "+ types[i]['title'] + " ' " + ", '" + types[i]['description'] + " ' " + ", '" +  types[i]['category'] + "', '" + types[i]['id'] + "' " + ' )" ' +
-                                            'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
-                                            ' <i class="far fa-edit"></i>' +
-                                        '</button>' +
-                                        '  <button type="button"' +
-                                            '  class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
-                                            ' title="Delete">' +
-                                            '  <i class="far fa-trash-alt"></i>' +
-                                        '</button>' +
-                                    '</form>' +
-                                '  </td>' +
-                            ' </tr>';
-                        }
-                    } else {
-                        html += '<tr><td colspan="4"> No Records </td></tr>';
-                    }
-
-                    $('#filtered-types').html(html);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
         });
     });
 </script>

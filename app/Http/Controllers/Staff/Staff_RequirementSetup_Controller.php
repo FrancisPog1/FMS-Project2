@@ -25,30 +25,46 @@ class Staff_RequirementSetup_Controller extends Controller
 {
 
     public function show(Request $request, $bin_id){
-        $requirementtypes = DB::table('requirement_types')->get();
+        $requirementtypes = DB::table('requirement_types')
+        ->join('requirement_categories as RC', 'RC.id', '=', 'requirement_types.category_id')
+        ->join('requirement_bins', 'requirement_bins.category_id', '=', 'RC.id')
+        ->leftJoin('requirement_bin_contents', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
+        ->whereNull('requirement_bin_contents.foreign_requirement_types_id')
+        ->where('requirement_bins.id', '=', $bin_id)
+        ->select('requirement_types.title as title',  'requirement_types.id as id', 'RC.title as category')
+        ->get();
+
+
         $requirement_bin = RequirementBin::where('id', $bin_id)->first();
         $roles = DB::table('roles')->get();
 
         $requirements = DB::table('requirement_bin_contents')
         ->join('requirement_types', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
         ->join('requirement_bins', 'requirement_bin_contents.foreign_requirement_bins_id', '=', 'requirement_bins.id')
+        ->join('requirement_categories as RC', 'RC.id', '=', 'requirement_bins.category_id')
         ->where('requirement_bins.id', '=', $bin_id)
         ->where('requirement_bin_contents.is_deleted', '=', false)
-                ->select('requirement_types.title as title', 'requirement_bin_contents.notes as note',
-                'requirement_bin_contents.file_format as file_format', 'requirement_bin_contents.id as id',
-                'requirement_bin_contents.foreign_requirement_types_id as typeId')
+                ->select('requirement_types.title as title', 'requirement_bin_contents.id as id',
+                'requirement_bin_contents.foreign_requirement_types_id as typeId',
+                'RC.title as category')
         ->get();
+
 
         $deleted_requirements = DB::table('requirement_bin_contents')
         ->join('requirement_types', 'requirement_bin_contents.foreign_requirement_types_id', '=', 'requirement_types.id')
+        ->join('requirement_categories as RC', 'RC.id', '=', 'requirement_types.category_id')
+        ->join('requirement_bins', 'requirement_bins.category_id', '=', 'RC.id')
         ->where('requirement_bin_contents.is_deleted', '=', true)
-                ->select('requirement_types.title as title', 'requirement_bin_contents.file_format as file_format',
-                'requirement_bin_contents.id as id')
+        ->where('requirement_bins.id', '=', $bin_id)
+                ->select('requirement_types.title as title',
+                'requirement_bin_contents.id as id', 'RC.title as category')
         ->get();
 
         $users = DB::table('users')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as role', 'users.email', 'users.status', 'users.id')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
+        ->select('roles.title as role', 'users.email', 'users.status', 'users.id',
+                'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         return view('Staff/Staff_Bin_Setup/Staff_Bin_Setup',
@@ -62,17 +78,21 @@ class Staff_RequirementSetup_Controller extends Controller
             if($request->types == 'All')
             {
                  $users = DB::table('users')
+                 ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
                 ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
+                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id',
+                'users_profiles.first_name', 'users_profiles.last_name')
                 ->get();
             }
 
             else
             {
                 $users = DB::table('users')
+                ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
                 ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
                 ->where('roles.id', '=', $request->types)
-                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id')
+                ->select('roles.title as role', 'users.email as email', 'users.status', 'users.id as id',
+                'users_profiles.first_name', 'users_profiles.last_name')
                 ->get();
             }
 
@@ -88,29 +108,32 @@ class Staff_RequirementSetup_Controller extends Controller
         /**Codes to validate the input fields of the registration page */
 
         $request->validate([
-            'type'=>'required',
-            'notes'=>'max:300'
+            'types'=>'required',
         ]);
         try
         {
             // Get the ID of the logged in user
             $userId = Auth::user()->id;
+            $types = $request->input('types');
 
-            /**Codes to get the contents of the input field and save it to the database */
-            $bin_setup = new RequirementBinContent();
-            $bin_setup->id = Str::uuid()->toString();
-            $bin_setup->foreign_requirement_types_id = $request->type;
-            $bin_setup->foreign_requirement_bins_id = $bin_id;
-            $bin_setup->notes = $request ->notes;
-            $bin_setup->created_by =  $userId;
-            $res = $bin_setup->save();
+            if ($types != null)
+            {
+                foreach( $types as $type_id ) {
+                    /**Codes to get the contents of the input field and save it to the database */
+                    $bin_setup = new RequirementBinContent();
+                    $bin_setup->id = Str::uuid()->toString();
+                    $bin_setup->foreign_requirement_types_id = $type_id;
+                    $bin_setup->foreign_requirement_bins_id = $bin_id;
+                    $bin_setup->created_by =  $userId;
+                    $res = $bin_setup->save();
+                }
+                return back()->with('success', 'Requirements added successfully!'); /**Alert Message */
+            }
 
-            if($res){
-                return back()->with('success', 'You have Added Requirement!'); /**Alert Message */
+            else
+            {    return back()->with('error', "You didn't selected any of the requirement to add."); /**Alert Message */
             }
-            else{
-                return back()->with('fail', 'Something went Wrong');
-            }
+
         }
 
         catch (QueryException $e) {
@@ -123,6 +146,7 @@ class Staff_RequirementSetup_Controller extends Controller
             throw $e;
         }
     }
+
     //SOFT DELETE Requiremnts
     public function deleteRequirement($id)
     {   // Find the role by its ID
@@ -147,7 +171,6 @@ class Staff_RequirementSetup_Controller extends Controller
         /**Codes to get the contents of the input field and save it to the database */
         $bin_content = RequirementBinContent::find($id);
         $bin_content->foreign_requirement_types_id = $request->type;
-        $bin_content->notes = $request ->notes;
         $bin_content->updated_by =  $userId;
         $res = $bin_content->save();
 

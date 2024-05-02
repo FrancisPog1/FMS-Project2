@@ -416,8 +416,7 @@
 
                             <form action="{{ route('login_user') }}" method="post">
                                 @csrf
-                                <input id="email" type="email"
-                                    class="form-control
+                                <input id="email" type="email" class="form-control
                                         mb-2" name="email"
                                     placeholder="Email" :value="old('email')" required autofocus
                                     autocomplete="username">
@@ -427,28 +426,29 @@
                                     placeholder="Password" required autocomplete="current-password">
 
 
-                                <div class="block mt-4">
+                                {{-- <div class="block mt-4">
                                     <label for="remember_me" class="inline-flex items-center">
                                         <input id="remember_me" type="checkbox"
                                             class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
                                             name="remember">
                                         <span class="ml-2 text-sm text-gray-600">Remember me</span>
                                     </label>
-                                </div>
+                                </div> --}}
 
-                                <div class="row btn-group mt-lg-4">
-                                    <div class="col-9">
+                                {{-- <div class="row btn-group mt-lg-12"> --}}
+                                    {{-- <div class="col-9">
                                         @if (Route::has('password.request'))
                                             <a id="show-modal" class="btn btn-danger d-inline-block m-0"
                                                 href="{{ route('password.request') }}">Forgot Password</a>
                                         @endif
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="col-3">
-                                        <button class="btn btn-primary d-inline-block m-0" type="submit">
-                                            Login</button>
+                                    <div class="col-lg-12 mt-4">
+                                        <button class="btn btn-primary d-inline-block col-12" type="submit">
+                                            Login
+                                        </button>
                                     </div>
-                                </div>
+                                {{-- </div> --}}
                             </form>
                         </div>
                         <div class="card-footer text-muted my-3"

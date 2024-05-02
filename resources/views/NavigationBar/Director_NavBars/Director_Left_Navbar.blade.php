@@ -1,10 +1,10 @@
 <!-- Sidebar Container -->
-<aside class="main-sidebar pal-1 sidebar-dark-maroon elevation-1">
+<aside class="main-sidebar elevation-1 transpa">
     <!-- PUP Logo -->
-    <a href="" class="brand-link" style="height: 70px;">
+    <a href="#" class="brand-link" style="height: 70px;">
         <div class="mt-2">
             <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" class="brand-image img-circle elevation-3">
-            <span class="brand-text font-weight-bolder">PUPQC-FARMS</span>
+            <span class="brand-text font-weight-bolder" style="color: var(--pallete-4);">PUPQC-FARMS</span>
         </div>
     </a>
 
@@ -17,7 +17,7 @@
                 data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="DirectorDashboard" class="nav-link">
+                    <a href="{{ route('director.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Dashboard
@@ -25,55 +25,48 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link">
-                        <i class="nav-icon fas fa-user-lock"></i>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" style="cursor: pointer !important">
+                        <i class="nav-icon fa-sharp fa-solid fa-people-group"></i>
                         <p> Class Setup<i class="fas fa-angle-left right"></i> </p>
                     </a>
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="DirectorClassSchedule" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
+                            <a href="{{ route('director.class_schedule') }}" class="nav-link">
+                                <i class="fa-regular fa-note-sticky nav-icon"></i>
                                 <p class="p-drop">Class Schedule</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="DirectorClassObservation" class="nav-link">
-                                <i class="fas fa-user-lock nav-icon"></i>
+                            <a href="{{ route('director.class_observation') }}" class="nav-link">
+                                <i class="fa-solid fa-location-pin nav-icon"></i>
                                 <p class="p-drop">Class Observation</p>
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
-                    <a class="nav-link">
-                        <i class="nav-icon fas fa-user-lock"></i>
-                        <p>Activity Setup<i class="fas fa-angle-left right"></i> </p>
-                    </a>
 
-                    <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('director_activities') }}" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
-                                <p class="p-drop">Activities</p>
+                            <a href="{{ route('director.activities') }}" class="nav-link">
+                                <i class="fa-regular fa-flag nav-icon"></i>
+                                <p>Activities</p>
                             </a>
                         </li>
 
 
                         <li class="nav-item">
-                            <a href="{{ route('director_requirementbin') }}" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
-                                <p class="p-drop">Requirement Bin</p>
+                            <a href="{{ route('director.requirement_bins') }}" class="nav-link">
+                                <i class="nav-icon fa-solid fa-book-bookmark"></i>
+                                <p>Requirement Bin</p>
                             </a>
                         </li>
 
-                    </ul>
-                </li>
+
                 <li class="nav-item">
-                    <a href="DirectorReports" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a href="{{ route('director.reports') }}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-book-bookmark"></i>
                         <p>
                             Reports
                         </p>

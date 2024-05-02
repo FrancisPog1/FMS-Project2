@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.Staff_master')
 
 
 {{-- CONTENTS --}}
@@ -6,8 +6,6 @@
     <div class="wrapper">
         <!-- Content Wrapper. Outer Container -->
         <div class="content-wrapper">
-
-
 
             {{-- New Page Header --}}
             <section class="content-header ">

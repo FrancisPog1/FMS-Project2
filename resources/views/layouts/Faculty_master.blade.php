@@ -29,8 +29,13 @@
 
     </div>
 
-{{-- BODY JS DEPENDENCIES --}}
+    {{-- MODAL CONTENTS --}}
+    @yield('modal_content')
+
+    {{-- BODY JS DEPENDENCIES --}}
     @include('layouts.Dependencies.BODY_JS_dependencies')
 
+    {{-- JS CONTENTS --}}
+    @yield('js_content')
 </body>
 </html>

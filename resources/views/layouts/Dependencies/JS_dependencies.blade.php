@@ -58,18 +58,18 @@
 
 <!-- MDB UI Kit (THIS IS THE CAUSE OF THE BUG OF LARGE BUTTONS. MUST BE IN THE HEAD PART OF HTML) -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
-  
+
 
 <!-- SCRIPTS FOR TOASTR ALERT MESSAGE -->
 <script>
     @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
     @endif
-                
+
     @if(Session::has('warning'))
         toastr.warning("{{ Session::get('warning') }}");
     @endif
-                
+
     @if(Session::has('error'))
         toastr.error("{{ Session::get('error') }}");
     @endif

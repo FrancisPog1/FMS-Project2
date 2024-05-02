@@ -6,14 +6,18 @@
 </style>
 
 <script>
-    function openEditModal(type, reqId, notes) {
+    function openEditModal(type, reqId) {
         // Set the values in the form fields
 
         // Set the value of the `type` element in the `editForm` form to the selected value
         document.getElementById('editForm').elements['type'].value = type;
-        document.getElementById('editForm').elements['notes'].value = notes;
+        // document.getElementById('editForm').elements['notes'].value = notes;
 
-        document.getElementById('editForm').action = "{{ route('staff_update_requirements', '') }}" + reqId;
+
+        var route = "{{ route('staff.update_requirements', ':id') }}"; // Replace with the actual delete route
+        var Action = route.replace(':id', reqId);
+
+        document.getElementById('editForm').action = Action;
 
         // Open the edit modal
         $('#modal-xl-edit').modal('show');
@@ -46,6 +50,23 @@
         $("input[type='checkbox']").on("change", function() {
             if (!$(this).prop("checked")) {
                 $("#check-all-assign").prop("checked", false);
+            }
+        });
+
+
+
+        $("#check-all-add").on("click", function() {
+            if ($(this).prop("checked")) {
+                $("input[type='checkbox']").prop("checked", true);
+            } else {
+                $("input[type='checkbox']").prop("checked", false);
+            }
+        });
+
+        // Uncheck
+        $("input[type='checkbox']").on("change", function() {
+            if (!$(this).prop("checked")) {
+                $("#check-all-add").prop("checked", false);
             }
         });
     });
@@ -122,7 +143,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('staff_destroy_requirements', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('staff.destroy_requirements', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -162,7 +184,7 @@
 
 <script>
 $(document).ready(function() {
-    var filteredUsersUrl = "{{ route('staff_filtered_users') }}";
+    var filteredUsersUrl = "{{ route('staff.filtered_users') }}";
     $("#types").on('change', function() {
         var types = $(this).val();
         // alert('Hello fuck');
@@ -185,7 +207,7 @@ $(document).ready(function() {
                                     <td>\
                                         <div class="ml-3">\
                                             <input type="checkbox" class="form-check-input" id="check" name="users[]" value="' + users[i]['id'] + '">\
-                                            <label class="form-check-label" for="check">Faculty 1</label>\
+                                            <label class="form-check-label" for="check">' + users[i]['first_name'] + " " + users[i]['last_name'] +'</label>\
                                         </div>\
                                     </td>\
                                     <td>' + users[i]['email'] + '</td>\

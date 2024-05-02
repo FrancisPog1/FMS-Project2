@@ -1,4 +1,5 @@
-document.getElementById('show-modal-logout').addEventListener('click', function () {
+$(document).on('click', '.admin-logout-button', function (event) {
+    event.preventDefault();
     Swal.fire({
         title: 'Are you sure?',
         icon: 'info',
@@ -14,7 +15,73 @@ document.getElementById('show-modal-logout').addEventListener('click', function 
         cancelButtonAriaLabel: '...'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.replace("logout");
+            window.location.replace("/admin/logout");
+        }
+    })
+});
+
+$(document).on('click', '.staff-logout-button', function (event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        icon: 'info',
+        html:
+            'Do you want to <b>Log Out</b>?',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Yes',
+        confirmButtonColor: '#3085d6',
+        confirmButtonAriaLabel: '...',
+        cancelButtonColor: '#d33',
+        cancelButtonAriaLabel: '...'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.replace('/staff/logout');
+        }
+    })
+});
+
+$(document).on('click', '.faculty-logout-button', function (event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        icon: 'info',
+        html:
+            'Do you want to <b>Log Out</b>?',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Yes',
+        confirmButtonColor: '#3085d6',
+        confirmButtonAriaLabel: '...',
+        cancelButtonColor: '#d33',
+        cancelButtonAriaLabel: '...'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.replace("/faculty/logout");
+        }
+    })
+});
+
+$(document).on('click', '.director-logout-button', function (event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        icon: 'info',
+        html:
+            'Do you want to <b>Log Out</b>?',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Yes',
+        confirmButtonColor: '#3085d6',
+        confirmButtonAriaLabel: '...',
+        cancelButtonColor: '#d33',
+        cancelButtonAriaLabel: '...'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.replace("/director/logout");
         }
     })
 });

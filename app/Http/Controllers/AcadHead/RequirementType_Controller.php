@@ -10,6 +10,8 @@ use App\Models\User;
 
 use App\Models\RequirementType;
 
+use App\Models\RequirementCategory;
+
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session; /**For the session to work */
@@ -33,8 +35,22 @@ class RequirementType_Controller extends Controller
         ->where('is_deleted', false)
         ->get();
 
+        $categories = RequirementCategory::get();
+
+
+        $requirement_types = DB::table('requirement_types as types')
+        ->leftJoin('requirement_categories as cat', 'cat.id', '=' ,'types.category_id')
+        ->where('types.deleted_at', '='  , null)
+        ->where('types.is_deleted', '='  , false)
+        ->select('types.title as title',
+                    'types.id as id',
+                    'types.description as description',
+                    'cat.title as cat_title')
+        ->get();
+
+
         return view('Academic_head/AcadHead_Setup/AcadHead_RequirementType/AcadHead_RequirementType',
-        compact('deleted_types', 'requirement_types'));
+        compact('deleted_types', 'requirement_types', 'categories'));
     }
 
     public function filteredAndSortedRequirementtype(Request $request){
@@ -67,7 +83,8 @@ class RequirementType_Controller extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title'=>'required|unique:requirement_types',
-            'description'=>'max:300'
+            'description'=>'max:300',
+            'category' => 'required'
         ]);
 
         // Get the user ID of the logged in user
@@ -78,6 +95,7 @@ class RequirementType_Controller extends Controller
         $reqtype->id = Str::uuid()->toString();
         $reqtype->title = $request ->title;
         $reqtype->description = $request ->description;
+        $reqtype->category_id = $request->category;
         $reqtype->created_by = $userId;
 
         if ($validator->fails()) {
@@ -107,7 +125,8 @@ class RequirementType_Controller extends Controller
     {
         $validator = Validator::make($request->all(), [
         'title'=>'required|unique:requirement_types',
-        'description'=>'max:300'
+        'description'=>'max:300',
+        'category' => 'required'
     ]);
 
         // Get the user ID of the logged in user
@@ -115,6 +134,7 @@ class RequirementType_Controller extends Controller
         $req_type = RequirementType::find($id);
         $req_type->title = $request->input('title');
         $req_type->description = $request->input('description');
+        $req_type->category_id = $request->input('category');
         $req_type->updated_by = $userId;
 
         if ($validator->fails()) {

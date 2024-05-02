@@ -24,26 +24,29 @@ class ActivitiesParticipants_Controller extends Controller
         $participants = DB::table('activities')
         ->join('activity_participants', 'activity_participants.activity_id',  '=', 'activities.id')
         ->join('users', 'users.id', '=', 'activity_participants.participant_id')
+        ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
         ->where('activity_participants.activity_id', '=', $activity_id)
-        ->select('users.email', 'roles.title as role', 'activity_participants.id as id')
+        ->select('users.email', 'roles.title as role', 'activity_participants.id as id',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         $activities = DB::table('activities')
         ->join('users', 'users.id', '=', 'activities.created_by')
+        ->leftjoin('users_profiles', 'users_profiles.user_id', '=', 'activities.created_by')
         ->join('activity_types', 'activity_types.id', '=', 'activities.activity_type_id')
         ->where('activities.id', '=', $activity_id)
         ->select('activities.created_at'
                 , 'activities.created_by'
                 , 'activities.location'
                 , 'activities.description'
-                , 'activities.agenda'
                 , 'activities.status'
                 , 'activities.start_datetime'
                 , 'activities.end_datetime'
                 , 'activity_types.title as type'
                 , 'activities.title'
-                , 'users.email'
+                , 'users_profiles.first_name'
+                , 'users_profiles.last_name'
                 )
         ->get();
 
@@ -56,8 +59,10 @@ class ActivitiesParticipants_Controller extends Controller
         $roles = DB::table('roles')->get();
 
         $users = DB::table('users')
+        ->leftJoin('users_profiles', 'users_profiles.user_id', '=', 'users.id')
         ->leftJoin('roles', 'roles.id', '=', 'users.foreign_role_id')
-        ->select('roles.title as role', 'users.email', 'users.id')
+        ->select('roles.title as role', 'users.email', 'users.id',
+        'users_profiles.first_name', 'users_profiles.last_name')
         ->get();
 
         return view('Academic_head/AcadHead_Setup/AcadHead_ActivitiesParticipants/AcadHead_ActivitiesParticipants',
@@ -113,11 +118,11 @@ class ActivitiesParticipants_Controller extends Controller
     {
           //HARD DELETE Requiremnts
           // Find the role by its ID
-              $participant = ActivityParticipants::findOrFail($id);
-              $participant->forceDelete();
-              return back()->with('success', 'Participant removed successfully!'); /**Alert Message */
+            $participant = ActivityParticipants::findOrFail($id);
+            $participant->forceDelete();
+            return back()->with('success', 'Participant removed successfully!'); /** Alert Message */
 
-          }
+        }
 
 
 }

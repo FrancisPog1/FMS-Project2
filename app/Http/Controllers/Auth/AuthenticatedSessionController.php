@@ -35,9 +35,8 @@ class AuthenticatedSessionController extends Controller
         //Make the status "Active when the user is logged in"
         $userId = Auth::user()->id;
         $user = User::find($userId);
-        $user->status = "Active";
+        $user->status = "Online";
         $user->save();
-
 
     /**
     * I added this if else statement so that after the authentication it will check the
@@ -46,12 +45,12 @@ class AuthenticatedSessionController extends Controller
     */
 
 
-         if (Auth::user()->foreign_role_id == '1') {
+        if (Auth::user()->foreign_role_id == '1') {
             return redirect()->intended(RouteServiceProvider::AcadHead_HOME)->with('success', 'Admin Login Successfull');
         }
 
         elseif (Auth::user()->foreign_role_id == '2') {
-            return redirect()->intended(RouteServiceProvider::Faculty_HOME)->with('success', 'Faculty Login Successfull');
+            return redirect()->intended(RouteServiceProvider::Faculty_HOME)->with('success', 'Faculty (Regular) Login Successfull');
 
         }
 
@@ -62,6 +61,10 @@ class AuthenticatedSessionController extends Controller
 
         elseif (Auth::user()->foreign_role_id == '4') {
             return redirect()->intended(RouteServiceProvider::Director_HOME)->with('success', 'Director Login Successfull');
+        }
+
+        elseif (Auth::user()->foreign_role_id == '5') {
+            return redirect()->intended(RouteServiceProvider::Faculty_HOME)->with('success', 'Faculty (Part time) Login Successfull');
         }
 
         // else {
@@ -76,13 +79,12 @@ class AuthenticatedSessionController extends Controller
     {    //Make the status "Active when the user is logged in"
         $userId = Auth::user()->id;
         $user = User::find($userId);
-        $user->status = "Inactive";
+        $user->status = "Offline";
         $user->save();
 
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
 
         return redirect('/');
     }

@@ -1,6 +1,6 @@
         <!-- Assigning Modal -->
         <section class="content">
-            <form id="assign" action="{{ route('staff_assign_requirement', $bin_id) }}" method="post">
+            <form id="assign" action="{{ route('staff.assign_requirement', $bin_id) }}" method="post">
                 @csrf
                 <div class="modal fade" id="modal-xl-assign">
                     <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 700px">
@@ -29,18 +29,6 @@
                                             </select>
                                         </div>
 
-                                        <div class="col-6">
-                                            {{-- Search bar --}}
-                                            <div class="input-group">
-                                                <input type="search" class="form-control"
-                                                    placeholder="Search a user" />
-                                                <span class="input-group-append">
-                                                    <button class="btn btn-outline-secondary" type="button">
-                                                        <i class="fas fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </div>
                                         {{-- Check all button --}}
                                         <div class="col-2 mt-2">
                                             <input type="checkbox" class="check-all-assign" id="check-all-assign">
@@ -52,7 +40,7 @@
                                     <div class="col-md-12 form-group">
                                         {{-- Table body --}}
                                         <div class="card-body p-0">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped" id="myTable1">
                                                 <thead class="pal-1 text-col-2">
                                                     <tr>
                                                         <th>Name</th>
@@ -68,9 +56,7 @@
                                                                     <input type="checkbox" class="form-check-input"
                                                                         id="check" name="users[]"
                                                                         value="{{ $user->id }}">
-                                                                    <label class="form-check-label" for="check">
-                                                                        Faculty
-                                                                        1</label>
+                                                                    <label class="form-check-label" for="check">{{ $user->first_name }} {{ $user->last_name }}</label>
                                                                 </div>
 
                                                             </td>

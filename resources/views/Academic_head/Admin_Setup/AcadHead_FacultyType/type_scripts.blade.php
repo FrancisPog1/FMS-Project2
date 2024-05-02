@@ -18,7 +18,7 @@
 
                 jQuery.ajax({
                     type: 'put',
-                    url: "{{ route('update_facultytypes', '') }}" + typeId,
+                    url: "{{ route('admin.update_facultytypes', '') }}" + typeId,
                     data: jQuery('#editForm').serialize(), // Serialize the form data
 
                     success: function(response) {
@@ -108,7 +108,7 @@
 
             jQuery.ajax({
                 type: 'post',
-                url: "{{ route('CreateFacultyType') }}",
+                url: "{{ route('admin.faculty_types.store') }}",
                 data: jQuery('#create_type').serialize(), // Serialize the form data
 
                 success: function(response) {
@@ -185,7 +185,8 @@
         event.preventDefault();
 
         var name = this.getAttribute("name");
-        var action = "{{ route('destroy_facultytypes', '') }}" + name; // Replace with the actual delete route
+        var route = "{{ route('admin.destroy_facultytypes', ':id') }}"; // Replace with the actual delete route
+        var action = route.replace(':id', name);
 
         Swal.fire({
             title: "Are you sure?",
@@ -231,71 +232,6 @@
     });
 </script>
 
-{{-- AJAX SCRIPT FOR SORTING --}}
-<script>
-    $(document).ready(function() {
-        var sortedTypeRoute = "{{ route('sorted_facultytypes') }}";
-
-        $("#sort").on('change', function() {
-            var sortOption = $("#sort").val();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajax({
-                url: sortedTypeRoute,
-                type: "GET",
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                data: {
-                    'option': sortOption
-                },
-                success: function(data) {
-                    var types = data.types;
-                    var html = '';
-                    var deleteTypeRoute = "{{ route('delete_facultytypes', ':type_id') }}";
-
-                    if (types.length > 0) {
-                        for (let i = 0; i < types.length; i++) {
-                            html += '<tr>' +
-                                '<td>' + types[i]['title'] + '</td>' +
-                                '<td>' + types[i]['description'] + '</td>' +
-                                ' <td class="text-center">' +
-                                    '<form method="POST" action=" '+ deleteTypeRoute.replace(':type_id', types[i]['id']) +' ">' +
-                                        '@csrf' +
-                                        ' <input name="_method" type="hidden" value="DELETE">' +
-                                        '<button data-toggle="modal"' +
-                                            'onclick="openViewModal(' +"'"+ types[i]['title'] + "', '" + types[i]['description'] + "'"+ ')" ' +
-                                            ' data-target="#modal-xl-view" type="button"' +
-                                            'class="px-2 py-2 text-sm text-center rounded-lg text-blue focus:ring-4 focus:outline-none focus:ring-blue-300">' +
-                                            '  <i class="far fa-eye"></i>' +
-                                    '   </button>' +
-                                        '<button type="button"' +
-                                            ' onclick="openEditModal(' +" ' "+ types[i]['title'] + " ' " + ", '" + types[i]['description'] + " ' " + ", '" + types[i]['id'] + "' " + ' )" ' +
-                                            'class="px-2 py-2 text-sm text-center rounded-lg text-yellow focus:ring-4 focus:outline-none focus:ring-yellow-300">' +
-                                            ' <i class="far fa-edit"></i>' +
-                                        '</button>' +
-                                        '  <button type="button"' +
-                                            '  class="px-2 py-2 text-sm text-center rounded-lg text-red focus:ring-4 focus:outline-none focus:ring-red-300 local-delete-button"' +
-                                            ' title="Delete">' +
-                                            '  <i class="far fa-trash-alt"></i>' +
-                                        '</button>' +
-                                    '</form>' +
-                                '  </td>' +
-                            ' </tr>';
-                        }
-                    } else {
-                        html += '<tr><td colspan="3"> No Records </td></tr>';
-                    }
-
-                    $('#filtered-types').html(html);
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-    });
-</script>
 
 {{-- Local Warning Modal Before Deleting--}}
 <script>
