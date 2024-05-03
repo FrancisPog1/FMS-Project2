@@ -37,5 +37,6 @@
 
     {{-- JS CONTENTS --}}
     @yield('js_content')
+
 </body>
 </html>

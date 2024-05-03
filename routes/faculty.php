@@ -62,6 +62,7 @@ Route::middleware(['auth', 'isFaculty'])->prefix('faculty')->name('faculty.')->g
     Route::post('upload-file', [UploadTemporaryFiles_Controller::class, 'uploadFile'])->name('upload_file');
     Route::delete('delete-file', [DeleteTemporaryFiles_Controller::class, 'deleteFile'])->name('delete_file');
     Route::put('submit-uploads/{id}', [FacultyUpload_Controller::class, 'uploadFile'])->name('submit_uploads');
+    Route::post('upload-hardcopy', [FacultyUpload_Controller::class, 'uploadHardCopy'])->name('upload_hardcopy');
 
 
     //USER PROFILE

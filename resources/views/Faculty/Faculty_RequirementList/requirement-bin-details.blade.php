@@ -10,28 +10,28 @@
             </div>
             <div class="card-body" style="overflow: auto;" id="cardBody">
                 <div  class="">
-                    @foreach ( $requirementbin as $detail)
+
                     <div class="row">
                         <div class="col-md-6">
                             <h5 class="font-weight-bold ">Posted by:</h5>
-                            <p> {{ $detail->email }}</p><br>
+                            <p> {{ $requirementbin->email }}</p><br>
                         </div>
 
                         <div class="col-md-6">
                             <h5 class="font-weight-bold">Deadline:</h5>
-                            <p>{{ $detail->deadline }}</p> <br>
+                            <p>{{ $requirementbin->deadline }}</p> <br>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <h5 class="font-weight-bold">Posted at:</h5>
-                            <p>{{ $detail->bin_created_at }}</p> <br>
+                            <p>{{ $requirementbin->bin_created_at }}</p> <br>
                         </div>
 
                         <div class="col-md-6">
                             <h5 class="font-weight-bold">Status:</h5>
-                            <p>{{ $detail->bin_status }}</p>
+                            <p>{{ $requirementbin->bin_status }}</p>
                         </div>
 
                     </div>
@@ -39,18 +39,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h5 class="font-weight-bold">Title:</h5>
-                            <p>{{ $detail->bin_title }}</p> <br>
+                            <p>{{ $requirementbin->bin_title }}</p> <br>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-10">
                             <h5 class="font-weight-bold" id="description">Description:</h5>
-                            <div>{!!$detail->bin_description!!} </div>
+                            <div>{!!$requirementbin->bin_description!!} </div>
                         </div>
                     </div>
 
-                    @endforeach
                 </div>
 
             </div>

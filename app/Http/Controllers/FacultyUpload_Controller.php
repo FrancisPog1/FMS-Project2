@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\File;
 Use Carbon\Carbon;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use illuminate\Support\Facades\Validator;
 
 
@@ -61,8 +62,38 @@ class FacultyUpload_Controller extends Controller
             }
             $assigned_requirement->status = "In review";
             $assigned_requirement->submission_date = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
+            $assigned_requirement->submission_type = "Soft Copy";
             $assigned_requirement->save();
             return back()->with('success', 'Files successfully uploaded'); /**Alert Message */
+        }
+
+    }
+
+    public function uploadHardCopy(Request $request): JsonResponse {
+
+        $validator = \Validator::make($request->all(), [
+            'submission_date' => 'required'
+        ]);
+
+        $requirementID = $request ->requirement_id;
+        $user_id = Auth::user()->id;
+        $assigned_requirement = UserUploadRequirement::findOrFail($requirementID);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        else{
+            $assigned_requirement->status = "In review";
+            $assigned_requirement->submission_date = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
+            $assigned_requirement->submission_type = "Hard Copy";
+            $assigned_requirement->uploader_comments = $request ->comments;
+            $assigned_requirement->save();
+            return response()->json(['success' => true, 'message' => 'The form submitted successfully!'], 200);
         }
 
     }

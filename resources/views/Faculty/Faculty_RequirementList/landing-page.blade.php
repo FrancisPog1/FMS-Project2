@@ -38,11 +38,7 @@
 
 
 
-            {{-- Upload Modal --}}
-            @include('Faculty/Faculty_RequirementList/upload-modal')
 
-                {{-- File Modal --}}
-            @include('Faculty/Faculty_RequirementList/file-modal')
 
 
             {{-- <div class="d-flex justify-content-between">
@@ -69,13 +65,12 @@
         </footer>
     </div>
 
-
-@endsection
-
-{{-- Place Holder where you can put your module's javascript codes --}}
-@section('js_contents')
-
-    {{-- Scripts --}}
+    <!-- Faculty/Faculty_RequirementList Scripts -->
     @include('Faculty/Faculty_RequirementList/scripts')
-
 @endsection
+
+
+
+
+
+

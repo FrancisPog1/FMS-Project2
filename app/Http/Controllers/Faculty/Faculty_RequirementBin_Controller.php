@@ -63,6 +63,7 @@ class Faculty_RequirementBin_Controller extends Controller
                 'user_upload_requirements.acadhead_remarks as remarks',
                 'user_upload_requirements.submission_date',
                 'user_upload_requirements.id as id',
+                'user_upload_requirements.submission_type as submission_type',
                 'user_upload_requirements.reviewed_at',
                 'reviewer_profiles.first_name as first_name', // Alias for reviewer's first name
                 'reviewer_profiles.last_name as last_name' // Alias for reviewer's last name
@@ -89,12 +90,10 @@ class Faculty_RequirementBin_Controller extends Controller
                 'bin.description as bin_description',
                 'bin.deadline as deadline',
                 'users.email as email')
-            ->get();
+            ->first();
 
-            foreach ($requirementbin as $bin) {
-                $bin->deadline = Carbon::parse($bin->deadline)->format('F d, Y h:i A');
-                $bin->bin_created_at = Carbon::parse($bin->bin_created_at)->format('F d, Y h:i A');
-            }
+            $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+            $requirementbin->bin_created_at = Carbon::parse($requirementbin->bin_created_at)->format('F d, Y h:i A');
 
             return view('Faculty/Faculty_RequirementList/landing-page'
             , compact('datas','assigned_bin_id', 'req_bin_id', 'requirementbin', 'user_id'));

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('user_upload_requirements', function (Blueprint $table) {
-            $table->string('submission_type');
+            $table->longText('uploader_comments')->nullable();
         });
     }
 
@@ -21,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-
+        Schema::table('user_upload_requirements', function (Blueprint $table) {
+            //
+        });
     }
 };

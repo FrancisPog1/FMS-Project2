@@ -101,3 +101,8 @@
         @endif
     });
 </script>
+
+
+{{-- SCRIPTS FOR FILE POND --}}
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
