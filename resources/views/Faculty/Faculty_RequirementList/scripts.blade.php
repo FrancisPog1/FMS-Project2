@@ -154,3 +154,84 @@
         });
     });
 </script>
+
+
+
+@foreach ($datas as $data)
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FilePond.registerPlugin(FilePondPluginImagePreview);
+            // Get a reference to the file input element
+            const inputElement_{{ $loop->iteration }} = document.querySelector('#upload-file-{{ $data->id }}');
+
+            // Create a FilePond instance
+            var pond = FilePond.create(inputElement_{{ $loop->iteration }});
+
+
+            FilePond.setOptions({
+                server: {
+                    process: {
+                        url: "{{ route('faculty.upload_file') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    },
+                    revert: {
+                        url: "{{ route('faculty.delete_file') }}",
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }
+                },
+            });
+        });
+    </script>
+
+
+    {{-- Scripts for showing the Upload modal --}}
+    <script>
+        // Add event listener for upload buttons using event delegation
+        const myButton_{{ $loop->iteration }} = document.getElementById('upload-button-{{ $data->id }}');
+        myButton_{{ $loop->iteration }}.addEventListener('click', function() {
+            $.ajax({
+                url: "{{ route('faculty.files.view') }}",
+                method: 'GET',
+                data: {
+                    req_bin_id: '{{ $req_bin_id }}',
+                    user_id: '{{ $user_id }}',
+                    type_id: '{{ $data->id }}'
+                },
+                success: function(data) {
+                    var file = data.files;
+                    var html = '';
+
+                    // Update the modal content with the files
+                    if (file.length > 0) {
+                        for (let i = 0; i < file.length; i++) {
+
+                        html += '<li id="list-' + file[i]['id'] + '" class=" btn list-group-item rounded border mb-2" onclick="displayFileModal('+ "'" + file[i]['id'] + "'" + ')" >'+
+                                                            '<div class="d-flex justify-content-between align-items-center">' +
+                                                            '  <span>' + file[i]['file_name'] +'</span>' +
+                                                                '<div class="d-flex">' +
+                                                                ' <button type="button" id="delete-file-button" onclick="deleteFile(this), event.stopPropagation();"'+
+                                                                'data-id="' + file[i]['id'] + '">' +
+                                                                    '<i class="far fa-trash-alt" title="Delete"></i></button>' +
+
+                                                            ' </div>' +
+                                                            '</div>' +
+                                                        '</li>';
+                        }
+                    }
+                    $('#list-of-files-{{ $data->id }}').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+
+            });
+
+    </script>
+@endforeach

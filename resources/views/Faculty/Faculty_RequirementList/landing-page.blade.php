@@ -37,22 +37,6 @@
             @include('Faculty/Faculty_RequirementList/data-table')
 
 
-
-
-
-
-            {{-- <div class="d-flex justify-content-between">
-                <a href="{{ route('acadhead_RequirementAssignees', $req_bin_id) }}" class="btn btn-outline-danger btn-lg"
-                    id="lower_button">Back</a>
-
-                <form
-                    action="{{ route('acadhead_ReviewRequirements', ['assigned_bin_id' => $assigned_bin_id, 'req_bin_id' => $req_bin_id]) }}"
-                    method="post">
-                    @method('PUT')
-                    @csrf
-                    <button type="submit" class="btn btn-outline-primary btn-lg" id="lower_button">Mark as Reviewed</button>
-                </form>
-            </div> --}}
         </div>
 
         <!-- Footer Container -->
@@ -65,12 +49,25 @@
         </footer>
     </div>
 
+
+@endsection
+
+@section('modal_content')
+
+    @foreach ($datas as $data)
+        {{-- Hard Copy Submission Modal --}}
+        @include('Faculty/Faculty_RequirementList/hard-copy-submission-modal')
+
+        {{-- Soft Copy Submission Modal --}}
+        @include('Faculty/Faculty_RequirementList/soft-copy-submission-modal')
+    @endforeach
+
+@endsection
+
+@section('js_content')
     <!-- Faculty/Faculty_RequirementList Scripts -->
     @include('Faculty/Faculty_RequirementList/scripts')
 @endsection
-
-
-
 
 
 

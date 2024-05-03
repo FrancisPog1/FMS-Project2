@@ -83,7 +83,14 @@
                                 </td>
 
                                 <td>
-                                    {{ $data->submission_type }}
+
+                                    @if ($data->submission_type)
+                                        {{ $data->submission_type }}
+                                    @else
+                                        <p>For Compliance</p>
+
+                                    @endif
+
                                 </td>
 
                                 <td class="text-center ">
@@ -110,14 +117,6 @@
                                 </td>
 
                             </tr>
-
-                            {{-- Hard Copy Submission Modal --}}
-                            @include('Faculty/Faculty_RequirementList/hard-copy-submission-modal')
-
-                            {{-- Soft Copy Submission Modal --}}
-                            @include('Faculty/Faculty_RequirementList/soft-copy-submission-modal')
-
-
 
                         @endforeach
                     </tbody>
