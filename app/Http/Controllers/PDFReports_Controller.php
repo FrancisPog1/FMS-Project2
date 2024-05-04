@@ -22,6 +22,19 @@ class PDFReports_Controller extends Controller
 {
     public function generateReports(){
 
+        // Get the logged in user's ID
+        $user_id = Auth::user()->id;
+
+        $user = DB::table('users')
+        ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
+        ->where('users.id', '=', $user_id)
+        ->select('users.id as user_id','users.email as email',
+                'roles.title as role_type',
+                'users_profiles.first_name as first_name',
+                'users_profiles.last_name as last_name')
+        ->first();
+
         $datas = DB::table('requirement_types')
         ->join('requirement_bin_contents', 'requirement_types.id', '=', 'requirement_bin_contents.foreign_requirement_types_id')
         ->join('user_upload_requirements', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
@@ -66,7 +79,7 @@ class PDFReports_Controller extends Controller
         }
 
 
-        $pdf = Pdf::loadView('pdf-reports.faculty-compliance-reports', ['datas' => $datas])->setPaper('legal', 'landscape');
+        $pdf = Pdf::loadView('pdf-reports.faculty-compliance-reports', ['datas' => $datas, 'user' => $user ])->setPaper('legal', 'landscape');
         return $pdf->download();
 
 
