@@ -49,17 +49,17 @@
             <div class="container-fluid mt-4 border p-4">
                 <table class="table">
                     <thead style="background-color: red;">
-            <tr>
-                <th>Faculty Name</th>
-                <th>Requirement Bin</th>
-                <th>Category</th>
-                <th>Requirement</th>
-                <th>Submission Type</th>
-                <th>Deadline</th>
-                <th>Date Submitted</th>
-                <th>Timeliness</th>
-                <th>Status</th>
-            </tr>
+                        <tr>
+                            <th>Faculty Name</th>
+                            <th>Requirement Bin</th>
+                            <th>Category</th>
+                            <th>Requirement</th>
+                            <th>Submission Type</th>
+                            <th>Deadline</th>
+                            <th>Date Submitted</th>
+                            <th>Timeliness</th>
+                            <th>Status</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <!-- Faculty 1  -->
