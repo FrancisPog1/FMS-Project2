@@ -47,6 +47,20 @@ class Faculty_RequirementBin_Controller extends Controller
         {
             $user_id = Auth::user()->id;
 
+            $compliance_info = DB::table('users')
+            ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
+            ->join('user_assigned_to_requirement_bins as user_bins', 'users.id', '=', 'user_bins.assigned_to')
+            ->join('requirement_bins as bin', 'bin.id', '=', 'user_bins.requirement_bin_id')
+            ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
+            ->where('bin.id', '=', $req_bin_id)
+            ->where('users.id', '=', $user_id)
+            ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
+                    'user_bins.review_status as review_status',
+                    'user_bins.compliance_status as compliance_status',
+                    'users_profiles.first_name as first_name', 'users_profiles.last_name as last_name')
+            ->first();
+
+
             $datas = DB::table('requirement_types')
             ->join('requirement_bin_contents', 'requirement_types.id', '=', 'requirement_bin_contents.foreign_requirement_types_id')
             ->join('user_upload_requirements', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
@@ -96,7 +110,7 @@ class Faculty_RequirementBin_Controller extends Controller
             $requirementbin->bin_created_at = Carbon::parse($requirementbin->bin_created_at)->format('F d, Y h:i A');
 
             return view('Faculty/Faculty_RequirementList/landing-page'
-            , compact('datas','assigned_bin_id', 'req_bin_id', 'requirementbin', 'user_id'));
+            , compact('datas','assigned_bin_id', 'req_bin_id', 'requirementbin', 'user_id', 'compliance_info'));
 
         }
 

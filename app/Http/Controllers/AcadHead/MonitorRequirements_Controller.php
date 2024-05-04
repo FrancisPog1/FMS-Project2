@@ -23,6 +23,20 @@ class MonitorRequirements_Controller extends Controller
 {
     public function show($user_id, $assigned_bin_id, $req_bin_id)
     {
+        $compliance_info = DB::table('users')
+        ->join('users_profiles', 'users_profiles.user_id', '=', 'users.id')
+        ->join('user_assigned_to_requirement_bins as user_bins', 'users.id', '=', 'user_bins.assigned_to')
+        ->join('requirement_bins as bin', 'bin.id', '=', 'user_bins.requirement_bin_id')
+        ->join('roles', 'roles.id', '=', 'users.foreign_role_id')
+        ->where('bin.id', '=', $req_bin_id)
+        ->where('users.id', '=', $user_id)
+        ->select('users.id as user_id','users.email as email', 'roles.title as role_type',
+                'user_bins.review_status as review_status',
+                'user_bins.compliance_status as compliance_status',
+                'users_profiles.first_name as first_name', 'users_profiles.last_name as last_name')
+        ->first();
+
+
         $datas = DB::table('requirement_types')
         ->join('requirement_bin_contents', 'requirement_types.id', '=', 'requirement_bin_contents.foreign_requirement_types_id')
         ->join('user_upload_requirements', 'requirement_bin_contents.id', '=', 'user_upload_requirements.foreign_bin_content_id')
@@ -39,8 +53,11 @@ class MonitorRequirements_Controller extends Controller
                 'user_upload_requirements.acadhead_remarks as remarks',
                 'user_upload_requirements.submission_date',
                 'user_upload_requirements.id as id',
-                'users.id as user_id', 'users_profiles.first_name' ,
+                'users.id as user_id',
+                'users_profiles.first_name' ,
                 'users_profiles.last_name' ,
+                'user_upload_requirements.submission_type as submission_type',
+                'user_upload_requirements.uploader_comments as uploader_comments',
                 'user_upload_requirements.reviewed_at',
                 'reviewer_profiles.first_name as first_name', // Alias for reviewer's first name
                 'reviewer_profiles.last_name as last_name') // Alias for reviewer's last name)
@@ -56,8 +73,23 @@ class MonitorRequirements_Controller extends Controller
             }
         }
 
-        return view('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/AcadHead_MonitorRequirements'
-        , compact('datas','assigned_bin_id', 'req_bin_id', 'user_id'));
+        $requirementbin = DB::table('requirement_bins as bin')
+        ->leftJoin('users', 'users.id', '=' ,'bin.created_by')
+        ->where('bin.id', '=',  $req_bin_id)
+        ->select('bin.title as bin_title',
+            'bin.status as bin_status',
+            'bin.created_by as bin_created_by',
+            'bin.created_at as bin_created_at',
+            'bin.description as bin_description',
+            'bin.deadline as deadline',
+            'users.email as email')
+        ->first();
+
+        $requirementbin->deadline = Carbon::parse($requirementbin->deadline)->format('F d, Y h:i A');
+        $requirementbin->bin_created_at = Carbon::parse($requirementbin->bin_created_at)->format('F d, Y h:i A');
+
+        return view('Academic_head/AcadHead_Setup/Monitor-Requirements/landing-page'
+        , compact('datas','assigned_bin_id', 'req_bin_id', 'user_id', 'requirementbin', 'compliance_info'));
 
     }
 
@@ -70,20 +102,25 @@ class MonitorRequirements_Controller extends Controller
     }
 
 
-    public function reject(Request $request, $id, $req_bin_id, $assigned_bin_id): JsonResponse
+    public function reject(Request $request): JsonResponse
     {
         // Get the user ID of the logged in user
+
+        $id = $request->requirementId;
+        $req_bin_id = $request->req_bin_id;
+        $assigned_bin_id = $request->assigned_bin_id;
+
         $userId = Auth::user()->id;
         $assigned_bin = UserAssignedToRequirementBins::findOrFail($assigned_bin_id);
-       $assigned_requirement_id = UserUploadRequirement::findOrFail($id);
-       $assigned_requirement_id->status = "Rejected";
-       $assigned_requirement_id->reviewed_by = $userId;
-       $assigned_requirement_id->reviewed_at = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
-       $assigned_requirement_id->acadhead_remarks = $request->remarks;
-       $assigned_requirement_id->save();
+        $assigned_requirement_id = UserUploadRequirement::findOrFail($id);
+        $assigned_requirement_id->status = "Rejected";
+        $assigned_requirement_id->reviewed_by = $userId;
+        $assigned_requirement_id->reviewed_at = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
+        $assigned_requirement_id->acadhead_remarks = $request->remarks;
+        $assigned_requirement_id->save();
 
 
-       if ($assigned_bin->review_status != "Reviewed") {
+        if ($assigned_bin->review_status != "Reviewed") {
         $assigned_bin->review_status = "Reviewed";
         $assigned_bin->updated_by = $userId;
         $assigned_bin->save();
@@ -130,10 +167,13 @@ class MonitorRequirements_Controller extends Controller
     }
 
 
-    public function approve(Request $request, $id, $req_bin_id, $assigned_bin_id): JsonResponse
+    public function approve(Request $request): JsonResponse
     {
         // Get the user ID of the logged in user
         $userId = Auth::user()->id;
+        $id = $request->requirementId;
+        $req_bin_id = $request->req_bin_id;
+        $assigned_bin_id = $request->assigned_bin_id;
         $assigned_bin = UserAssignedToRequirementBins::findOrFail($assigned_bin_id);
 
        $assigned_requirement_id = UserUploadRequirement::findOrFail($id);

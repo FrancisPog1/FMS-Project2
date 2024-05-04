@@ -23,11 +23,11 @@
             </section>
 
             {{-- Data Table --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/monitor_reqs_dataTable')
+            @include('Academic_head/AcadHead_Setup/Monitor-Requirements/data-table')
 
 
             {{-- Display File Modal --}}
-            @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/file_modal')
+            @include('Academic_head/AcadHead_Setup/Monitor-Requirements/file-modal')
 
 
             {{-- <div class="d-flex justify-content-between">
@@ -54,8 +54,25 @@
         </footer>
     </div>
 
+@endsection
 
 
+@section('modal_content')
+    @foreach ($datas as $data)
+        {{-- Validate Soft Copy Modal --}}
+        @include('Academic_head/AcadHead_Setup/Monitor-Requirements/validate-soft-copy-modal')
+
+        {{-- Validate Hard Copy Modal --}}
+        @include('Academic_head/AcadHead_Setup/Monitor-Requirements/validate-hard-copy-modal')
+
+        {{-- Validate No Submission Modal --}}
+        @include('Academic_head/AcadHead_Setup/Monitor-Requirements/validate-no-submission-modal')
+    @endforeach
+@endsection
+
+
+
+@section('js_content')
     {{-- Scripts --}}
-    @include('Academic_head/AcadHead_Setup/AcadHead_MonitorRequirements/monitor_reqs_scripts')
+    @include('Academic_head/AcadHead_Setup/Monitor-Requirements/scripts')
 @endsection

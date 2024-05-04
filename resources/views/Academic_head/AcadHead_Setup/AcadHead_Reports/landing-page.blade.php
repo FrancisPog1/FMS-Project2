@@ -10,18 +10,18 @@
 
             <br>
         <!-- Content Header -->
-        @include('Academic_head/AcadHead_Setup/AcadHead_Reports/reports_header')
+        @include('Academic_head/AcadHead_Setup/AcadHead_Reports/reports-header')
 
 
             <!-- Content Body -->
             <div class="card-body">
 
                 <!-- Table Header -->
-                @include('Academic_head/AcadHead_Setup/AcadHead_Reports/table_header')
+                @include('Academic_head/AcadHead_Setup/AcadHead_Reports/table-header')
 
 
                 <!-- Submission Reqs Reports -->
-                @include('Academic_head/AcadHead_Setup/AcadHead_Reports/submission_reports')
+                @include('Academic_head/AcadHead_Setup/AcadHead_Reports/data-table')
 
             </div>
         </div>

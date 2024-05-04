@@ -1,10 +1,11 @@
 <section class="content">
-    <form id="Form-{{ $data->id }}"
+    <form id="soft-copy-form-{{ $data->id }}"
+        class="soft-copy-form"
         action=""
         method="POST">
         @method('PUT')
         @csrf
-        <div class="modal fade" id="modal-xl-validate-{{ $data->id }}">
+        <div class="modal fade" id="soft-copy-modal-{{ $data->id }}">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -26,21 +27,28 @@
                                                 </div>
 
                                                 <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h5 class="font-weight-bold ">Reviewed by:</h5>
-                                                            <p> {{ $data->first_name }} {{ $data->last_name }}</p><br>
-                                                        </div>
+                                                    <input type="hidden" id="requirement-id-{{ $data->id }}" name="requirementId" value="{{ $data->id }}">
 
-                                                        <div class="col-md-6">
-                                                            <h5 class="font-weight-bold ">Reviewed at:</h5>
-                                                            <p> {{ $data->reviewed_at }}</p><br>
-                                                        </div>
-                                                      </div>
+                                                    <input type="hidden" id="bin-{{ $data->id }}" name="req_bin_id" value="{{$req_bin_id}}">
 
+                                                    <input type="hidden" id="assigned-bin-{{ $data->id }}" name="assigned_bin_id" value="{{$assigned_bin_id}}">
+
+                                                    @if ($data->reviewed_at)
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <small class="font-weight-bold ">Reviewed by</small>
+                                                                <p> {{ $data->first_name }} {{ $data->last_name }}</p><br>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <small class="font-weight-bold ">Reviewed at</small>
+                                                                <p> {{ $data->reviewed_at }}</p><br>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                     <div class="form-group">
-                                                        <label for="remarks">Remarks</label>
-                                                        <textarea type="text" class="form-control" id="remarks" name="remarks" style="height: 200px; resize: none;"> {{ $data->remarks }}</textarea>
+                                                        <label for="remarks">Remarks <small class="text-muted">(Optional)</small></label>
+                                                        <textarea type="text" class="form-control rounded-md" id="remarks" name="remarks" style="height: 200px; resize: none;"> {{ $data->remarks }}</textarea>
 
                                                     </div>
                                                 </div>
@@ -56,7 +64,7 @@
                                                 <div class="card-body" style=" overflow-y: scroll;">
                                                     <!-- List of files goes here -->
 
-                                                    <ul id="files-{{$data->id }}" class="list-group">
+                                                    <ul id="list-of-files-{{ $data->id }}" class="list-group">
 
                                                     </ul>
 
@@ -69,20 +77,18 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-danger"
-                                data-requirement-id="{{ $data->id }}"
-                                data-user-id="{{ $data->user_id }}"
-                                data-req-bin-id="{{ $req_bin_id }}"
-                                data-assigned-bin-id="{{ $assigned_bin_id }}"
-                                id="reject-button">Reject</button>
+                        <button type="button" class="btn btn-outline-danger reject-button"
+                                data-formID="#soft-copy-form-{{ $data->id }}"
+                                data-id="{{ $data->id }}"
+                                id="soft-copy-reject-button-{{ $data->id }}">Reject
+                        </button>
 
-                        <button  class="btn btn-outline-primary swalDefaultSuccess"
+                        <button  class="btn btn-outline-primary approve-button"
                                 type="button"
-                                data-requirement-id="{{ $data->id }}"
-                                data-user-id="{{ $data->user_id }}"
-                                data-req-bin-id="{{ $req_bin_id }}"
-                                data-assigned-bin-id="{{ $assigned_bin_id }}"
-                                id="approve-button">Approve</button>
+                                data-formID="#soft-copy-form-{{ $data->id }}"
+                                data-id="{{ $data->id }}"
+                                id="soft-copy-approve-button-{{ $data->id }}">Approve
+                        </button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

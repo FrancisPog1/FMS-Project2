@@ -37,7 +37,8 @@
                                                                             font-medium rounded-full text-sm px-3 py-1 text-center mr-2 mb-2">{{ $assigned_reqr->review_status }}</button>
                                 </td>
 
-                                <td class="text-center"><button type="button"
+                                <td class="text-center">
+                                    <button type="button"
                                         class="text-white {{ $assigned_reqr->compliance_status === 'Pending' ? 'bg-gray-400' : ($assigned_reqr->compliance_status === 'Incomplete' ? 'bg-red-500' : 'bg-green-500') }}
                                                                                 font-medium rounded-full text-sm  px-3 py-1 text-center mr-2 mb-2">{{ $assigned_reqr->compliance_status }}</button>
                                 </td>

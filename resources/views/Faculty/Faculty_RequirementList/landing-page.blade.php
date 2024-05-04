@@ -30,7 +30,7 @@
             </section>
 
             {{-- Requirement Bin details --}}
-            @include('Faculty/Faculty_RequirementList/requirement-bin-details')
+            @include('Faculty/Faculty_RequirementList/compliance-info')
 
 
             {{-- Data Table --}}

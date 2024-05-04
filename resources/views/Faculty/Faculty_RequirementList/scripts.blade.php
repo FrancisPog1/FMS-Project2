@@ -1,7 +1,7 @@
 <style>
     .list-group-item {
 /* Change the target property to 'color' */
-        color: gray; /* Or whatever your default text color is */
+        color: rgb(0, 0, 0); /* Or whatever your default text color is */
     }
 
     .list-group-item:hover {

@@ -59,6 +59,8 @@ require __DIR__.'/director.php';
 
 require __DIR__.'/staff.php';
 
+require __DIR__.'/pdf_reports.php';
+
 
 //------------------------------------------------------------------ ACADEMIC HEAD --------------------------------------------------------------------//
 // Route::middleware(['auth','isAdmin'])->group(function () {
@@ -298,10 +300,10 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
 
         /**Requirement Validation for AcadHead*/
-    Route::put('approve_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'approve'])
+    Route::put('approve_bincontents', [MonitorRequirements_Controller::class, 'approve'])
     ->name('approve_requirements');
 
-    Route::put('reject_bincontents/{requirementId}/{req_bin_id}/{assigned_bin_id}', [MonitorRequirements_Controller::class, 'reject'])
+    Route::put('reject_bincontents', [MonitorRequirements_Controller::class, 'reject'])
     ->name('reject_requirements');
 
 
