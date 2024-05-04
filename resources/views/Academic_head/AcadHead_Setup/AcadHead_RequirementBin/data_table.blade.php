@@ -38,13 +38,26 @@
                                         <td>{{ $requirementbin->cat_title }}</td>
                                         <td>{{ $requirementbin->deadline }}</td>
 
-
                                         <td class="text-center">
-                                            <button type="button"
-                                                class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300
-                                                    font-medium rounded-full text-sm px-2 text-center mr-2 mb-2">
-                                                {{ $requirementbin->status }}
-                                            </button>
+                                            @php
+                                                // Get today's date
+                                                $todayDate = \Carbon\Carbon::now();
+
+                                                // Get deadline date (assuming you have this from your data)
+                                                $deadlineDate = \Carbon\Carbon::parse($requirementbin->deadline);
+
+                                                // Calculate difference from today to deadline
+                                                $deadlineDiff = $todayDate->diffInDays($deadlineDate);
+                                            @endphp
+
+
+                                            @if ($deadlineDate > $todayDate || $deadlineDiff == 0)
+                                                <p><span class="badge badge-info" style="font-size: 1em; padding: 0.4em 0.6em;">Ongoing</span></p>
+
+                                            @else
+                                                <p><span class="badge badge-secondary" style="font-size: 1em; padding: 0.4em 0.6em;">Deadline Passed</span></p>
+                                            @endif
+
                                         </td>
 
                                         <td class="text-center">

@@ -26,11 +26,27 @@
                             <tr>
                                 <td class="small-font">{{ $requirement_bin->title }}</td>
                                 <td class="small-font">{{ $requirement_bin->category }}</td>
-                                <td class="small-font">{{ $requirement_bin->deadline }} </td>
+                                <td class="small-font">{{ $requirement_bin->deadline }}</td>
                                 <td class="text-center small-font">
-                                    <button type="button"
-                                        class="text-white {{ $requirement_bin->review_status === 'Reviewed' ? 'bg-green-500' : 'bg-gray-400' }}
-                                                                        font-medium rounded-full text-sm px-3 py-1 text-center mr-2 mb-2 small-font">{{ $requirement_bin->status }}</button>
+                                    @php
+                                        // Get today's date
+                                        $todayDate = \Carbon\Carbon::now();
+
+                                        // Get deadline date (assuming you have this from your data)
+                                        $deadlineDate = \Carbon\Carbon::parse($requirement_bin->deadline);
+
+                                        // Calculate difference from today to deadline
+                                        $deadlineDiff = $todayDate->diffInDays($deadlineDate);
+                                    @endphp
+
+
+                                    @if ($deadlineDate > $todayDate || $deadlineDiff == 0)
+                                        <p><span class="badge badge-info" style="font-size: 1em; padding: 0.4em 0.6em;">Ongoing</span></p>
+
+                                    @else
+                                        <p><span class="badge badge-secondary" style="font-size: 1em; padding: 0.4em 0.6em;">Deadline Passed</span></p>
+                                    @endif
+
                                 </td>
 
                                 <td class="text-center small-font">

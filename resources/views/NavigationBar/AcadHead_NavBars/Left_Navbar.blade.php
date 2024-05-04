@@ -85,12 +85,12 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('admin.activity_types.show')}}" class="nav-link">
                                         <i class="fa-regular fa-folder-open nav-icon"></i>
                                         <p class="p-drop">Activity Type</p>
                                     </a>
-                                </li>
+                                </li> --}}
 
                                 <li class="nav-item">
                                     <a href="{{ route('admin.designations.show')}}" class="nav-link">
@@ -137,12 +137,12 @@
                                 </li> --}}
 
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('admin.activities.show')}}" class="nav-link">
                                         <i class="fas fa-sticky-note nav-icon"></i>
                                         <p class="p-drop">Activity</p>
                                     </a>
-                                </li>
+                                </li> --}}
 
 
                                 {{-- <li class="nav-item">

@@ -69,14 +69,14 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('faculty.activities') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-flag"></i>
                         <p>
                             Activities
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('faculty.reports') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-book-bookmark"></i>

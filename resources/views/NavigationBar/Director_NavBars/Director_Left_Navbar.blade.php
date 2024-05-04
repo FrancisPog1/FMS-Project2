@@ -48,12 +48,12 @@
                 </li> --}}
 
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('director.activities') }}" class="nav-link">
                                 <i class="fa-regular fa-flag nav-icon"></i>
                                 <p>Activities</p>
                             </a>
-                        </li>
+                        </li> --}}
 
 
                         <li class="nav-item">

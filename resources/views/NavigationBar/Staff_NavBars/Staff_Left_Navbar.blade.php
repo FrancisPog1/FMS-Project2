@@ -32,13 +32,13 @@
                                     <p class="p-drop">Requirements Bin</p>
                                 </a>
                             </li>
-
+{{--
                             <li class="nav-item">
                                 <a href="{{ route('staff.activities.show')}}" class="nav-link">
                                     <i class="nav-icon fa-solid fa-flag"></i>
                                     <p class="p-drop">Activity</p>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             {{-- <li class="nav-item">
                                 <a href="{{ route('staff.class_schedule')}}" class="nav-link">
