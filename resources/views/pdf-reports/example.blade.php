@@ -17,7 +17,7 @@
             th, td {
                 border: .1rem solid;
                 border-color: lightgrey;
-                
+
             }
             th {
                 background-color: #830000 !important;
@@ -51,65 +51,87 @@
                     <thead style="background-color: red;">
                         <tr>
                             <th>Faculty Name</th>
+                            <th>Requirement Bin</th>
                             <th>Category</th>
                             <th>Requirement</th>
-                            <th>Type</th>
+                            <th>Submission Type</th>
                             <th>Deadline</th>
                             <th>Date Submitted</th>
                             <th>Timeliness</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Faculty 1  -->
-                        <tr>
-                            <td>Faculty 1</td>
-                            <td>Mandatory Requirements</td>
-                            <td>Class Record</td>
-                            <td>Soft Copy</td>
-                            <td>20-Dec-2024</td>
-                            <td>31-Dec-2024</td>
-                            <td>11 day/s late</td>
-                        </tr>
-                        <!-- Faculty 2  -->
-                        <tr>
-                            <td>Faculty 2</td>
-                            <td>Mandatory Requirements</td>
-                            <td>Class Record</td>
-                            <td>Hard Copy</td>
-                            <td>20-Dec-2024</td>
-                            <td>20-Dec-2024</td>
-                            <td>On-time</td>
-                        </tr>
-                        <!-- Faculty 3  -->
-                        <tr>
-                            <td>Faculty 3</td>
-                            <td>Mandatory Requirements</td>
-                            <td>Class Record</td>
-                            <td>Hard Copy</td>
-                            <td>20-Dec-2024</td>
-                            <td>For compliance</td>
-                            <td>11 day/s late</td>
-                        </tr>
-                        <!-- Faculty 4  -->
-                        <tr>
-                            <td>Faculty 4</td>
-                            <td>Mandatory Requirements</td>
-                            <td>Class Record</td>
-                            <td>Soft Copy</td>
-                            <td>20-Dec-2024</td>
-                            <td>19-Dec-2024</td>
-                            <td>1 day/s ahead</td>
-                        </tr>
-                        <!-- Faculty 5  -->
-                        <tr>
-                            <td>Faculty 4</td>
-                            <td>Mandatory Requirements</td>
-                            <td>Class Record</td>
-                            <td>Soft Copy</td>
-                            <td>20-Dec-2024</td>
-                            <td>For compliance</td>
-                            <td>1 day/s before deadline</td>
-                        </tr>
+                        @foreach ($datas as $data)
+                            <tr>
+                                <th scope="row">{{ $data->first_name }} {{ $data->last_name }}</th>
+                                <td>{{ $data->bin_title }}</td>
+                                <td>{{ $data->category }}</td>
+                                <td>{{ $data->requirement }}</td>
+                                <td>
+                                    @if ($data->submission_type)
+                                        {{ $data->submission_type }}
+                                    @else
+                                        <p>For Compliance</p>
+                                    @endif
+                                </td>
+
+                                <td>{{ $data->bin_deadline }}</td>
+                                <td>{{ $data->submission_date == Null ? 'For Compliance': $data->submission_date  }}</td>
+
+                                <td>
+                                    @php
+                                        // 1. Get today's date
+                                        $todayDate = \Carbon\Carbon::now();
+                                        $status = $data->status;
+
+                                        // 3. Get deadline date (assuming you have this from your data)
+                                        $deadlineDate = \Carbon\Carbon::parse($data->bin_deadline);
+
+                                        $TodayDeadlineDiff = $deadlineDate->diffInDays($todayDate);
+
+                                        if ($data->submission_date){
+                                                                                    // 2. Get submission date (assuming you have this from your data)
+                                            $submissionDate = \Carbon\Carbon::parse($data->submission_date);
+                                            $daysDiff = $deadlineDate->diffInDays($submissionDate);
+
+                                            // Output (you can customize this)
+                                            if ($deadlineDate > $submissionDate) {
+                                                echo abs($daysDiff+1) . " days ahead of deadline";
+
+                                            } elseif ($daysDiff == 0) {
+                                                echo "On time";
+
+                                            } else {
+
+                                                echo abs($daysDiff) . " days late";
+                                            }
+                                        }
+
+                                        else {
+
+                                            if ($deadlineDate > $todayDate || $TodayDeadlineDiff == 0 && $status == 'Pending' ) {
+                                                echo "For Compliance";
+                                            }
+
+                                            elseif ($deadlineDate < $todayDate && $status == 'Pending' || $status == 'Approved') {
+                                                echo abs($TodayDeadlineDiff) . " days late";
+                                            }
+                                        }
+
+                                    @endphp
+                                </td>
+
+                                <td class="text-center ">
+                                    <button type="button"
+                                        class="  font-medium rounded-full text-sm  px-3 py-1 text-center mr-2 mb-2
+                                    {{ $data->status == 'Pending' ? 'text-white bg-gray-400' : ($data->status == 'Rejected' ? 'text-white bg-red-500' : ($data->status == 'In review' ? 'text-white bg-blue-500' : 'text-white bg-green-500')) }}
+                                    ">{{ $data->status }}</button>
+                                </td>
+
+                            </tr>
+
+                        @endforeach
                     </tbody>
                 </table>
             </div>
