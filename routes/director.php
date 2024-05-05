@@ -15,6 +15,7 @@ use App\Http\Controllers\Director\Director_ViewUserFiles_Controller;
 use App\Http\Controllers\Director\Director_Profile_Controller;
 use App\Http\Controllers\Director\Director_Dashboard_Controller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Director\Reports_Controller;
 
 
 /*
@@ -57,10 +58,13 @@ Route::middleware(['auth', 'isDirector'])->prefix('director')->name('director.')
     //     return view('Director/Director_Profile', ['page_title' => 'Director Profile']);
     //     })->name('Profile');
 
-    Route::get('reports', function () {
-        return view('Director/Director_Reports', ['page_title' => 'Director Reports']);
-        })->name('reports');
+    // Route::get('reports', function () {
+    //     return view('Director/Director_Reports', ['page_title' => 'Director Reports']);
+    //     })->name('reports');
 
+
+            /**Academic Head Reports*/
+    Route::get('reports', [Reports_Controller::class,'show'])->name('reports');
 
 
     Route::get('requirement_assignees{bin_id}', [Director_RequirementBin_Controller::class, 'view_assigned_user'

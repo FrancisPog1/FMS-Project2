@@ -130,8 +130,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
     /**Academic Head Reports*/
     Route::get('/reports', [Reports_Controller::class,'show'])->name('reports.show');
+    
     /**Requirement Assignees*/
-
     Route::get('/requirement_assignees_reports/{bin_id}', [Reports_Controller::class, 'show_assignees'])->name('requirement_assignees_reports');
 
     Route::get('/requirementbin_content_reports/{id}', [Reports_Controller::class, 'show_bin_contents'])->name('bin_content_reports');
