@@ -70,13 +70,13 @@ return [
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'FaRMS-Database'),
-            'username' => env('DB_USERNAME', 'postgres'),
-            'password' => env('DB_PASSWORD', '331212'),
+            'username' => env('DB_USERNAME', 'farms_owner'),
+            'password' => env('DB_PASSWORD', 'BJcy6npHlu9P'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'prefer',
+            'sslmode' => env('DB_SSLMODE', 'prefer'),
         ],
 
         'sqlsrv' => [
