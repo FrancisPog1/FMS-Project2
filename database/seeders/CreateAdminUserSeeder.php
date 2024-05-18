@@ -66,7 +66,7 @@ class CreateAdminUserSeeder extends Seeder
             'foreign_role_id' => '2',
         ]);
         $user = User::create([
-            'id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS',
+            'id' => '66464132-e6aa-4a71-9eb6-16adcd7c1aed',
             'email' => 'staff@pupqc.com',
             'password' => bcrypt('pupqcfarms'),
             'foreign_role_id' => '3',
@@ -89,7 +89,7 @@ class CreateAdminUserSeeder extends Seeder
         ]);
 
         $profile = UsersProfile::create([
-            'id' => '6646A592-e6aa-4a71-9eb6-16fccd7c1bcj',
+            'id' => '4496b810-2a0e-42e9-8192-8f3f67c8821e',
             'first_name' => 'Francis',
             'last_name' => 'Candelaria',
             'middle_name' => '',
@@ -110,7 +110,7 @@ class CreateAdminUserSeeder extends Seeder
             'first_name' => 'Mr. Staff',
             'last_name' => 'Checker',
             'middle_name' => '',
-            'user_id' => '66464592-e6aa-4a71-9eb6-16fccd7c1bcS'
+            'user_id' => '66464132-e6aa-4a71-9eb6-16adcd7c1aed'
         ]);
 
 
